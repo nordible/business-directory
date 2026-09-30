@@ -1,0 +1,124 @@
+{
+  "brand": {
+    "poweredBy": "Powered by Nordible Directory",
+    "createYourOwn": "Create your own directory",
+    "customizeBrand": "Customize brand",
+    "brandName": "Brand name",
+    "primaryColor": "Primary color",
+    "tagline": "Tagline / Subtitle",
+    "applyChanges": "Apply changes"
+  },
+  "nav": {
+    "explore": "Explore",
+    "search": "Search",
+    "categories": "Categories",
+    "addListing": "Add Listing",
+    "manage": "Manage"
+  },
+  "search": {
+    "placeholder": "Search businesses, services, locations...",
+    "filterButton": "Filters",
+    "filterTitle": "Filter Results",
+    "allCategories": "All Categories",
+    "location": "Location",
+    "minRating": "Minimum Rating",
+    "openNow": "Open Now",
+    "applyFilters": "Apply Filters",
+    "resetFilters": "Reset",
+    "resultsFound": "{{count}} listings found"
+  },
+  "listing": {
+    "verified": "Verified",
+    "call": "Call",
+    "website": "Website",
+    "directions": "Directions",
+    "details": "View details",
+    "hideDetails": "Show less",
+    "openingHours": "Opening hours",
+    "reviews": "Reviews",
+    "claimListing": "Claim listing"
+  },
+  "tenant": {
+    "switchTenant": "Switch directory",
+    "activeTenant": "Active Directory"
+  },
+  "aiModal": {
+    "title": "AI Listing Creation",
+    "subtitle": "Generate a business listing in seconds via URL or flyer",
+    "tabUrl": "Web URL",
+    "tabUpload": "Flyer / Business Card",
+    "urlLabel": "Website or Google Maps Link",
+    "urlPlaceholder": "https://example-business.com or Impressum link",
+    "uploadPlaceholder": "Upload flyer, menu, or business card (PNG, JPG, PDF)",
+    "trySample": "Try Sample",
+    "startExtract": "Analyze with AI",
+    "analyzing": "AI is extracting details...",
+    "stepScraping": "1. Fetching legal notice & contact info...",
+    "stepVision": "2. Structuring opening hours & key offerings...",
+    "stepValidation": "3. Validating against directory schema...",
+    "reviewTitle": "Review Extracted Data",
+    "businessName": "Business Name",
+    "category": "Category",
+    "address": "Street Address",
+    "city": "City & Postal Code",
+    "phone": "Phone Number",
+    "website": "Website",
+    "hours": "Opening Hours",
+    "description": "Short Description",
+    "confirmAndAdd": "Add to Directory",
+    "back": "Back"
+  },
+  "claimModal": {
+    "title": "Claim Listing",
+    "subtitle": "Verify your ownership of {{name}}",
+    "emailLabel": "Work Email Address",
+    "emailPlaceholder": "owner@company.com",
+    "sendCode": "Send Verification Code",
+    "codeLabel": "6-Digit Verification Code",
+    "verifyCode": "Verify Ownership",
+    "successTitle": "Ownership Verified!",
+    "successSubtitle": "You now have full management access to this business profile.",
+    "openDashboard": "Open Business Dashboard"
+  },
+  "dashboard": {
+    "title": "Business Dashboard",
+    "subtitle": "Manage your contact details, services, and opening hours",
+    "saveChanges": "Save Changes",
+    "saved": "Changes saved successfully!",
+    "isOpenLabel": "Currently open for customers"
+  },
+  "reviewsModal": {
+    "title": "Reviews & Ratings",
+    "writeReview": "Leave a review",
+    "namePlaceholder": "Your name",
+    "commentPlaceholder": "Share your experience with this business...",
+    "submit": "Submit Review",
+    "noReviews": "No reviews yet. Be the first to share your experience!"
+  },
+  "pricing": {
+    "title": "Directory Operator Pricing",
+    "subtitle": "Launch your own profitable business directory",
+    "monthly": "Monthly",
+    "yearly": "Yearly (Save 2 months)",
+    "tierStarter": "Local Starter",
+    "tierStarterDesc": "Great for local community guides & niche directories",
+    "tierPro": "White-Label Pro",
+    "tierProDesc": "For entrepreneurs with custom domains & unlimited growth",
+    "tierEnterprise": "Franchise & Enterprise",
+    "tierEnterpriseDesc": "Multi-region networks and corporate franchises",
+    "popularBadge": "Most Popular",
+    "subscribe": "Choose Plan",
+    "redirectingStripe": "Redirecting to Stripe Checkout..."
+  },
+  "domain": {
+    "title": "Custom Domain & SSL",
+    "subtitle": "Connect your branded domain in a few clicks",
+    "currentDomain": "Active Domain",
+    "cnameRecord": "CNAME Record",
+    "cnameValue": "cname.nordible.com",
+    "sslStatus": "SSL Status",
+    "sslActive": "Active & Encrypted (TLS 1.3)",
+    "copy": "Copy",
+    "copied": "Copied!"
+  }
+}

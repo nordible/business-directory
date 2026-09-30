@@ -1,0 +1,124 @@
+{
+  "brand": {
+    "poweredBy": "Unterstützt durch Nordible Directory",
+    "createYourOwn": "Eigenes Verzeichnis erstellen",
+    "customizeBrand": "Marke anpassen",
+    "brandName": "Markenname",
+    "primaryColor": "Hauptfarbe",
+    "tagline": "Slogan / Untertitel",
+    "applyChanges": "Änderungen anwenden"
+  },
+  "nav": {
+    "explore": "Entdecken",
+    "search": "Suche",
+    "categories": "Kategorien",
+    "addListing": "Eintragen",
+    "manage": "Verwaltung"
+  },
+  "search": {
+    "placeholder": "Unternehmen, Dienstleistungen, Orte suchen...",
+    "filterButton": "Filter anpassen",
+    "filterTitle": "Ergebnisse filtern",
+    "allCategories": "Alle Kategorien",
+    "location": "Standort",
+    "minRating": "Mindestbewertung",
+    "openNow": "Jetzt geöffnet",
+    "applyFilters": "Filter anwenden",
+    "resetFilters": "Zurücksetzen",
+    "resultsFound": "{{count}} Einträge gefunden"
+  },
+  "listing": {
+    "verified": "Verifiziert",
+    "call": "Anrufen",
+    "website": "Webseite",
+    "directions": "Route planen",
+    "details": "Details ansehen",
+    "hideDetails": "Weniger anzeigen",
+    "openingHours": "Öffnungszeiten",
+    "reviews": "Bewertungen",
+    "claimListing": "Eintrag beanspruchen"
+  },
+  "tenant": {
+    "switchTenant": "Mandant wechseln",
+    "activeTenant": "Aktives Verzeichnis"
+  },
+  "aiModal": {
+    "title": "KI-Eintragserstellung",
+    "subtitle": "Eintrag in Sekunden statt Minuten per URL oder Flyer generieren",
+    "tabUrl": "Web-Adresse (URL)",
+    "tabUpload": "Flyer / Visitenkarte",
+    "urlLabel": "Webseite oder Google Maps Link",
+    "urlPlaceholder": "https://beispiel-firma.de oder Impressum-Link",
+    "uploadPlaceholder": "Flyer, Speisekarte oder Visitenkarte hochladen (PNG, JPG, PDF)",
+    "trySample": "Beispiel testen",
+    "startExtract": "Mit KI analysieren",
+    "analyzing": "KI analysiert Daten...",
+    "stepScraping": "1. Impressum & Kontaktdaten erfassen...",
+    "stepVision": "2. Öffnungszeiten & Kernangebote strukturieren...",
+    "stepValidation": "3. Validierung nach Verzeichnis-Schema...",
+    "reviewTitle": "Erfasste Daten überprüfen",
+    "businessName": "Unternehmensname",
+    "category": "Kategorie",
+    "address": "Straße & Hausnummer",
+    "city": "Stadt & PLZ",
+    "phone": "Telefonnummer",
+    "website": "Webseite",
+    "hours": "Öffnungszeiten",
+    "description": "Kurzbeschreibung",
+    "confirmAndAdd": "Jetzt eintragen",
+    "back": "Zurück"
+  },
+  "claimModal": {
+    "title": "Eintrag beanspruchen",
+    "subtitle": "Bestätigen Sie Ihre Inhaberschaft für {{name}}",
+    "emailLabel": "Geschäftliche E-Mail-Adresse",
+    "emailPlaceholder": "inhaber@firma.de",
+    "sendCode": "Code anfordern",
+    "codeLabel": "6-stelliger Bestätigungscode",
+    "verifyCode": "Inhaberschaft bestätigen",
+    "successTitle": "Erfolgreich bestätigt!",
+    "successSubtitle": "Sie haben nun die volle Kontrolle über diesen Firmeneintrag.",
+    "openDashboard": "Zum Inhaber-Dashboard"
+  },
+  "dashboard": {
+    "title": "Unternehmens-Dashboard",
+    "subtitle": "Verwalten Sie Ihre Kontaktdaten und Öffnungszeiten",
+    "saveChanges": "Änderungen speichern",
+    "saved": "Änderungen erfolgreich gespeichert!",
+    "isOpenLabel": "Aktuell für Kunden geöffnet"
+  },
+  "reviewsModal": {
+    "title": "Bewertungen",
+    "writeReview": "Bewertung abgeben",
+    "namePlaceholder": "Ihr Name",
+    "commentPlaceholder": "Teilen Sie Ihre Erfahrungen mit diesem Unternehmen...",
+    "submit": "Bewertung absenden",
+    "noReviews": "Noch keine Bewertungen vorhanden. Seien Sie der Erste!"
+  },
+  "pricing": {
+    "title": "Preise für Verzeichnis-Betreiber",
+    "subtitle": "Starten Sie Ihr eigenes gewinnbringendes Verzeichnis-Geschäft",
+    "monthly": "Monatlich",
+    "yearly": "Jährlich (2 Monate gratis)",
+    "tierStarter": "Lokal Starter",
+    "tierStarterDesc": "Ideal für lokale Nischen und Nachbarschafts-Verzeichnisse",
+    "tierPro": "White-Label Pro",
+    "tierProDesc": "Für Unternehmer mit eigener Domain & unbegrenztem Wachstum",
+    "tierEnterprise": "Franchise & Großkunden",
+    "tierEnterpriseDesc": "Mehrere Standorte, Städte oder Branchen unter einem Dach",
+    "popularBadge": "Beliebteste Wahl",
+    "subscribe": "Tarif wählen",
+    "redirectingStripe": "Verbindung zu Stripe Checkout..."
+  },
+  "domain": {
+    "title": "Eigene Domain & SSL",
+    "subtitle": "Verbinden Sie Ihre Wunsch-Domain in wenigen Klicks",
+    "currentDomain": "Aktuelle Domain",
+    "cnameRecord": "CNAME-Eintrag",
+    "cnameValue": "cname.nordible.com",
+    "sslStatus": "SSL-Status",
+    "sslActive": "Aktiv & verschlüsselt (TLS 1.3)",
+    "copy": "Kopieren",
+    "copied": "Kopiert!"
+  }
+}

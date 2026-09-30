@@ -1,0 +1,152 @@
+import { TenantBranding, Category, BusinessListing } from './types';
+
+export const INITIAL_TENANTS: TenantBranding[] = [
+  {
+    id: 't-1',
+    slug: 'handwerk-berlin',
+    name: 'Berliner Meisterbetriebe',
+    tagline: {
+      de: 'Ihr regionales Verzeichnis für zertifiziertes Handwerk in Berlin & Brandenburg',
+      en: 'Your regional directory for certified craft businesses in Berlin & Brandenburg',
+    },
+    primaryColor: '#0284c7',
+    accentColor: '#0369a1',
+    logoText: '🛠️ BerlinCraft',
+  },
+  {
+    id: 't-2',
+    slug: 'nordic-tech',
+    name: 'Nordic Tech & Design Index',
+    tagline: {
+      de: 'Entdecken Sie innovative IT-Agenturen, SaaS-Startups und Designstudios',
+      en: 'Discover innovative IT agencies, SaaS startups, and design studios',
+    },
+    primaryColor: '#059669',
+    accentColor: '#047857',
+    logoText: '⚡ NordicHub',
+  },
+  {
+    id: 't-3',
+    slug: 'alpen-genuss',
+    name: 'Alpen Genuss Guide',
+    tagline: {
+      de: 'Traditionelle Bäckereien, Gasthäuser und regionale Spezialitäten',
+      en: 'Traditional bakeries, local taverns, and regional specialties',
+    },
+    primaryColor: '#b45309',
+    accentColor: '#92400e',
+    logoText: '🥨 AlpenGenuss',
+  },
+];
+
+export const CATEGORIES: Category[] = [
+  {
+    id: 'cat-all',
+    slug: 'all',
+    name: { de: 'Alle Branchen', en: 'All Categories' },
+    icon: 'Grid',
+  },
+  {
+    id: 'cat-craft',
+    slug: 'handwerk',
+    name: { de: 'Handwerk & Bau', en: 'Crafts & Construction' },
+    icon: 'Hammer',
+  },
+  {
+    id: 'cat-tech',
+    slug: 'tech',
+    name: { de: 'IT & Digital', en: 'IT & Digital' },
+    icon: 'Laptop',
+  },
+  {
+    id: 'cat-food',
+    slug: 'gastronomie',
+    name: { de: 'Gastronomie & Genuss', en: 'Food & Dining' },
+    icon: 'Utensils',
+  },
+  {
+    id: 'cat-services',
+    slug: 'dienstleistungen',
+    name: { de: 'Dienstleistungen', en: 'Services & Consulting' },
+    icon: 'Briefcase',
+  },
+];
+
+export const MOCK_LISTINGS: BusinessListing[] = [
+  {
+    id: 'list-1',
+    tenantId: 't-1',
+    name: 'Elektro Müller & Söhne GmbH',
+    categoryId: 'cat-craft',
+    description: {
+      de: 'Traditionsreicher Meisterbetrieb für Gebäudetechnik, Smart Home und Photovoltaik-Installationen in Berlin.',
+      en: 'Traditional master enterprise for building automation, smart homes, and solar installations in Berlin.',
+    },
+    address: 'Kurfürstendamm 142',
+    city: 'Berlin',
+    phone: '+49 30 8912340',
+    website: 'https://elektro-mueller-example.de',
+    rating: 4.9,
+    reviewCount: 48,
+    isVerified: true,
+    isOpenNow: true,
+    hours: 'Mo - Fr: 07:30 - 17:00 Uhr',
+  },
+  {
+    id: 'list-2',
+    tenantId: 't-1',
+    name: 'Schreinerei HolzART Prenzlauer Berg',
+    categoryId: 'cat-craft',
+    description: {
+      de: 'Maßgefertigte Möbel, ökologischer Innenausbau und Restaurierung historischer Altbautüren.',
+      en: 'Custom bespoke furniture, ecological interior design, and historic door restoration.',
+    },
+    address: 'Kastanienallee 24',
+    city: 'Berlin',
+    phone: '+49 30 4409876',
+    website: 'https://holzart-example.de',
+    rating: 4.8,
+    reviewCount: 32,
+    isVerified: true,
+    isOpenNow: false,
+    hours: 'Mo - Do: 08:00 - 16:30 Uhr',
+  },
+  {
+    id: 'list-3',
+    tenantId: 't-2',
+    name: 'Nordic Cloud Solutions',
+    categoryId: 'cat-tech',
+    description: {
+      de: 'Spezialisten für Kubernetes-Migrationen, Hochverfügbarkeit und DSGVO-konforme Cloud-Architekturen.',
+      en: 'Specialists in Kubernetes migrations, high availability, and GDPR-compliant cloud architectures.',
+    },
+    address: 'Friedrichstraße 90',
+    city: 'Berlin',
+    phone: '+49 30 2001122',
+    website: 'https://nordic-cloud-example.com',
+    rating: 5.0,
+    reviewCount: 29,
+    isVerified: true,
+    isOpenNow: true,
+    hours: 'Mo - Fr: 09:00 - 18:00 Uhr',
+  },
+  {
+    id: 'list-4',
+    tenantId: 't-3',
+    name: 'Bäckerei & Konditorei Bergblick',
+    categoryId: 'cat-food',
+    description: {
+      de: 'Handgefertigtes Sauerteigbrot nach 100 Jahre altem Familienrezept, feinste Torten und Kaffeespezialitäten.',
+      en: 'Artisan sourdough bread based on a century-old family recipe, cakes, and specialty coffee.',
+    },
+    address: 'Marktplatz 5',
+    city: 'Garmisch-Partenkirchen',
+    phone: '+49 8821 55432',
+    website: 'https://bergblick-baecker-example.de',
+    rating: 4.9,
+    reviewCount: 114,
+    isVerified: true,
+    isOpenNow: true,
+    hours: 'Di - So: 06:00 - 18:00 Uhr',
+  },
+];
