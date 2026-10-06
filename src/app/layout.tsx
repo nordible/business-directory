@@ -15,11 +15,13 @@ const inter = Inter({
   weight: ['400', '500', '600', '700'],
 });
 
+import { siteConfig } from '@/config/site';
+
 export const metadata: Metadata = {
-  title: 'Nordible Directory | Multi-Tenant White-Label Business Platform',
-  description: 'Multi-tenant white-label business directory platform with AI ingestion, custom branding, and localized search by Nordible Technologies.',
+  title: `${siteConfig.appName} | Multi-Tenant White-Label Business Platform`,
+  description: `Multi-tenant white-label business directory platform with AI ingestion, custom branding, and localized search by ${siteConfig.company.name}.`,
   icons: {
-    icon: '/images/logos/nordible-icon.png',
+    icon: siteConfig.assets.logoIcon,
   },
 };
 

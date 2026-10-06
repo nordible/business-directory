@@ -1,6 +1,6 @@
 {
   "brand": {
-    "poweredBy": "Propulsé par Nordible Directory",
+    "poweredBy": "Propulsé par Nordible for Businesses",
     "createYourOwn": "Créer votre propre annuaire",
     "customizeBrand": "Personnaliser la marque",
     "brandName": "Nom de marque",
@@ -71,15 +71,16 @@
     "faq3A": "Nous couvrons principalement Francfort, Berlin, Munich, Hambourg, la région DACH et des partenaires internationaux."
   },
   "addModal": {
-    "comingSoonBadge": "En préparation • Bientôt disponible",
+    "verifiedBadge": "Inscription Vérifiée Gratuite",
     "title": "Ajouter votre entreprise",
-    "subtitle": "La capture IA automatisée est en phase bêta fermée. Pour inscrire votre entreprise en priorité, envoyez vos coordonnées par e-mail :",
-    "infoNeeded": "Veuillez fournir les informations suivantes :",
+    "subtitle": "Inscrivez facilement votre entreprise dans l'annuaire mondial Nordible for Businesses :",
+    "infoNeeded": "Veuillez fournir les informations suivantes dans votre e-mail :",
     "field1": "Nom de l'entreprise & Secteur",
     "field2": "Site web officiel / URL",
     "field3": "Emplacement (Ville & Adresse)",
     "field4": "Numéro de téléphone & Contact",
     "field5": "Brève description de vos services",
+    "field6": "URL du logo (ex. https://votre-domaine.fr/logo.png – aucun upload requis)",
     "sendEmailBtn": "Envoyer un e-mail à mail@nordible.co",
     "copyEmailBtn": "Copier l'adresse e-mail",
     "copied": "Copié !"

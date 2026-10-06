@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { BusinessListing } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
 import { Star, ShieldCheck, MapPin, Phone, Globe, ChevronDown, ChevronUp, Clock, Settings } from 'lucide-react';
@@ -24,12 +25,13 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
 }) => {
   const { locale, t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   return (
     <article className="bg-white rounded-2xl border border-[#E8ECF4] p-5 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between hover:border-[#145BFF]/30">
       <div>
         {/* Top badges */}
-        <div className="flex items-center justify-between gap-2 mb-2">
+        <div className="flex items-center justify-between gap-2 mb-3">
           <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4]">
             {categoryName}
           </span>
@@ -41,36 +43,55 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
           )}
         </div>
 
-        {/* Title & Rating */}
-        <h3 className="font-heading font-extrabold text-lg text-[#0D2B75] group-hover:text-[#145BFF] transition-colors tracking-tight">
-          {listing.name}
-        </h3>
+        {/* Logo, Title & Rating */}
+        <div className="flex items-start gap-3 mb-3">
+          {listing.logoUrl && !imgError ? (
+            <div className="w-12 h-12 rounded-xl bg-white p-1 border border-[#E8ECF4] shadow-2xs shrink-0 flex items-center justify-center overflow-hidden">
+              <Image
+                src={listing.logoUrl}
+                alt={listing.name}
+                width={44}
+                height={44}
+                unoptimized
+                onError={() => setImgError(true)}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          ) : (
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#145BFF]/10 to-[#0D2B75]/10 border border-[#E8ECF4] text-[#0D2B75] font-black font-heading text-sm flex items-center justify-center shrink-0">
+              {listing.name.slice(0, 2).toUpperCase()}
+            </div>
+          )}
 
-        <div className="flex items-center gap-2 mt-1.5 mb-3">
-          <button
-            type="button"
-            onClick={() => onOpenReviews?.(listing)}
-            className="flex items-center gap-1.5 hover:opacity-80 transition-opacity cursor-pointer group"
-          >
-            <div className="flex items-center text-[#FF9F1A]">
-              <Star className="w-4 h-4 fill-[#FF9F1A] text-[#FF9F1A]" />
-              <span className="ml-1 text-sm font-bold text-[#0D2B75] group-hover:underline">
-                {listing.rating.toFixed(1)}
+          <div className="min-w-0 flex-1">
+            <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] group-hover:text-[#145BFF] transition-colors tracking-tight leading-snug">
+              {listing.name}
+            </h3>
+
+            <div className="flex flex-wrap items-center gap-1.5 mt-1">
+              <button
+                type="button"
+                onClick={() => onOpenReviews?.(listing)}
+                className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer group"
+              >
+                <div className="flex items-center text-[#FF9F1A]">
+                  <Star className="w-3.5 h-3.5 fill-[#FF9F1A] text-[#FF9F1A]" />
+                  <span className="ml-1 text-xs font-bold text-[#0D2B75] group-hover:underline">
+                    {listing.rating.toFixed(1)}
+                  </span>
+                </div>
+                <span className="text-[11px] text-gray-400 font-normal">({listing.reviewCount})</span>
+              </button>
+              <span className="text-xs text-gray-300">•</span>
+              <span
+                className={`text-[11px] font-semibold ${
+                  listing.isOpenNow ? 'text-emerald-600' : 'text-rose-500'
+                }`}
+              >
+                {listing.isOpenNow ? '• Offen' : '• Geschlossen'}
               </span>
             </div>
-            <span className="text-xs text-gray-400">•</span>
-            <span className="text-xs font-medium text-gray-600 group-hover:underline">
-              {listing.reviewCount} {t('listing.reviews')}
-            </span>
-          </button>
-          <span className="text-xs text-gray-400">•</span>
-          <span
-            className={`text-xs font-semibold ${
-              listing.isOpenNow ? 'text-emerald-600' : 'text-rose-500'
-            }`}
-          >
-            {listing.isOpenNow ? '• Offen' : '• Geschlossen'}
-          </span>
+          </div>
         </div>
 
         {/* Description */}

@@ -6,6 +6,10 @@ import enDict from '@/locales/en.json';
 import frDict from '@/locales/fr.json';
 import esDict from '@/locales/es.json';
 import itDict from '@/locales/it.json';
+import trDict from '@/locales/tr.json';
+import zhDict from '@/locales/zh.json';
+import arDict from '@/locales/ar.json';
+import swDict from '@/locales/sw.json';
 import { Locale } from './types';
 
 export interface LanguageOption {
@@ -20,6 +24,10 @@ export const SUPPORTED_LANGUAGES: LanguageOption[] = [
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+  { code: 'zh', name: '中文 (简体)', flag: '🇨🇳' },
+  { code: 'ar', name: 'العربية', flag: '🇦🇪' },
+  { code: 'sw', name: 'Kiswahili', flag: '🇰🇪' },
 ];
 
 type Translations = typeof deDict;
@@ -36,6 +44,10 @@ const dictionaries: Record<Locale, Translations> = {
   fr: frDict as unknown as Translations,
   es: esDict as unknown as Translations,
   it: itDict as unknown as Translations,
+  tr: trDict as unknown as Translations,
+  zh: zhDict as unknown as Translations,
+  ar: arDict as unknown as Translations,
+  sw: swDict as unknown as Translations,
 };
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);

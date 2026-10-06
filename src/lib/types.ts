@@ -1,4 +1,4 @@
-export type Locale = 'de' | 'en' | 'fr' | 'es' | 'it';
+export type Locale = 'de' | 'en' | 'fr' | 'es' | 'it' | 'tr' | 'zh' | 'ar' | 'sw';
 
 export type LocalizedString = Record<string, string>;
 
@@ -30,6 +30,7 @@ export interface BusinessListing {
   city: string;
   phone: string;
   website: string;
+  logoUrl?: string;
   rating: number;
   reviewCount: number;
   isVerified: boolean;

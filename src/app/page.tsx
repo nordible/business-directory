@@ -1,19 +1,20 @@
 import { Metadata } from 'next';
 import { LandingPage } from '@/components/LandingPage';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'Nordible Directory | Verifiziertes Branchenverzeichnis für Qualitätsunternehmen',
+  title: `${siteConfig.appName} | Verifiziertes Branchenverzeichnis für Qualitätsunternehmen`,
   description:
-    'Das offizielle Branchenverzeichnis für verifizierte Unternehmen in Frankfurt am Main, Berlin, München, Hamburg und der DACH-Region. 100% qualitätsgeprüft.',
+    `Das offizielle Branchenverzeichnis für verifizierte Unternehmen in Frankfurt am Main, Berlin, München, Hamburg und der DACH-Region. 100% qualitätsgeprüft von ${siteConfig.company.name}.`,
   alternates: {
-    canonical: 'https://directory.nordible.co/',
+    canonical: `${siteConfig.urls.base}/`,
   },
   openGraph: {
-    title: 'Nordible Directory | Verifiziertes Branchenverzeichnis',
+    title: `${siteConfig.appName} | Verifiziertes Branchenverzeichnis`,
     description:
       'Entdecken Sie handverlesene Tech-Agenturen, Gastronomie, Architekten und Dienstleister – 100% verifiziert.',
-    url: 'https://directory.nordible.co/',
-    siteName: 'Nordible Directory',
+    url: `${siteConfig.urls.base}/`,
+    siteName: siteConfig.appName,
     type: 'website',
   },
 };

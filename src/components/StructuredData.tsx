@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Locale } from '@/lib/types';
+import { siteConfig } from '@/config/site';
 
 interface StructuredDataProps {
   locale: Locale;
@@ -15,32 +16,32 @@ export function StructuredData({ locale }: StructuredDataProps) {
     '@graph': [
       {
         '@type': 'WebSite',
-        '@id': 'https://directory.nordible.co/#website',
-        url: 'https://directory.nordible.co/',
-        name: isDe ? 'Nordible Directory | Verifiziertes Branchenverzeichnis' : 'Nordible Directory | Verified Business Directory',
+        '@id': `${siteConfig.urls.base}/#website`,
+        url: `${siteConfig.urls.base}/`,
+        name: isDe ? `${siteConfig.appName} | Verifiziertes Branchenverzeichnis` : `${siteConfig.appName} | Verified Business Directory`,
         description: isDe
           ? 'Offizielles Verzeichnis verifizierter Unternehmen in Frankfurt am Main, Berlin, München, Hamburg und der DACH-Region.'
           : 'Official directory of verified enterprises across Frankfurt, Berlin, Munich, Hamburg, and the DACH region.',
         publisher: {
           '@type': 'Organization',
-          name: 'Nordible Technologies',
-          url: 'https://nordible.co/',
+          name: siteConfig.company.name,
+          url: siteConfig.company.website,
           logo: {
             '@type': 'ImageObject',
-            url: 'https://directory.nordible.co/images/logos/nordible-icon.png',
+            url: `${siteConfig.urls.base}${siteConfig.assets.logoIcon}`,
           },
         },
       },
       {
         '@type': 'Organization',
-        '@id': 'https://directory.nordible.co/#organization',
-        name: 'Nordible Technologies',
-        url: 'https://nordible.co/',
-        logo: 'https://directory.nordible.co/images/logos/nordible-icon.png',
+        '@id': `${siteConfig.urls.base}/#organization`,
+        name: siteConfig.company.name,
+        url: siteConfig.company.website,
+        logo: `${siteConfig.urls.base}${siteConfig.assets.logoIcon}`,
         sameAs: [
           'https://linkedin.com/company/nordible',
           'https://invoice.nordible.co',
-          'https://mail.nordible.co',
+          'https://email.nordible.co',
         ],
       },
       {
@@ -49,13 +50,13 @@ export function StructuredData({ locale }: StructuredDataProps) {
           {
             '@type': 'Question',
             name: isDe
-              ? 'Wie kann ich mein Unternehmen in das Nordible Directory aufnehmen lassen?'
-              : 'How can I get my business listed in the Nordible Directory?',
+              ? `Wie kann ich mein Unternehmen in ${siteConfig.appName} aufnehmen lassen?`
+              : `How can I get my business listed in ${siteConfig.appName}?`,
             acceptedAnswer: {
               '@type': 'Answer',
               text: isDe
-                ? 'Senden Sie Ihre Unternehmensdaten (Name, Website, Adresse, Branche) einfach per E-Mail an mail@nordible.co. Unser Team prüft und schaltet Ihren Eintrag zeitnah frei.'
-                : 'Simply email your company details (name, website, address, industry) to mail@nordible.co. Our team will verify and activate your listing promptly.',
+                ? `Senden Sie Ihre Unternehmensdaten (Name, Website, Adresse, Branche) einfach per E-Mail an ${siteConfig.contact.email}. Unser Team prüft und schaltet Ihren Eintrag zeitnah frei.`
+                : `Simply email your company details (name, website, address, industry) to ${siteConfig.contact.email}. Our team will verify and activate your listing promptly.`,
             },
           },
           {

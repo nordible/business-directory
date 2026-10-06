@@ -15,6 +15,7 @@ import { ClaimListingModal } from '@/components/ClaimListingModal';
 import { BusinessDashboardModal } from '@/components/BusinessDashboardModal';
 import { ReviewModal } from '@/components/ReviewModal';
 import { Mascot } from '@/components/mascot/Mascot';
+import { siteConfig } from '@/config/site';
 import { Search, SlidersHorizontal, Sparkles, ArrowRight, ArrowLeft } from 'lucide-react';
 
 function getInitialTenant(): TenantBranding {
@@ -275,33 +276,34 @@ export default function DirectoryAppPage() {
           </div>
         )}
 
-        {/* Bottom Banner */}
+        {/* Bottom Banner: Directory Listing CTA */}
         <section className="mt-16 bg-gradient-to-r from-[#0D2B75] via-[#145BFF]/85 to-[#0D2B75] rounded-3xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl relative overflow-hidden">
           <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left z-10">
             <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 drop-shadow-xl">
-              <Mascot variant="celebrate" alt="Nordible Directory White-Label" />
+              <Mascot variant="celebrate" alt={`${siteConfig.appName} Business Directory`} />
             </div>
             <div className="space-y-1.5">
               <span className="text-xs font-extrabold tracking-wider uppercase text-[#FF9F1A]">
-                Business Partnerschaft & White-Label
+                100% Verifiziert • Weltweit • Offen für alle Branchen
               </span>
               <h3 className="text-xl sm:text-2xl font-black font-heading tracking-tight">
-                Möchten Sie ein eigenes Branchenverzeichnis betreiben?
+                Ist Ihr Unternehmen noch nicht in {siteConfig.appName} gelistet?
               </h3>
               <p className="text-xs sm:text-sm text-blue-100/80 max-w-lg leading-relaxed font-medium">
-                Entdecken Sie unsere Turnkey-Lösung mit eigener Domain, Inhaber-Verifizierung und Multi-Sprachen-Unterstützung.
+                Präsentieren Sie Ihre Leistungen, Adresse und Kontaktdaten vor Kunden und Partnern rund um die Welt.
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 shrink-0 z-10 w-full md:w-auto">
-            <Link
-              href="/partner"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#FF9F1A] hover:bg-amber-400 text-[#0D2B75] font-extrabold text-xs sm:text-sm transition-transform active:scale-95 shadow-md flex items-center justify-center gap-2"
+            <button
+              type="button"
+              onClick={() => setIsAddModalOpen(true)}
+              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#FF9F1A] hover:bg-amber-400 text-[#0D2B75] font-extrabold text-xs sm:text-sm transition-transform active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Partner-Programm ansehen</span>
+              <span>Unternehmen jetzt eintragen</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
         </section>
       </main>

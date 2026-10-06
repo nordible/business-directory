@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTranslation } from '@/lib/i18n';
 import { MOCK_LISTINGS, INITIAL_TENANTS } from '@/lib/mockData';
 import { Header } from '@/components/Header';
@@ -9,6 +10,7 @@ import { Footer } from '@/components/Footer';
 import { Mascot } from '@/components/mascot/Mascot';
 import { AddListingModal } from '@/components/AddListingModal';
 import { StructuredData } from '@/components/StructuredData';
+import { siteConfig } from '@/config/site';
 import {
   Sparkles,
   ArrowRight,
@@ -18,11 +20,36 @@ import {
   ChevronDown,
   ChevronUp,
   Zap,
-  CheckCircle2,
   Globe,
   Compass,
   Phone,
 } from 'lucide-react';
+
+function ListingLogo({ logoUrl, name, size = 36 }: { logoUrl?: string; name: string; size?: number }) {
+  const [error, setError] = useState(false);
+
+  if (logoUrl && !error) {
+    return (
+      <div className="w-10 h-10 rounded-xl bg-white p-1 border border-[#E8ECF4] shadow-2xs shrink-0 flex items-center justify-center overflow-hidden">
+        <Image
+          src={logoUrl}
+          alt={name}
+          width={size}
+          height={size}
+          unoptimized
+          onError={() => setError(true)}
+          className="w-full h-full object-contain"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#145BFF]/10 to-[#0D2B75]/10 border border-[#E8ECF4] text-[#0D2B75] font-black font-heading text-xs flex items-center justify-center shrink-0">
+      {name.slice(0, 2).toUpperCase()}
+    </div>
+  );
+}
 
 export function LandingPage() {
   const { locale, t } = useTranslation();
@@ -34,12 +61,12 @@ export function LandingPage() {
   };
 
   const geoLocations = [
-    { name: 'Frankfurt am Main', count: 'Zentraler Hub', highlight: true },
-    { name: 'Berlin', count: 'Hauptstadt-Region', highlight: false },
-    { name: 'München', count: 'Süddeutschland', highlight: false },
-    { name: 'Hamburg', count: 'Norddeutschland', highlight: false },
-    { name: 'Wien & Zürich', count: 'DACH-Region', highlight: false },
-    { name: 'International', count: 'Global Partners', highlight: false },
+    { name: 'Global / Weltweit', count: 'Alle Regionen', highlight: true },
+    { name: 'Frankfurt am Main', count: 'DACH Hub', highlight: false },
+    { name: 'New York & London', count: 'Global Metropolises', highlight: false },
+    { name: 'Berlin & München', count: 'Innovation Hubs', highlight: false },
+    { name: 'Mumbai & Dubai', count: 'International Hubs', highlight: false },
+    { name: 'Alle Branchen weltweit', count: '100% Branchenoffen', highlight: true },
   ];
 
   const faqs = [
@@ -134,7 +161,7 @@ export function LandingPage() {
                   <div className="absolute inset-0 bg-[#145BFF]/10 rounded-full blur-2xl animate-pulse" />
                   <Mascot
                     variant="hero-wave"
-                    alt="Nordible Directory Mascot Googloo"
+                    alt={`${siteConfig.appName} Mascot Googloo`}
                     priority
                   />
                 </div>
@@ -179,9 +206,12 @@ export function LandingPage() {
                       </div>
                     </div>
 
-                    <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-[#145BFF] transition-colors tracking-tight">
-                      {listing.name}
-                    </h3>
+                    <div className="flex items-start gap-3 my-2">
+                      <ListingLogo logoUrl={listing.logoUrl} name={listing.name} size={36} />
+                      <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-[#145BFF] transition-colors tracking-tight leading-snug">
+                        {listing.name}
+                      </h3>
+                    </div>
 
                     <p className="text-xs text-slate-600 line-clamp-3 mt-2 leading-relaxed">
                       {listing.description[locale] || listing.description['de']}
@@ -331,14 +361,14 @@ export function LandingPage() {
             <div className="bg-gradient-to-r from-[#0D2B75] via-[#145BFF]/90 to-[#0D2B75] rounded-3xl p-8 sm:p-14 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl relative overflow-hidden">
               <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left z-10">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 drop-shadow-xl">
-                  <Mascot variant="celebrate" alt="Nordible Directory Celebration" />
+                  <Mascot variant="celebrate" alt={`${siteConfig.appName} Celebration`} />
                 </div>
                 <div className="space-y-2">
                   <span className="text-xs font-extrabold uppercase tracking-wider text-[#FF9F1A]">
                     Verifiziert • Unabhängig • Lokal
                   </span>
                   <h3 className="font-heading font-black text-xl sm:text-3xl tracking-tight">
-                    Starten Sie jetzt mit dem Nordible Directory
+                    Starten Sie jetzt mit {siteConfig.appName}
                   </h3>
                   <p className="text-xs sm:text-sm text-blue-100/80 max-w-lg leading-relaxed font-medium">
                     Finden Sie geprüfte Dienstleister oder senden Sie Ihre Daten für einen kostenlosen Basiseintrag.

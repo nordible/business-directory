@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
-import { X, Mail, Check, Copy, Sparkles, Building2, Globe, MapPin, Phone, FileText } from 'lucide-react';
+import { X, Mail, Check, Copy, Building2, Globe, MapPin, Phone, FileText, Image as ImageIcon, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
+import { siteConfig } from '@/config/site';
 
 interface AddListingModalProps {
   isOpen: boolean;
@@ -23,20 +24,20 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
 
   const emailSubject = encodeURIComponent(
     locale === 'de'
-      ? 'Eintragsanfrage für das Nordible Directory'
-      : 'Listing Request for Nordible Directory'
+      ? `Eintragsanfrage für ${siteConfig.appName}`
+      : `Listing Request for ${siteConfig.appName}`
   );
 
   const emailBody = encodeURIComponent(
     locale === 'de'
-      ? `Hallo Nordible Team,\n\nich möchte mein Unternehmen gerne im Nordible Directory listen lassen:\n\n• Unternehmensname & Branche: \n• Offizielle Webseite / URL: \n• Standort (Stadt & Adresse): \n• Telefonnummer & Ansprechpartner: \n• Kurzbeschreibung der Leistungen: \n\nViele Grüße,\n`
-      : `Hello Nordible Team,\n\nI would like to list my business in the Nordible Directory:\n\n• Company Name & Industry: \n• Official Website / URL: \n• Location (City & Address): \n• Phone Number & Contact: \n• Short Description of Services: \n\nBest regards,\n`
+      ? `Hallo ${siteConfig.company.name} Team,\n\nich möchte mein Unternehmen gerne in ${siteConfig.appName} listen lassen:\n\n• Unternehmensname & Branche: \n• Offizielle Webseite / URL: \n• Standort (Stadt & Land): \n• Telefonnummer & Ansprechpartner: \n• Kurzbeschreibung der Leistungen: \n• Logo-URL (z.B. https://domain.de/logo.png): \n\nViele Grüße,\n`
+      : `Hello ${siteConfig.company.name} Team,\n\nI would like to list my business in ${siteConfig.appName}:\n\n• Company Name & Industry: \n• Official Website / URL: \n• Location (City & Country): \n• Phone Number & Contact: \n• Short Description of Services: \n• Hosted Logo URL (e.g. https://domain.com/logo.png): \n\nBest regards,\n`
   );
 
-  const mailtoUrl = `mailto:mail@nordible.co?subject=${emailSubject}&body=${emailBody}`;
+  const mailtoUrl = `mailto:${siteConfig.contact.email}?subject=${emailSubject}&body=${emailBody}`;
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('mail@nordible.co');
+    navigator.clipboard.writeText(siteConfig.contact.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -56,13 +57,14 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
         {/* Modal Header */}
         <div className="px-6 py-4 border-b border-[#E8ECF4] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-amber-50 text-amber-800 border border-amber-200">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
-              <span>{t('addModal.comingSoonBadge')}</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-200">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{t('addModal.verifiedBadge')}</span>
             </div>
           </div>
           <button
             onClick={onClose}
+            aria-label="Close"
             className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-gray-800 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
@@ -70,9 +72,9 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto space-y-6">
-          <div className="text-center space-y-3">
-            <div className="w-24 h-24 mx-auto drop-shadow-md">
+        <div className="p-6 overflow-y-auto space-y-5">
+          <div className="text-center space-y-2">
+            <div className="w-20 h-20 mx-auto drop-shadow-md">
               <Mascot variant="mail-send" alt="Mascot sending mail" priority />
             </div>
             <h3 className="font-heading font-black text-xl text-[#0D2B75] leading-tight">
@@ -85,7 +87,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
 
           {/* Checklist of required items */}
           <div className="bg-[#FAFBFF] rounded-2xl border border-[#E8ECF4] p-4.5 space-y-3">
-            <div className="text-xs font-extrabold text-[#0D2B75] uppercase tracking-wider font-heading">
+            <div className="text-[11px] font-extrabold text-[#0D2B75] uppercase tracking-wider font-heading">
               {t('addModal.infoNeeded')}
             </div>
             <ul className="space-y-2 text-xs text-gray-700 font-medium">
@@ -109,11 +111,15 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                 <FileText className="w-4 h-4 text-[#145BFF] shrink-0" />
                 <span>{t('addModal.field5')}</span>
               </li>
+              <li className="flex items-center gap-2.5">
+                <ImageIcon className="w-4 h-4 text-[#145BFF] shrink-0" />
+                <span>{t('addModal.field6')}</span>
+              </li>
             </ul>
           </div>
 
           {/* Direct CTA Buttons */}
-          <div className="space-y-2.5 pt-1">
+          <div className="space-y-2 pt-1">
             <a
               href={mailtoUrl}
               className="w-full py-3.5 px-4 rounded-xl text-white text-xs md:text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 transition-all hover:opacity-95 active:scale-98 cursor-pointer"
@@ -121,6 +127,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
             >
               <Mail className="w-4 h-4" />
               <span>{t('addModal.sendEmailBtn')}</span>
+              <ArrowRight className="w-4 h-4 ml-1 opacity-80" />
             </a>
 
             <button
@@ -136,7 +143,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
               ) : (
                 <>
                   <Copy className="w-4 h-4 text-gray-500" />
-                  <span>{t('addModal.copyEmailBtn')} (mail@nordible.co)</span>
+                  <span>{t('addModal.copyEmailBtn')} ({siteConfig.contact.email})</span>
                 </>
               )}
             </button>
@@ -144,8 +151,8 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3 bg-[#FAFBFF] border-t border-[#E8ECF4] text-center text-[11px] text-gray-500">
-          Geprüfte Einträge erscheinen nach redaktioneller Freigabe im Verzeichnis.
+        <div className="px-6 py-2.5 bg-[#FAFBFF] border-t border-[#E8ECF4] text-center text-[11px] text-gray-500">
+          Geprüfte Einträge erscheinen nach redaktioneller Freigabe weltweit in {siteConfig.appName}.
         </div>
       </div>
     </div>

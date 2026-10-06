@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useTranslation } from '@/lib/i18n';
 import { Sparkles, ArrowUpRight, ShieldCheck, Mail, Globe, Bug } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
+import { siteConfig } from '@/config/site';
 
 export function Footer() {
   const { locale } = useTranslation();
@@ -69,14 +70,14 @@ export function Footer() {
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center">
                 <Image
-                  src="/images/logos/nordible-icon.png"
-                  alt="Nordible Technologies"
+                  src={siteConfig.assets.logoIcon}
+                  alt={siteConfig.company.name}
                   width={24}
                   height={24}
                   className="object-contain"
                 />
               </div>
-              <span className="font-heading font-black text-lg tracking-tight">Nordible Directory</span>
+              <span className="font-heading font-black text-lg tracking-tight">{siteConfig.appName}</span>
             </div>
             <p className="text-xs text-blue-100/70 leading-relaxed">
               {isDe
@@ -147,7 +148,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://mail.nordible.co"
+                  href="https://email.nordible.co"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors flex items-center gap-1"
@@ -166,16 +167,16 @@ export function Footer() {
             <ul className="space-y-2 text-xs text-blue-100/80">
               <li>
                 <a
-                  href="mailto:mail@nordible.co"
+                  href={`mailto:${siteConfig.contact.email}`}
                   className="hover:text-white transition-colors flex items-center gap-1.5"
                 >
                   <Mail className="h-3.5 w-3.5 text-[#FF9F1A]" />
-                  <span>mail@nordible.co</span>
+                  <span>{siteConfig.contact.email}</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="https://nordible.co/privacy-policy"
+                  href={`${siteConfig.urls.base}/privacy`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
@@ -185,7 +186,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://nordible.co/terms-of-service"
+                  href={`${siteConfig.urls.base}/terms`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
@@ -199,10 +200,10 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-100/60">
-          <p>© {new Date().getFullYear()} Nordible Technologies. {isDe ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}</p>
+          <p>© {new Date().getFullYear()} {siteConfig.company.name}. {isDe ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}</p>
           <div className="flex items-center gap-4">
             <a
-              href="mailto:mail@nordible.co?subject=%5BDirectory%20Feedback%5D"
+              href={`mailto:${siteConfig.contact.email}?subject=%5B${encodeURIComponent(siteConfig.appName)}%20Feedback%5D`}
               className="hover:text-white transition-colors flex items-center gap-1"
             >
               <Bug className="h-3.5 w-3.5 text-[#FF9F1A]" />

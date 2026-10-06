@@ -11,6 +11,7 @@ import { TenantCustomizer } from '@/components/TenantCustomizer';
 import { PricingModal } from '@/components/PricingModal';
 import { DomainSettingsModal } from '@/components/DomainSettingsModal';
 import { Footer } from '@/components/Footer';
+import { siteConfig } from '@/config/site';
 import {
   Sparkles,
   ArrowLeft,
@@ -61,15 +62,15 @@ export default function PartnerPage() {
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shadow-2xs border border-[#E8ECF4]">
                 <Image
-                  src="/images/logos/nordible-icon.png"
-                  alt="Nordible"
+                  src={siteConfig.assets.logoIcon}
+                  alt={siteConfig.company.name}
                   width={20}
                   height={20}
                   className="object-contain"
                 />
               </div>
               <span className="font-heading font-extrabold text-sm text-[#0D2B75] hidden sm:inline">
-                Nordible Partner
+                {siteConfig.appNameShort} Partner
               </span>
             </div>
 

@@ -5,10 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { TenantBranding, Locale } from '@/lib/types';
 import { useTranslation, SUPPORTED_LANGUAGES } from '@/lib/i18n';
-import { Globe, PlusCircle, Handshake, ChevronDown, Compass } from 'lucide-react';
+import { Globe, PlusCircle, ChevronDown, Compass } from 'lucide-react';
+
+import { siteConfig } from '@/config/site';
 
 interface HeaderProps {
-  currentTenant: TenantBranding;
+  currentTenant?: TenantBranding;
   tenants?: TenantBranding[];
   onSelectTenant?: (tenant: TenantBranding) => void;
   onOpenCustomizer?: () => void;
@@ -17,7 +19,6 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  currentTenant,
   onOpenAiModal,
 }) => {
   const { locale, setLocale, t } = useTranslation();
@@ -30,10 +31,17 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-3">
           <Link
             href="/"
-            className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-heading font-bold shadow-sm shrink-0 hover:scale-105 transition-transform"
-            style={{ backgroundColor: currentTenant.primaryColor }}
+            title={siteConfig.appName}
+            className="w-10 h-10 bg-white rounded-xl flex items-center justify-center p-1.5 shadow-md shadow-blue-500/10 border border-[#E8ECF4] shrink-0 hover:scale-105 transition-transform"
           >
-            {currentTenant.logoText.slice(0, 2)}
+            <Image
+              src={siteConfig.assets.logoIcon}
+              alt={siteConfig.company.name}
+              width={36}
+              height={36}
+              className="w-full h-full object-contain"
+              priority
+            />
           </Link>
           <div>
             <div className="flex items-center gap-2">
@@ -41,25 +49,20 @@ export const Header: React.FC<HeaderProps> = ({
                 href="/"
                 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] leading-tight tracking-tight hover:text-[#145BFF] transition-colors"
               >
-                {currentTenant.name}
+                {siteConfig.appName}
               </Link>
+              <a
+                href={siteConfig.company.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-slate-100 hover:bg-[#F3F7FF] border border-[#E8ECF4] px-2 py-0.5 text-[10px] font-bold text-slate-600 hover:text-[#145BFF] transition-colors hidden sm:inline-block"
+              >
+                by {siteConfig.appNameShort}
+              </a>
             </div>
-            <a
-              href="https://nordible.co"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-[#145BFF] transition-colors"
-            >
-              <Image
-                src="/images/logos/nordible-icon.png"
-                alt="Nordible"
-                width={12}
-                height={12}
-                className="opacity-70 group-hover:opacity-100 transition-opacity"
-              />
-              <span className="hidden sm:inline">{t('brand.poweredBy')}</span>
-              <span className="font-semibold text-gray-700 group-hover:text-[#145BFF]">Nordible</span>
-            </a>
+            <p className="text-[11px] text-gray-500 leading-tight hidden md:block">
+              {isDe ? siteConfig.tagline.de : siteConfig.tagline.en}
+            </p>
           </div>
         </div>
 
@@ -85,17 +88,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span>{t('nav.addListing')}</span>
           </button>
 
-          {/* Partnership / White-Label Link */}
-          <Link
-            href="/partner"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl border border-[#E8ECF4] bg-white hover:bg-[#F3F7FF] text-[#0D2B75] shadow-2xs transition-colors cursor-pointer"
-            title={isDe ? 'White-Label & Partnerschaft' : 'White-Label & Partnership'}
-          >
-            <Handshake className="w-3.5 h-3.5 text-[#145BFF]" />
-            <span>{t('nav.partner')}</span>
-          </Link>
-
-          {/* Ergonomic 5-Language Dropdown */}
+          {/* Language Dropdown */}
           <div className="relative flex items-center">
             <Globe className="w-3.5 h-3.5 text-[#145BFF] absolute left-2.5 pointer-events-none" />
             <select
