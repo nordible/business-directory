@@ -1,0 +1,133 @@
+{
+  "brand": {
+    "poweredBy": "Propulsé par Nordible Directory",
+    "createYourOwn": "Créer votre propre annuaire",
+    "customizeBrand": "Personnaliser la marque",
+    "brandName": "Nom de marque",
+    "primaryColor": "Couleur principale",
+    "tagline": "Slogan / Sous-titre",
+    "applyChanges": "Appliquer les modifications"
+  },
+  "nav": {
+    "explore": "Explorer",
+    "search": "Recherche",
+    "categories": "Catégories",
+    "addListing": "Ajouter",
+    "manage": "Gérer",
+    "launchDirectory": "Ouvrir l'annuaire",
+    "backHome": "Accueil",
+    "partner": "Partenariat"
+  },
+  "search": {
+    "placeholder": "Rechercher entreprises, services, lieux...",
+    "filterButton": "Filtres",
+    "filterTitle": "Filtrer les résultats",
+    "allCategories": "Toutes catégories",
+    "location": "Emplacement",
+    "minRating": "Note minimale",
+    "openNow": "Ouvert actuellement",
+    "applyFilters": "Appliquer les filtres",
+    "resetFilters": "Réinitialiser",
+    "resultsFound": "{{count}} établissements trouvés"
+  },
+  "listing": {
+    "verified": "Vérifié",
+    "call": "Appeler",
+    "website": "Site web",
+    "directions": "Itinéraire",
+    "details": "Voir détails",
+    "hideDetails": "Moins de détails",
+    "openingHours": "Horaires d'ouverture",
+    "reviews": "Avis",
+    "claimListing": "Revendiquer la fiche"
+  },
+  "tenant": {
+    "switchTenant": "Changer d'annuaire",
+    "activeTenant": "Annuaire actif"
+  },
+  "landing": {
+    "badge": "Annuaire professionnel officiel • 100% Vérifié",
+    "heroTitle": "Entreprises et services vérifiés dans votre région",
+    "heroSubtitle": "Découvrez des agences tech sélectionnées, une gastronomie de premier plan, des architectes renommés et des experts immobiliers.",
+    "ctaExplore": "Explorer l'annuaire",
+    "ctaAdd": "Inscrire votre entreprise",
+    "geoBadge": "Recherche locale pour les métropoles clés",
+    "geoSubtitle": "Présence commerciale ciblée dans les pôles économiques majeurs",
+    "featuredTitle": "Partenaires en vedette",
+    "featuredSubtitle": "De véritables entreprises avec une garantie de qualité",
+    "benefitsTitle": "Pourquoi Nordible Directory ?",
+    "benefit1Title": "100% Propriétaires Vérifiés",
+    "benefit1Desc": "Aucun spam. Chaque profil est validé directement par les dirigeants ou notre équipe.",
+    "benefit2Title": "Visibilité Géo Locale",
+    "benefit2Desc": "Optimisé pour les requêtes régionales, Google Rich Snippets et assistants IA.",
+    "benefit3Title": "Ergonomique et Rapide",
+    "benefit3Desc": "Conception Mobile-First avec des vitesses de chargement optimales sans bannières intrusives.",
+    "faqTitle": "Questions fréquentes (FAQ)",
+    "faq1Q": "Comment inscrire mon entreprise dans l'annuaire ?",
+    "faq1A": "Cliquez sur 'Inscrire votre entreprise' ou envoyez vos informations à mail@nordible.co pour un traitement prioritaire.",
+    "faq2Q": "L'inscription de base est-elle gratuite ?",
+    "faq2A": "Oui, la fiche standard pour les entreprises vérifiées est gratuite de manière permanente.",
+    "faq3Q": "Quelles villes et régions sont couvertes ?",
+    "faq3A": "Nous couvrons principalement Francfort, Berlin, Munich, Hambourg, la région DACH et des partenaires internationaux."
+  },
+  "addModal": {
+    "comingSoonBadge": "En préparation • Bientôt disponible",
+    "title": "Ajouter votre entreprise",
+    "subtitle": "La capture IA automatisée est en phase bêta fermée. Pour inscrire votre entreprise en priorité, envoyez vos coordonnées par e-mail :",
+    "infoNeeded": "Veuillez fournir les informations suivantes :",
+    "field1": "Nom de l'entreprise & Secteur",
+    "field2": "Site web officiel / URL",
+    "field3": "Emplacement (Ville & Adresse)",
+    "field4": "Numéro de téléphone & Contact",
+    "field5": "Brève description de vos services",
+    "sendEmailBtn": "Envoyer un e-mail à mail@nordible.co",
+    "copyEmailBtn": "Copier l'adresse e-mail",
+    "copied": "Copié !"
+  },
+  "claimModal": {
+    "title": "Vérification du propriétaire",
+    "subtitle": "Revendiquer {{name}}",
+    "emailLabel": "E-mail professionnel officiel",
+    "emailPlaceholder": "contact@votreentreprise.fr",
+    "sendCode": "Demander un code de sécurité",
+    "codeLabel": "Code de confirmation à 6 chiffres",
+    "verifyCode": "Valider le code & devenir propriétaire",
+    "successTitle": "Vérification réussie !",
+    "successSubtitle": "Vous êtes désormais enregistré comme propriétaire officiel.",
+    "openDashboard": "Accéder au tableau de bord"
+  },
+  "reviewsModal": {
+    "title": "Avis",
+    "writeReview": "Laisser un avis",
+    "namePlaceholder": "Votre nom",
+    "commentPlaceholder": "Partagez votre expérience avec cet établissement...",
+    "submit": "Publier l'avis",
+    "noReviews": "Aucun avis pour l'instant. Soyez le premier !"
+  },
+  "pricing": {
+    "title": "Tarifs pour opérateurs d'annuaire",
+    "subtitle": "Lancez votre plateforme d'annuaire professionnelle",
+    "monthly": "Mensuel",
+    "yearly": "Annuel (2 mois gratuits)",
+    "tierStarter": "Starter Local",
+    "tierStarterDesc": "Idéal pour les niches locales et les quartiers",
+    "tierPro": "White-Label Pro",
+    "tierProDesc": "Pour entrepreneurs avec domaine propre et croissance illimitée",
+    "tierEnterprise": "Franchise & Grands Comptes",
+    "tierEnterpriseDesc": "Plusieurs villes ou secteurs réunis sous une même plateforme",
+    "popularBadge": "Choix le plus populaire",
+    "subscribe": "Choisir ce forfait",
+    "redirectingStripe": "Redirection vers Stripe Checkout..."
+  },
+  "domain": {
+    "title": "Nom de domaine & SSL",
+    "subtitle": "Connectez votre propre domaine en quelques clics",
+    "currentDomain": "Domaine actuel",
+    "cnameRecord": "Enregistrement CNAME",
+    "cnameValue": "cname.nordible.com",
+    "sslStatus": "Statut SSL",
+    "sslActive": "Actif & chiffré (TLS 1.3)",
+    "copy": "Copier",
+    "copied": "Copié !"
+  }
+}

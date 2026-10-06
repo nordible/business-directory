@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --nordible-blue: #145BFF;
+  --nordible-dark: #0D2B75;
+  --nordible-orange: #FF9F1A;
+  --nordible-bg: #FAFBFF;
+  --nordible-section-bg: #F3F7FF;
+  --nordible-border: #E8ECF4;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-nordible-blue: #145BFF;
+  --color-nordible-dark: #0D2B75;
+  --color-nordible-orange: #FF9F1A;
+  --color-nordible-bg: #FAFBFF;
+  --color-nordible-border: #E8ECF4;
+  --font-heading: var(--font-sora);
+  --font-sans: var(--font-inter);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAFBFF;
+  color: #1e293b;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-heading {
+  font-family: var(--font-sora), system-ui, sans-serif;
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  }
 }

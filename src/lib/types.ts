@@ -1,9 +1,6 @@
-export type Locale = 'de' | 'en';
+export type Locale = 'de' | 'en' | 'fr' | 'es' | 'it';
 
-export interface LocalizedString {
-  de: string;
-  en: string;
-}
+export type LocalizedString = Record<string, string>;
 
 export interface TenantBranding {
   id: string;

@@ -9,14 +9,15 @@ import {
   Globe,
   UploadCloud,
   CheckCircle2,
-  Loader2,
   Building,
   MapPin,
   Phone,
   Clock,
   ArrowRight,
   RefreshCw,
+  MessageSquareCode,
 } from 'lucide-react';
+import { Mascot } from '@/components/mascot/Mascot';
 
 interface AiListingModalProps {
   isOpen: boolean;
@@ -27,7 +28,7 @@ interface AiListingModalProps {
   onListingCreated: (listing: BusinessListing) => void;
 }
 
-type TabType = 'url' | 'upload';
+type TabType = 'url' | 'prompt' | 'upload';
 type StepType = 'input' | 'processing' | 'review';
 
 export const AiListingModal: React.FC<AiListingModalProps> = ({
@@ -45,6 +46,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
 
   // Input states
   const [urlInput, setUrlInput] = useState('');
+  const [promptInput, setPromptInput] = useState('');
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
 
   // Processing simulation state
@@ -59,6 +61,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
       setTimeout(() => {
         setStep('input');
         setUrlInput('');
+        setPromptInput('');
         setSelectedFileName(null);
         setProgressStep(1);
         setExtractedListing(null);
@@ -68,16 +71,20 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleStartExtraction = async (overrideUrl?: string, overrideDoc?: string) => {
-    const targetUrl = overrideUrl || urlInput;
-    const targetDoc = overrideDoc || selectedFileName;
+  const handleStartExtraction = async (
+    overrideUrl?: string,
+    overrideDoc?: string,
+    overridePrompt?: string
+  ) => {
+    const targetUrl = overrideUrl !== undefined ? overrideUrl : urlInput;
+    const targetDoc = overrideDoc !== undefined ? overrideDoc : selectedFileName;
+    const targetPrompt = overridePrompt !== undefined ? overridePrompt : promptInput;
 
-    if (!targetUrl && !targetDoc) return;
+    if (!targetUrl && !targetDoc && !targetPrompt) return;
 
     setStep('processing');
     setProgressStep(1);
 
-    // Multi-step animated progress for science-backed system status visibility (Nielsen Heuristics)
     const t1 = setTimeout(() => setProgressStep(2), 700);
     const t2 = setTimeout(() => setProgressStep(3), 1400);
 
@@ -87,6 +94,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           url: targetUrl,
+          prompt: targetPrompt,
           documentName: targetDoc,
           sourceType: activeTab,
           tenantId: currentTenantId,
@@ -103,7 +111,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           alert('Fehler bei der Extraktion');
           setStep('input');
         }
-      }, 2100);
+      }, 2000);
     } catch {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -112,7 +120,14 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
     }
   };
 
-  const handleApplySample = (sampleType: 'coffee' | 'craft' | 'tech') => {
+  const handleApplySample = (sampleType: 'nordible' | 'coffee' | 'craft' | 'tech') => {
+    if (sampleType === 'nordible') {
+      setUrlInput('https://nordible.co');
+      setActiveTab('url');
+      handleStartExtraction('https://nordible.co');
+      return;
+    }
+
     let sampleUrl = 'https://spree-kaffee.berlin';
     if (sampleType === 'craft') sampleUrl = 'https://kreuzberg-holz.de';
     if (sampleType === 'tech') sampleUrl = 'https://nordic-code.berlin';
@@ -120,6 +135,12 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
     setUrlInput(sampleUrl);
     setActiveTab('url');
     handleStartExtraction(sampleUrl);
+  };
+
+  const handleApplyPromptSample = (text: string) => {
+    setPromptInput(text);
+    setActiveTab('prompt');
+    handleStartExtraction(undefined, undefined, text);
   };
 
   const handleConfirmListing = () => {
@@ -138,13 +159,13 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
       {/* Backdrop touch dismiss */}
       <div className="absolute inset-0 -z-10" onClick={onClose} />
 
-      {/* Sheet Content: Bottom-anchored on mobile for optimal thumb reachability */}
-      <div className="bg-white w-full md:max-w-xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] md:max-h-[85vh] overflow-hidden">
-        {/* Handle bar for bottom sheet UX */}
+      {/* Sheet Content */}
+      <div className="bg-white w-full md:max-w-xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] md:max-h-[85vh] overflow-hidden border border-[#E8ECF4]">
+        {/* Handle bar for mobile */}
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 md:hidden" />
 
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-[#E8ECF4] flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div
               className="w-9 h-9 rounded-xl flex items-center justify-center text-white shadow-xs"
@@ -153,17 +174,17 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-extrabold text-gray-900 text-base leading-tight">
+              <h3 className="font-heading font-extrabold text-[#0D2B75] text-base leading-tight">
                 {t('aiModal.title')}
               </h3>
-              <p className="text-xs text-gray-700 leading-tight">
+              <p className="text-xs text-gray-500 leading-tight">
                 {t('aiModal.subtitle')}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:text-gray-800 hover:bg-gray-200 flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-gray-800 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -175,29 +196,41 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           {step === 'input' && (
             <div className="space-y-5">
               {/* Tab Selector (Segmented Control) */}
-              <div className="flex bg-gray-100 p-1 rounded-2xl">
+              <div className="flex bg-[#F3F7FF] border border-[#E8ECF4] p-1 rounded-2xl gap-1">
                 <button
                   type="button"
                   onClick={() => setActiveTab('url')}
-                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                     activeTab === 'url'
-                      ? 'bg-white text-gray-900 shadow-xs'
-                      : 'text-gray-700 hover:text-gray-900'
+                      ? 'bg-white text-[#0D2B75] shadow-xs'
+                      : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  <Globe className="w-4 h-4" />
+                  <Globe className="w-3.5 h-3.5 text-[#145BFF]" />
                   <span>{t('aiModal.tabUrl')}</span>
                 </button>
                 <button
                   type="button"
-                  onClick={() => setActiveTab('upload')}
-                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                    activeTab === 'upload'
-                      ? 'bg-white text-gray-900 shadow-xs'
-                      : 'text-gray-700 hover:text-gray-900'
+                  onClick={() => setActiveTab('prompt')}
+                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                    activeTab === 'prompt'
+                      ? 'bg-white text-[#0D2B75] shadow-xs'
+                      : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  <UploadCloud className="w-4 h-4" />
+                  <MessageSquareCode className="w-3.5 h-3.5 text-[#FF9F1A]" />
+                  <span>AI Prompt</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('upload')}
+                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                    activeTab === 'upload'
+                      ? 'bg-white text-[#0D2B75] shadow-xs'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  <UploadCloud className="w-3.5 h-3.5 text-[#145BFF]" />
                   <span>{t('aiModal.tabUpload')}</span>
                 </button>
               </div>
@@ -205,26 +238,33 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               {/* Tab 1 Content: URL input */}
               {activeTab === 'url' && (
                 <div className="space-y-3">
-                  <label className="block text-xs font-semibold text-gray-700">
+                  <label className="block text-xs font-bold text-[#0D2B75]">
                     {t('aiModal.urlLabel')}
                   </label>
                   <div className="relative">
-                    <Globe className="w-4 h-4 text-gray-600 absolute left-3.5 top-3.5 pointer-events-none" />
+                    <Globe className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
                       type="url"
                       value={urlInput}
                       onChange={(e) => setUrlInput(e.target.value)}
-                      placeholder={t('aiModal.urlPlaceholder')}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+                      placeholder="https://nordible.co"
+                      className="w-full pl-10 pr-4 py-3 bg-[#FAFBFF] border border-[#E8ECF4] rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium"
                     />
                   </div>
 
-                  {/* Ergonomic Quick Sample Chips */}
+                  {/* Quick Sample Chips */}
                   <div className="pt-2">
-                    <span className="text-[11px] font-semibold text-gray-700 block mb-1.5">
+                    <span className="text-[11px] font-bold text-gray-600 block mb-1.5">
                       {t('aiModal.trySample')}:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => handleApplySample('nordible')}
+                        className="px-2.5 py-1 text-xs bg-blue-50 text-[#145BFF] border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-bold flex items-center gap-1"
+                      >
+                        ⚡ nordible.co
+                      </button>
                       <button
                         type="button"
                         onClick={() => handleApplySample('coffee')}
@@ -237,35 +277,62 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                         onClick={() => handleApplySample('craft')}
                         className="px-2.5 py-1 text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors cursor-pointer font-medium"
                       >
-                        🪵 Tischlerei & Handwerk
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleApplySample('tech')}
-                        className="px-2.5 py-1 text-xs bg-blue-50 text-blue-800 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-medium"
-                      >
-                        💻 Tech Agentur
+                        🪵 Tischlerei
                       </button>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Tab 2 Content: Upload flyer/card */}
+              {/* Tab 2 Content: AI Prompt input */}
+              {activeTab === 'prompt' && (
+                <div className="space-y-3">
+                  <label className="block text-xs font-bold text-[#0D2B75]">
+                    Freitext oder KI-Prompt (auch für KI-Agenten)
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={promptInput}
+                    onChange={(e) => setPromptInput(e.target.value)}
+                    placeholder="z.B. Trage Nordible Technologies ein: Software-Agentur aus Frankfurt am Main, Web: https://nordible.co, Tel: +49 69 9999 8888, Spezialisiert auf KI-Agenten und Webplattformen."
+                    className="w-full p-3 bg-[#FAFBFF] border border-[#E8ECF4] rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium leading-relaxed"
+                  />
+
+                  {/* Sample Prompt Chips */}
+                  <div className="pt-1">
+                    <span className="text-[11px] font-bold text-gray-600 block mb-1.5">
+                      Prompt-Beispiel testen:
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleApplyPromptSample(
+                          'Trage Nordible Technologies ein: AI & Software Engineering Agentur aus Frankfurt, Web: https://nordible.co, Tel: +49 69 9999 8888'
+                        )
+                      }
+                      className="px-3 py-1.5 text-xs bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4] rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-semibold text-left block"
+                    >
+                      🤖 „Trage Nordible Technologies ein: Software & KI-Agentur aus Frankfurt...“
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Tab 3 Content: Upload flyer/card */}
               {activeTab === 'upload' && (
                 <div className="space-y-3">
                   <div
                     onClick={() => {
-                      setSelectedFileName('speisekarte-und-visitenkarte.pdf');
-                      handleStartExtraction(undefined, 'speisekarte-und-visitenkarte.pdf');
+                      setSelectedFileName('nordible-visitenkarte.pdf');
+                      handleStartExtraction(undefined, 'nordible-visitenkarte.pdf');
                     }}
-                    className="border-2 border-dashed border-gray-300 hover:border-gray-400 rounded-2xl p-6 text-center cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-colors"
+                    className="border-2 border-dashed border-[#E8ECF4] hover:border-[#145BFF] rounded-2xl p-6 text-center cursor-pointer bg-[#FAFBFF] hover:bg-white transition-colors"
                   >
-                    <UploadCloud className="w-10 h-10 text-gray-600 mx-auto mb-2" />
-                    <p className="text-xs font-semibold text-gray-800">
+                    <UploadCloud className="w-10 h-10 text-[#145BFF] mx-auto mb-2" />
+                    <p className="text-xs font-bold text-[#0D2B75]">
                       {t('aiModal.uploadPlaceholder')}
                     </p>
-                    <p className="text-[11px] text-gray-700 mt-1">
+                    <p className="text-[11px] text-gray-500 mt-1">
                       Klicken zum Hochladen oder hier ablegen
                     </p>
                   </div>
@@ -274,27 +341,24 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
             </div>
           )}
 
-          {/* STEP 2: Extraction in Progress (Nielsen UX Feedback) */}
+          {/* STEP 2: Extraction in Progress */}
           {step === 'processing' && (
-            <div className="py-8 flex flex-col items-center text-center space-y-6">
-              <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-lg animate-bounce"
-                style={{ backgroundColor: primaryColor }}
-              >
-                <Loader2 className="w-8 h-8 animate-spin" />
+            <div className="py-8 flex flex-col items-center text-center space-y-5">
+              <div className="w-24 h-24 drop-shadow-md">
+                <Mascot variant="working-laptop" alt="KI analysiert Daten" priority />
               </div>
 
               <div>
-                <h4 className="text-base font-bold text-gray-900">
+                <h4 className="font-heading font-extrabold text-base text-[#0D2B75]">
                   {t('aiModal.analyzing')}
                 </h4>
-                <p className="text-xs text-gray-700 mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   Extraktion läuft automatisch im Hintergrund
                 </p>
               </div>
 
               {/* Progress Milestones */}
-              <div className="w-full max-w-sm space-y-3 text-left bg-gray-50 p-4 rounded-2xl border border-gray-100">
+              <div className="w-full max-w-sm space-y-3 text-left bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4]">
                 <div className="flex items-center gap-2.5 text-xs">
                   {progressStep >= 1 ? (
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -303,7 +367,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   )}
                   <span
                     className={
-                      progressStep >= 1 ? 'font-semibold text-gray-900' : 'text-gray-600'
+                      progressStep >= 1 ? 'font-bold text-[#0D2B75]' : 'text-gray-500'
                     }
                   >
                     {t('aiModal.stepScraping')}
@@ -318,7 +382,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   )}
                   <span
                     className={
-                      progressStep >= 2 ? 'font-semibold text-gray-900' : 'text-gray-600'
+                      progressStep >= 2 ? 'font-bold text-[#0D2B75]' : 'text-gray-500'
                     }
                   >
                     {t('aiModal.stepVision')}
@@ -333,7 +397,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   )}
                   <span
                     className={
-                      progressStep >= 3 ? 'font-semibold text-gray-900' : 'text-gray-600'
+                      progressStep >= 3 ? 'font-bold text-[#0D2B75]' : 'text-gray-500'
                     }
                   >
                     {t('aiModal.stepValidation')}
@@ -347,27 +411,26 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           {step === 'review' && extractedListing && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                <span className="text-xs font-extrabold text-[#0D2B75] uppercase tracking-wider font-heading">
                   {t('aiModal.reviewTitle')}
                 </span>
                 <button
                   type="button"
                   onClick={() => setStep('input')}
-                  className="text-xs text-gray-500 hover:text-gray-800 flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-semibold text-gray-500 hover:text-[#145BFF] flex items-center gap-1 cursor-pointer"
                 >
                   <RefreshCw className="w-3 h-3" />
-                  <span>Neu scannen</span>
+                  <span>Neu erfassen</span>
                 </button>
               </div>
 
-              {/* Editable Quick Fields */}
-              <div className="space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-200">
-                {/* Business Name */}
+              {/* Editable Fields */}
+              <div className="space-y-3 bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4]">
                 <div>
                   <label className="block text-[11px] font-bold text-gray-600 mb-1">
                     {t('aiModal.businessName')}
                   </label>
-                  <div className="flex items-center bg-white border border-gray-200 rounded-xl px-3 py-2">
+                  <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
                     <Building className="w-4 h-4 text-gray-400 mr-2 shrink-0" />
                     <input
                       type="text"
@@ -375,12 +438,11 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       onChange={(e) =>
                         setExtractedListing({ ...extractedListing, name: e.target.value })
                       }
-                      className="w-full text-xs font-semibold text-gray-900 focus:outline-none"
+                      className="w-full text-xs font-bold text-[#0D2B75] focus:outline-none"
                     />
                   </div>
                 </div>
 
-                {/* Category Selector */}
                 <div>
                   <label className="block text-[11px] font-bold text-gray-600 mb-1">
                     {t('aiModal.category')}
@@ -393,7 +455,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                         categoryId: e.target.value,
                       })
                     }
-                    className="w-full text-xs font-semibold bg-white border border-gray-200 rounded-xl px-3 py-2 text-gray-900 focus:outline-none cursor-pointer"
+                    className="w-full text-xs font-semibold bg-white border border-[#E8ECF4] rounded-xl px-3 py-2 text-[#0D2B75] focus:outline-none cursor-pointer"
                   >
                     {categories
                       .filter((c) => c.id !== 'cat-all')
@@ -405,13 +467,12 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   </select>
                 </div>
 
-                {/* Address & City */}
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <label className="block text-[11px] font-bold text-gray-600 mb-1">
                       {t('aiModal.address')}
                     </label>
-                    <div className="flex items-center bg-white border border-gray-200 rounded-xl px-3 py-2">
+                    <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
                       <MapPin className="w-4 h-4 text-gray-400 mr-1.5 shrink-0" />
                       <input
                         type="text"
@@ -426,31 +487,33 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       />
                     </div>
                   </div>
+
                   <div>
                     <label className="block text-[11px] font-bold text-gray-600 mb-1">
                       {t('aiModal.city')}
                     </label>
-                    <input
-                      type="text"
-                      value={extractedListing.city}
-                      onChange={(e) =>
-                        setExtractedListing({
-                          ...extractedListing,
-                          city: e.target.value,
-                        })
-                      }
-                      className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs font-medium text-gray-900 focus:outline-none"
-                    />
+                    <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
+                      <input
+                        type="text"
+                        value={extractedListing.city}
+                        onChange={(e) =>
+                          setExtractedListing({
+                            ...extractedListing,
+                            city: e.target.value,
+                          })
+                        }
+                        className="w-full text-xs font-medium text-gray-900 focus:outline-none"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Phone & Hours */}
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <label className="block text-[11px] font-bold text-gray-600 mb-1">
                       {t('aiModal.phone')}
                     </label>
-                    <div className="flex items-center bg-white border border-gray-200 rounded-xl px-3 py-2">
+                    <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
                       <Phone className="w-4 h-4 text-gray-400 mr-1.5 shrink-0" />
                       <input
                         type="text"
@@ -465,19 +528,20 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       />
                     </div>
                   </div>
+
                   <div>
                     <label className="block text-[11px] font-bold text-gray-600 mb-1">
-                      {t('aiModal.hours')}
+                      {t('aiModal.website')}
                     </label>
-                    <div className="flex items-center bg-white border border-gray-200 rounded-xl px-3 py-2">
-                      <Clock className="w-4 h-4 text-gray-400 mr-1.5 shrink-0" />
+                    <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
+                      <Globe className="w-4 h-4 text-gray-400 mr-1.5 shrink-0" />
                       <input
                         type="text"
-                        value={extractedListing.hours}
+                        value={extractedListing.website}
                         onChange={(e) =>
                           setExtractedListing({
                             ...extractedListing,
-                            hours: e.target.value,
+                            website: e.target.value,
                           })
                         }
                         className="w-full text-xs font-medium text-gray-900 focus:outline-none"
@@ -486,24 +550,43 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   </div>
                 </div>
 
-                {/* Description */}
                 <div>
                   <label className="block text-[11px] font-bold text-gray-600 mb-1">
-                    {t('aiModal.description')}
+                    {t('aiModal.hours')}
+                  </label>
+                  <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
+                    <Clock className="w-4 h-4 text-gray-400 mr-2 shrink-0" />
+                    <input
+                      type="text"
+                      value={extractedListing.hours}
+                      onChange={(e) =>
+                        setExtractedListing({
+                          ...extractedListing,
+                          hours: e.target.value,
+                        })
+                      }
+                      className="w-full text-xs font-medium text-gray-900 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-gray-600 mb-1">
+                    {t('aiModal.descDe')}
                   </label>
                   <textarea
                     rows={2}
-                    value={extractedListing.description[locale]}
+                    value={extractedListing.description.de}
                     onChange={(e) =>
                       setExtractedListing({
                         ...extractedListing,
                         description: {
                           ...extractedListing.description,
-                          [locale]: e.target.value,
+                          de: e.target.value,
                         },
                       })
                     }
-                    className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs font-medium text-gray-900 focus:outline-none resize-none"
+                    className="w-full text-xs font-medium text-gray-900 bg-white border border-[#E8ECF4] rounded-xl p-2.5 focus:outline-none"
                   />
                 </div>
               </div>
@@ -511,8 +594,8 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           )}
         </div>
 
-        {/* Modal Footer (Thumb-anchored primary action adhering to Fitts's Law) */}
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-3">
+        {/* Modal Actions */}
+        <div className="px-6 py-4 bg-[#FAFBFF] border-t border-[#E8ECF4] flex items-center justify-between gap-3">
           {step === 'input' && (
             <>
               <button
@@ -524,7 +607,13 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               </button>
               <button
                 type="button"
-                disabled={!urlInput.trim()}
+                disabled={
+                  activeTab === 'url'
+                    ? !urlInput.trim()
+                    : activeTab === 'prompt'
+                    ? !promptInput.trim()
+                    : false
+                }
                 onClick={() => handleStartExtraction()}
                 className="flex-1 py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 style={{ backgroundColor: primaryColor }}
@@ -536,8 +625,8 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           )}
 
           {step === 'processing' && (
-            <div className="w-full text-center text-xs font-medium text-gray-500 py-1">
-              Bitte einen Moment Geduld...
+            <div className="w-full text-center text-xs font-semibold text-[#0D2B75] py-1">
+              KI analysiert und formatiert die Daten...
             </div>
           )}
 
