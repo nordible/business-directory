@@ -127,11 +127,35 @@
     "rights": "Alle Rechte vorbehalten.",
     "legalNotice": "Impressum",
     "privacy": "Datenschutzerklärung",
-    "sitemap": "Seitenübersicht"
+    "sitemap": "Seitenübersicht",
+    "contactLegal": "Kontakt & Rechtliches",
+    "terms": "Nutzungsbedingungen",
+    "feedback": "Feedback geben",
+    "madeWithLove": "Mit ❤️ für Unternehmer entwickelt"
   },
   "partner": {
     "backToDirectory": "Zurück zum Verzeichnis",
-    "plansAndLicense": "Tarife & Lizenz"
+    "plansAndLicense": "Tarife & Lizenz",
+    "badge": "B2B Partner & White-Label Plattform",
+    "heroTitle": "Starten Sie Ihr eigenes regionales oder vertikales Branchenportal",
+    "heroSubtitle": "100% unter Ihrer eigenen Marke. Mit automatisierter KI-Erfassung per URL, mobiler Ergonomie, Inhaber-Verifizierung und eigener Domain.",
+    "btnTestLive": "Live-Branding testen",
+    "btnViewPricing": "Preise & Pakete ansehen",
+    "featDomainTitle": "Eigene Domain & SSL",
+    "featDomainDesc": "Verbinden Sie Ihre Wunsch-Domain mit automatischer SSL-Verschlüsselung innerhalb von 60 Sekunden.",
+    "featAiTitle": "Autonome KI-Erfassung",
+    "featAiDesc": "Geben Sie eine URL oder einen kurzen Text ein – unsere KI liest Öffnungszeiten, Kontaktdaten und Beschreibungen automatisch aus.",
+    "featClaimTitle": "Inhaber-Verifizierung",
+    "featClaimDesc": "Unternehmen können ihre Einträge per 2-Faktor-Code beanspruchen, Bewertungen verwalten und ihr Profil eigenständig pflegen.",
+    "previewBadge": "Interaktive Vorschau",
+    "previewTitle": "Passen Sie Farben, Logo und Domain in Echtzeit an",
+    "previewSubtitle": "Ihr Verzeichnis passt sich flexibel Ihrer Corporate Identity an – von Primärfarben bis zu individuellen Kategorien.",
+    "btnChangeColors": "Farben & Logo ändern",
+    "btnConfigureDomain": "Domain konfigurieren",
+    "supportBadge": "Persönliche Betreuung",
+    "supportTitle": "Haben Sie Fragen zur Partnerschaft?",
+    "supportDesc": "Unser Engineering-Team unterstützt Sie beim Setup, Datenimport und bei der Anbindung Ihrer bestehenden Systeme.",
+    "btnBookConsult": "Beratungsgespräch buchen"
   },
   "addModal": {
     "verifiedBadge": "Kostenloser Unternehmenseintrag",

@@ -188,10 +188,34 @@
     "rights": "All rights reserved.",
     "legalNotice": "Legal Notice / Impressum",
     "privacy": "Privacy Policy / Datenschutz",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "contactLegal": "Mawasiliano na Kisheria",
+    "terms": "Sheria na Masharti",
+    "feedback": "Tuma Maoni",
+    "madeWithLove": "Imetengenezwa kwa ❤️ kwa ajili ya wajasiriamali"
   },
   "partner": {
     "backToDirectory": "Back to Directory",
-    "plansAndLicense": "Plans & License"
+    "plansAndLicense": "Plans & License",
+    "badge": "Mshirika wa B2B & Jukwaa la White-Label",
+    "heroTitle": "Zindua Saraka Yako ya Biashara ya Kikanda au Maalum",
+    "heroSubtitle": "100% lebo nyeupe chini ya chapa yako. Inaendeshwa na ukusanyaji wa kiotomatiki wa AI, mpangilio wa simu, uthibitishaji wa wamiliki, na vikoa maalum.",
+    "btnTestLive": "Jaribu Chapa Moja kwa Moja",
+    "btnViewPricing": "Angalia Bei na Mipango",
+    "featDomainTitle": "Kikoa Maalum na SSL",
+    "featDomainDesc": "Unganisha kikoa chako maalum na cheti cha SSL kiotomatiki kwa chini ya sekunde 60.",
+    "featAiTitle": "Ukusanyaji wa Kiotomatiki wa AI",
+    "featAiDesc": "Weka anwani ya tovuti au maelezo mafupi – maajenti wetu wa AI huchanganua saa za kazi, mawasiliano na huduma kiotomatiki.",
+    "featClaimTitle": "Uthibitishaji wa Mmiliki",
+    "featClaimDesc": "Biashara zinaweza kudai wasifu wao kupitia nambari za 2FA, kujibu maoni, na kusasisha saa za kazi moja kwa moja.",
+    "previewBadge": "Hakiki Inayoingiliana",
+    "previewTitle": "Badilisha Rangi, Nembo, na Kikoa Papo Hapo",
+    "previewSubtitle": "Saraka yako inaonyesha utambulisho wa chapa yako kwa rangi, kategoria na muundo unaoweza kubinafsishwa.",
+    "btnChangeColors": "Badilisha Rangi na Nembo",
+    "btnConfigureDomain": "Sanidi Kikoa",
+    "supportBadge": "Mashauriano Maalum",
+    "supportTitle": "Je, una Maswali Kuhusu Ushirikiano?",
+    "supportDesc": "Timu yetu ya uhandisi husaidia katika usajili, usanidi wa hifadhidata, na uunganishaji wa API maalum.",
+    "btnBookConsult": "Weka Miadi ya Mashauriano"
   }
 }

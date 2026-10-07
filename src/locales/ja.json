@@ -127,11 +127,35 @@
     "rights": "All rights reserved.",
     "legalNotice": "特定商取引法に基づく表記・会社概要",
     "privacy": "プライバシーポリシー",
-    "sitemap": "サイトマップ"
+    "sitemap": "サイトマップ",
+    "contactLegal": "お問い合わせ・規約",
+    "terms": "利用規約",
+    "feedback": "フィードバックを送信",
+    "madeWithLove": "起業家のために ❤️ を込めて作成"
   },
   "partner": {
     "backToDirectory": "ディレクトリに戻る",
-    "plansAndLicense": "プランとライセンス"
+    "plansAndLicense": "プランとライセンス",
+    "badge": "B2Bパートナー＆ホワイトレーベルプラットフォーム",
+    "heroTitle": "独自の地域・業界別ビジネスポータルを開設",
+    "heroSubtitle": "完全ホワイトレーベルでお客様のブランドで展開。AIによるURL自動解析、モバイル最適化、オーナー認証、カスタムドメインに対応。",
+    "btnTestLive": "ライブブランディングを試す",
+    "btnViewPricing": "料金プランを見る",
+    "featDomainTitle": "カスタムドメイン＆SSL",
+    "featDomainDesc": "60秒以内に自動SSLプロビジョニングでお客様の独自ドメインを接続できます。",
+    "featAiTitle": "自律型AIデータ収集",
+    "featAiDesc": "URLやテキストを入力するだけで、AIエージェントが営業時間、連絡先、サービス概要を自動抽出します。",
+    "featClaimTitle": "オーナー認証・請求",
+    "featClaimDesc": "2段階認証コードで事業主認証を行い、口コミへの返信や営業時間の更新を直接管理できます。",
+    "previewBadge": "インタラクティブプレビュー",
+    "previewTitle": "カラー、ロゴ、ドメインをリアルタイムでカスタマイズ",
+    "previewSubtitle": "カスタマイズ可能なカラーパレットやカテゴリー、タイポグラフィでお客様のブランドを完璧に表現します。",
+    "btnChangeColors": "カラーとロゴを変更",
+    "btnConfigureDomain": "ドメインを設定",
+    "supportBadge": "専任コンサルテーション",
+    "supportTitle": "パートナーシップについてご質問はありますか？",
+    "supportDesc": "弊社のエンジニアリングチームが導入、データベース構築、カスタムAPI連携をサポートします。",
+    "btnBookConsult": "相談を予約する"
   },
   "addModal": {
     "verifiedBadge": "無料の公式認証掲載",

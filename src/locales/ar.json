@@ -188,10 +188,34 @@
     "rights": "All rights reserved.",
     "legalNotice": "Legal Notice / Impressum",
     "privacy": "Privacy Policy / Datenschutz",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "contactLegal": "الاتصال والشؤون القانونية",
+    "terms": "شروط الخدمة",
+    "feedback": "إرسال تعليقات",
+    "madeWithLove": "صُنع بـ ❤️ لرواد الأعمال"
   },
   "partner": {
     "backToDirectory": "Back to Directory",
-    "plansAndLicense": "Plans & License"
+    "plansAndLicense": "Plans & License",
+    "badge": "شريك B2B ومنصة العلامة البيضاء",
+    "heroTitle": "أطلق دليلك التجاري الإقليمي أو التخصصي الخاص بك",
+    "heroSubtitle": "100% علامة بيضاء تحت علامتك التجارية. مدعوم بالاستخراج التلقائي للذكاء الاصطناعي، وتصميم مخصص للهاتف، والتحقق من المالكين، ونطاق مخصص.",
+    "btnTestLive": "تجربة الهوية مباشرة",
+    "btnViewPricing": "عرض الأسعار والباقات",
+    "featDomainTitle": "نطاق مخصص و SSL",
+    "featDomainDesc": "قم بربط نطاقك المخصص مع توفير تلقائي لشهادة SSL في أقل من 60 ثانية.",
+    "featAiTitle": "استيراد البيانات الذاتي بالذكاء الاصطناعي",
+    "featAiDesc": "أدخل رابط موقع أو نصاً – يقوم الذكاء الاصطناعي باستخراج ساعات العمل وجهات الاتصال والخدمات تلقائياً.",
+    "featClaimTitle": "التحقق من ملكية النشاط التجاري",
+    "featClaimDesc": "يمكن للشركات المطالبة بملفاتها عبر رمز 2FA، والرد على التقييمات، وتحديث ساعات العمل مباشرة.",
+    "previewBadge": "معاينة تفاعلية",
+    "previewTitle": "قم بتخصيص الألوان والشعار والنطاق في الوقت الفعلي",
+    "previewSubtitle": "يعكس دليلك هوية علامتك التجارية بشكل ديناميكي من خلال لوحات ألوان وفئات وخطوط قابلة للتخصيص.",
+    "btnChangeColors": "تغيير الألوان والشعار",
+    "btnConfigureDomain": "تهيئة النطاق",
+    "supportBadge": "استشارة مخصصة",
+    "supportTitle": "هل لديك أسئلة حول الشراكة؟",
+    "supportDesc": "يساعد فريقنا الهندسي في إعداد النظام وقواعد البيانات وربط واجهات برمجة التطبيقات المخصصة.",
+    "btnBookConsult": "حجز موعد استشارة"
   }
 }

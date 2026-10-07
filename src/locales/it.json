@@ -188,10 +188,34 @@
     "rights": "All rights reserved.",
     "legalNotice": "Legal Notice / Impressum",
     "privacy": "Privacy Policy / Datenschutz",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "contactLegal": "Contatti e note legali",
+    "terms": "Termini di servizio",
+    "feedback": "Invia feedback",
+    "madeWithLove": "Fatto con ❤️ per gli imprenditori"
   },
   "partner": {
     "backToDirectory": "Back to Directory",
-    "plansAndLicense": "Plans & License"
+    "plansAndLicense": "Plans & License",
+    "badge": "Partner B2B e piattaforma white-label",
+    "heroTitle": "Lancia la tua directory aziendale regionale o verticale",
+    "heroSubtitle": "100% white-label sotto il tuo marchio. Con importazione automatica AI, ergonomia mobile, rivendicazione dei titolari e domini personalizzati.",
+    "btnTestLive": "Prova il branding dal vivo",
+    "btnViewPricing": "Visualizza prezzi e piani",
+    "featDomainTitle": "Dominio personalizzato e SSL",
+    "featDomainDesc": "Collega il tuo dominio personalizzato con crittografia SSL automatica in meno di 60 secondi.",
+    "featAiTitle": "Acquisizione autonoma con IA",
+    "featAiDesc": "Inserisci un URL o un testo: i nostri agenti IA analizzano orari, contatti e servizi automatisch.",
+    "featClaimTitle": "Verifica dei titolari",
+    "featClaimDesc": "Le aziende possono rivendicare le schede tramite codici 2FA, gestire recensioni e orari in autonomia.",
+    "previewBadge": "Anteprima interattiva",
+    "previewTitle": "Personalizza colori, logo e dominio in tempo reale",
+    "previewSubtitle": "La tua directory riflette dinamicamente l'identità del tuo marchio con palette e categorie personalizzabili.",
+    "btnChangeColors": "Modifica colori e logo",
+    "btnConfigureDomain": "Configura dominio",
+    "supportBadge": "Consulenza dedicata",
+    "supportTitle": "Hai domande sulla partnership?",
+    "supportDesc": "Il nostro team di ingegneri ti assiste nell'integrazione, configurazione del database e API personalizzate.",
+    "btnBookConsult": "Prenota consulenza"
   }
 }

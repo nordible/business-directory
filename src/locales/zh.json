@@ -188,10 +188,34 @@
     "rights": "All rights reserved.",
     "legalNotice": "Legal Notice / Impressum",
     "privacy": "Privacy Policy / Datenschutz",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "contactLegal": "联系与法律信息",
+    "terms": "服务条款",
+    "feedback": "发送反馈",
+    "madeWithLove": "用 ❤️ 为创业者打造"
   },
   "partner": {
     "backToDirectory": "Back to Directory",
-    "plansAndLicense": "Plans & License"
+    "plansAndLicense": "Plans & License",
+    "badge": "B2B 合作伙伴与白标平台",
+    "heroTitle": "建立您自己的区域或垂直行业企业名录",
+    "heroSubtitle": "100% 贴牌白标定制。由自动化 AI 网址抓取、移动端优先体验、企业认领和自定义域名驱动。",
+    "btnTestLive": "测试实时品牌定制",
+    "btnViewPricing": "查看价格与套餐",
+    "featDomainTitle": "自定义域名与 SSL",
+    "featDomainDesc": "在 60 秒内绑定您的自定义域名并自动配置 SSL 证书。",
+    "featAiTitle": "AI 自主数据采集",
+    "featAiDesc": "输入网站网址或文字描述，我们的 AI 智能体即可自动解析营业时间、联系方式和服务内容。",
+    "featClaimTitle": "企业认领与验证",
+    "featClaimDesc": "商家可通过两步验证认领页面、回复客户评价并实时更新营业时间。",
+    "previewBadge": "实时交互预览",
+    "previewTitle": "实时自定义配色、标志与域名",
+    "previewSubtitle": "名录可自由定制调色板、分类与字体，完美彰显您的品牌形象。",
+    "btnChangeColors": "修改配色与标志",
+    "btnConfigureDomain": "配置独立域名",
+    "supportBadge": "专属咨询与支持",
+    "supportTitle": "对合作有任何疑问？",
+    "supportDesc": "我们的技术工程团队将全程协助您完成入驻、数据库设置和定制 API 对接。",
+    "btnBookConsult": "预约专属咨询"
   }
 }

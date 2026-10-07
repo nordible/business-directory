@@ -9,8 +9,7 @@ import { Mascot } from '@/components/mascot/Mascot';
 import { siteConfig } from '@/config/site';
 
 export function Footer() {
-  const { locale } = useTranslation();
-  const isDe = locale === 'de';
+  const { locale, t } = useTranslation();
 
   return (
     <footer className="mt-16 border-t border-[#E8ECF4] bg-[#0D2B75] text-white">
@@ -25,18 +24,14 @@ export function Footer() {
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1 text-xs font-bold text-[#FF9F1A]">
                 <Sparkles className="h-3.5 w-3.5" />
                 <span>
-                  {isDe ? 'White-Label Plattformen & KI-Lösungen' : 'White-Label Platforms & AI Solutions'}
+                  {t('footer.promoBadge')}
                 </span>
               </div>
               <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight font-heading">
-                {isDe
-                  ? 'Möchten Sie Ihr eigenes Branchenportal oder Custom Web-App skalieren?'
-                  : 'Want to scale your custom directory portal or enterprise web app?'}
+                {t('footer.promoTitle')}
               </h2>
               <p className="text-xs sm:text-sm text-blue-100/80 max-w-2xl leading-relaxed">
-                {isDe
-                  ? 'Nordible Technologies entwickelt skalierbare Marktplätze, automatisierte Daten-Pipelines und moderne Webanwendungen mit 100 % Code-Eigentum ab Tag 1.'
-                  : 'Nordible Technologies builds high-performance directories, automated data pipelines, and custom web applications with 100% IP ownership from Day 1.'}
+                {t('footer.promoDesc')}
               </p>
             </div>
           </div>
@@ -48,7 +43,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 px-4 py-2.5 text-xs font-bold text-white transition-all active:scale-95 cursor-pointer"
             >
-              <span>{isDe ? 'Leistungen entdecken' : 'Explore Services'}</span>
+              <span>{t('footer.promoExplore')}</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
             <a
@@ -57,7 +52,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-[#145BFF] hover:bg-[#0F47D1] px-5 py-2.5 text-xs font-black text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-0.5 active:scale-95 cursor-pointer"
             >
-              <span>{isDe ? 'Projekt anfragen' : 'Talk to Us'}</span>
+              <span>{t('footer.promoTalk')}</span>
             </a>
           </div>
         </div>
@@ -80,30 +75,28 @@ export function Footer() {
               <span className="font-heading font-black text-lg tracking-tight">{siteConfig.appName}</span>
             </div>
             <p className="text-xs text-blue-100/70 leading-relaxed">
-              {isDe
-                ? 'Internationales Branchenverzeichnis für alle Unternehmensarten weltweit.'
-                : 'International business directory for all types of businesses across the world.'}
+              {t('footer.aboutDesc')}
             </p>
           </div>
 
           <div>
             <h3 className="text-xs font-extrabold uppercase tracking-wider text-blue-200 mb-3 font-heading">
-              {isDe ? 'Funktionen' : 'Features'}
+              {t('footer.featuresTitle')}
             </h3>
             <ul className="space-y-2 text-xs text-blue-100/80">
               <li className="flex items-center gap-1.5">
                 <ShieldCheck className="h-3.5 w-3.5 text-[#FF9F1A]" />
-                <span>{isDe ? 'Geprüfte Unternehmenseinträge' : 'Verified Listings'}</span>
+                <span>{t('footer.featVerified')}</span>
               </li>
-              <li>{isDe ? 'KI-gestützte Datenerfassung' : 'AI Listing Extraction'}</li>
-              <li>{isDe ? 'Eigene Domains & SSL' : 'Custom Domains & SSL'}</li>
-              <li>{isDe ? 'Mobile-First Ergonomie' : 'Mobile-First Ergonomics'}</li>
+              <li>{t('footer.featAi')}</li>
+              <li>{t('footer.featDomains')}</li>
+              <li>{t('footer.featMobile')}</li>
               <li>
                 <Link
                   href={`/${locale}/directory`}
                   className="hover:text-white transition-colors flex items-center gap-1 font-bold text-white"
                 >
-                  <span>{isDe ? 'Interaktives Verzeichnis' : 'Interactive Directory'}</span>
+                  <span>{t('footer.featDirectory')}</span>
                   <ArrowUpRight className="h-3 w-3" />
                 </Link>
               </li>
@@ -112,7 +105,7 @@ export function Footer() {
                   href={`/${locale}/partner`}
                   className="text-[#FF9F1A] hover:underline font-bold flex items-center gap-1"
                 >
-                  <span>{isDe ? 'Partner werden (White-Label)' : 'Partner Program (White-Label)'}</span>
+                  <span>{t('footer.featPartner')}</span>
                   <ArrowUpRight className="h-3 w-3" />
                 </Link>
               </li>
@@ -121,7 +114,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-extrabold uppercase tracking-wider text-blue-200 mb-3 font-heading">
-              Nordible Ökosystem
+              {t('footer.ecosystemTitle')}
             </h3>
             <ul className="space-y-2 text-xs text-blue-100/80">
               <li>
@@ -137,7 +130,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://invoice.nordible.co"
+                  href="https://free-invoice-generator.nordible.co"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors flex items-center gap-1"
@@ -162,7 +155,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-extrabold uppercase tracking-wider text-blue-200 mb-3 font-heading">
-              {isDe ? 'Kontakt & Rechtliches' : 'Contact & Legal'}
+              {t('footer.contactLegal')}
             </h3>
             <ul className="space-y-2 text-xs text-blue-100/80">
               <li>
@@ -181,7 +174,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  {isDe ? 'Datenschutzerklärung' : 'Privacy Policy'}
+                  {t('footer.privacy')}
                 </a>
               </li>
               <li>
@@ -191,7 +184,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  {isDe ? 'Nutzungsbedingungen' : 'Terms of Service'}
+                  {t('footer.terms')}
                 </a>
               </li>
             </ul>
@@ -200,19 +193,19 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-100/60">
-          <p>© {new Date().getFullYear()} {siteConfig.company.name}. {isDe ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}</p>
+          <p>© {new Date().getFullYear()} {siteConfig.company.name}. {t('footer.rights')}</p>
           <div className="flex items-center gap-4">
             <a
               href={`mailto:${siteConfig.contact.email}?subject=%5B${encodeURIComponent(siteConfig.appName)}%20Feedback%5D`}
               className="hover:text-white transition-colors flex items-center gap-1"
             >
               <Bug className="h-3.5 w-3.5 text-[#FF9F1A]" />
-              <span>{isDe ? 'Feedback geben' : 'Send Feedback'}</span>
+              <span>{t('footer.feedback')}</span>
             </a>
             <span className="text-white/20">•</span>
             <div className="flex items-center gap-1">
               <Globe className="h-3.5 w-3.5 text-[#145BFF]" />
-              <span>Made with ❤️ for Entrepreneurs</span>
+              <span>{t('footer.madeWithLove')}</span>
             </div>
           </div>
         </div>

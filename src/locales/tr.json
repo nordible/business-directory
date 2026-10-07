@@ -188,10 +188,34 @@
     "rights": "All rights reserved.",
     "legalNotice": "Legal Notice / Impressum",
     "privacy": "Privacy Policy / Datenschutz",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "contactLegal": "İletişim ve Yasal",
+    "terms": "Kullanım Şartları",
+    "feedback": "Geri Bildirim Gönder",
+    "madeWithLove": "Girişimciler için ❤️ ile yapıldı"
   },
   "partner": {
     "backToDirectory": "Back to Directory",
-    "plansAndLicense": "Plans & License"
+    "plansAndLicense": "Plans & License",
+    "badge": "B2B Ortak & White-Label Platformu",
+    "heroTitle": "Kendi Bölgesel veya Dikey İş Rehberinizi Başlatın",
+    "heroSubtitle": "Markanız altında %100 white-label. Otomatik yapay zeka URL alımı, mobil öncelikli ergonomi, işletme sahiplenme ve özel alan adları.",
+    "btnTestLive": "Canlı Markalamayı Test Edin",
+    "btnViewPricing": "Fiyatlandırma ve Paketleri İncele",
+    "featDomainTitle": "Özel Alan Adı ve SSL",
+    "featDomainDesc": "60 saniyeden kısa sürede otomatik SSL kurulumu ile özel alan adınızı bağlayın.",
+    "featAiTitle": "Otonom Yapay Zeka Alımı",
+    "featAiDesc": "Bir web sitesi URL'si veya metin girin; yapay zeka ajanlarımız çalışma saatlerini, iletişim bilgilerini ve hizmetleri otomatik ayıklar.",
+    "featClaimTitle": "İşletme Sahibi Doğrulaması",
+    "featClaimDesc": "İşletmeler 2FA kodlarıyla kayıtlarını sahiplenebilir, yorumları yanıtlayabilir ve çalışma saatlerini güncelleyebilir.",
+    "previewBadge": "Etkileşimli Önizleme",
+    "previewTitle": "Renkleri, Logoyu ve Alan Adını Gerçek Zamanlı Özelleştirin",
+    "previewSubtitle": "Rehberiniz, özelleştirilebilir paletler, kategoriler ve tipografi ile marka kimliğinizi dinamik olarak yansıtır.",
+    "btnChangeColors": "Renkleri ve Logoyu Değiştir",
+    "btnConfigureDomain": "Alan Adını Yapılandır",
+    "supportBadge": "Birebir Danışmanlık",
+    "supportTitle": "Ortaklık Hakkında Sorularınız mı Var?",
+    "supportDesc": "Mühendislik ekibimiz ilk kurulum, veri aktarımı ve özel API entegrasyonlarında yanınızda.",
+    "btnBookConsult": "Görüşme Planla"
   }
 }

@@ -127,11 +127,35 @@
     "rights": "All rights reserved.",
     "legalNotice": "Legal Notice / Impressum",
     "privacy": "Privacy Policy / Datenschutz",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "contactLegal": "Contact & Legal",
+    "terms": "Terms of Service",
+    "feedback": "Send Feedback",
+    "madeWithLove": "Made with ❤️ for Entrepreneurs"
   },
   "partner": {
     "backToDirectory": "Back to Directory",
-    "plansAndLicense": "Plans & License"
+    "plansAndLicense": "Plans & License",
+    "badge": "B2B Partner & White-Label Platform",
+    "heroTitle": "Launch Your Own Regional or Vertical Business Directory",
+    "heroSubtitle": "100% white-labeled under your brand. Powered by automated AI URL ingestion, mobile-first ergonomics, business owner claiming, and custom domains.",
+    "btnTestLive": "Test Live Branding",
+    "btnViewPricing": "View Pricing & Plans",
+    "featDomainTitle": "Custom Domain & SSL",
+    "featDomainDesc": "Connect your custom domain with instant automated SSL provisioning in under 60 seconds.",
+    "featAiTitle": "Autonomous AI Ingestion",
+    "featAiDesc": "Input a website URL or text prompt – our AI agents parse business hours, contacts, and services automatically.",
+    "featClaimTitle": "Owner Claim Verification",
+    "featClaimDesc": "Businesses can claim listings via 2FA codes, answer reviews, and maintain opening hours directly.",
+    "previewBadge": "Interactive Preview",
+    "previewTitle": "Customize Colors, Logo, and Domain in Real-Time",
+    "previewSubtitle": "Your directory dynamically reflects your brand identity with customizable palettes, categories, and typography.",
+    "btnChangeColors": "Change Colors & Logo",
+    "btnConfigureDomain": "Configure Domain",
+    "supportBadge": "Dedicated Consultation",
+    "supportTitle": "Have Questions About Partnering?",
+    "supportDesc": "Our engineering team helps with onboarding, database setup, and custom API integrations.",
+    "btnBookConsult": "Book Consultation"
   },
   "addModal": {
     "verifiedBadge": "Free Verified Listing",

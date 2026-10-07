@@ -188,10 +188,34 @@
     "rights": "All rights reserved.",
     "legalNotice": "Legal Notice / Impressum",
     "privacy": "Privacy Policy / Datenschutz",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "contactLegal": "Contacto y legal",
+    "terms": "Términos de servicio",
+    "feedback": "Enviar comentarios",
+    "madeWithLove": "Hecho con ❤️ para emprendedores"
   },
   "partner": {
     "backToDirectory": "Back to Directory",
-    "plansAndLicense": "Plans & License"
+    "plansAndLicense": "Plans & License",
+    "badge": "Socio B2B y plataforma de marca blanca",
+    "heroTitle": "Lance su propio directorio empresarial regional o vertical",
+    "heroSubtitle": "100% bajo su propia marca. Con ingestión automática por IA, ergonomía móvil, reclamación de empresas y dominio personalizado.",
+    "btnTestLive": "Probar marca en vivo",
+    "btnViewPricing": "Ver precios y planes",
+    "featDomainTitle": "Dominio personalizado y SSL",
+    "featDomainDesc": "Conecte su dominio personalizado con aprovisionamiento SSL automático en menos de 60 segundos.",
+    "featAiTitle": "Ingestión autónoma por IA",
+    "featAiDesc": "Introduzca una URL o texto: nuestra IA analiza horarios, datos de contacto y servicios automáticamente.",
+    "featClaimTitle": "Verificación de propietarios",
+    "featClaimDesc": "Las empresas pueden reclamar sus perfiles mediante 2FA, responder reseñas y actualizar sus horarios.",
+    "previewBadge": "Vista previa interactiva",
+    "previewTitle": "Personalice colores, logotipo y dominio en tiempo real",
+    "previewSubtitle": "Su directorio refleja de forma dinámica la identidad de su marca con colores, categorías y tipografías a medida.",
+    "btnChangeColors": "Cambiar colores y logo",
+    "btnConfigureDomain": "Configurar dominio",
+    "supportBadge": "Asesoramiento dedicado",
+    "supportTitle": "¿Tiene preguntas sobre la asociación?",
+    "supportDesc": "Nuestro equipo de ingeniería le asiste en la configuración, importación de datos e integraciones de API personalizadas.",
+    "btnBookConsult": "Reservar consulta"
   }
 }

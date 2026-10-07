@@ -127,11 +127,35 @@
     "rights": "All rights reserved.",
     "legalNotice": "회사 정보 및 법적 고지",
     "privacy": "개인정보처리방침",
-    "sitemap": "사이트맵"
+    "sitemap": "사이트맵",
+    "contactLegal": "문의 및 법적 고지",
+    "terms": "서비스 약관",
+    "feedback": "피드백 보내기",
+    "madeWithLove": "기업가를 위해 ❤️로 제작"
   },
   "partner": {
     "backToDirectory": "디렉토리로 돌아가기",
-    "plansAndLicense": "플랜 및 라이선스"
+    "plansAndLicense": "플랜 및 라이선스",
+    "badge": "B2B 파트너 및 화이트 라벨 플랫폼",
+    "heroTitle": "나만의 지역 또는 전문 비즈니스 디렉토리 출시",
+    "heroSubtitle": "귀사의 브랜드로 100% 화이트 라벨 적용. 자동화된 AI URL 수집, 모바일 우선 UX, 사업자 소유권 인증 및 커스텀 도메인 지원。",
+    "btnTestLive": "라이브 브랜딩 체험하기",
+    "btnViewPricing": "요금제 및 플랜 보기",
+    "featDomainTitle": "커스텀 도메인 및 SSL",
+    "featDomainDesc": "60초 이내에 자동 SSL 프로비저닝을 통해 맞춤 도메인을 연결하세요.",
+    "featAiTitle": "자율형 AI 데이터 수집",
+    "featAiDesc": "웹사이트 URL이나 텍스트를 입력하면 AI가 영업시간, 연락처, 서비스 정보를 자동으로 파악합니다.",
+    "featClaimTitle": "소유자 인증 및 소유권 주장",
+    "featClaimDesc": "기업은 2FA 인증을 통해 비즈니스를 등록하고, 리뷰에 답변하며, 영업시간을 직접 관리할 수 있습니다.",
+    "previewBadge": "인터랙티브 미리보기",
+    "previewTitle": "색상, 로고, 도메인을 실시간으로 맞춤 설정하세요",
+    "previewSubtitle": "디렉토리는 맞춤형 색상 팔레트, 카테고리, 타이포그래피로 귀사의 브랜드 아이덴티티를 완벽하게 반영합니다.",
+    "btnChangeColors": "색상 및 로고 변경",
+    "btnConfigureDomain": "도메인 설정하기",
+    "supportBadge": "전담 컨설팅",
+    "supportTitle": "파트너십에 관해 궁금한 점이 있으신가요?",
+    "supportDesc": "엔지니어링 팀이 온보딩, 데이터베이스 구축 및 맞춤 API 연동을 지원합니다。",
+    "btnBookConsult": "상담 예약하기"
   },
   "addModal": {
     "verifiedBadge": "무료 공식 검증 등록",

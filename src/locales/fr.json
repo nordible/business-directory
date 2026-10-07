@@ -188,10 +188,34 @@
     "rights": "All rights reserved.",
     "legalNotice": "Legal Notice / Impressum",
     "privacy": "Privacy Policy / Datenschutz",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "contactLegal": "Contact et mentions légales",
+    "terms": "Conditions d'utilisation",
+    "feedback": "Envoyer des commentaires",
+    "madeWithLove": "Fait avec ❤️ pour les entrepreneurs"
   },
   "partner": {
     "backToDirectory": "Back to Directory",
-    "plansAndLicense": "Plans & License"
+    "plansAndLicense": "Plans & License",
+    "badge": "Partenaire B2B et plateforme en marque blanche",
+    "heroTitle": "Lancez votre propre annuaire d'entreprises régional ou vertical",
+    "heroSubtitle": "100% en marque blanche sous votre marque. Avec ingestion automatique par IA, ergonomie mobile, revendication de profil et domaines personnalisés.",
+    "btnTestLive": "Tester le branding en direct",
+    "btnViewPricing": "Voir les tarifs et forfaits",
+    "featDomainTitle": "Domaine personnalisé et SSL",
+    "featDomainDesc": "Connectez votre domaine personnalisé avec provisionnement SSL automatique en moins de 60 secondes.",
+    "featAiTitle": "Ingestion autonome par IA",
+    "featAiDesc": "Entrez une URL ou un court texte : nos agents IA analysent automatiquement les horaires, contacts et services.",
+    "featClaimTitle": "Vérification des propriétaires",
+    "featClaimDesc": "Les entreprises peuvent revendiquer leurs fiches via 2FA, répondre aux avis et mettre à jour leurs horaires.",
+    "previewBadge": "Aperçu interactif",
+    "previewTitle": "Personnalisez les couleurs, le logo et le domaine en temps réel",
+    "previewSubtitle": "Votre annuaire reflète fidèlement votre identité de marque avec palettes, catégories et polices personnalisables.",
+    "btnChangeColors": "Modifier couleurs et logo",
+    "btnConfigureDomain": "Configurer le domaine",
+    "supportBadge": "Conseil dédié",
+    "supportTitle": "Vous avez des questions sur le partenariat ?",
+    "supportDesc": "Notre équipe d'ingénierie vous accompagne pour l'intégration, la base de données et les API sur mesure.",
+    "btnBookConsult": "Réserver une consultation"
   }
 }

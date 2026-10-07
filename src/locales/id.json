@@ -127,11 +127,35 @@
     "rights": "Hak cipta dilindungi undang-undang.",
     "legalNotice": "Informasi Hukum",
     "privacy": "Kebijakan Privasi",
-    "sitemap": "Peta Situs"
+    "sitemap": "Peta Situs",
+    "contactLegal": "Kontak & Legal",
+    "terms": "Ketentuan Layanan",
+    "feedback": "Kirim Masukan",
+    "madeWithLove": "Dibuat dengan ❤️ untuk Pengusaha"
   },
   "partner": {
     "backToDirectory": "Kembali ke Direktori",
-    "plansAndLicense": "Paket & Lisensi"
+    "plansAndLicense": "Paket & Lisensi",
+    "badge": "Mitra B2B & Platform White-Label",
+    "heroTitle": "Luncurkan Direktori Bisnis Regional atau Vertikal Anda Sendiri",
+    "heroSubtitle": "100% label putih dengan merek Anda. Didukung oleh ekstraksi URL AI otomatis, ergonomi seluler, klaim pemilik, dan domain kustom.",
+    "btnTestLive": "Uji Branding Langsung",
+    "btnViewPricing": "Lihat Harga & Paket",
+    "featDomainTitle": "Domain Kustom & SSL",
+    "featDomainDesc": "Hubungkan domain kustom Anda dengan penyediaan SSL otomatis instan dalam waktu kurang dari 60 detik.",
+    "featAiTitle": "Ekstraksi AI Otonom",
+    "featAiDesc": "Masukkan URL situs web atau teks – agen AI kami memproses jam buka, kontak, dan layanan secara otomatis.",
+    "featClaimTitle": "Verifikasi Klaim Pemilik",
+    "featClaimDesc": "Bisnis dapat mengklaim listing via 2FA, membalas ulasan, dan mengelola jam buka secara langsung.",
+    "previewBadge": "Pratinjau Interaktif",
+    "previewTitle": "Sesuaikan Warna, Logo, dan Domain Secara Real-Time",
+    "previewSubtitle": "Direktori Anda mencerminkan identitas merek dengan palet warna, kategori, dan tipografi yang dapat disesuaikan.",
+    "btnChangeColors": "Ubah Warna & Logo",
+    "btnConfigureDomain": "Konfigurasi Domain",
+    "supportBadge": "Konsultasi Khusus",
+    "supportTitle": "Punya Pertanyaan Tentang Kemitraan?",
+    "supportDesc": "Tim teknik kami membantu proses orientasi, konfigurasi basis data, dan integrasi API kustom.",
+    "btnBookConsult": "Jadwalkan Konsultasi"
   },
   "addModal": {
     "verifiedBadge": "Listing Terverifikasi Gratis",
