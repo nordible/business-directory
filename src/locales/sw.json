@@ -99,7 +99,21 @@
     "field6": "Kiungo cha Nembo/Logo URL (mfano https://tovuti-yako.com/logo.png – bila kupakia faili)",
     "sendEmailBtn": "Tuma Barua Pepe kwa mail@nordible.co",
     "copyEmailBtn": "Nakili Barua Pepe",
-    "copied": "Imenakiliwa!"
+    "copied": "Imenakiliwa!",
+    "benefitsTitle": "Kile biashara yako inapata baada ya kuorodheshwa:",
+    "benefit1Title": "Wasifu wa Biashara Uliothibitishwa",
+    "benefit1Desc": "Kadi ya kudumu yenye beji iliyothibitishwa, kiungo cha moja kwa moja na vitufe vya mawasiliano.",
+    "benefit2Title": "Wateja wa Moja kwa Moja Bila Tume 100%",
+    "benefit2Desc": "Wateja wanaotarajiwa wanakupigia simu au kutembelea tovuti yako moja kwa moja bila ada za udalali.",
+    "benefit3Title": "Uorodheshaji wa Injini za Utafutaji za AI na LLM (GEO)",
+    "benefit3Desc": "Ujumuishaji wa Schema.org na llms.txt ili ChatGPT, Perplexity na Google AI zipendekeze biashara yako.",
+    "benefit4Title": "Ufikiaji wa Ulimwenguni katika Lugha 17",
+    "benefit4Desc": "Vutia wateja wa kimataifa kwa anwani za kieneo na usaidizi kamili wa RTL.",
+    "aiAgentBadge": "Itifaki ya Maajenti wa AI na Boti",
+    "aiAgentNotice": "Unatembelea kama Ajenti wa AI au Boti? Wasilisha maelezo ya biashara yaliyopangwa moja kwa moja kwa barua pepe:",
+    "copyAiTemplate": "Nakili Kiolezo cha Ajenti wa AI",
+    "copiedAiTemplate": "Kiolezo cha AI Kimekunakiliwa!",
+    "footerNotice": "Orodha zilizothibitishwa huonekana ulimwenguni kote baada ya ukaguzi wa uhariri. 100% bure daima."
   },
   "claimModal": {
     "title": "Uthibitisho wa Mmiliki",

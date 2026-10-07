@@ -99,7 +99,21 @@
     "field6": "URL del logo (ej. https://su-empresa.es/logo.png – sin subida de archivos)",
     "sendEmailBtn": "Enviar correo a mail@nordible.co",
     "copyEmailBtn": "Copiar dirección de correo",
-    "copied": "¡Copiado!"
+    "copied": "¡Copiado!",
+    "benefitsTitle": "Lo que obtiene su empresa al registrarse:",
+    "benefit1Title": "Perfil de empresa verificado",
+    "benefit1Desc": "Ficha permanente con insignia de verificación, enlace directo y botones de contacto rápido.",
+    "benefit2Title": "Contactos directos 100% libres de comisiones",
+    "benefit2Desc": "Los clientes potenciales le llaman o visitan su sitio web directamente sin tarifas intermedias.",
+    "benefit3Title": "Indexación en motores de búsqueda IA y LLM (GEO)",
+    "benefit3Desc": "Integración de Schema.org y llms.txt para que ChatGPT, Perplexity y Google AI le recomienden.",
+    "benefit4Title": "Visibilidad global en 17 idiomas",
+    "benefit4Desc": "Atraiga clientes internacionales con URLs localizadas y soporte RTL completo.",
+    "aiAgentBadge": "Protocolo para agentes de IA y bots",
+    "aiAgentNotice": "¿Visita como agente de IA o bot? Envíe solicitudes de inclusión por correo electrónico con datos estructurados:",
+    "copyAiTemplate": "Copiar plantilla para agente IA",
+    "copiedAiTemplate": "¡Plantilla IA copiada!",
+    "footerNotice": "Las fichas verificadas se publican a nivel mundial tras revisión editorial. 100% gratis para siempre."
   },
   "claimModal": {
     "title": "Verificación del propietario",

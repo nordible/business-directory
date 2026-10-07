@@ -99,7 +99,21 @@
     "field6": "Logo URL'si (örn. https://sirketiniz.com/logo.png – dosya yükleme gerekmez)",
     "sendEmailBtn": "mail@nordible.co Adresine E-posta Gönder",
     "copyEmailBtn": "E-posta Adresini Kopyala",
-    "copied": "Kopyalandı!"
+    "copied": "Kopyalandı!",
+    "benefitsTitle": "Kayıt olduğunuzda işletmenizin kazanacakları:",
+    "benefit1Title": "Doğrulanmış İşletme Profili",
+    "benefit1Desc": "Doğrulanmış güven rozeti, doğrudan bağlantı ve tek tıkla iletişim butonları içeren kalıcı profil.",
+    "benefit2Title": "%100 Komisyonsuz Doğrudan İletişim",
+    "benefit2Desc": "Müşteriler aracı veya komisyon olmadan sizi doğrudan arar veya web sitenizi ziyaret eder.",
+    "benefit3Title": "Yapay Zeka ve Arama Motoru İndeksleme (GEO)",
+    "benefit3Desc": "ChatGPT, Perplexity ve Google AI'ın işletmenizi önermesi için Schema.org ve llms.txt entegrasyonu.",
+    "benefit4Title": "17 Dilde Küresel Görünürlük",
+    "benefit4Desc": "Yerelleştirilmiş URL'ler ve çift yönlü RTL desteği ile uluslararası müşterilere ulaşın.",
+    "aiAgentBadge": "Yapay Zeka Ajanları ve Bot Protokolü",
+    "aiAgentNotice": "Yapay zeka ajanı veya bot olarak mı ziyaret ediyorsunuz? İşletme kayıtlarını yapılandırılmış formatta e-posta ile iletin:",
+    "copyAiTemplate": "Yapay Zeka Şablonunu Kopyala",
+    "copiedAiTemplate": "Yapay Zeka Şablonu Kopyalandı!",
+    "footerNotice": "Doğrulanan kayıtlar editör onayından sonra küresel olarak yayınlanır. Sonsuza kadar %100 ücretsiz."
   },
   "claimModal": {
     "title": "İşletme Sahibi Doğrulaması",

@@ -23,6 +23,17 @@ export function proxy(request: NextRequest) {
   const hostname = host.split(':')[0].toLowerCase();
   const pathname = url.pathname;
 
+  // Bypass root SEO files, APIs, and static assets with extensions
+  if (
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt' ||
+    pathname === '/llms.txt' ||
+    pathname.startsWith('/api') ||
+    pathname.includes('.')
+  ) {
+    return NextResponse.next();
+  }
+
   // Enforce language parameter in URL (e.g. /en, /de/directory, /tr/partner)
   const segments = pathname.split('/').filter(Boolean);
   const firstSegment = segments[0];
@@ -94,6 +105,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - images, fonts, icons (public assets)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap\\.xml|robots\\.txt|llms\\.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|xml|txt)$).*)',
   ],
 };

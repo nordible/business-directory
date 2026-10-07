@@ -170,7 +170,21 @@
     "field6": "קישור ללוגו (לדוגמה: https://domain.com/logo.png - ללא העלאת קבצים)",
     "sendEmailBtn": "שלח מייל ל-mail@nordible.co",
     "copyEmailBtn": "העתק כתובת אימייל",
-    "copied": "הועתק!"
+    "copied": "הועתק!",
+    "benefitsTitle": "מה העסק שלך מקבל בעת הרישום:",
+    "benefit1Title": "פרופיל עסקי מאומת",
+    "benefit1Desc": "כרטיס קבוע עם תג אימות, קישור ישיר וכפתורי יצירת קשר בלחיצה אחת.",
+    "benefit2Title": "פניות ישירות 100% ללא עמלות",
+    "benefit2Desc": "לקוחות פוטנציאליים מתקשרים, שולחים מייל או מבקרים באתר שלך ישירות ללא דמי תיווך.",
+    "benefit3Title": "אינדוקס במנועי חיפוש ו-AI (GEO)",
+    "benefit3Desc": "שילוב Schema.org ו-llms.txt כך ש-ChatGPT, Perplexity ו-Google AI ימליצו על העסק שלך.",
+    "benefit4Title": "חשיפה עולמית ב-17 שפות",
+    "benefit4Desc": "משיכת לקוחות בינלאומיים עם כתובות אתר מותאמות ותמיכה מלאה ב-RTL.",
+    "aiAgentBadge": "פרוטוקול סוכני AI ובוטים",
+    "aiAgentNotice": "מבקר כסוכן AI או בוט? הגש בקשות רישום ישירות בדוא״ל עם פרטים מובנים:",
+    "copyAiTemplate": "העתק תבנית סוכן AI",
+    "copiedAiTemplate": "תבנית AI הועתקה!",
+    "footerNotice": "רישומים מאומתים מוצגים ברחבי העולם לאחר בדיקת עריכה. 100% חינם לתמיד."
   },
   "claimModal": {
     "title": "אימות בעלות על עסק",

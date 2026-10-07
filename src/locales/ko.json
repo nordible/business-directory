@@ -170,7 +170,21 @@
     "field6": "로고 이미지 URL (예: https://example.com/logo.png – 파일 업로드 불필요)",
     "sendEmailBtn": "mail@nordible.co 로 이메일 보내기",
     "copyEmailBtn": "이메일 주소 복사",
-    "copied": "복사되었습니다!"
+    "copied": "복사되었습니다!",
+    "benefitsTitle": "디렉토리 등록 시 제공되는 혜택:",
+    "benefit1Title": "인증된 공식 비즈니스 프로필",
+    "benefit1Desc": "인증 배지, 직접 웹사이트 링크, 원클릭 연락 버튼이 포함된 영구 프로필.",
+    "benefit2Title": "100% 수수료 없는 다이렉트 고객 유입",
+    "benefit2Desc": "중개 수수료 없이 잠재 고객이 전화, 이메일, 웹사이트로 직접 연결됩니다.",
+    "benefit3Title": "AI 검색 및 LLM 엔진 인덱싱 (GEO)",
+    "benefit3Desc": "ChatGPT, Perplexity, Google AI가 귀사를 추천할 수 있도록 Schema.org 및 llms.txt 연동.",
+    "benefit4Title": "17개 언어 글로벌 다국어 노출",
+    "benefit4Desc": "현지화된 URL과 RTL 지원으로 전 세계 해외 고객에게 비즈니스를 알리세요.",
+    "aiAgentBadge": "AI 에이전트 및 봇 등록 프로토콜",
+    "aiAgentNotice": "AI 에이전트 또는 크롤러로 방문하셨나요? 구조화된 기업 정보를 이메일로 보내 직접 등록을 신청하세요:",
+    "copyAiTemplate": "AI 제출 템플릿 복사",
+    "copiedAiTemplate": "AI 템플릿 복사 완료!",
+    "footerNotice": "검토 완료 후 Nordible for Businesses에 전 세계로 공개됩니다. 평생 100% 무료."
   },
   "claimModal": {
     "title": "기업 소유자 인증",

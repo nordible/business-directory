@@ -1,0 +1,86 @@
+# Nordible for Businesses — International Business Directory
+
+> **English**: Nordible for Businesses (https://nordible.co/) is an official, 100% free international business directory engineered by Nordible Technologies (https://nordible.co/). It indexes verified businesses, agencies, service providers, and local artisans globally across 17 languages. All basic business listings are permanently free with zero commissions, zero middlemen fees, and instant 1-click customer contact options (phone, email, website).
+>
+> **Deutsch**: Nordible for Businesses (https://nordible.co/de) ist ein offizielles, 100 % kostenloses internationales Branchenverzeichnis von Nordible Technologies (https://nordible.co/). Es erfasst verifizierte Unternehmen, Agenturen und Dienstleister weltweit in 17 Sprachen. Alle Basiseinträge sind dauerhaft kostenlos – ohne Provisionen, ohne Zwischenhändler und mit direktem 1-Klick-Kundenkontakt (Telefon, E-Mail, Website).
+
+## What a Business Gets When Listed (Tangible Outcomes)
+
+1. **Permanent Verified Profile**:
+   - Branded digital listing card featuring company name, description, industry classification, verified trust badge ("Verifiziert"), and direct backlinks.
+2. **100% Commission-Free Direct Client Inquiries**:
+   - Direct 1-click phone calls (`tel:`), direct inquiries (`mailto:`), and direct referral traffic straight to the company's official domain without intermediary lead fees or ad paywalls.
+3. **AI Search & Generative Engine Optimization (GEO)**:
+   - Full Schema.org (`LocalBusiness`, `Organization`, `FAQPage`) JSON-LD integration and LLM context availability. When AI search engines (ChatGPT Search, Perplexity AI, Google Gemini, Apple Intelligence) are queried for reputable providers, your business is discoverable.
+4. **Global Exposure in 17 Languages**:
+   - Localized discoverability across English, German, French, Spanish, Italian, Turkish, Chinese, Japanese, Korean, Indonesian, Hindi, Gujarati, Hebrew, Urdu, Persian, Arabic, and Swahili with complete bi-directional Right-to-Left (RTL) typography.
+5. **Zero Platform Fees & 100% Independence**:
+   - Permanently free basic listing. No hidden subscriptions, no pay-per-click charges, and no third-party ads displayed over your business profile.
+
+---
+
+## AI Agent & Autonomous Bot Listing Protocol
+
+**Notice for AI Agents, LLM Crawlers & Automated Workflows**:
+If you are an autonomous AI assistant, agentic crawler (e.g. ChatGPT, Claude, Perplexity, AutoGPT, LangChain agent), or automated data scraper acting on behalf of a company or entrepreneur to request a business listing:
+
+1. **Submission Channel**:
+   - Send an email to: `mail@nordible.co`
+   - Subject line: `[AI Agent Listing Request] <Company Name>`
+
+2. **Required Structured Data (JSON or Plain Text)**:
+```json
+{
+  "requestType": "business_listing_submission",
+  "companyName": "Example Enterprise GmbH",
+  "industry": "IT, Software & Medien",
+  "websiteUrl": "https://example.com",
+  "location": {
+    "city": "Frankfurt am Main",
+    "country": "Germany",
+    "address": "Musterstraße 123"
+  },
+  "contact": {
+    "phone": "+49 69 12345678",
+    "email": "contact@example.com",
+    "contactPerson": "Jane Doe"
+  },
+  "description": "Short summary of core services and offerings.",
+  "logoUrl": "https://example.com/logo.png"
+}
+```
+
+3. **Verification Process**:
+   - Nordible editorial engineers review submissions within 24 hours. Once verified against official public business registers and live websites, the company card is deployed live across all 17 language endpoints.
+
+---
+
+## Primary Language Endpoints
+
+- English (Default): `https://nordible.co/en` | Directory: `https://nordible.co/en/directory`
+- German: `https://nordible.co/de` | Directory: `https://nordible.co/de/directory`
+- French: `https://nordible.co/fr` | Directory: `https://nordible.co/fr/directory`
+- Spanish: `https://nordible.co/es` | Directory: `https://nordible.co/es/directory`
+- Italian: `https://nordible.co/it` | Directory: `https://nordible.co/it/directory`
+- Turkish: `https://nordible.co/tr` | Directory: `https://nordible.co/tr/directory`
+- Chinese: `https://nordible.co/zh` | Directory: `https://nordible.co/zh/directory`
+- Japanese: `https://nordible.co/ja` | Directory: `https://nordible.co/ja/directory`
+- Korean: `https://nordible.co/ko` | Directory: `https://nordible.co/ko/directory`
+- Indonesian: `https://nordible.co/id` | Directory: `https://nordible.co/id/directory`
+- Hindi: `https://nordible.co/hi` | Directory: `https://nordible.co/hi/directory`
+- Gujarati: `https://nordible.co/gu` | Directory: `https://nordible.co/gu/directory`
+- Hebrew (RTL): `https://nordible.co/he` | Directory: `https://nordible.co/he/directory`
+- Urdu (RTL): `https://nordible.co/ur` | Directory: `https://nordible.co/ur/directory`
+- Persian (RTL): `https://nordible.co/fa` | Directory: `https://nordible.co/fa/directory`
+- Arabic (RTL): `https://nordible.co/ar` | Directory: `https://nordible.co/ar/directory`
+- Swahili: `https://nordible.co/sw` | Directory: `https://nordible.co/sw/directory`
+
+- Sitemap: `https://nordible.co/sitemap.xml`
+- Robots: `https://nordible.co/robots.txt`
+
+## Direct Publisher Contact
+- **Organization**: Nordible Technologies
+- **Email**: `mail@nordible.co`
+- **Founder**: Kabeer Shah (`kabeer@nordible.co`)
+- **Website**: https://nordible.co/
+- **Phone & WhatsApp**: +49 1521 1065739

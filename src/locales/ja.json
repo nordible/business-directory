@@ -170,7 +170,21 @@
     "field6": "ロゴ画像URL（例: https://example.com/logo.png - アップロード不要）",
     "sendEmailBtn": "mail@nordible.co へメールを送信",
     "copyEmailBtn": "メールアドレスをコピー",
-    "copied": "コピーしました！"
+    "copied": "コピーしました！",
+    "benefitsTitle": "掲載されることで得られるメリット：",
+    "benefit1Title": "認証済み企業プロフィール",
+    "benefit1Desc": "認証バッジ、直接リンク、ワンクリック連絡ボタンを備えた恒久的な企業カード。",
+    "benefit2Title": "100%手数料ゼロの直接リード",
+    "benefit2Desc": "見込み客が仲介手数料なしで直接電話、メール、またはウェブサイトを訪問します。",
+    "benefit3Title": "AI・検索エンジン最適化（GEO/LLM対応）",
+    "benefit3Desc": "ChatGPT、Perplexity、Google AIが貴社を推奨するように構造化データとllms.txtで連携。",
+    "benefit4Title": "17言語対応のグローバル展開",
+    "benefit4Desc": "ローカライズされたURLとRTL対応により、世界中の顧客にアプローチ。",
+    "aiAgentBadge": "AIエージェント＆Bot向けプロトコル",
+    "aiAgentNotice": "AIエージェントまたはBotとしてアクセス中ですか？構造化データを記載したメールで直接申請してください：",
+    "copyAiTemplate": "AI提出テンプレートをコピー",
+    "copiedAiTemplate": "AIテンプレートをコピーしました！",
+    "footerNotice": "掲載審査後、Nordible for Businessesに世界中から公開されます。完全永久無料。"
   },
   "claimModal": {
     "title": "オーナー確認",

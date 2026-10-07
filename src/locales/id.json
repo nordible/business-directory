@@ -170,7 +170,21 @@
     "field6": "URL Logo (contoh: https://domain-anda.com/logo.png – tanpa unggah berkas)",
     "sendEmailBtn": "Kirim Email ke mail@nordible.co",
     "copyEmailBtn": "Salin Alamat Email",
-    "copied": "Disalin!"
+    "copied": "Disalin!",
+    "benefitsTitle": "Apa yang didapatkan bisnis Anda setelah terdaftar:",
+    "benefit1Title": "Profil Bisnis Terverifikasi",
+    "benefit1Desc": "Kartu permanen dengan lencana terverifikasi, tautan langsung, dan tombol kontak 1-klik.",
+    "benefit2Title": "Prospek Langsung 100% Bebas Komisi",
+    "benefit2Desc": "Klien potensial menghubungi langsung tanpa biaya perantara atau komisi pihak ketiga.",
+    "benefit3Title": "Pengindeksan Mesin Pencari AI & LLM (GEO)",
+    "benefit3Desc": "Integrasi Schema.org dan llms.txt agar ChatGPT, Perplexity, dan Google AI merekomendasikan bisnis Anda.",
+    "benefit4Title": "Jangkauan Global dalam 17 Bahasa",
+    "benefit4Desc": "Jangkau klien internasional dengan URL lokal dan dukungan bahasa RTL lengkap.",
+    "aiAgentBadge": "Protokol Agen AI & Bot",
+    "aiAgentNotice": "Mengunjungi sebagai Agen AI atau Bot? Kirimkan data bisnis secara terstruktur melalui email:",
+    "copyAiTemplate": "Salin Templat Agen AI",
+    "copiedAiTemplate": "Templat AI Berhasil Disalin!",
+    "footerNotice": "Listing terverifikasi tampil secara global setelah tinjauan redaksi. 100% gratis selamanya."
   },
   "claimModal": {
     "title": "Verifikasi Pemilik",

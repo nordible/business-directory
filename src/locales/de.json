@@ -170,7 +170,21 @@
     "field6": "Logo-URL (z. B. https://ihre-domain.de/logo.png – kein Datei-Upload erforderlich)",
     "sendEmailBtn": "E-Mail an mail@nordible.co senden",
     "copyEmailBtn": "E-Mail-Adresse kopieren",
-    "copied": "Kopiert!"
+    "copied": "Kopiert!",
+    "benefitsTitle": "Was Ihr Unternehmen mit dem Eintrag erhält:",
+    "benefit1Title": "Verifiziertes Unternehmensprofil",
+    "benefit1Desc": "Dauerhafter Eintrag mit Prüfsiegel, direktem Backlink und 1-Klick-Kontaktbuttons.",
+    "benefit2Title": "100 % provisionsfreie Direktkontakte",
+    "benefit2Desc": "Interessenten rufen Sie direkt an oder besuchen Ihre Website – ohne Mittelsmänner oder Provisionen.",
+    "benefit3Title": "KI- & Suchmaschinen-Auffindbarkeit (GEO)",
+    "benefit3Desc": "Schema.org JSON-LD & llms.txt Integration, damit ChatGPT, Perplexity und Google AI Sie empfehlen.",
+    "benefit4Title": "Globale Reichweite in 17 Sprachen",
+    "benefit4Desc": "Gewinnen Sie internationale Kunden mit lokalisierten URLs und vollständiger RTL-Unterstützung.",
+    "aiAgentBadge": "KI-Agenten & Bots Protokoll",
+    "aiAgentNotice": "Besuchen Sie die Seite als KI-Agent oder Crawler? Senden Sie Unternehmenseinträge direkt per E-Mail:",
+    "copyAiTemplate": "KI-Agenten-Vorlage kopieren",
+    "copiedAiTemplate": "KI-Vorlage kopiert!",
+    "footerNotice": "Geprüfte Einträge erscheinen nach redaktioneller Freigabe weltweit in Nordible for Businesses. Dauerhaft kostenlos."
   },
   "claimModal": {
     "title": "Inhaber-Verifizierung",

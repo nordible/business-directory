@@ -99,7 +99,21 @@
     "field6": "企业 Logo 图片网址 (例如 https://your-domain.com/logo.png – 无需上传文件)",
     "sendEmailBtn": "发送邮件至 mail@nordible.co",
     "copyEmailBtn": "复制邮箱地址",
-    "copied": "已复制！"
+    "copied": "已复制！",
+    "benefitsTitle": "收录后您的企业将获得：",
+    "benefit1Title": "官方认证的企业名录主页",
+    "benefit1Desc": "带有官方认证徽章、直接外链和一键联系按钮的永久页面。",
+    "benefit2Title": "100% 零佣金直接获客",
+    "benefit2Desc": "潜在客户可直接致电、发信或访问您的官网，完全无任何中介抽成。",
+    "benefit3Title": "AI 搜索与大模型索引优化 (GEO)",
+    "benefit3Desc": "通过 Schema.org 与 llms.txt 结构化数据，让 ChatGPT、Perplexity 及 Google AI 优先推荐您的企业。",
+    "benefit4Title": "全球 17 种语言多语言曝光",
+    "benefit4Desc": "借助本地化多语言网址与双向 RTL 支持，吸引全球高价值客户。",
+    "aiAgentBadge": "AI 智能体与自动化抓取协议",
+    "aiAgentNotice": "正在作为 AI 智能体或爬虫访问？可直接通过电子邮件发送结构化企业信息申请收录：",
+    "copyAiTemplate": "复制 AI 提交模板",
+    "copiedAiTemplate": "AI 模板已复制！",
+    "footerNotice": "经人工审核认证后，企业名录将在全球范围内正式上线。永久免费，零平台费用。"
   },
   "claimModal": {
     "title": "企业所有者认证",

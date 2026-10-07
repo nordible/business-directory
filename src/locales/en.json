@@ -170,7 +170,21 @@
     "field6": "Logo URL (e.g. https://your-domain.com/logo.png – no file upload needed)",
     "sendEmailBtn": "Send Email to mail@nordible.co",
     "copyEmailBtn": "Copy Email Address",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "benefitsTitle": "What your business gets upon listing:",
+    "benefit1Title": "Verified Directory Profile",
+    "benefit1Desc": "Permanent branded card with verified trust badge, backlink, and direct 1-click contact buttons.",
+    "benefit2Title": "100% Commission-Free Direct Leads",
+    "benefit2Desc": "Prospective clients call, email, or visit your website directly without intermediary fees.",
+    "benefit3Title": "AI & LLM Search Engine Indexing (GEO)",
+    "benefit3Desc": "Schema.org JSON-LD and llms.txt integration so ChatGPT, Perplexity, and Google AI recommend your business.",
+    "benefit4Title": "Global Exposure in 17 Languages",
+    "benefit4Desc": "Attract international clients with localized URLs and full bi-directional RTL script support.",
+    "aiAgentBadge": "AI Agents & Bots Protocol",
+    "aiAgentNotice": "Visiting as an AI Agent or Crawler? Submit company listings directly via email with structured details:",
+    "copyAiTemplate": "Copy AI Agent Template",
+    "copiedAiTemplate": "AI Template Copied!",
+    "footerNotice": "Verified listings appear globally in Nordible for Businesses after human editorial check. 100% free forever."
   },
   "claimModal": {
     "title": "Owner Verification",
