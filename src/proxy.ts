@@ -10,10 +10,35 @@ const CUSTOM_DOMAINS: Record<string, string> = {
   'alpengenuss.at': 'alpen-genuss',
 };
 
+import { SUPPORTED_LOCALES } from '@/lib/types';
+const DEFAULT_LOCALE = 'en';
+
 export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   const host = request.headers.get('host') || '';
   const hostname = host.split(':')[0].toLowerCase();
+  const pathname = url.pathname;
+
+  // Enforce language parameter in URL (e.g. /en, /de/directory, /tr/partner)
+  const segments = pathname.split('/').filter(Boolean);
+  const firstSegment = segments[0];
+
+  if (!firstSegment || !SUPPORTED_LOCALES.includes(firstSegment)) {
+    const queryLang = url.searchParams.get('lang');
+    const cookieLang = request.cookies.get('nordible_lang')?.value;
+    const targetLang = (queryLang && SUPPORTED_LOCALES.includes(queryLang))
+      ? queryLang
+      : (cookieLang && SUPPORTED_LOCALES.includes(cookieLang) ? cookieLang : DEFAULT_LOCALE);
+
+    if (queryLang) {
+      url.searchParams.delete('lang');
+    }
+
+    url.pathname = `/${targetLang}${pathname === '/' ? '' : pathname}`;
+    const redirectResponse = NextResponse.redirect(url);
+    redirectResponse.cookies.set('nordible_lang', targetLang, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+    return redirectResponse;
+  }
 
   // 1. Check query parameter override (ergonomic for local testing: ?tenant=nordic-tech)
   const queryTenant = url.searchParams.get('tenant');

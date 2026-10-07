@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import deDict from '@/locales/de.json';
 import enDict from '@/locales/en.json';
 import frDict from '@/locales/fr.json';
@@ -10,25 +11,9 @@ import trDict from '@/locales/tr.json';
 import zhDict from '@/locales/zh.json';
 import arDict from '@/locales/ar.json';
 import swDict from '@/locales/sw.json';
-import { Locale } from './types';
-
-export interface LanguageOption {
-  code: Locale;
-  name: string;
-  flag: string;
-}
-
-export const SUPPORTED_LANGUAGES: LanguageOption[] = [
-  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-  { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-  { code: 'zh', name: '中文 (简体)', flag: '🇨🇳' },
-  { code: 'ar', name: 'العربية', flag: '🇦🇪' },
-  { code: 'sw', name: 'Kiswahili', flag: '🇰🇪' },
-];
+import { Locale, LanguageOption, SUPPORTED_LANGUAGES, SUPPORTED_LOCALES } from './types';
+export { SUPPORTED_LANGUAGES, SUPPORTED_LOCALES };
+export type { LanguageOption };
 
 type Translations = typeof deDict;
 
@@ -52,27 +37,62 @@ const dictionaries: Record<Locale, Translations> = {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
-export const I18nProvider = ({ children }: { children: ReactNode }) => {
-  const [locale, setLocaleState] = useState<Locale>('de');
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('nordible_lang') as Locale;
-      if (saved && SUPPORTED_LANGUAGES.some((l) => l.code === saved)) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setLocaleState(saved);
-      }
-    } catch {
-      // Local storage not available
+const getLocaleFromPath = (path: string | null): Locale | null => {
+  if (!path) return null;
+  const match = path.match(/^\/([a-z]{2})(?:\/|$)/);
+  if (match) {
+    const code = match[1] as Locale;
+    if (SUPPORTED_LANGUAGES.some((l) => l.code === code)) {
+      return code;
     }
-  }, []);
+  }
+  return null;
+};
+
+export const I18nProvider = ({ children }: { children: ReactNode }) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    return getLocaleFromPath(pathname) || 'en';
+  });
+
+  // Keep state in sync with URL pathname
+  useEffect(() => {
+    const pathLocale = getLocaleFromPath(pathname);
+    if (pathLocale && pathLocale !== locale) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLocaleState(pathLocale);
+    }
+  }, [pathname, locale]);
+
+  // Update HTML document attributes for SEO and accessibility
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = locale;
+      document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
+    }
+  }, [locale]);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
     try {
       localStorage.setItem('nordible_lang', newLocale);
+      document.cookie = `nordible_lang=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
     } catch {
       // Ignore
+    }
+
+    // Seamlessly navigate to same route with updated language parameter in URL
+    if (pathname) {
+      const currentPathLocale = getLocaleFromPath(pathname);
+      let newPath = pathname;
+      if (currentPathLocale) {
+        newPath = pathname.replace(new RegExp(`^/${currentPathLocale}`), `/${newLocale}`);
+      } else {
+        newPath = `/${newLocale}${pathname === '/' ? '' : pathname}`;
+      }
+      router.push(newPath);
     }
   };
 

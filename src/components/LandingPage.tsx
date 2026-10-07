@@ -10,6 +10,7 @@ import { Footer } from '@/components/Footer';
 import { Mascot } from '@/components/mascot/Mascot';
 import { AddListingModal } from '@/components/AddListingModal';
 import { StructuredData } from '@/components/StructuredData';
+import { InteractiveGlobe } from '@/components/InteractiveGlobe';
 import { siteConfig } from '@/config/site';
 import {
   Sparkles,
@@ -60,13 +61,12 @@ export function LandingPage() {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
   };
 
-  const geoLocations = [
-    { name: 'Global / Weltweit', count: 'Alle Regionen', highlight: true },
-    { name: 'Frankfurt am Main', count: 'DACH Hub', highlight: false },
-    { name: 'New York & London', count: 'Global Metropolises', highlight: false },
-    { name: 'Berlin & München', count: 'Innovation Hubs', highlight: false },
-    { name: 'Mumbai & Dubai', count: 'International Hubs', highlight: false },
-    { name: 'Alle Branchen weltweit', count: '100% Branchenoffen', highlight: true },
+  const isDe = locale === 'de';
+  const globalBadges = [
+    { name: isDe ? 'Internationales Branchenverzeichnis' : 'International Business Directory', highlight: true },
+    { name: isDe ? 'Grenzüberschreitende Vernetzung' : 'Cross-Border Commerce', highlight: false },
+    { name: isDe ? 'Geprüfte Qualität weltweit' : 'Worldwide Verification', highlight: false },
+    { name: isDe ? '100% Branchenoffen' : 'All Global Industries', highlight: true },
   ];
 
   const faqs = [
@@ -117,19 +117,19 @@ export function LandingPage() {
                   {t('landing.heroSubtitle')}
                 </p>
 
-                {/* Geo Local Target Chips */}
+                {/* Global Multi-Industry Target Chips */}
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
-                  {geoLocations.map((loc, i) => (
+                  {globalBadges.map((badge, i) => (
                     <span
                       key={i}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-colors ${
-                        loc.highlight
+                      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors ${
+                        badge.highlight
                           ? 'bg-[#145BFF]/10 text-[#145BFF] border border-[#145BFF]/30'
                           : 'bg-white border border-[#E8ECF4] text-slate-600'
                       }`}
                     >
-                      <MapPin className="w-3 h-3 text-[#FF9F1A]" />
-                      <span>{loc.name}</span>
+                      <Globe className="w-3.5 h-3.5 text-[#145BFF]" />
+                      <span>{badge.name}</span>
                     </span>
                   ))}
                 </div>
@@ -137,7 +137,7 @@ export function LandingPage() {
                 {/* Primary CTA (Fitts's Law Conversion Action) */}
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-4">
                   <Link
-                    href="/directory"
+                    href={`/${locale}/directory`}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#145BFF] px-8 py-4 text-sm font-extrabold text-white shadow-xl shadow-blue-500/25 hover:bg-[#0D2B75] transition-all hover:scale-102 active:scale-95"
                   >
                     <Compass className="h-4 w-4" />
@@ -311,6 +311,9 @@ export function LandingPage() {
           </div>
         </section>
 
+        {/* INTERACTIVE 3D GLOBAL CONNECTION GLOBE */}
+        <InteractiveGlobe />
+
         {/* INTERACTIVE FAQ SECTION (Rich Snippets SEO) */}
         <section className="py-16 sm:py-20 bg-white border-b border-[#E8ECF4]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -378,7 +381,7 @@ export function LandingPage() {
 
               <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 z-10 w-full md:w-auto">
                 <Link
-                  href="/directory"
+                  href={`/${locale}/directory`}
                   className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-[#FF9F1A] hover:bg-amber-400 text-[#0D2B75] font-extrabold text-xs sm:text-sm transition-transform active:scale-95 shadow-md flex items-center justify-center gap-2"
                 >
                   <span>Verzeichnis öffnen</span>

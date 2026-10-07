@@ -6,8 +6,8 @@ export const INITIAL_TENANTS: TenantBranding[] = [
     slug: 'nordible-index',
     name: 'Nordible for Businesses',
     tagline: {
-      de: 'Das globale Branchenverzeichnis für alle Unternehmensarten weltweit',
-      en: 'The Global Business Directory for all types of businesses across the world',
+      de: 'Das internationale Branchenverzeichnis für alle Unternehmensarten weltweit',
+      en: 'The International Business Directory for all types of businesses across the world',
     },
     primaryColor: '#145BFF',
     accentColor: '#FF9F1A',

@@ -18,8 +18,8 @@ const inter = Inter({
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: `${siteConfig.appName} | Multi-Tenant White-Label Business Platform`,
-  description: `Multi-tenant white-label business directory platform with AI ingestion, custom branding, and localized search by ${siteConfig.company.name}.`,
+  title: `${siteConfig.appName} | International Business Directory`,
+  description: `Official International Business Directory for verified companies across all industries worldwide by ${siteConfig.company.name}.`,
   icons: {
     icon: siteConfig.assets.logoIcon,
   },
@@ -32,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="de"
+      lang="en"
       className={`${sora.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-[#FAFBFF] text-gray-900">

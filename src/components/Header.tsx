@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand identity */}
         <div className="flex items-center gap-3">
           <Link
-            href="/"
+            href={`/${locale}`}
             title={siteConfig.appName}
             className="w-10 h-10 bg-white rounded-xl flex items-center justify-center p-1.5 shadow-md shadow-blue-500/10 border border-[#E8ECF4] shrink-0 hover:scale-105 transition-transform"
           >
@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <Link
-                href="/"
+                href={`/${locale}`}
                 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] leading-tight tracking-tight hover:text-[#145BFF] transition-colors"
               >
                 {siteConfig.appName}
@@ -70,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           {/* Quick link to Directory Tool */}
           <Link
-            href="/directory"
+            href={`/${locale}/directory`}
             className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] hover:bg-[#F3F7FF] text-[#0D2B75] transition-colors"
             title={isDe ? 'Zum Verzeichnis' : 'To Directory'}
           >

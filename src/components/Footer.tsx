@@ -81,8 +81,8 @@ export function Footer() {
             </div>
             <p className="text-xs text-blue-100/70 leading-relaxed">
               {isDe
-                ? 'White-Label Branchenverzeichnis-Lösung für Communities, Städte und vertikale Netzwerke.'
-                : 'Turnkey white-label directory platform for communities, municipalities, and niche industries.'}
+                ? 'Internationales Branchenverzeichnis für alle Unternehmensarten weltweit.'
+                : 'International business directory for all types of businesses across the world.'}
             </p>
           </div>
 
@@ -100,7 +100,7 @@ export function Footer() {
               <li>{isDe ? 'Mobile-First Ergonomie' : 'Mobile-First Ergonomics'}</li>
               <li>
                 <Link
-                  href="/directory"
+                  href={`/${locale}/directory`}
                   className="hover:text-white transition-colors flex items-center gap-1 font-bold text-white"
                 >
                   <span>{isDe ? 'Interaktives Verzeichnis' : 'Interactive Directory'}</span>
@@ -109,7 +109,7 @@ export function Footer() {
               </li>
               <li className="pt-1">
                 <Link
-                  href="/partner"
+                  href={`/${locale}/partner`}
                   className="text-[#FF9F1A] hover:underline font-bold flex items-center gap-1"
                 >
                   <span>{isDe ? 'Partner werden (White-Label)' : 'Partner Program (White-Label)'}</span>

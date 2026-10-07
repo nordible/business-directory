@@ -1,24 +1,24 @@
 import { Metadata } from 'next';
-import { LandingPage } from '@/components/LandingPage';
+import { redirect } from 'next/navigation';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: `${siteConfig.appName} | Verifiziertes Branchenverzeichnis für Qualitätsunternehmen`,
+  title: `${siteConfig.appName} | International Business Directory`,
   description:
-    `Das offizielle Branchenverzeichnis für verifizierte Unternehmen in Frankfurt am Main, Berlin, München, Hamburg und der DACH-Region. 100% qualitätsgeprüft von ${siteConfig.company.name}.`,
+    `Official International Business Directory for verified companies across all industries worldwide by ${siteConfig.company.name}.`,
   alternates: {
-    canonical: `${siteConfig.urls.base}/`,
+    canonical: `${siteConfig.urls.base}/en`,
   },
   openGraph: {
-    title: `${siteConfig.appName} | Verifiziertes Branchenverzeichnis`,
+    title: `${siteConfig.appName} | International Business Directory`,
     description:
-      'Entdecken Sie handverlesene Tech-Agenturen, Gastronomie, Architekten und Dienstleister – 100% verifiziert.',
-    url: `${siteConfig.urls.base}/`,
+      'Discover and connect with verified companies across all industries worldwide – 100% verified.',
+    url: `${siteConfig.urls.base}/en`,
     siteName: siteConfig.appName,
     type: 'website',
   },
 };
 
 export default function RootDirectoryPage() {
-  return <LandingPage />;
+  redirect('/en');
 }

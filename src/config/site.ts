@@ -2,8 +2,8 @@ export const siteConfig = {
   appName: 'Nordible for Businesses',
   appNameShort: 'Nordible',
   tagline: {
-    de: 'Das globale Branchenverzeichnis für alle Unternehmensarten weltweit',
-    en: 'The Global Business Directory for all types of businesses across the world',
+    de: 'Das internationale Branchenverzeichnis für alle Unternehmensarten weltweit',
+    en: 'The International Business Directory for all types of businesses across the world',
   },
   company: {
     name: 'Nordible Technologies',

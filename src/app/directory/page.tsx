@@ -130,7 +130,7 @@ export default function DirectoryAppPage() {
         {/* Navigation Breadcrumb / Back to Home link */}
         <div className="mb-6 flex items-center justify-between">
           <Link
-            href="/"
+            href={`/${locale}`}
             className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#145BFF] transition-colors group"
           >
             <div className="w-7 h-7 rounded-lg bg-white border border-[#E8ECF4] flex items-center justify-center group-hover:border-[#145BFF]/30">
@@ -140,7 +140,7 @@ export default function DirectoryAppPage() {
           </Link>
 
           <span className="text-xs font-semibold text-slate-500 hidden sm:inline">
-            📍 Frankfurt am Main & Metropolregionen
+            🌐 {isDe ? 'Internationales Branchenverzeichnis • Weltweit' : 'International Business Directory • Worldwide'}
           </span>
         </div>
 

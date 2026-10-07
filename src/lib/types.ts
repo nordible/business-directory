@@ -1,5 +1,25 @@
 export type Locale = 'de' | 'en' | 'fr' | 'es' | 'it' | 'tr' | 'zh' | 'ar' | 'sw';
 
+export interface LanguageOption {
+  code: Locale;
+  name: string;
+  flag: string;
+}
+
+export const SUPPORTED_LANGUAGES: LanguageOption[] = [
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+  { code: 'zh', name: '中文 (简体)', flag: '🇨🇳' },
+  { code: 'ar', name: 'العربية', flag: '🇦🇪' },
+  { code: 'sw', name: 'Kiswahili', flag: '🇰🇪' },
+];
+
+export const SUPPORTED_LOCALES: Locale[] = ['en', 'de', 'fr', 'es', 'it', 'tr', 'zh', 'ar', 'sw'];
+
 export type LocalizedString = Record<string, string>;
 
 export interface TenantBranding {

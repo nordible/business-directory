@@ -49,7 +49,7 @@ export default function PartnerPage() {
       <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E8ECF4] shadow-xs">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <Link
-            href="/"
+            href={`/${locale}`}
             className="flex items-center gap-2.5 text-[#0D2B75] hover:text-[#145BFF] transition-colors group font-bold text-xs sm:text-sm"
           >
             <div className="w-8 h-8 rounded-xl bg-[#FAFBFF] border border-[#E8ECF4] flex items-center justify-center group-hover:border-[#145BFF]/30 transition-colors">
