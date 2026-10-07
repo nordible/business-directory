@@ -10,8 +10,12 @@ const CUSTOM_DOMAINS: Record<string, string> = {
   'alpengenuss.at': 'alpen-genuss',
 };
 
-import { SUPPORTED_LOCALES } from '@/lib/types';
-const DEFAULT_LOCALE = 'en';
+import { Locale, SUPPORTED_LOCALES } from '@/lib/types';
+const DEFAULT_LOCALE: Locale = 'en';
+
+const isSupportedLocale = (val?: string | null): val is Locale => {
+  return typeof val === 'string' && (SUPPORTED_LOCALES as readonly string[]).includes(val);
+};
 
 export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
@@ -23,12 +27,12 @@ export function proxy(request: NextRequest) {
   const segments = pathname.split('/').filter(Boolean);
   const firstSegment = segments[0];
 
-  if (!firstSegment || !SUPPORTED_LOCALES.includes(firstSegment)) {
+  if (!firstSegment || !isSupportedLocale(firstSegment)) {
     const queryLang = url.searchParams.get('lang');
     const cookieLang = request.cookies.get('nordible_lang')?.value;
-    const targetLang = (queryLang && SUPPORTED_LOCALES.includes(queryLang))
+    const targetLang: Locale = isSupportedLocale(queryLang)
       ? queryLang
-      : (cookieLang && SUPPORTED_LOCALES.includes(cookieLang) ? cookieLang : DEFAULT_LOCALE);
+      : (isSupportedLocale(cookieLang) ? cookieLang : DEFAULT_LOCALE);
 
     if (queryLang) {
       url.searchParams.delete('lang');
