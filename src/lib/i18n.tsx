@@ -11,11 +11,19 @@ import trDict from '@/locales/tr.json';
 import zhDict from '@/locales/zh.json';
 import arDict from '@/locales/ar.json';
 import swDict from '@/locales/sw.json';
-import { Locale, LanguageOption, SUPPORTED_LANGUAGES, SUPPORTED_LOCALES } from './types';
-export { SUPPORTED_LANGUAGES, SUPPORTED_LOCALES };
+import jaDict from '@/locales/ja.json';
+import koDict from '@/locales/ko.json';
+import idDict from '@/locales/id.json';
+import hiDict from '@/locales/hi.json';
+import guDict from '@/locales/gu.json';
+import heDict from '@/locales/he.json';
+import urDict from '@/locales/ur.json';
+import faDict from '@/locales/fa.json';
+import { Locale, LanguageOption, SUPPORTED_LANGUAGES, SUPPORTED_LOCALES, RTL_LOCALES } from './types';
+export { SUPPORTED_LANGUAGES, SUPPORTED_LOCALES, RTL_LOCALES };
 export type { LanguageOption };
 
-type Translations = typeof deDict;
+type Translations = typeof enDict;
 
 interface I18nContextType {
   locale: Locale;
@@ -24,13 +32,21 @@ interface I18nContextType {
 }
 
 const dictionaries: Record<Locale, Translations> = {
-  de: deDict,
   en: enDict,
+  de: deDict as unknown as Translations,
   fr: frDict as unknown as Translations,
   es: esDict as unknown as Translations,
   it: itDict as unknown as Translations,
   tr: trDict as unknown as Translations,
   zh: zhDict as unknown as Translations,
+  ja: jaDict as unknown as Translations,
+  ko: koDict as unknown as Translations,
+  id: idDict as unknown as Translations,
+  hi: hiDict as unknown as Translations,
+  gu: guDict as unknown as Translations,
+  he: heDict as unknown as Translations,
+  ur: urDict as unknown as Translations,
+  fa: faDict as unknown as Translations,
   ar: arDict as unknown as Translations,
   sw: swDict as unknown as Translations,
 };
@@ -70,7 +86,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.documentElement.lang = locale;
-      document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.dir = RTL_LOCALES.includes(locale) ? 'rtl' : 'ltr';
     }
   }, [locale]);
 

@@ -130,8 +130,7 @@ const GLOBAL_CITIES: CityNode[] = [
 ];
 
 export function InteractiveGlobe() {
-  const { locale } = useTranslation();
-  const isDe = locale === 'de';
+  const { t } = useTranslation();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [selectedCityId, setSelectedCityId] = useState<string>('frankfurt');
@@ -440,19 +439,15 @@ export function InteractiveGlobe() {
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-400/30 px-3.5 py-1 text-xs font-bold text-sky-300 mb-3 shadow-xs">
             <Globe className="w-3.5 h-3.5 text-sky-400 animate-spin-slow" />
-            <span>{isDe ? 'Echtzeit-Konnektivität • Weltweit' : 'Real-Time Connectivity • Worldwide'}</span>
+            <span>{t('globe.badge')}</span>
           </div>
 
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white font-heading tracking-tight leading-tight">
-            {isDe
-              ? 'Internationales Branchenverzeichnis'
-              : 'International Business Directory'}
+            {t('globe.title')}
           </h2>
 
           <p className="text-xs sm:text-base text-slate-300 mt-3 font-medium leading-relaxed max-w-2xl mx-auto">
-            {isDe
-              ? 'Nahtlose Vernetzung zwischen Wirtschaftszentren auf allen Kontinenten. Entdecken Sie verifizierte Partnerschaften über Landesgrenzen hinweg.'
-              : 'Seamless global connections between commerce hubs across all continents. Explore verified enterprises and cross-border partnerships worldwide.'}
+            {t('globe.subtitle')}
           </p>
         </div>
 
@@ -475,7 +470,7 @@ export function InteractiveGlobe() {
 
               {/* Interactive Help Hint */}
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[11px] text-sky-200 pointer-events-none whitespace-nowrap">
-                {isDe ? '🖱️ Ziehen zum Drehen des Globus' : '🖱️ Drag to rotate globe in 3D'}
+                {t('globe.dragHint')}
               </div>
             </div>
 
@@ -485,17 +480,17 @@ export function InteractiveGlobe() {
                 type="button"
                 onClick={() => setIsAutoSpinning(!isAutoSpinning)}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold text-white transition-all cursor-pointer"
-                title={isAutoSpinning ? 'Pause rotation' : 'Auto rotate'}
+                title={isAutoSpinning ? t('globe.pause') : t('globe.rotate')}
               >
                 {isAutoSpinning ? (
                   <>
                     <Pause className="w-3.5 h-3.5 text-sky-400" />
-                    <span>{isDe ? 'Anhalten' : 'Pause'}</span>
+                    <span>{t('globe.pause')}</span>
                   </>
                 ) : (
                   <>
                     <Play className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>{isDe ? 'Drehen' : 'Rotate'}</span>
+                    <span>{t('globe.rotate')}</span>
                   </>
                 )}
               </button>
@@ -504,10 +499,10 @@ export function InteractiveGlobe() {
                 type="button"
                 onClick={resetView}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold text-white transition-all cursor-pointer"
-                title="Reset Globe View"
+                title={t('globe.reset')}
               >
                 <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
-                <span>{isDe ? 'Zurücksetzen' : 'Reset'}</span>
+                <span>{t('globe.reset')}</span>
               </button>
             </div>
           </div>
@@ -531,14 +526,14 @@ export function InteractiveGlobe() {
 
                 <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[11px] font-extrabold text-emerald-300">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>{isDe ? 'Aktiv' : 'Live Hub'}</span>
+                  <span>{t('globe.liveHub')}</span>
                 </div>
               </div>
 
               {/* Verified Sectors */}
               <div className="space-y-2 mt-4">
                 <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
-                  {isDe ? 'Branchenbereiche im Verzeichnis' : 'Active Directory Sectors'}
+                  {t('globe.sectorsTitle')}
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedCity.sectors.map((sec, i) => (
@@ -555,7 +550,7 @@ export function InteractiveGlobe() {
               {/* Connected Intercontinental Hubs */}
               <div className="space-y-2 mt-5 pt-4 border-t border-white/10">
                 <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
-                  {isDe ? 'Direkte Verbindungen im Index' : 'Intercontinental Trade Links'}
+                  {t('globe.linksTitle')}
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {selectedCity.connections.map((connId) => {
@@ -580,7 +575,7 @@ export function InteractiveGlobe() {
             {/* Quick Hub Navigation Pills */}
             <div className="space-y-2">
               <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400">
-                {isDe ? 'Wirtschaftszentren erkunden:' : 'Explore Global Commerce Hubs:'}
+                {t('globe.exploreHubs')}
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {GLOBAL_CITIES.map((city) => {

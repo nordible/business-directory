@@ -16,7 +16,9 @@
     "manage": "إدارة",
     "launchDirectory": "فتح الدليل",
     "backHome": "الرئيسية",
-    "partner": "الشراكات"
+    "partner": "الشراكات",
+    "tagline": "The International Business Directory for all types of businesses across the world",
+    "toDirectory": "Directory"
   },
   "search": {
     "placeholder": "ابحث عن الشركات والخدمات والمواقع...",
@@ -68,7 +70,21 @@
     "faq2Q": "هل الإدراج الأساسي في Nordible for Businesses مجاني؟",
     "faq2A": "نعم، الإدراج الأساسي الموثق للشركات والشركاء مجاني دائماً.",
     "faq3Q": "ما هي المناطق والقطاعات المشمولة؟",
-    "faq3A": "دليلنا عالمي وشامل لكافة القطاعات: نستقبل الشركات بمختلف أحجامها ومجالاتها حول العالم – من التكنولوجيا والأغذية إلى العمارة والخدمات المهنية."
+    "faq3A": "دليلنا عالمي وشامل لكافة القطاعات: نستقبل الشركات بمختلف أحجامها ومجالاتها حول العالم – من التكنولوجيا والأغذية إلى العمارة والخدمات المهنية.",
+    "badgeInternational": "International Business Directory",
+    "badgeCrossBorder": "Cross-Border Commerce",
+    "badgeVerified": "Worldwide Verification",
+    "badgeAllIndustries": "All Global Industries",
+    "featuredHeading": "Verified Partners in the Business Index",
+    "verifiedPill": "Verified",
+    "visitWebsite": "Visit Website",
+    "benefitsBadge": "Trust & Transparency",
+    "faqBadge": "Transparency",
+    "ctaBannerBadge": "Worldwide Access",
+    "ctaBannerTitle": "Get Started with {{name}}",
+    "ctaBannerSubtitle": "Find verified service providers or submit your details for a free basic listing.",
+    "ctaBannerOpen": "Open Directory",
+    "ctaBannerSubmit": "Add Business"
   },
   "addModal": {
     "verifiedBadge": "إدراج موثق مجاني",
@@ -130,5 +146,52 @@
     "sslActive": "مفعّل ومشفر (TLS 1.3)",
     "copy": "نسخ",
     "copied": "تم النسخ!"
+  },
+  "globe": {
+    "badge": "Real-Time Connectivity • Worldwide",
+    "title": "International Business Directory",
+    "subtitle": "Seamless global connections between commerce hubs across all continents. Explore verified enterprises and cross-border partnerships worldwide.",
+    "dragHint": "🖱️ Drag to rotate globe in 3D",
+    "pause": "Pause",
+    "rotate": "Rotate",
+    "reset": "Reset",
+    "liveHub": "Live Hub",
+    "sectorsTitle": "Active Directory Sectors",
+    "linksTitle": "Intercontinental Trade Links",
+    "exploreHubs": "Explore Global Commerce Hubs:"
+  },
+  "directory": {
+    "backToOverview": "← Back to Overview",
+    "badgeTitle": "International Business Directory • Worldwide",
+    "emptyTitle": "No listings found",
+    "emptyDesc": "Try adjusting your search criteria or category filters.",
+    "resetFilters": "Reset filters",
+    "ctaCardTitle": "List Your Enterprise",
+    "ctaCardDesc": "Get your business indexed in the worldwide directory.",
+    "ctaCardBtn": "Submit Listing"
+  },
+  "footer": {
+    "promoBadge": "Turnkey Platforms & AI Solutions",
+    "promoTitle": "Want to scale your custom directory portal or enterprise web app?",
+    "promoDesc": "Nordible Technologies builds high-performance directories, automated data pipelines, and custom web applications with 100% IP ownership from Day 1.",
+    "promoExplore": "Explore Services",
+    "promoTalk": "Talk to Us",
+    "aboutDesc": "International business directory for all types of businesses across the world.",
+    "featuresTitle": "Features",
+    "featVerified": "Verified Listings",
+    "featAi": "AI Listing Extraction",
+    "featDomains": "Custom Domains & SSL",
+    "featMobile": "Mobile-First Ergonomics",
+    "featDirectory": "Interactive Directory",
+    "featPartner": "Partner Program (White-Label)",
+    "ecosystemTitle": "Nordible Ecosystem",
+    "rights": "All rights reserved.",
+    "legalNotice": "Legal Notice / Impressum",
+    "privacy": "Privacy Policy / Datenschutz",
+    "sitemap": "Sitemap"
+  },
+  "partner": {
+    "backToDirectory": "Back to Directory",
+    "plansAndLicense": "Plans & License"
   }
 }

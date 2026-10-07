@@ -35,7 +35,6 @@ function getInitialTenant(): TenantBranding {
 
 export default function DirectoryAppPage() {
   const { locale, t } = useTranslation();
-  const isDe = locale === 'de';
 
   const [currentTenant] = useState<TenantBranding>(getInitialTenant);
   const [listings, setListings] = useState<BusinessListing[]>(MOCK_LISTINGS);
@@ -136,11 +135,11 @@ export default function DirectoryAppPage() {
             <div className="w-7 h-7 rounded-lg bg-white border border-[#E8ECF4] flex items-center justify-center group-hover:border-[#145BFF]/30">
               <ArrowLeft className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#145BFF]" />
             </div>
-            <span>{isDe ? '← Zurück zur Startseite' : '← Back to Overview'}</span>
+            <span>{t('directory.backToOverview')}</span>
           </Link>
 
           <span className="text-xs font-semibold text-slate-500 hidden sm:inline">
-            🌐 {isDe ? 'Internationales Branchenverzeichnis • Weltweit' : 'International Business Directory • Worldwide'}
+            🌐 {t('directory.badgeTitle')}
           </span>
         </div>
 

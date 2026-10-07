@@ -22,7 +22,6 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenAiModal,
 }) => {
   const { locale, setLocale, t } = useTranslation();
-  const isDe = locale === 'de';
 
   return (
     <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E8ECF4] shadow-xs">
@@ -61,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({
               </a>
             </div>
             <p className="text-[11px] text-gray-500 leading-tight hidden md:block">
-              {isDe ? siteConfig.tagline.de : siteConfig.tagline.en}
+              {t('nav.tagline')}
             </p>
           </div>
         </div>
@@ -72,10 +71,10 @@ export const Header: React.FC<HeaderProps> = ({
           <Link
             href={`/${locale}/directory`}
             className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] hover:bg-[#F3F7FF] text-[#0D2B75] transition-colors"
-            title={isDe ? 'Zum Verzeichnis' : 'To Directory'}
+            title={t('nav.toDirectory')}
           >
             <Compass className="w-3.5 h-3.5 text-[#145BFF]" />
-            <span>{isDe ? 'Verzeichnis' : 'Directory'}</span>
+            <span>{t('nav.toDirectory')}</span>
           </Link>
 
           {/* Add Business / Eintragen Button */}

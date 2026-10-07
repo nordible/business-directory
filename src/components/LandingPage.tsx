@@ -61,12 +61,11 @@ export function LandingPage() {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
   };
 
-  const isDe = locale === 'de';
   const globalBadges = [
-    { name: isDe ? 'Internationales Branchenverzeichnis' : 'International Business Directory', highlight: true },
-    { name: isDe ? 'Grenzüberschreitende Vernetzung' : 'Cross-Border Commerce', highlight: false },
-    { name: isDe ? 'Geprüfte Qualität weltweit' : 'Worldwide Verification', highlight: false },
-    { name: isDe ? '100% Branchenoffen' : 'All Global Industries', highlight: true },
+    { name: t('landing.badgeInternational'), highlight: true },
+    { name: t('landing.badgeCrossBorder'), highlight: false },
+    { name: t('landing.badgeVerified'), highlight: false },
+    { name: t('landing.badgeAllIndustries'), highlight: true },
   ];
 
   const faqs = [
@@ -178,7 +177,7 @@ export function LandingPage() {
                 {t('landing.featuredTitle')}
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight mt-1">
-                Geprüfte Partner im Branchenindex
+                {t('landing.featuredHeading')}
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 mt-2 font-medium">
                 {t('landing.featuredSubtitle')}
@@ -196,7 +195,7 @@ export function LandingPage() {
                     <div className="flex items-center justify-between gap-2 mb-2.5">
                       <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                         <ShieldCheck className="w-3.5 h-3.5" />
-                        <span>Verifiziert</span>
+                        <span>{t('landing.verifiedPill')}</span>
                       </span>
 
                       <div className="flex items-center gap-1 text-amber-500 font-bold text-xs">
@@ -214,7 +213,7 @@ export function LandingPage() {
                     </div>
 
                     <p className="text-xs text-slate-600 line-clamp-3 mt-2 leading-relaxed">
-                      {listing.description[locale] || listing.description['de']}
+                      {listing.description[locale] || listing.description['en'] || listing.description['de']}
                     </p>
 
                     <div className="flex items-center gap-1.5 mt-3.5 text-xs text-slate-500 font-medium">
@@ -231,13 +230,13 @@ export function LandingPage() {
                       className="text-xs font-bold text-[#145BFF] hover:underline flex items-center gap-1"
                     >
                       <Globe className="w-3 h-3" />
-                      <span>Website besuchen</span>
+                      <span>{t('landing.visitWebsite')}</span>
                     </a>
 
                     <a
                       href={`tel:${listing.phone}`}
                       className="p-2 rounded-xl bg-white border border-[#E8ECF4] text-slate-600 hover:text-[#0D2B75] hover:bg-[#F3F7FF] transition-colors"
-                      title="Anrufen"
+                      title={t('listing.call')}
                     >
                       <Phone className="w-3.5 h-3.5" />
                     </a>
@@ -319,7 +318,7 @@ export function LandingPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <span className="text-xs font-extrabold uppercase tracking-wider text-[#FF9F1A] font-heading">
-                Transparenz
+                {t('landing.faqBadge')}
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight mt-1">
                 {t('landing.faqTitle')}
@@ -368,13 +367,13 @@ export function LandingPage() {
                 </div>
                 <div className="space-y-2">
                   <span className="text-xs font-extrabold uppercase tracking-wider text-[#FF9F1A]">
-                    Verifiziert • Unabhängig • Lokal
+                    {t('landing.ctaBannerBadge')}
                   </span>
                   <h3 className="font-heading font-black text-xl sm:text-3xl tracking-tight">
-                    Starten Sie jetzt mit {siteConfig.appName}
+                    {t('landing.ctaBannerTitle', { name: siteConfig.appName })}
                   </h3>
                   <p className="text-xs sm:text-sm text-blue-100/80 max-w-lg leading-relaxed font-medium">
-                    Finden Sie geprüfte Dienstleister oder senden Sie Ihre Daten für einen kostenlosen Basiseintrag.
+                    {t('landing.ctaBannerSubtitle')}
                   </p>
                 </div>
               </div>
@@ -384,7 +383,7 @@ export function LandingPage() {
                   href={`/${locale}/directory`}
                   className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-[#FF9F1A] hover:bg-amber-400 text-[#0D2B75] font-extrabold text-xs sm:text-sm transition-transform active:scale-95 shadow-md flex items-center justify-center gap-2"
                 >
-                  <span>Verzeichnis öffnen</span>
+                  <span>{t('landing.ctaBannerOpen')}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <button
@@ -392,7 +391,7 @@ export function LandingPage() {
                   onClick={() => setIsAddModalOpen(true)}
                   className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all active:scale-95 cursor-pointer text-center"
                 >
-                  Unternehmen eintragen
+                  {t('landing.ctaBannerSubmit')}
                 </button>
               </div>
             </div>
