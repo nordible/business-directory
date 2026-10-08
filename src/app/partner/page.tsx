@@ -247,7 +247,7 @@ export default function PartnerPage() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer showPromo={true} />
 
       {/* Modals for live demo */}
       <TenantCustomizer

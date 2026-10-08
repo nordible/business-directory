@@ -122,7 +122,7 @@ export const ClaimListingModal: React.FC<ClaimListingModalProps> = ({
                     />
                   </div>
                   <p className="text-[11px] text-gray-500 mt-2">
-                    Wir senden einen 6-stelligen Sicherheitscode an diese E-Mail-Adresse.
+                    {t('claimModal.securityCodeNote')}
                   </p>
                 </div>
 
@@ -165,7 +165,7 @@ export const ClaimListingModal: React.FC<ClaimListingModalProps> = ({
                     />
                   </div>
                   <p className="text-[11px] text-gray-500 mt-2">
-                    Testcode: Beliebigen 6-stelligen Code eingeben.
+                    {t('claimModal.testCodeHint')}
                   </p>
                 </div>
 

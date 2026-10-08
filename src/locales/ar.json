@@ -6,7 +6,16 @@
     "brandName": "اسم العلامة التجارية",
     "primaryColor": "اللون الأساسي",
     "tagline": "الشعار / العنوان الفرعي",
-    "applyChanges": "تطبيق التغييرات"
+    "applyChanges": "تطبيق التغييرات",
+    "brandNamePlaceholder": "e.g. Munich Craft Portal",
+    "logoText": "Logo Icon / Text",
+    "logoTextPlaceholder": "e.g. 🚀 TechHub",
+    "taglineDePlaceholder": "Subtitle for German visitors...",
+    "taglineEnPlaceholder": "Subtitle for English visitors...",
+    "previewTitle": "Live Brand Preview",
+    "defaultName": "Directory Name",
+    "defaultTagline": "Your Directory",
+    "cancel": "Cancel"
   },
   "nav": {
     "explore": "استكشاف",
@@ -41,7 +50,9 @@
     "hideDetails": "إخفاء التفاصيل",
     "openingHours": "ساعات العمل",
     "reviews": "التقييمات",
-    "claimListing": "توثيق ملكية النشاط"
+    "claimListing": "توثيق ملكية النشاط",
+    "openNow": "مفتوح الآن",
+    "closed": "مغلق"
   },
   "tenant": {
     "switchTenant": "تبديل الدليل",
@@ -100,20 +111,30 @@
     "sendEmailBtn": "إرسال بريد إلى mail@nordible.co",
     "copyEmailBtn": "نسخ عنوان البريد الإلكتروني",
     "copied": "تم النسخ!",
-    "benefitsTitle": "ما يحصل عليه نشاطك التجاري عند الإدراج:",
-    "benefit1Title": "ملف تجاري موثق",
-    "benefit1Desc": "بطاقة دائمة مع شارة توثيق ورابط مباشر وأزرار تواصل بنقرة واحدة.",
-    "benefit2Title": "عملاء محتملون مباشرون بدون أي عمولات 100%",
-    "benefit2Desc": "يتواصل العملاء معك مباشرة عبر الهاتف أو البريد دون رسوم وسطاء أو عمولات.",
-    "benefit3Title": "فهرسة محركات البحث والذكاء الاصطناعي (GEO)",
-    "benefit3Desc": "دمج Schema.org و llms.txt حتى يوصي ChatGPT وPerplexity وGoogle AI بشركتك.",
-    "benefit4Title": "انتشار عالمي بـ 17 لغة",
-    "benefit4Desc": "اجذب عملاء دوليين من خلال روابط محلية ودعم كامل للغات من اليمين إلى اليسار.",
+    "benefitsTitle": "كيف يؤدي هذا الإدراج إلى زيادة إيراداتك وخفض تكاليف التسويق:",
+    "benefit1Title": "المزيد من العملاء الدافعين والصفقات الناجحة",
+    "benefit1Desc": "تمتع بفرصة الظهور أمام عملاء جاهزين لشراء خدماتك والتعاقد معك فوراً.",
+    "benefit2Title": "عمولة 0% – احتفظ بـ 100% من أرباحك وعائداتك",
+    "benefit2Desc": "على عكس المنصات التي تقتطع 15%–30% أو رسوم على كل عميل، كل ربح تحققه هو ملكك بالكامل 100%.",
+    "benefit3Title": "خفض ميزانيات إعلانات Google والإعلانات الممولة المكلفة",
+    "benefit3Desc": "احصل على استفسارات مستمرة من عملاء جدد مقابل 0 يورو بدلاً من دفع 5-50 يورو+ لكل نقرة إعلانية.",
+    "benefit4Title": "حقق صفقات أسرع بفضل شارة التوثيق وبناء الثقة",
+    "benefit4Desc": "تخلص من تردد العملاء. تثبت شارة التوثيق مصداقيتك وتمنح العملاء الثقة لاختيار شركتك دون تردد.",
     "aiAgentBadge": "بروتوكول وكلاء الذكاء الاصطناعي والروبوتات",
     "aiAgentNotice": "هل تزور كوكيل ذكاء اصطناعي أو روبوت؟ أرسل بيانات الشركة المهيكلة مباشرة عبر البريد الإلكتروني:",
     "copyAiTemplate": "نسخ نموذج وكيل الذكاء الاصطناعي",
     "copiedAiTemplate": "تم نسخ نموذج الذكاء الاصطناعي!",
-    "footerNotice": "تظهر القوائم الموثقة عالمياً بعد المراجعة التحريرية. مجاناً 100% إلى الأبد."
+    "footerNotice": "تظهر القوائم الموثقة عالمياً بعد المراجعة التحريرية. مجاناً 100% إلى الأبد.",
+    "submittedBadge": "Listing Initiated 🎉",
+    "submittedTitle": "Thank You for Your Submission!",
+    "submittedSubtitle": "Your listing details have been sent for editorial verification. Your business entry will be published 100% free forever.",
+    "pitchBadge": "📍 Nordible Technologies • Frankfurt am Main",
+    "pitchTitle": "Need custom software, client portals, or AI systems?",
+    "pitchDesc": "Nordible Technologies is a technology service provider in Frankfurt am Main, Germany, serving clients across Europe and worldwide. We architect and build scalable web platforms, bespoke business tools, and custom AI automations with 100% intellectual property ownership from Day 1.",
+    "pitchExploreBtn": "Explore Software Services",
+    "pitchConsultBtn": "Book Free Tech Consultation",
+    "pitchDoneBtn": "Back to Directory",
+    "viewTemplateAgain": "← View or edit listing details again"
   },
   "claimModal": {
     "title": "توثيق ملكية الشركة",
@@ -125,7 +146,9 @@
     "verifyCode": "تأكيد الرمز وتوثيق الملكية",
     "successTitle": "تم التوثيق بنجاح!",
     "successSubtitle": "أنت الآن المالك الرسمي المعتمد لهذا النشاط.",
-    "openDashboard": "الانتقال إلى لوحة التحكم"
+    "openDashboard": "الانتقال إلى لوحة التحكم",
+    "securityCodeNote": "We will send a 6-digit security code to this email address.",
+    "testCodeHint": "Test code: Enter any 6-digit code."
   },
   "reviewsModal": {
     "title": "التقييمات",
@@ -133,7 +156,13 @@
     "namePlaceholder": "اسمك",
     "commentPlaceholder": "شارك تجربتك مع هذه الشركة...",
     "submit": "إرسال التقييم",
-    "noReviews": "لا توجد تقييمات حتى الآن. كن أول من يقيّم!"
+    "noReviews": "لا توجد تقييمات حتى الآن. كن أول من يقيّم!",
+    "dateYesterday": "Yesterday",
+    "dateDaysAgo": "3 days ago",
+    "dateJustNow": "Just now",
+    "anonymousUser": "Anonymous Customer",
+    "sampleReview1": "Outstanding service, very friendly advice, and top quality!",
+    "sampleReview2": "Highly recommended. Fast response time and fair pricing."
   },
   "pricing": {
     "title": "باقات مشغلي الأدلة",
@@ -148,7 +177,28 @@
     "tierEnterpriseDesc": "إدارة مدن وقطاعات متعددة تحت مظلة واحدة",
     "popularBadge": "الأكثر طلباً",
     "subscribe": "اختيار الباقة",
-    "redirectingStripe": "جارٍ التحويل إلى بوابة الدفع Stripe..."
+    "redirectingStripe": "جارٍ التحويل إلى بوابة الدفع Stripe...",
+    "perMonth": "/ month",
+    "cancelNotice": "Cancel anytime monthly • No setup fees",
+    "securePayment": "Secure 256-bit SSL payment via Stripe",
+    "checkoutSuccess": "Successfully redirected to Stripe Checkout for plan: {{plan}} ({{cycle}})",
+    "checkoutError": "Error connecting to payment provider.",
+    "fStarter1": "1 business directory",
+    "fStarter2": "Up to 250 business listings",
+    "fStarter3": "AI ingestion (50 scans / mo)",
+    "fStarter4": "Standard subdomain (.nordible.com)",
+    "fStarter5": "Mobile-first ergonomic design",
+    "fPro1": "Custom domain with automated SSL",
+    "fPro2": "Unlimited business listings",
+    "fPro3": "Unlimited AI ingestion via URL & flyer",
+    "fPro4": "100% White-Label (Custom logo & colors)",
+    "fPro5": "Owner dashboard & review system",
+    "fPro6": "Priority support & SEO optimization",
+    "fEnterprise1": "Unlimited directories & cities",
+    "fEnterprise2": "Dedicated Stripe billing for owners",
+    "fEnterprise3": "Multi-tenant admin dashboard",
+    "fEnterprise4": "Custom API endpoints & webhooks",
+    "fEnterprise5": "99.9% Uptime SLA & 24/7 support"
   },
   "domain": {
     "title": "نطاق خاص وشهادة SSL",
@@ -159,7 +209,13 @@
     "sslStatus": "حالة SSL",
     "sslActive": "مفعّل ومشفر (TLS 1.3)",
     "copy": "نسخ",
-    "copied": "تم النسخ!"
+    "copied": "تم النسخ!",
+    "customDomainLabel": "Custom Domain",
+    "placeholder": "e.g. directory.my-city.com",
+    "currentSubdomain": "Current internal subdomain:",
+    "dnsHelperTitle": "Required DNS records at your registrar",
+    "saveAndDeploy": "Save Domain & Provision SSL",
+    "savedSuccess": "Domain successfully saved & linked!"
   },
   "globe": {
     "badge": "Real-Time Connectivity • Worldwide",
@@ -231,5 +287,17 @@
     "supportTitle": "هل لديك أسئلة حول الشراكة؟",
     "supportDesc": "يساعد فريقنا الهندسي في إعداد النظام وقواعد البيانات وربط واجهات برمجة التطبيقات المخصصة.",
     "btnBookConsult": "حجز موعد استشارة"
+  },
+  "dashboard": {
+    "title": "Business Owner Dashboard",
+    "saved": "Changes saved successfully!",
+    "isOpenLabel": "Currently Open for Customers",
+    "hours": "Opening Hours",
+    "phone": "Phone Number",
+    "website": "Website",
+    "address": "Street & House Number",
+    "city": "City & Postal Code",
+    "description": "Company Description",
+    "saveChanges": "Save Changes"
   }
 }

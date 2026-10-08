@@ -88,7 +88,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
                   listing.isOpenNow ? 'text-emerald-600' : 'text-rose-500'
                 }`}
               >
-                {listing.isOpenNow ? '• Offen' : '• Geschlossen'}
+                • {listing.isOpenNow ? t('listing.openNow') : t('listing.closed')}
               </span>
             </div>
           </div>
@@ -96,7 +96,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
 
         {/* Description */}
         <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
-          {listing.description[locale]}
+          {listing.description[locale] || listing.description.en || listing.description.de}
         </p>
 
         {/* Address */}

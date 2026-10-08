@@ -6,7 +6,16 @@
     "brandName": "نام برند",
     "primaryColor": "رنگ اصلی",
     "tagline": "شعار / زیرعنوان",
-    "applyChanges": "اعمال تغییرات"
+    "applyChanges": "اعمال تغییرات",
+    "brandNamePlaceholder": "e.g. Munich Craft Portal",
+    "logoText": "Logo Icon / Text",
+    "logoTextPlaceholder": "e.g. 🚀 TechHub",
+    "taglineDePlaceholder": "Subtitle for German visitors...",
+    "taglineEnPlaceholder": "Subtitle for English visitors...",
+    "previewTitle": "Live Brand Preview",
+    "defaultName": "Directory Name",
+    "defaultTagline": "Your Directory",
+    "cancel": "Cancel"
   },
   "nav": {
     "explore": "کاوش",
@@ -41,7 +50,9 @@
     "hideDetails": "بستن",
     "openingHours": "ساعات کاری",
     "reviews": "دیدگاه‌ها",
-    "claimListing": "ادعای مالکیت"
+    "claimListing": "ادعای مالکیت",
+    "openNow": "اکنون باز است",
+    "closed": "بسته است"
   },
   "tenant": {
     "switchTenant": "تغییر دایرکتوری",
@@ -171,20 +182,30 @@
     "sendEmailBtn": "ارسال ایمیل به mail@nordible.co",
     "copyEmailBtn": "کپی آدرس ایمیل",
     "copied": "کپی شد!",
-    "benefitsTitle": "آنچه کسب‌وکار شما با ثبت در دایرکتوری به دست می‌آورد:",
-    "benefit1Title": "نمایه تجاری تایید شده",
-    "benefit1Desc": "کارت دائمی با نشان تایید، لینک مستقیم به وب‌سایت و دکمه‌های تماس مستقیم.",
-    "benefit2Title": "ارتباط مستقیم و ۱۰۰٪ بدون کمیسیون با مشتریان",
-    "benefit2Desc": "مشتریان بدون هیچ کارمزد واسطه‌ای، مستقیماً تماس گرفته یا به وب‌سایت شما مراجعه می‌کنند.",
-    "benefit3Title": "نمایه‌سازی در موتورهای جستجوی هوش مصنوعی (GEO)",
-    "benefit3Desc": "یکپارچه‌سازی با Schema.org و llms.txt برای معرفی کسب‌وکار شما توسط ChatGPT، پرپلکسیتی و گوگل.",
-    "benefit4Title": "دسترسی جهانی به ۱۷ زبان زنده دنیا",
-    "benefit4Desc": "جذب مشتریان بین‌المللی با نشانی‌های محلی‌سازی‌شده و پشتیبانی کامل از خطوط راست‌به‌چپ.",
+    "benefitsTitle": "چگونه این نمایه درآمد شما را افزایش داده و هزینه‌های بازاریابی را کاهش می‌دهد:",
+    "benefit1Title": "مشتریان واقعی و قراردادهای بیشتر",
+    "benefit1Desc": "توسط خریداران واقعی که آماده ثبت سفارش و خرید خدمات شما هستند پیدا شوید.",
+    "benefit2Title": "۰٪ کمیسیون – ۱۰۰٪ درآمد برای خودتان باقی می‌ماند",
+    "benefit2Desc": "برخلاف پلتفرم‌هایی که ۱۵ تا ۳۰ درصد کارمزد می‌گیرند، تمام مبلغ قراردادها ۱۰۰٪ متعلق به خودتان است.",
+    "benefit3Title": "کاهش هزینه‌های سرسام‌آور تبلیغات گوگلی و بازاریابی",
+    "benefit3Desc": "به جای پرداخت ۵ تا ۵۰ یورو برای هر کلیک تبلیغاتی، به صورت مداوم و با هزینه ۰ یورو مشتری جذب کنید.",
+    "benefit4Title": "بستن سریع‌تر قراردادها به لطف نشان اعتماد رسمی",
+    "benefit4Desc": "شک و تردید مشتری را از بین ببرید. نشان تایید رسمی اصالت شما را اثبات کرده و نرخ بستن قرارداد را بالا می‌برد.",
     "aiAgentBadge": "پروتکل اختصاصی عامل‌های هوش مصنوعی",
     "aiAgentNotice": "به عنوان عامل هوش مصنوعی بازدید می‌کنید؟ اطلاعات ساختاریافته شرکت را از طریق ایمیل ارسال کنید:",
     "copyAiTemplate": "کپی قالب عامل هوش مصنوعی",
     "copiedAiTemplate": "قالب هوش مصنوعی کپی شد!",
-    "footerNotice": "پروفایل‌های تاییدشده پس از بررسی تحریریه در سراسر جهان منتشر می‌شوند. برای همیشه ۱۰۰٪ رایگان."
+    "footerNotice": "پروفایل‌های تاییدشده پس از بررسی تحریریه در سراسر جهان منتشر می‌شوند. برای همیشه ۱۰۰٪ رایگان.",
+    "submittedBadge": "Listing Initiated 🎉",
+    "submittedTitle": "Thank You for Your Submission!",
+    "submittedSubtitle": "Your listing details have been sent for editorial verification. Your business entry will be published 100% free forever.",
+    "pitchBadge": "📍 Nordible Technologies • Frankfurt am Main",
+    "pitchTitle": "Need custom software, client portals, or AI systems?",
+    "pitchDesc": "Nordible Technologies is a technology service provider in Frankfurt am Main, Germany, serving clients across Europe and worldwide. We architect and build scalable web platforms, bespoke business tools, and custom AI automations with 100% intellectual property ownership from Day 1.",
+    "pitchExploreBtn": "Explore Software Services",
+    "pitchConsultBtn": "Book Free Tech Consultation",
+    "pitchDoneBtn": "Back to Directory",
+    "viewTemplateAgain": "← View or edit listing details again"
   },
   "claimModal": {
     "title": "تایید مالکیت",
@@ -196,7 +217,9 @@
     "verifyCode": "تایید کد",
     "successTitle": "با موفقیت تایید شد!",
     "successSubtitle": "شما اکنون به عنوان مالک رسمی این کسب‌وکار ثبت شده‌اید.",
-    "openDashboard": "ورود به پنل مدیریت"
+    "openDashboard": "ورود به پنل مدیریت",
+    "securityCodeNote": "We will send a 6-digit security code to this email address.",
+    "testCodeHint": "Test code: Enter any 6-digit code."
   },
   "reviewsModal": {
     "title": "دیدگاه‌ها",
@@ -204,7 +227,13 @@
     "namePlaceholder": "نام شما",
     "commentPlaceholder": "تجربه خود را با این کسب‌وکار به اشتراک بگذارید...",
     "submit": "ارسال نظر",
-    "noReviews": "هنوز دیدگاهی ثبت نشده است. اولین نفر باشید!"
+    "noReviews": "هنوز دیدگاهی ثبت نشده است. اولین نفر باشید!",
+    "dateYesterday": "Yesterday",
+    "dateDaysAgo": "3 days ago",
+    "dateJustNow": "Just now",
+    "anonymousUser": "Anonymous Customer",
+    "sampleReview1": "Outstanding service, very friendly advice, and top quality!",
+    "sampleReview2": "Highly recommended. Fast response time and fair pricing."
   },
   "pricing": {
     "title": "تعرفه‌ها برای مجریان دایرکتوری",
@@ -219,7 +248,28 @@
     "tierEnterpriseDesc": "چندین شهر و صنعت تحت یک برند",
     "popularBadge": "محبوب‌ترین",
     "subscribe": "انتخاب پلن",
-    "redirectingStripe": "در حال اتصال به درگاه پرداخت..."
+    "redirectingStripe": "در حال اتصال به درگاه پرداخت...",
+    "perMonth": "/ month",
+    "cancelNotice": "Cancel anytime monthly • No setup fees",
+    "securePayment": "Secure 256-bit SSL payment via Stripe",
+    "checkoutSuccess": "Successfully redirected to Stripe Checkout for plan: {{plan}} ({{cycle}})",
+    "checkoutError": "Error connecting to payment provider.",
+    "fStarter1": "1 business directory",
+    "fStarter2": "Up to 250 business listings",
+    "fStarter3": "AI ingestion (50 scans / mo)",
+    "fStarter4": "Standard subdomain (.nordible.com)",
+    "fStarter5": "Mobile-first ergonomic design",
+    "fPro1": "Custom domain with automated SSL",
+    "fPro2": "Unlimited business listings",
+    "fPro3": "Unlimited AI ingestion via URL & flyer",
+    "fPro4": "100% White-Label (Custom logo & colors)",
+    "fPro5": "Owner dashboard & review system",
+    "fPro6": "Priority support & SEO optimization",
+    "fEnterprise1": "Unlimited directories & cities",
+    "fEnterprise2": "Dedicated Stripe billing for owners",
+    "fEnterprise3": "Multi-tenant admin dashboard",
+    "fEnterprise4": "Custom API endpoints & webhooks",
+    "fEnterprise5": "99.9% Uptime SLA & 24/7 support"
   },
   "domain": {
     "title": "دامنه اختصاصی و SSL",
@@ -230,6 +280,24 @@
     "sslStatus": "وضعیت SSL",
     "sslActive": "فعال و رمزگذاری شده (TLS 1.3)",
     "copy": "کپی",
-    "copied": "کپی شد!"
+    "copied": "کپی شد!",
+    "customDomainLabel": "Custom Domain",
+    "placeholder": "e.g. directory.my-city.com",
+    "currentSubdomain": "Current internal subdomain:",
+    "dnsHelperTitle": "Required DNS records at your registrar",
+    "saveAndDeploy": "Save Domain & Provision SSL",
+    "savedSuccess": "Domain successfully saved & linked!"
+  },
+  "dashboard": {
+    "title": "Business Owner Dashboard",
+    "saved": "Changes saved successfully!",
+    "isOpenLabel": "Currently Open for Customers",
+    "hours": "Opening Hours",
+    "phone": "Phone Number",
+    "website": "Website",
+    "address": "Street & House Number",
+    "city": "City & Postal Code",
+    "description": "Company Description",
+    "saveChanges": "Save Changes"
   }
 }

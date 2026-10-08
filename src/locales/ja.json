@@ -6,7 +6,16 @@
     "brandName": "ブランド名",
     "primaryColor": "プライマリカラー",
     "tagline": "キャッチコピー / サブタイトル",
-    "applyChanges": "変更を適用"
+    "applyChanges": "変更を適用",
+    "brandNamePlaceholder": "e.g. Munich Craft Portal",
+    "logoText": "Logo Icon / Text",
+    "logoTextPlaceholder": "e.g. 🚀 TechHub",
+    "taglineDePlaceholder": "Subtitle for German visitors...",
+    "taglineEnPlaceholder": "Subtitle for English visitors...",
+    "previewTitle": "Live Brand Preview",
+    "defaultName": "Directory Name",
+    "defaultTagline": "Your Directory",
+    "cancel": "Cancel"
   },
   "nav": {
     "explore": "探す",
@@ -41,7 +50,9 @@
     "hideDetails": "閉じる",
     "openingHours": "営業時間",
     "reviews": "口コミ・評価",
-    "claimListing": "オーナー確認を申請"
+    "claimListing": "オーナー確認を申請",
+    "openNow": "営業中",
+    "closed": "営業時間外"
   },
   "tenant": {
     "switchTenant": "ディレクトリを切り替え",
@@ -171,20 +182,30 @@
     "sendEmailBtn": "mail@nordible.co へメールを送信",
     "copyEmailBtn": "メールアドレスをコピー",
     "copied": "コピーしました！",
-    "benefitsTitle": "掲載されることで得られるメリット：",
-    "benefit1Title": "認証済み企業プロフィール",
-    "benefit1Desc": "認証バッジ、直接リンク、ワンクリック連絡ボタンを備えた恒久的な企業カード。",
-    "benefit2Title": "100%手数料ゼロの直接リード",
-    "benefit2Desc": "見込み客が仲介手数料なしで直接電話、メール、またはウェブサイトを訪問します。",
-    "benefit3Title": "AI・検索エンジン最適化（GEO/LLM対応）",
-    "benefit3Desc": "ChatGPT、Perplexity、Google AIが貴社を推奨するように構造化データとllms.txtで連携。",
-    "benefit4Title": "17言語対応のグローバル展開",
-    "benefit4Desc": "ローカライズされたURLとRTL対応により、世界中の顧客にアプローチ。",
+    "benefitsTitle": "掲載が貴社の売上を伸ばし、広告コストを削減する理由：",
+    "benefit1Title": "有料顧客と成約数の増加",
+    "benefit1Desc": "今すぐ貴社のサービスを発注・購入したい購買意欲の高い顧客から直接見つけられます。",
+    "benefit2Title": "手数料0% – 売上の100%が貴社の手元に残る",
+    "benefit2Desc": "15〜30%の手数料やリード課金をとる他社と違い、成約した売上は100%貴社の利益になります。",
+    "benefit3Title": "高騰するGoogle広告費とマーケティング費用を削減",
+    "benefit3Desc": "1クリックあたり5〜50ユーロ以上かかる検索広告の代わりに、費用0円で継続的な商談を獲得。",
+    "benefit4Title": "公式認証バッジで購入検討者の信頼を獲得し成約率向上",
+    "benefit4Desc": "顧客の不安を払拭。公的審査バッジが信頼性の証となり、競合他社よりも選ばれる決め手に。",
     "aiAgentBadge": "AIエージェント＆Bot向けプロトコル",
     "aiAgentNotice": "AIエージェントまたはBotとしてアクセス中ですか？構造化データを記載したメールで直接申請してください：",
     "copyAiTemplate": "AI提出テンプレートをコピー",
     "copiedAiTemplate": "AIテンプレートをコピーしました！",
-    "footerNotice": "掲載審査後、Nordible for Businessesに世界中から公開されます。完全永久無料。"
+    "footerNotice": "掲載審査後、Nordible for Businessesに世界中から公開されます。完全永久無料。",
+    "submittedBadge": "Listing Initiated 🎉",
+    "submittedTitle": "Thank You for Your Submission!",
+    "submittedSubtitle": "Your listing details have been sent for editorial verification. Your business entry will be published 100% free forever.",
+    "pitchBadge": "📍 Nordible Technologies • Frankfurt am Main",
+    "pitchTitle": "Need custom software, client portals, or AI systems?",
+    "pitchDesc": "Nordible Technologies is a technology service provider in Frankfurt am Main, Germany, serving clients across Europe and worldwide. We architect and build scalable web platforms, bespoke business tools, and custom AI automations with 100% intellectual property ownership from Day 1.",
+    "pitchExploreBtn": "Explore Software Services",
+    "pitchConsultBtn": "Book Free Tech Consultation",
+    "pitchDoneBtn": "Back to Directory",
+    "viewTemplateAgain": "← View or edit listing details again"
   },
   "claimModal": {
     "title": "オーナー確認",
@@ -196,7 +217,9 @@
     "verifyCode": "コードを送信して確認完了",
     "successTitle": "認証が完了しました！",
     "successSubtitle": "公式オーナーとして正常に登録されました。",
-    "openDashboard": "オーナーダッシュボードへ"
+    "openDashboard": "オーナーダッシュボードへ",
+    "securityCodeNote": "We will send a 6-digit security code to this email address.",
+    "testCodeHint": "Test code: Enter any 6-digit code."
   },
   "reviewsModal": {
     "title": "レビュー・評価",
@@ -204,7 +227,13 @@
     "namePlaceholder": "お名前",
     "commentPlaceholder": "この企業での体験を共有してください...",
     "submit": "レビューを送信",
-    "noReviews": "まだレビューがありません。最初のレビューを投稿しましょう！"
+    "noReviews": "まだレビューがありません。最初のレビューを投稿しましょう！",
+    "dateYesterday": "Yesterday",
+    "dateDaysAgo": "3 days ago",
+    "dateJustNow": "Just now",
+    "anonymousUser": "Anonymous Customer",
+    "sampleReview1": "Outstanding service, very friendly advice, and top quality!",
+    "sampleReview2": "Highly recommended. Fast response time and fair pricing."
   },
   "pricing": {
     "title": "ディレクトリ運営者向け料金プラン",
@@ -219,7 +248,28 @@
     "tierEnterpriseDesc": "複数都市・複数バーティカルを一括管理",
     "popularBadge": "一番人気",
     "subscribe": "プランを選択",
-    "redirectingStripe": "Stripe チェックアウトへ接続中..."
+    "redirectingStripe": "Stripe チェックアウトへ接続中...",
+    "perMonth": "/ month",
+    "cancelNotice": "Cancel anytime monthly • No setup fees",
+    "securePayment": "Secure 256-bit SSL payment via Stripe",
+    "checkoutSuccess": "Successfully redirected to Stripe Checkout for plan: {{plan}} ({{cycle}})",
+    "checkoutError": "Error connecting to payment provider.",
+    "fStarter1": "1 business directory",
+    "fStarter2": "Up to 250 business listings",
+    "fStarter3": "AI ingestion (50 scans / mo)",
+    "fStarter4": "Standard subdomain (.nordible.com)",
+    "fStarter5": "Mobile-first ergonomic design",
+    "fPro1": "Custom domain with automated SSL",
+    "fPro2": "Unlimited business listings",
+    "fPro3": "Unlimited AI ingestion via URL & flyer",
+    "fPro4": "100% White-Label (Custom logo & colors)",
+    "fPro5": "Owner dashboard & review system",
+    "fPro6": "Priority support & SEO optimization",
+    "fEnterprise1": "Unlimited directories & cities",
+    "fEnterprise2": "Dedicated Stripe billing for owners",
+    "fEnterprise3": "Multi-tenant admin dashboard",
+    "fEnterprise4": "Custom API endpoints & webhooks",
+    "fEnterprise5": "99.9% Uptime SLA & 24/7 support"
   },
   "domain": {
     "title": "独自ドメインとSSL",
@@ -230,6 +280,24 @@
     "sslStatus": "SSL ステータス",
     "sslActive": "有効＆暗号化完了 (TLS 1.3)",
     "copy": "コピー",
-    "copied": "コピーしました！"
+    "copied": "コピーしました！",
+    "customDomainLabel": "Custom Domain",
+    "placeholder": "e.g. directory.my-city.com",
+    "currentSubdomain": "Current internal subdomain:",
+    "dnsHelperTitle": "Required DNS records at your registrar",
+    "saveAndDeploy": "Save Domain & Provision SSL",
+    "savedSuccess": "Domain successfully saved & linked!"
+  },
+  "dashboard": {
+    "title": "Business Owner Dashboard",
+    "saved": "Changes saved successfully!",
+    "isOpenLabel": "Currently Open for Customers",
+    "hours": "Opening Hours",
+    "phone": "Phone Number",
+    "website": "Website",
+    "address": "Street & House Number",
+    "city": "City & Postal Code",
+    "description": "Company Description",
+    "saveChanges": "Save Changes"
   }
 }

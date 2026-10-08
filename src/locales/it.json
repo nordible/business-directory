@@ -6,7 +6,16 @@
     "brandName": "Nome del marchio",
     "primaryColor": "Colore primario",
     "tagline": "Slogan / Sottotitolo",
-    "applyChanges": "Applica modifiche"
+    "applyChanges": "Applica modifiche",
+    "brandNamePlaceholder": "e.g. Munich Craft Portal",
+    "logoText": "Logo Icon / Text",
+    "logoTextPlaceholder": "e.g. 🚀 TechHub",
+    "taglineDePlaceholder": "Subtitle for German visitors...",
+    "taglineEnPlaceholder": "Subtitle for English visitors...",
+    "previewTitle": "Live Brand Preview",
+    "defaultName": "Directory Name",
+    "defaultTagline": "Your Directory",
+    "cancel": "Cancel"
   },
   "nav": {
     "explore": "Esplora",
@@ -41,7 +50,9 @@
     "hideDetails": "Meno dettagli",
     "openingHours": "Orari di apertura",
     "reviews": "Recensioni",
-    "claimListing": "Rivendica scheda"
+    "claimListing": "Rivendica scheda",
+    "openNow": "Aperto",
+    "closed": "Chiuso"
   },
   "tenant": {
     "switchTenant": "Cambia directory",
@@ -100,20 +111,30 @@
     "sendEmailBtn": "Invia email a mail@nordible.co",
     "copyEmailBtn": "Copia indirizzo email",
     "copied": "Copiato!",
-    "benefitsTitle": "Cosa ottiene la tua azienda con l'inserimento:",
-    "benefit1Title": "Profilo aziendale verificato",
-    "benefit1Desc": "Scheda permanente con badge verificato, backlink e pulsanti di contatto diretto.",
-    "benefit2Title": "Contatti diretti al 100% senza commissioni",
-    "benefit2Desc": "I clienti ti contattano direttamente via email o telefono senza commissioni né intermediari.",
-    "benefit3Title": "Indicizzazione nei motori di ricerca IA e LLM (GEO)",
-    "benefit3Desc": "Integrazione Schema.org e llms.txt affinché ChatGPT, Perplexity e Google AI consiglino la tua attività.",
-    "benefit4Title": "Visibilità globale in 17 lingue",
-    "benefit4Desc": "Attira clienti internazionali con URL localizzati e supporto completo per lingue RTL.",
+    "benefitsTitle": "Come questa scheda aumenta il tuo fatturato e riduce i costi di marketing:",
+    "benefit1Title": "Più clienti paganti e contratti chiusi",
+    "benefit1Desc": "Fatti trovare da clienti qualificati pronti ad acquistare e richiedere i tuoi servizi adesso.",
+    "benefit2Title": "0% commissioni – Mantieni il 100% del tuo fatturato",
+    "benefit2Desc": "A differenza delle piattaforme che trattengono il 15-30% o 50 €/lead, ogni euro guadagnato è al 100% tuo.",
+    "benefit3Title": "Riduci la spesa per Google Ads costosi",
+    "benefit3Desc": "Ottieni richieste continue di clienti per 0 € invece di pagare 5-50 €+ per singolo clic pubblicitario.",
+    "benefit4Title": "Chiudi contratti più velocemente con il badge verificato",
+    "benefit4Desc": "Supera lo scetticismo dei clienti. Il badge ufficiale prova la tua affidabilità e accelera la chiusura.",
     "aiAgentBadge": "Protocollo per agenti IA e bot",
     "aiAgentNotice": "Stai visitando come agente IA o bot? Invia le richieste di inserimento via email con dati strutturati:",
     "copyAiTemplate": "Copia modello agente IA",
     "copiedAiTemplate": "Modello IA copiato!",
-    "footerNotice": "Le schede verificate appaiono a livello globale dopo revisione editoriale. 100% gratuito per sempre."
+    "footerNotice": "Le schede verificate appaiono a livello globale dopo revisione editoriale. 100% gratuito per sempre.",
+    "submittedBadge": "Listing Initiated 🎉",
+    "submittedTitle": "Thank You for Your Submission!",
+    "submittedSubtitle": "Your listing details have been sent for editorial verification. Your business entry will be published 100% free forever.",
+    "pitchBadge": "📍 Nordible Technologies • Frankfurt am Main",
+    "pitchTitle": "Need custom software, client portals, or AI systems?",
+    "pitchDesc": "Nordible Technologies is a technology service provider in Frankfurt am Main, Germany, serving clients across Europe and worldwide. We architect and build scalable web platforms, bespoke business tools, and custom AI automations with 100% intellectual property ownership from Day 1.",
+    "pitchExploreBtn": "Explore Software Services",
+    "pitchConsultBtn": "Book Free Tech Consultation",
+    "pitchDoneBtn": "Back to Directory",
+    "viewTemplateAgain": "← View or edit listing details again"
   },
   "claimModal": {
     "title": "Verifica del titolare",
@@ -125,7 +146,9 @@
     "verifyCode": "Verifica codice e diventa titolare",
     "successTitle": "Verifica completata!",
     "successSubtitle": "Ora sei registrato come titolare ufficiale.",
-    "openDashboard": "Vai alla dashboard"
+    "openDashboard": "Vai alla dashboard",
+    "securityCodeNote": "We will send a 6-digit security code to this email address.",
+    "testCodeHint": "Test code: Enter any 6-digit code."
   },
   "reviewsModal": {
     "title": "Recensioni",
@@ -133,7 +156,13 @@
     "namePlaceholder": "Il tuo nome",
     "commentPlaceholder": "Condividi la tua esperienza con questa attività...",
     "submit": "Invia recensione",
-    "noReviews": "Nessuna recensione finora. Sii il primo!"
+    "noReviews": "Nessuna recensione finora. Sii il primo!",
+    "dateYesterday": "Yesterday",
+    "dateDaysAgo": "3 days ago",
+    "dateJustNow": "Just now",
+    "anonymousUser": "Anonymous Customer",
+    "sampleReview1": "Outstanding service, very friendly advice, and top quality!",
+    "sampleReview2": "Highly recommended. Fast response time and fair pricing."
   },
   "pricing": {
     "title": "Tariffe per operatori di directory",
@@ -148,7 +177,28 @@
     "tierEnterpriseDesc": "Più città o settori sotto un unico marchio",
     "popularBadge": "Scelta più popolare",
     "subscribe": "Scegli piano",
-    "redirectingStripe": "Collegamento a Stripe Checkout..."
+    "redirectingStripe": "Collegamento a Stripe Checkout...",
+    "perMonth": "/ month",
+    "cancelNotice": "Cancel anytime monthly • No setup fees",
+    "securePayment": "Secure 256-bit SSL payment via Stripe",
+    "checkoutSuccess": "Successfully redirected to Stripe Checkout for plan: {{plan}} ({{cycle}})",
+    "checkoutError": "Error connecting to payment provider.",
+    "fStarter1": "1 business directory",
+    "fStarter2": "Up to 250 business listings",
+    "fStarter3": "AI ingestion (50 scans / mo)",
+    "fStarter4": "Standard subdomain (.nordible.com)",
+    "fStarter5": "Mobile-first ergonomic design",
+    "fPro1": "Custom domain with automated SSL",
+    "fPro2": "Unlimited business listings",
+    "fPro3": "Unlimited AI ingestion via URL & flyer",
+    "fPro4": "100% White-Label (Custom logo & colors)",
+    "fPro5": "Owner dashboard & review system",
+    "fPro6": "Priority support & SEO optimization",
+    "fEnterprise1": "Unlimited directories & cities",
+    "fEnterprise2": "Dedicated Stripe billing for owners",
+    "fEnterprise3": "Multi-tenant admin dashboard",
+    "fEnterprise4": "Custom API endpoints & webhooks",
+    "fEnterprise5": "99.9% Uptime SLA & 24/7 support"
   },
   "domain": {
     "title": "Dominio personalizzato & SSL",
@@ -159,7 +209,13 @@
     "sslStatus": "Stato SSL",
     "sslActive": "Attivo e crittografato (TLS 1.3)",
     "copy": "Copia",
-    "copied": "Copiato!"
+    "copied": "Copiato!",
+    "customDomainLabel": "Custom Domain",
+    "placeholder": "e.g. directory.my-city.com",
+    "currentSubdomain": "Current internal subdomain:",
+    "dnsHelperTitle": "Required DNS records at your registrar",
+    "saveAndDeploy": "Save Domain & Provision SSL",
+    "savedSuccess": "Domain successfully saved & linked!"
   },
   "globe": {
     "badge": "Real-Time Connectivity • Worldwide",
@@ -231,5 +287,17 @@
     "supportTitle": "Hai domande sulla partnership?",
     "supportDesc": "Il nostro team di ingegneri ti assiste nell'integrazione, configurazione del database e API personalizzate.",
     "btnBookConsult": "Prenota consulenza"
+  },
+  "dashboard": {
+    "title": "Business Owner Dashboard",
+    "saved": "Changes saved successfully!",
+    "isOpenLabel": "Currently Open for Customers",
+    "hours": "Opening Hours",
+    "phone": "Phone Number",
+    "website": "Website",
+    "address": "Street & House Number",
+    "city": "City & Postal Code",
+    "description": "Company Description",
+    "saveChanges": "Save Changes"
   }
 }

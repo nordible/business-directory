@@ -73,6 +73,26 @@ export function StructuredData({ locale }: StructuredDataProps) {
           },
         ],
       },
+      {
+        '@type': 'EntryPoint',
+        '@id': `${siteConfig.urls.base}/#agent-submission`,
+        name: 'AI Agent Listing Submission Protocol',
+        url: `${siteConfig.urls.base}/llms.txt`,
+        actionPlatform: [
+          'http://schema.org/DesktopWebPlatform',
+          'http://schema.org/MobileWebPlatform',
+        ],
+        potentialAction: {
+          '@type': 'CommunicateAction',
+          name: 'Submit Business Listing via Email',
+          target: `mailto:${siteConfig.contact.email}?subject=%5BAI%20Agent%20Listing%20Request%5D`,
+          recipient: {
+            '@type': 'Organization',
+            name: siteConfig.company.name,
+            email: siteConfig.contact.email,
+          },
+        },
+      },
     ],
   };
 

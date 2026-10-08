@@ -20,10 +20,14 @@ import {
   MapPin,
   ChevronDown,
   ChevronUp,
-  Zap,
   Globe,
   Compass,
   Phone,
+  TrendingUp,
+  Coins,
+  Search,
+  CheckCircle2,
+  Bot,
 } from 'lucide-react';
 
 function ListingLogo({ logoUrl, name, size = 36 }: { logoUrl?: string; name: string; size?: number }) {
@@ -245,67 +249,159 @@ export function LandingPage() {
               ))}
             </div>
 
-            {/* Launch Directory Button Under Cards */}
-            <div className="text-center mt-10">
+            {/* Action Buttons Under Cards */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-10">
               <Link
-                href="/directory"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#0D2B75] hover:bg-[#145BFF] text-white px-7 py-3.5 text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95"
+                href={`/${locale}/directory`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#0D2B75] hover:bg-[#145BFF] text-white px-7 py-3.5 text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95"
               >
-                <span>Alle Einträge im interaktiven Verzeichnis durchsuchen</span>
+                <span>{t('landing.ctaExplore')}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
+
+              <button
+                type="button"
+                onClick={() => setIsAddModalOpen(true)}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-[#F3F7FF] border border-[#E8ECF4] text-[#0D2B75] px-6 py-3.5 text-xs sm:text-sm font-bold shadow-xs transition-colors cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
+                <span>{t('landing.ctaAdd')}</span>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* BENEFITS / WHY NORDIBLE DIRECTORY */}
-        <section className="py-16 sm:py-20 bg-[#FAFBFF] border-b border-[#E8ECF4]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-[#FF9F1A] font-heading">
-                Qualität & Sicherheit
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight mt-1">
-                {t('landing.benefitsTitle')}
+        {/* REVENUE & MARKETING ROI VALUE PROPOSITION (CRO-OPTIMIZED) */}
+        <section className="py-16 sm:py-24 bg-[#FAFBFF] border-b border-[#E8ECF4] relative overflow-hidden">
+          {/* Subtle Ambient Background Gradients */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent pointer-events-none" />
+
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/80 px-3.5 py-1 text-xs font-extrabold text-[#145BFF] mb-3 shadow-2xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+                <span>{t('addModal.verifiedBadge')}</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight leading-tight">
+                {t('addModal.benefitsTitle')}
               </h2>
+              <p className="text-xs sm:text-sm text-slate-600 mt-3 font-medium max-w-2xl mx-auto leading-relaxed">
+                {t('landing.ctaBannerSubtitle')}
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-3xl border border-[#E8ECF4] p-7 shadow-xs">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5">
-                  <ShieldCheck className="w-6 h-6" />
+            {/* 4 Pillars of Tangible Commercial ROI */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {/* Pillar 1: More Paying Clients */}
+              <div className="bg-white rounded-3xl border border-emerald-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-emerald-300">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <TrendingUp className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      + Deals
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-emerald-700 transition-colors mb-2 leading-snug">
+                    {t('addModal.benefit1Title')}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                    {t('addModal.benefit1Desc')}
+                  </p>
                 </div>
-                <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] mb-2">
-                  {t('landing.benefit1Title')}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                  {t('landing.benefit1Desc')}
-                </p>
               </div>
 
-              <div className="bg-white rounded-3xl border border-[#E8ECF4] p-7 shadow-xs">
-                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#145BFF] flex items-center justify-center mb-5">
-                  <Globe className="w-6 h-6" />
+              {/* Pillar 2: 0% Commission (Spotlight Card) */}
+              <div className="bg-gradient-to-b from-white to-blue-50/30 rounded-3xl border-2 border-[#145BFF]/30 p-6 shadow-md transition-all flex flex-col justify-between relative group hover:border-[#145BFF]">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#145BFF] text-white text-[10px] font-black tracking-wider uppercase px-3 py-0.5 rounded-full shadow-xs">
+                  100% Margin
                 </div>
-                <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] mb-2">
-                  {t('landing.benefit2Title')}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                  {t('landing.benefit2Desc')}
-                </p>
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-blue-50 text-[#145BFF] flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <Coins className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-full bg-blue-50 text-[#145BFF] border border-blue-200">
+                      0% Fees
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-[#145BFF] transition-colors mb-2 leading-snug">
+                    {t('addModal.benefit2Title')}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                    {t('addModal.benefit2Desc')}
+                  </p>
+                </div>
               </div>
 
-              <div className="bg-white rounded-3xl border border-[#E8ECF4] p-7 shadow-xs">
-                <div className="w-12 h-12 rounded-2xl bg-amber-50 text-[#FF9F1A] flex items-center justify-center mb-5">
-                  <Zap className="w-6 h-6" />
+              {/* Pillar 3: Cut Costly Ad Spend */}
+              <div className="bg-white rounded-3xl border border-amber-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-amber-300">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-amber-50 text-[#FF9F1A] flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <Search className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                      €0 Clicks
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-amber-800 transition-colors mb-2 leading-snug">
+                    {t('addModal.benefit3Title')}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                    {t('addModal.benefit3Desc')}
+                  </p>
                 </div>
-                <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] mb-2">
-                  {t('landing.benefit3Title')}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                  {t('landing.benefit3Desc')}
-                </p>
               </div>
+
+              {/* Pillar 4: Verified Trust Badge */}
+              <div className="bg-white rounded-3xl border border-indigo-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-indigo-300">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <ShieldCheck className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                      Trust Seal
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-indigo-700 transition-colors mb-2 leading-snug">
+                    {t('addModal.benefit4Title')}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                    {t('addModal.benefit4Desc')}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Direct Conversion Action Bar */}
+            <div className="mt-10 bg-white rounded-2xl border border-[#E8ECF4] p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5 text-center sm:text-left">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#145BFF] shrink-0 hidden sm:flex items-center justify-center">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-[#0D2B75]">
+                    {t('addModal.footerNotice')}
+                  </div>
+                  <div className="text-[11px] text-slate-500 font-medium flex items-center gap-2 mt-0.5 justify-center sm:justify-start">
+                    <Bot className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                    <span>{t('addModal.aiAgentNotice')} <strong className="font-mono text-[#0D2B75]">mail@nordible.co</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsAddModalOpen(true)}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white px-6 py-3.5 text-xs sm:text-sm font-extrabold shadow-md shadow-blue-500/20 transition-all active:scale-95 shrink-0 cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
+                <span>{t('landing.ctaAdd')}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
         </section>
@@ -400,7 +496,7 @@ export function LandingPage() {
       </main>
 
       {/* Branded Footer */}
-      <Footer />
+      <Footer showPromo={true} />
 
       {/* Add Business Coming Soon Modal */}
       <AddListingModal

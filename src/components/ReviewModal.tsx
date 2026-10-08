@@ -37,15 +37,15 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
       id: 'r-1',
       author: 'Maximilian S.',
       rating: 5,
-      comment: 'Hervorragender Service, sehr freundliche Beratung und top Qualität!',
-      date: 'Gestern',
+      comment: t('reviewsModal.sampleReview1'),
+      date: t('reviewsModal.dateYesterday'),
     },
     {
       id: 'r-2',
       author: 'Laura B.',
       rating: 4,
-      comment: 'Sehr empfehlenswert. Schnelle Rückmeldung und faire Preise.',
-      date: 'Vor 3 Tagen',
+      comment: t('reviewsModal.sampleReview2'),
+      date: t('reviewsModal.dateDaysAgo', { days: 3 }),
     },
   ]);
 
@@ -57,10 +57,10 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
     const newRev: UserReview = {
       id: `rev-${Date.now()}`,
-      author: authorName.trim() || 'Anonymer Kunde',
+      author: authorName.trim() || t('reviewsModal.anonymousUser'),
       rating,
       comment,
-      date: 'Gerade eben',
+      date: t('reviewsModal.dateJustNow'),
     };
 
     const nextReviews = [newRev, ...reviews];

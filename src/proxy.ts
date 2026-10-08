@@ -40,10 +40,8 @@ export function proxy(request: NextRequest) {
 
   if (!firstSegment || !isSupportedLocale(firstSegment)) {
     const queryLang = url.searchParams.get('lang');
-    const cookieLang = request.cookies.get('nordible_lang')?.value;
-    const targetLang: Locale = isSupportedLocale(queryLang)
-      ? queryLang
-      : (isSupportedLocale(cookieLang) ? cookieLang : DEFAULT_LOCALE);
+    // Strict English default: only override if an explicit ?lang= parameter is passed
+    const targetLang: Locale = isSupportedLocale(queryLang) ? queryLang : DEFAULT_LOCALE;
 
     if (queryLang) {
       url.searchParams.delete('lang');

@@ -86,14 +86,14 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
           {isSaved && (
             <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs font-semibold flex items-center gap-2">
               <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Domain erfolgreich gespeichert & verknüpft!</span>
+              <span>{t('domain.savedSuccess')}</span>
             </div>
           )}
 
           {/* Current Domain Input */}
           <div>
             <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-              Eigene Wunsch-Domain
+              {t('domain.customDomainLabel')}
             </label>
             <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
               <Globe className="w-4 h-4 text-gray-500 mr-2 shrink-0" />
@@ -101,12 +101,12 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
                 type="text"
                 value={domainInput}
                 onChange={(e) => setDomainInput(e.target.value)}
-                placeholder="z.B. verzeichnis.meine-stadt.de"
+                placeholder={t('domain.placeholder')}
                 className="w-full text-xs font-semibold text-gray-900 bg-transparent focus:outline-none placeholder-gray-400"
               />
             </div>
             <p className="text-[11px] text-gray-500 mt-1.5">
-              Aktuelle interne Subdomain: <code className="bg-gray-100 px-1 py-0.5 rounded text-gray-800 font-mono">{currentTenant.slug}.nordible.com</code>
+              {t('domain.currentSubdomain')} <code className="bg-gray-100 px-1 py-0.5 rounded text-gray-800 font-mono">{currentTenant.slug}.nordible.com</code>
             </p>
           </div>
 
@@ -114,13 +114,13 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
           <div className="space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-200">
             <h4 className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
               <Server className="w-4 h-4 text-gray-600" />
-              <span>Erforderliche DNS-Einträge bei Ihrem Registrar</span>
+              <span>{t('domain.dnsHelperTitle')}</span>
             </h4>
 
             {/* CNAME record */}
             <div className="p-2.5 bg-white rounded-xl border border-gray-200 flex items-center justify-between text-xs">
               <div>
-                <span className="text-[10px] uppercase font-bold text-gray-400 block">Typ: CNAME</span>
+                <span className="text-[10px] uppercase font-bold text-gray-400 block">{t('domain.cnameRecord')}</span>
                 <span className="font-mono font-semibold text-gray-800">cname.nordible.com</span>
               </div>
               <button
@@ -164,7 +164,7 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
             className="w-full py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 cursor-pointer"
             style={{ backgroundColor: primaryColor }}
           >
-            <span>Domain speichern & SSL bereitstellen</span>
+            <span>{t('domain.saveAndDeploy')}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>

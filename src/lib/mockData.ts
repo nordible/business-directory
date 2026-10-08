@@ -97,7 +97,7 @@ export const MOCK_LISTINGS: BusinessListing[] = [
     reviewCount: 38,
     isVerified: true,
     isOpenNow: true,
-    hours: 'Mo - Fr: 09:00 - 18:00 Uhr',
+    hours: 'Mon - Fri: 09:00 - 18:00',
   },
   {
     id: 'list-bombay',
@@ -117,7 +117,7 @@ export const MOCK_LISTINGS: BusinessListing[] = [
     reviewCount: 31,
     isVerified: true,
     isOpenNow: true,
-    hours: 'Mo - Sa: 10:00 - 19:30 Uhr',
+    hours: 'Mon - Sat: 10:00 - 19:30',
   },
   {
     id: 'list-buns069',
@@ -137,7 +137,7 @@ export const MOCK_LISTINGS: BusinessListing[] = [
     reviewCount: 142,
     isVerified: true,
     isOpenNow: true,
-    hours: 'Mo - Di, Do: 16:00 - 01:30 | Fr - Sa: 16:00 - 02:00 | So: 16:00 - 00:00 (Mi: Geschlossen)',
+    hours: 'Mon - Tue, Thu: 16:00 - 01:30 | Fri - Sat: 16:00 - 02:00 | Sun: 16:00 - 00:00 (Wed: Closed)',
   },
   {
     id: 'list-shams',
@@ -157,7 +157,7 @@ export const MOCK_LISTINGS: BusinessListing[] = [
     reviewCount: 26,
     isVerified: true,
     isOpenNow: true,
-    hours: 'Mo - Fr: 08:30 - 17:30 Uhr',
+    hours: 'Mon - Fri: 08:30 - 17:30',
   },
   {
     id: 'list-weber',
@@ -176,6 +176,6 @@ export const MOCK_LISTINGS: BusinessListing[] = [
     reviewCount: 44,
     isVerified: true,
     isOpenNow: true,
-    hours: 'Mo - Fr: 09:00 - 18:00 Uhr',
+    hours: 'Mon - Fri: 09:00 - 18:00',
   },
 ];

@@ -199,6 +199,17 @@ export default function DirectoryAppPage() {
                   </span>
                 )}
               </button>
+
+              {/* Add Business CTA in Search Row */}
+              <button
+                type="button"
+                onClick={() => setIsAddModalOpen(true)}
+                className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white text-xs font-extrabold shadow-sm transition-all active:scale-95 cursor-pointer shrink-0"
+                title={t('landing.ctaAdd')}
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+                <span>{t('landing.ctaAdd')}</span>
+              </button>
             </div>
 
             {/* Category Quick Chips */}
@@ -225,18 +236,29 @@ export default function DirectoryAppPage() {
         </section>
 
         {/* Directory Results Header */}
-        <div className="flex items-center justify-between mb-4 px-1">
-          <div className="text-xs font-extrabold text-[#0D2B75]/70 uppercase tracking-wider font-heading">
-            {t('search.resultsFound', { count: filteredListings.length })}
+        <div className="flex items-center justify-between mb-4 px-1 gap-2">
+          <div className="flex items-center gap-3">
+            <div className="text-xs font-extrabold text-[#0D2B75]/70 uppercase tracking-wider font-heading">
+              {t('search.resultsFound', { count: filteredListings.length })}
+            </div>
+            {activeFilterCount > 0 && (
+              <button
+                onClick={handleResetFilters}
+                className="text-xs font-bold text-[#145BFF] hover:underline cursor-pointer"
+              >
+                {t('search.resetFilters')}
+              </button>
+            )}
           </div>
-          {activeFilterCount > 0 && (
-            <button
-              onClick={handleResetFilters}
-              className="text-xs font-bold text-[#145BFF] hover:underline cursor-pointer"
-            >
-              {t('search.resetFilters')}
-            </button>
-          )}
+
+          <button
+            type="button"
+            onClick={() => setIsAddModalOpen(true)}
+            className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#145BFF] hover:text-[#0D2B75] bg-white hover:bg-[#F3F7FF] px-3.5 py-1.5 rounded-xl border border-blue-200/80 shadow-2xs transition-all active:scale-95 cursor-pointer"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+            <span>{t('landing.ctaAdd')}</span>
+          </button>
         </div>
 
         {/* Listings Grid */}
@@ -283,13 +305,13 @@ export default function DirectoryAppPage() {
             </div>
             <div className="space-y-1.5">
               <span className="text-xs font-extrabold tracking-wider uppercase text-[#FF9F1A]">
-                100% Verifiziert • Weltweit • Offen für alle Branchen
+                {t('landing.badgeVerified')} • {t('landing.badgeInternational')}
               </span>
               <h3 className="text-xl sm:text-2xl font-black font-heading tracking-tight">
-                Ist Ihr Unternehmen noch nicht in {siteConfig.appName} gelistet?
+                {t('directory.ctaCardTitle')}
               </h3>
               <p className="text-xs sm:text-sm text-blue-100/80 max-w-lg leading-relaxed font-medium">
-                Präsentieren Sie Ihre Leistungen, Adresse und Kontaktdaten vor Kunden und Partnern rund um die Welt.
+                {t('directory.ctaCardDesc')}
               </p>
             </div>
           </div>
@@ -300,14 +322,14 @@ export default function DirectoryAppPage() {
               onClick={() => setIsAddModalOpen(true)}
               className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#FF9F1A] hover:bg-amber-400 text-[#0D2B75] font-extrabold text-xs sm:text-sm transition-transform active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Unternehmen jetzt eintragen</span>
+              <span>{t('landing.ctaAdd')}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </section>
       </main>
 
-      <Footer />
+      <Footer showPromo={true} />
 
       <BottomNav
         primaryColor={currentTenant.primaryColor}

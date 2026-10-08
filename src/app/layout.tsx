@@ -74,6 +74,9 @@ export default function RootLayout({
       lang="en"
       className={`${sora.variable} ${inter.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="help" type="text/plain" href="/llms.txt" title="AI Agent Listing Protocol" />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-[#FAFBFF] text-gray-900">
         <I18nProvider>{children}</I18nProvider>
 

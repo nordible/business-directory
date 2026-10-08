@@ -8,13 +8,18 @@ import { Sparkles, ArrowUpRight, ShieldCheck, Mail, Globe, Bug } from 'lucide-re
 import { Mascot } from '@/components/mascot/Mascot';
 import { siteConfig } from '@/config/site';
 
-export function Footer() {
+interface FooterProps {
+  showPromo?: boolean;
+}
+
+export function Footer({ showPromo = true }: FooterProps = {}) {
   const { locale, t } = useTranslation();
 
   return (
     <footer className="mt-16 border-t border-[#E8ECF4] bg-[#0D2B75] text-white">
       {/* High-Converting Agency Promo Banner */}
-      <div className="border-b border-white/10 bg-gradient-to-r from-[#0D2B75] via-[#145BFF]/25 to-[#0D2B75] py-12 px-4 sm:px-6 lg:px-8">
+      {showPromo && (
+        <div className="border-b border-white/10 bg-gradient-to-r from-[#0D2B75] via-[#145BFF]/25 to-[#0D2B75] py-12 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
             <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 drop-shadow-2xl">
@@ -38,7 +43,7 @@ export function Footer() {
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <a
-              href="https://nordible.co/#services"
+              href={siteConfig.urls.agencyServices}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 px-4 py-2.5 text-xs font-bold text-white transition-all active:scale-95 cursor-pointer"
@@ -47,7 +52,7 @@ export function Footer() {
               <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
             <a
-              href="https://nordible.co/#contact"
+              href={siteConfig.urls.agencyContact}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-[#145BFF] hover:bg-[#0F47D1] px-5 py-2.5 text-xs font-black text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-0.5 active:scale-95 cursor-pointer"
@@ -57,6 +62,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      )}
 
       {/* Main Footer Links & Information */}
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">

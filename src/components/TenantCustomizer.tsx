@@ -79,7 +79,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium"
-              placeholder="z.B. München Handwerk Portal"
+              placeholder={t('brand.brandNamePlaceholder')}
               required
             />
           </div>
@@ -87,14 +87,14 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
           {/* Logo Icon / Text */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
-              Logo Icon / Text
+              {t('brand.logoText')}
             </label>
             <input
               type="text"
               value={logoText}
               onChange={(e) => setLogoText(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium"
-              placeholder="z.B. 🚀 TechHub"
+              placeholder={t('brand.logoTextPlaceholder')}
               required
             />
           </div>
@@ -136,7 +136,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
               value={taglineDe}
               onChange={(e) => setTaglineDe(e.target.value)}
               className="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-              placeholder="Untertitel für deutsche Besucher..."
+              placeholder={t('brand.taglineDePlaceholder')}
             />
           </div>
 
@@ -150,14 +150,14 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
               value={taglineEn}
               onChange={(e) => setTaglineEn(e.target.value)}
               className="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-              placeholder="Subtitle for English visitors..."
+              placeholder={t('brand.taglineEnPlaceholder')}
             />
           </div>
 
           {/* Live Preview Box */}
           <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 mt-2">
             <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-2">
-              Live Vorschau (Brand Preview)
+              {t('brand.previewTitle')}
             </span>
             <div className="flex items-center gap-3">
               <div
@@ -167,8 +167,8 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
                 {logoText.slice(0, 2)}
               </div>
               <div>
-                <div className="font-bold text-sm text-gray-900">{name || 'Verzeichnisname'}</div>
-                <div className="text-xs text-gray-600 line-clamp-1">{taglineDe || 'Ihr Verzeichnis'}</div>
+                <div className="font-bold text-sm text-gray-900">{name || t('brand.defaultName')}</div>
+                <div className="text-xs text-gray-600 line-clamp-1">{taglineDe || t('brand.defaultTagline')}</div>
               </div>
             </div>
           </div>
@@ -180,7 +180,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
               onClick={onClose}
               className="px-5 py-3 rounded-xl border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-100 cursor-pointer min-h-[48px]"
             >
-              Abbrechen
+              {t('brand.cancel')}
             </button>
             <button
               type="submit"

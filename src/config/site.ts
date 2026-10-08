@@ -28,6 +28,8 @@ export const siteConfig = {
     base: process.env.NEXT_PUBLIC_SITE_URL || 'https://nordible.co',
     directory: '/directory',
     partner: '/partner',
+    agencyServices: 'https://nordible.co/#services',
+    agencyContact: 'https://nordible.co/#contact',
   },
   geo: {
     defaultRegion: 'Global',

@@ -36,13 +36,13 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       if (data.url) {
         setTimeout(() => {
           setLoadingPlan(null);
-          alert(`Erfolgreich weitergeleitet zu Stripe Checkout für den Tarif: ${planId.toUpperCase()} (${billingCycle})`);
+          alert(t('pricing.checkoutSuccess', { plan: planId.toUpperCase(), cycle: billingCycle }));
           onClose();
         }, 800);
       }
     } catch {
       setLoadingPlan(null);
-      alert('Fehler beim Verbinden mit dem Zahlungsanbieter.');
+      alert(t('pricing.checkoutError'));
     }
   };
 
@@ -54,11 +54,11 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       priceMonthly: 29,
       priceYearly: 24,
       features: [
-        '1 Branchenverzeichnis',
-        'Bis zu 250 Firmeneinträge',
-        'KI-Erfassung (50 Scans / Monat)',
-        'Standard Subdomain (.nordible.com)',
-        'Mobiles Ergo-Design',
+        t('pricing.fStarter1'),
+        t('pricing.fStarter2'),
+        t('pricing.fStarter3'),
+        t('pricing.fStarter4'),
+        t('pricing.fStarter5'),
       ],
       isPopular: false,
     },
@@ -69,12 +69,12 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       priceMonthly: 79,
       priceYearly: 65,
       features: [
-        'Eigene Domain mit automatischem SSL',
-        'Unbegrenzte Firmeneinträge',
-        'Unbegrenzte KI-Erfassung per URL & Flyer',
-        '100% White-Label (Eigenes Logo & Farben)',
-        'Inhaber-Dashboard & Bewertungs-System',
-        'Prioritäts-Support & SEO-Optimierung',
+        t('pricing.fPro1'),
+        t('pricing.fPro2'),
+        t('pricing.fPro3'),
+        t('pricing.fPro4'),
+        t('pricing.fPro5'),
+        t('pricing.fPro6'),
       ],
       isPopular: true,
     },
@@ -85,11 +85,11 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       priceMonthly: 199,
       priceYearly: 165,
       features: [
-        'Unbegrenzte Verzeichnisse & Städte',
-        'Eigene Stripe-Abrechnung für Inhaber',
-        'Multi-Mandanten Admin-Dashboard',
-        'Eigene API-Schnittstellen & Webhooks',
-        '99.9% Verfügbarkeits-SLA & 24/7 Support',
+        t('pricing.fEnterprise1'),
+        t('pricing.fEnterprise2'),
+        t('pricing.fEnterprise3'),
+        t('pricing.fEnterprise4'),
+        t('pricing.fEnterprise5'),
       ],
       isPopular: false,
     },
@@ -205,7 +205,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
 
                     <div className="mt-4 mb-5 flex items-baseline gap-1">
                       <span className="text-3xl font-black text-[#0D2B75]">€{price}</span>
-                      <span className="text-xs font-semibold text-gray-500">/ Monat</span>
+                      <span className="text-xs font-semibold text-gray-500">{t('pricing.perMonth')}</span>
                     </div>
 
                     <ul className="space-y-2.5 text-xs text-gray-700">
@@ -273,7 +273,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
               }}
               className="px-4 py-2 bg-white hover:bg-gray-50 border border-[#E8ECF4] rounded-xl text-xs font-bold text-[#0D2B75] shadow-2xs transition-colors cursor-pointer shrink-0"
             >
-              DNS & SSL verwalten
+              {t('partner.btnConfigureDomain')}
             </button>
           </div>
         </div>
@@ -282,9 +282,9 @@ export const PricingModal: React.FC<PricingModalProps> = ({
         <div className="px-6 py-3.5 bg-[#FAFBFF] border-t border-[#E8ECF4] flex items-center justify-between text-xs text-gray-500">
           <div className="flex items-center gap-1.5">
             <Shield className="w-4 h-4 text-emerald-600" />
-            <span>Sichere 256-Bit SSL-Zahlung über Stripe</span>
+            <span>{t('pricing.securePayment')}</span>
           </div>
-          <span className="hidden sm:inline">Jederzeit monatlich kündbar</span>
+          <span className="hidden sm:inline">{t('pricing.cancelNotice')}</span>
         </div>
       </div>
     </div>

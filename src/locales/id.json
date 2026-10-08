@@ -6,7 +6,16 @@
     "brandName": "Nama merek",
     "primaryColor": "Warna utama",
     "tagline": "Tagline / Subtitle",
-    "applyChanges": "Terapkan perubahan"
+    "applyChanges": "Terapkan perubahan",
+    "brandNamePlaceholder": "e.g. Munich Craft Portal",
+    "logoText": "Logo Icon / Text",
+    "logoTextPlaceholder": "e.g. 🚀 TechHub",
+    "taglineDePlaceholder": "Subtitle for German visitors...",
+    "taglineEnPlaceholder": "Subtitle for English visitors...",
+    "previewTitle": "Live Brand Preview",
+    "defaultName": "Directory Name",
+    "defaultTagline": "Your Directory",
+    "cancel": "Cancel"
   },
   "nav": {
     "explore": "Jelajahi",
@@ -41,7 +50,9 @@
     "hideDetails": "Sembunyikan",
     "openingHours": "Jam operasional",
     "reviews": "Ulasan",
-    "claimListing": "Klaim kepemilikan"
+    "claimListing": "Klaim kepemilikan",
+    "openNow": "Buka Sekarang",
+    "closed": "Tutup"
   },
   "tenant": {
     "switchTenant": "Ganti direktori",
@@ -171,20 +182,30 @@
     "sendEmailBtn": "Kirim Email ke mail@nordible.co",
     "copyEmailBtn": "Salin Alamat Email",
     "copied": "Disalin!",
-    "benefitsTitle": "Apa yang didapatkan bisnis Anda setelah terdaftar:",
-    "benefit1Title": "Profil Bisnis Terverifikasi",
-    "benefit1Desc": "Kartu permanen dengan lencana terverifikasi, tautan langsung, dan tombol kontak 1-klik.",
-    "benefit2Title": "Prospek Langsung 100% Bebas Komisi",
-    "benefit2Desc": "Klien potensial menghubungi langsung tanpa biaya perantara atau komisi pihak ketiga.",
-    "benefit3Title": "Pengindeksan Mesin Pencari AI & LLM (GEO)",
-    "benefit3Desc": "Integrasi Schema.org dan llms.txt agar ChatGPT, Perplexity, dan Google AI merekomendasikan bisnis Anda.",
-    "benefit4Title": "Jangkauan Global dalam 17 Bahasa",
-    "benefit4Desc": "Jangkau klien internasional dengan URL lokal dan dukungan bahasa RTL lengkap.",
+    "benefitsTitle": "Bagaimana listing ini meningkatkan pendapatan & memangkas biaya pemasaran Anda:",
+    "benefit1Title": "Lebih Banyak Klien Membayar & Kesepakatan Tertutup",
+    "benefit1Desc": "Ditemukan oleh pembeli berintensitas tinggi yang siap memesan dan membeli layanan Anda sekarang.",
+    "benefit2Title": "Komisi 0% – Simpan 100% Pendapatan Anda",
+    "benefit2Desc": "Tidak seperti platform yang memotong 15%–30% atau €50/prospek, setiap pendapatan adalah 100% milik Anda.",
+    "benefit3Title": "Pangkas Biaya Iklan Google yang Mahal",
+    "benefit3Desc": "Dapatkan pertanyaan pelanggan berkelanjutan seharga €0 alih-alih membayar €5–€50+ per klik iklan.",
+    "benefit4Title": "Menangkan Kesepakatan Lebih Cepat dengan Lencana Tepercaya",
+    "benefit4Desc": "Hilangkan keraguan calon pembeli. Lencana editorial resmi membuktikan kredibilitas bisnis Anda.",
     "aiAgentBadge": "Protokol Agen AI & Bot",
     "aiAgentNotice": "Mengunjungi sebagai Agen AI atau Bot? Kirimkan data bisnis secara terstruktur melalui email:",
     "copyAiTemplate": "Salin Templat Agen AI",
     "copiedAiTemplate": "Templat AI Berhasil Disalin!",
-    "footerNotice": "Listing terverifikasi tampil secara global setelah tinjauan redaksi. 100% gratis selamanya."
+    "footerNotice": "Listing terverifikasi tampil secara global setelah tinjauan redaksi. 100% gratis selamanya.",
+    "submittedBadge": "Listing Initiated 🎉",
+    "submittedTitle": "Thank You for Your Submission!",
+    "submittedSubtitle": "Your listing details have been sent for editorial verification. Your business entry will be published 100% free forever.",
+    "pitchBadge": "📍 Nordible Technologies • Frankfurt am Main",
+    "pitchTitle": "Need custom software, client portals, or AI systems?",
+    "pitchDesc": "Nordible Technologies is a technology service provider in Frankfurt am Main, Germany, serving clients across Europe and worldwide. We architect and build scalable web platforms, bespoke business tools, and custom AI automations with 100% intellectual property ownership from Day 1.",
+    "pitchExploreBtn": "Explore Software Services",
+    "pitchConsultBtn": "Book Free Tech Consultation",
+    "pitchDoneBtn": "Back to Directory",
+    "viewTemplateAgain": "← View or edit listing details again"
   },
   "claimModal": {
     "title": "Verifikasi Pemilik",
@@ -196,7 +217,9 @@
     "verifyCode": "Verifikasi Kode",
     "successTitle": "Berhasil Diverifikasi!",
     "successSubtitle": "Anda sekarang terdaftar sebagai pemilik resmi listing ini.",
-    "openDashboard": "Buka Dashboard Pemilik"
+    "openDashboard": "Buka Dashboard Pemilik",
+    "securityCodeNote": "We will send a 6-digit security code to this email address.",
+    "testCodeHint": "Test code: Enter any 6-digit code."
   },
   "reviewsModal": {
     "title": "Ulasan",
@@ -204,7 +227,13 @@
     "namePlaceholder": "Nama Anda",
     "commentPlaceholder": "Bagikan pengalaman Anda dengan bisnis ini...",
     "submit": "Kirim Ulasan",
-    "noReviews": "Belum ada ulasan. Jadilah yang pertama!"
+    "noReviews": "Belum ada ulasan. Jadilah yang pertama!",
+    "dateYesterday": "Yesterday",
+    "dateDaysAgo": "3 days ago",
+    "dateJustNow": "Just now",
+    "anonymousUser": "Anonymous Customer",
+    "sampleReview1": "Outstanding service, very friendly advice, and top quality!",
+    "sampleReview2": "Highly recommended. Fast response time and fair pricing."
   },
   "pricing": {
     "title": "Paket Operator Direktori",
@@ -219,7 +248,28 @@
     "tierEnterpriseDesc": "Banyak lokasi dan kategori dalam satu kendali",
     "popularBadge": "Paling Populer",
     "subscribe": "Pilih Paket",
-    "redirectingStripe": "Menghubungkan ke Stripe..."
+    "redirectingStripe": "Menghubungkan ke Stripe...",
+    "perMonth": "/ month",
+    "cancelNotice": "Cancel anytime monthly • No setup fees",
+    "securePayment": "Secure 256-bit SSL payment via Stripe",
+    "checkoutSuccess": "Successfully redirected to Stripe Checkout for plan: {{plan}} ({{cycle}})",
+    "checkoutError": "Error connecting to payment provider.",
+    "fStarter1": "1 business directory",
+    "fStarter2": "Up to 250 business listings",
+    "fStarter3": "AI ingestion (50 scans / mo)",
+    "fStarter4": "Standard subdomain (.nordible.com)",
+    "fStarter5": "Mobile-first ergonomic design",
+    "fPro1": "Custom domain with automated SSL",
+    "fPro2": "Unlimited business listings",
+    "fPro3": "Unlimited AI ingestion via URL & flyer",
+    "fPro4": "100% White-Label (Custom logo & colors)",
+    "fPro5": "Owner dashboard & review system",
+    "fPro6": "Priority support & SEO optimization",
+    "fEnterprise1": "Unlimited directories & cities",
+    "fEnterprise2": "Dedicated Stripe billing for owners",
+    "fEnterprise3": "Multi-tenant admin dashboard",
+    "fEnterprise4": "Custom API endpoints & webhooks",
+    "fEnterprise5": "99.9% Uptime SLA & 24/7 support"
   },
   "domain": {
     "title": "Domain Kustom & SSL",
@@ -230,6 +280,24 @@
     "sslStatus": "Status SSL",
     "sslActive": "Aktif & Terenkripsi (TLS 1.3)",
     "copy": "Salin",
-    "copied": "Disalin!"
+    "copied": "Disalin!",
+    "customDomainLabel": "Custom Domain",
+    "placeholder": "e.g. directory.my-city.com",
+    "currentSubdomain": "Current internal subdomain:",
+    "dnsHelperTitle": "Required DNS records at your registrar",
+    "saveAndDeploy": "Save Domain & Provision SSL",
+    "savedSuccess": "Domain successfully saved & linked!"
+  },
+  "dashboard": {
+    "title": "Business Owner Dashboard",
+    "saved": "Changes saved successfully!",
+    "isOpenLabel": "Currently Open for Customers",
+    "hours": "Opening Hours",
+    "phone": "Phone Number",
+    "website": "Website",
+    "address": "Street & House Number",
+    "city": "City & Postal Code",
+    "description": "Company Description",
+    "saveChanges": "Save Changes"
   }
 }
