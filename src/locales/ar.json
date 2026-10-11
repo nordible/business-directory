@@ -52,7 +52,8 @@
     "reviews": "التقييمات",
     "claimListing": "توثيق ملكية النشاط",
     "openNow": "مفتوح الآن",
-    "closed": "مغلق"
+    "closed": "مغلق",
+    "viewProfile": "عرض الملف الشخصي"
   },
   "tenant": {
     "switchTenant": "تبديل الدليل",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "العودة إلى الدليل",
+    "verifiedBusiness": "نشاط تجاري موثق",
+    "about": "عن الشركة",
+    "highlights": "مميزات الجودة الموثقة",
+    "highlightVerified": "هوية موثقة 100%",
+    "highlightVerifiedDesc": "موثق رسمياً في دليل الأعمال الدولي.",
+    "highlightDirect": "تواصل مباشر مع المالك",
+    "highlightDirectDesc": "تواصل مباشر مضمون بدون وسطاء أو عمولات.",
+    "highlightSpeed": "سرعة في الاستجابة",
+    "highlightSpeedDesc": "استجابة سريعة خلال ساعات العمل الرسمية.",
+    "contactAndLocation": "التواصل والموقع",
+    "openGoogleMaps": "فتح في خرائط Google",
+    "callNow": "اتصل الآن",
+    "visitWebsite": "زيارة الموقع الإلكتروني",
+    "openingHours": "ساعات العمل",
+    "reviews": "تقييمات العملاء",
+    "writeReview": "كتابة تقييم",
+    "claimListing": "المطالبة بهذا النشاط",
+    "claimListingDesc": "هل أنت صاحب هذا النشاط؟ قم بتوثيقه وإدارته اليوم.",
+    "ownerDashboard": "لوحة تحكم المالك",
+    "ownerDashboardDesc": "قم بتحديث بيانات الاتصال وساعات العمل مباشرة.",
+    "share": "مشاركة",
+    "copied": "تم نسخ الرابط!",
+    "notFound": "لم يتم العثور على النشاط",
+    "notFoundDesc": "الملف المطلوب غير موجود أو تم نقله.",
+    "exploreMore": "استكشاف شركات أخرى"
   }
 }

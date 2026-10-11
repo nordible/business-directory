@@ -52,7 +52,8 @@
     "reviews": "સમીક્ષાઓ",
     "claimListing": "માલિકીનો દાવો કરો",
     "openNow": "ખુલ્લું છે",
-    "closed": "બંધ છે"
+    "closed": "બંધ છે",
+    "viewProfile": "પ્રોફાઇલ જુઓ"
   },
   "tenant": {
     "switchTenant": "ડિરેક્ટરી બદલો",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "ડિરેક્ટરી પર પાછા જાઓ",
+    "verifiedBusiness": "ચકાસાયેલ વ્યવસાય",
+    "about": "વ્યવસાય વિશે",
+    "highlights": "ચકાસાયેલ ગુણવત્તા વિશેષતાઓ",
+    "highlightVerified": "100% ચકાસાયેલ ઓળખ",
+    "highlightVerifiedDesc": "આંતરરાષ્ટ્રીય વ્યાપાર અનુક્રમણિકામાં સત્તાવાર રીતે ચકાસાયેલ.",
+    "highlightDirect": "માલિક સાથે સીધો સંપર્ક",
+    "highlightDirectDesc": "કોઈપણ મધ્યસ્થી અથવા કમિશન વિના સીધો સંપર્ક.",
+    "highlightSpeed": "ઝડપી પ્રતિસાદ",
+    "highlightSpeedDesc": "કામકાજના કલાકો દરમિયાન ઝડપી પ્રતિસાદ સમય.",
+    "contactAndLocation": "સંપર્ક અને સ્થળ",
+    "openGoogleMaps": "Google Maps પર ખોલો",
+    "callNow": "હમણાં કૉલ કરો",
+    "visitWebsite": "વેબસાઇટની મુલાકાત લો",
+    "openingHours": "ખુલવાનો સમય",
+    "reviews": "ગ્રાહક સમીક્ષાઓ",
+    "writeReview": "સમીક્ષા લખો",
+    "claimListing": "વ્યવસાય પર દાવો કરો",
+    "claimListingDesc": "શું આ વ્યવસાય તમારો છે? આજે જ તેને ચકાસો અને સંચાલિત કરો.",
+    "ownerDashboard": "માલિક ડેશબોર્ડ",
+    "ownerDashboardDesc": "તમારી સંપર્ક વિગતો અને કામકાજના કલાકો અપડેટ કરો.",
+    "share": "શેર કરો",
+    "copied": "લિંક કૉપિ થઈ ગઈ!",
+    "notFound": "વ્યવસાય મળ્યો નથી",
+    "notFoundDesc": "વિનંતી કરેલ વ્યવસાય પ્રોફાઇલ અસ્તિત્વમાં નથી અથવા ખસેડવામાં આવી છે.",
+    "exploreMore": "અન્ય વ્યવસાયો શોધો"
   }
 }

@@ -52,7 +52,8 @@
     "reviews": "Recensioni",
     "claimListing": "Rivendica scheda",
     "openNow": "Aperto",
-    "closed": "Chiuso"
+    "closed": "Chiuso",
+    "viewProfile": "Vedi profilo"
   },
   "tenant": {
     "switchTenant": "Cambia directory",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "Torna alla directory",
+    "verifiedBusiness": "Azienda verificata",
+    "about": "Informazioni sull'azienda",
+    "highlights": "Punti di forza certificati",
+    "highlightVerified": "Identità verificata al 100%",
+    "highlightVerifiedDesc": "Verificata ufficialmente nell'indice internazionale delle imprese.",
+    "highlightDirect": "Contatto diretto con il proprietario",
+    "highlightDirectDesc": "Contatto diretto garantito senza intermediari né commissioni.",
+    "highlightSpeed": "Massima reperibilità",
+    "highlightSpeedDesc": "Tempi di risposta rapidi durante gli orari di apertura.",
+    "contactAndLocation": "Contatto e posizione",
+    "openGoogleMaps": "Apri su Google Maps",
+    "callNow": "Chiama ora",
+    "visitWebsite": "Visita il sito web",
+    "openingHours": "Orari di apertura",
+    "reviews": "Recensioni dei clienti",
+    "writeReview": "Scrivi una recensione",
+    "claimListing": "Rivendica scheda",
+    "claimListingDesc": "Sei il proprietario di questa attività? Verificala e gestiscila subito.",
+    "ownerDashboard": "Dashboard proprietario",
+    "ownerDashboardDesc": "Aggiorna contatti e orari di apertura in tempo reale.",
+    "share": "Condividi",
+    "copied": "Link copiato!",
+    "notFound": "Azienda non trovata",
+    "notFoundDesc": "La scheda richiesta non esiste o è stata spostata.",
+    "exploreMore": "Esplora altre aziende"
   }
 }

@@ -52,7 +52,8 @@
     "reviews": "리뷰",
     "claimListing": "소유권 확인",
     "openNow": "영업 중",
-    "closed": "영업 종료"
+    "closed": "영업 종료",
+    "viewProfile": "프로필 보기"
   },
   "tenant": {
     "switchTenant": "디렉토리 변경",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "디렉토리 목록으로 돌아가기",
+    "verifiedBusiness": "인증된 기업",
+    "about": "기업 소개",
+    "highlights": "검증된 신뢰 혜택",
+    "highlightVerified": "100% 공식 인증 완료",
+    "highlightVerifiedDesc": "국제 비즈니스 디렉토리에서 공식 검증 및 등록되었습니다.",
+    "highlightDirect": "사업주 직통 연결",
+    "highlightDirectDesc": "중개 수수료 없이 사업주와 직접 소통할 수 있습니다.",
+    "highlightSpeed": "신속한 응대",
+    "highlightSpeedDesc": "영업 시간 내 빠른 상담 및 응대를 제공합니다.",
+    "contactAndLocation": "연락처 및 위치",
+    "openGoogleMaps": "Google 지도에서 보기",
+    "callNow": "지금 전화하기",
+    "visitWebsite": "웹사이트 방문",
+    "openingHours": "영업 시간",
+    "reviews": "고객 리뷰",
+    "writeReview": "리뷰 작성하기",
+    "claimListing": "비즈니스 소유권 등록",
+    "claimListingDesc": "이 비즈니스의 대표님이신가요? 지금 인증하고 관리하세요.",
+    "ownerDashboard": "대표자 대시보드",
+    "ownerDashboardDesc": "연락처 및 영업시간을 직접 실시간으로 관리할 수 있습니다.",
+    "share": "공유하기",
+    "copied": "링크가 복사되었습니다!",
+    "notFound": "비즈니스를 찾을 수 없습니다",
+    "notFoundDesc": "요청하신 기업 프로필이 존재하지 않거나 이전되었습니다.",
+    "exploreMore": "다른 기업 살펴보기"
   }
 }

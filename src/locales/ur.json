@@ -52,7 +52,8 @@
     "reviews": "آراء",
     "claimListing": "ملکیت کا دعویٰ کریں",
     "openNow": "ابھی کھلا ہے",
-    "closed": "بند ہے"
+    "closed": "بند ہے",
+    "viewProfile": "پروفائل دیکھیں"
   },
   "tenant": {
     "switchTenant": "ڈائرکٹری تبدیل کریں",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "ڈائریکٹری پر واپس جائیں",
+    "verifiedBusiness": "تصدیق شدہ کاروبار",
+    "about": "کاروبار کے بارے میں",
+    "highlights": "تصدیق شدہ نمایاں خصوصیات",
+    "highlightVerified": "100% تصدیق شدہ شناخت",
+    "highlightVerifiedDesc": "بین الاقوامی کاروباری انڈیکس میں باضابطہ طور پر تصدیق شدہ۔",
+    "highlightDirect": "مالک سے براہ راست رابطہ",
+    "highlightDirectDesc": "بغیر کسی کمیشن یا دلال کے براہ راست رابطہ کی ضمانت۔",
+    "highlightSpeed": "فوری رسائی اور رابطہ",
+    "highlightSpeedDesc": "دفتری اوقات میں تیز ترین جوابی کارروائی۔",
+    "contactAndLocation": "رابطہ اور مقام",
+    "openGoogleMaps": "گوگل میپس پر کھولیں",
+    "callNow": "ابھی کال کریں",
+    "visitWebsite": "ویب سائٹ دیکھیں",
+    "openingHours": "اوقات کار",
+    "reviews": "صارفین کے جائزے",
+    "writeReview": "جائزہ لکھیں",
+    "claimListing": "کاروبار کی ملکیت کا دعویٰ کریں",
+    "claimListingDesc": "کیا آپ اس کاروبار کے مالک ہیں؟ آج ہی تصدیق اور انتظام کریں۔",
+    "ownerDashboard": "مالک کا ڈیش بورڈ",
+    "ownerDashboardDesc": "اپنے رابطے اور اوقات کار خود اپ ڈیٹ کریں۔",
+    "share": "شیئر کریں",
+    "copied": "لنک کاپی ہو گیا!",
+    "notFound": "کاروبار نہیں ملا",
+    "notFoundDesc": "مطلوبہ کاروباری پروفائل موجود نہیں یا منتقل کر دی گئی ہے۔",
+    "exploreMore": "دیگر کاروبار دریافت کریں"
   }
 }

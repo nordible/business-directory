@@ -52,7 +52,8 @@
     "reviews": "دیدگاه‌ها",
     "claimListing": "ادعای مالکیت",
     "openNow": "اکنون باز است",
-    "closed": "بسته است"
+    "closed": "بسته است",
+    "viewProfile": "مشاهده پروفایل"
   },
   "tenant": {
     "switchTenant": "تغییر دایرکتوری",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "بازگشت به دایرکتوری",
+    "verifiedBusiness": "کسب‌وکار تایید شده",
+    "about": "درباره کسب‌وکار",
+    "highlights": "ویژگی‌های کیفی تایید شده",
+    "highlightVerified": "هویت ۱۰۰٪ تایید شده",
+    "highlightVerifiedDesc": "به طور رسمی در دایرکتوری بین‌المللی کسب‌وکارها تایید شده است.",
+    "highlightDirect": "ارتباط مستقیم با مالک",
+    "highlightDirectDesc": "ارتباط مستقیم تضمین‌شده بدون واسطه یا کمیسیون.",
+    "highlightSpeed": "دسترسی و پاسخگویی سریع",
+    "highlightSpeedDesc": "پاسخگویی سریع در ساعات کاری مقرر.",
+    "contactAndLocation": "تماس و موقعیت مکانی",
+    "openGoogleMaps": "نمایش در گوگل مپ",
+    "callNow": "تماس تلفنی",
+    "visitWebsite": "مشاهده وب‌سایت",
+    "openingHours": "ساعات کاری",
+    "reviews": "نظرات مشتریان",
+    "writeReview": "ثبت نظر",
+    "claimListing": "ثبت مالکیت کسب‌وکار",
+    "claimListingDesc": "مالک این کسب‌وکار هستید؟ اکنون آن را تایید و مدیریت کنید.",
+    "ownerDashboard": "داشبورد مدیریت مالک",
+    "ownerDashboardDesc": "اطلاعات تماس و ساعات کاری خود را مستقیماً به‌روزرسانی کنید.",
+    "share": "اشتراک‌گذاری",
+    "copied": "لینک کپی شد!",
+    "notFound": "کسب‌وکار پیدا نشد",
+    "notFoundDesc": "پروفایل مورد نظر یافت نشد یا منتقل شده است.",
+    "exploreMore": "مشاهده سایر کسب‌وکارها"
   }
 }

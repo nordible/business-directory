@@ -52,7 +52,8 @@
     "reviews": "Ulasan",
     "claimListing": "Klaim kepemilikan",
     "openNow": "Buka Sekarang",
-    "closed": "Tutup"
+    "closed": "Tutup",
+    "viewProfile": "Lihat Profil"
   },
   "tenant": {
     "switchTenant": "Ganti direktori",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "Kembali ke Direktori",
+    "verifiedBusiness": "Bisnis Terverifikasi",
+    "about": "Tentang Bisnis",
+    "highlights": "Keunggulan Kualitas Terverifikasi",
+    "highlightVerified": "100% Identitas Terverifikasi",
+    "highlightVerifiedDesc": "Terverifikasi secara resmi dalam direktori bisnis internasional.",
+    "highlightDirect": "Kontak Langsung Pemilik",
+    "highlightDirectDesc": "Komunikasi langsung terjamin tanpa perantara atau komisi.",
+    "highlightSpeed": "Respons Cepat",
+    "highlightSpeedDesc": "Waktu respons cepat selama jam operasional resmi.",
+    "contactAndLocation": "Kontak & Lokasi",
+    "openGoogleMaps": "Buka di Google Maps",
+    "callNow": "Hubungi Sekarang",
+    "visitWebsite": "Kunjungi Situs Web",
+    "openingHours": "Jam Operasional",
+    "reviews": "Ulasan Pelanggan",
+    "writeReview": "Tulis Ulasan",
+    "claimListing": "Klaim Profil Bisnis",
+    "claimListingDesc": "Apakah Anda pemilik bisnis ini? Verifikasi dan kelola profil Anda sekarang.",
+    "ownerDashboard": "Dasbor Pemilik",
+    "ownerDashboardDesc": "Perbarui detail kontak dan jam operasional secara mandiri.",
+    "share": "Bagikan",
+    "copied": "Tautan disalin!",
+    "notFound": "Bisnis Tidak Ditemukan",
+    "notFoundDesc": "Profil bisnis yang dicari tidak ada atau telah dipindahkan.",
+    "exploreMore": "Jelajahi Bisnis Lainnya"
   }
 }

@@ -52,7 +52,8 @@
     "reviews": "口コミ・評価",
     "claimListing": "オーナー確認を申請",
     "openNow": "営業中",
-    "closed": "営業時間外"
+    "closed": "営業時間外",
+    "viewProfile": "企業プロフィールを見る"
   },
   "tenant": {
     "switchTenant": "ディレクトリを切り替え",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "名鑑一覧へ戻る",
+    "verifiedBusiness": "認証済み企業",
+    "about": "企業・店舗情報",
+    "highlights": "認証品質の特長",
+    "highlightVerified": "100% 公式認証済み",
+    "highlightVerifiedDesc": "国際ビジネスディレクトリにおいて公式に認証されています。",
+    "highlightDirect": "オーナー直接対応",
+    "highlightDirectDesc": "仲介手数料なしで直接スムーズにお問い合わせいただけます。",
+    "highlightSpeed": "迅速な問い合わせ対応",
+    "highlightSpeedDesc": "営業時間内での迅速かつ丁寧なレスポンス。",
+    "contactAndLocation": "所在地と連絡先",
+    "openGoogleMaps": "Googleマップで開く",
+    "callNow": "電話をかける",
+    "visitWebsite": "ウェブサイトを見る",
+    "openingHours": "営業時間",
+    "reviews": "お客様レビュー",
+    "writeReview": "レビューを投稿する",
+    "claimListing": "オーナー権限を申請",
+    "claimListingDesc": "この企業・店舗のオーナー様ですか？今すぐ認証して管理を開始できます。",
+    "ownerDashboard": "オーナーダッシュボード",
+    "ownerDashboardDesc": "営業時間や連絡先情報をいつでも編集・更新できます。",
+    "share": "シェア",
+    "copied": "リンクをコピーしました！",
+    "notFound": "企業が見つかりません",
+    "notFoundDesc": "お探しの企業プロフィールは存在しないか、移動された可能性があります。",
+    "exploreMore": "他の企業を探す"
   }
 }

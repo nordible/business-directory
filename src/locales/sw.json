@@ -52,7 +52,8 @@
     "reviews": "Maoni",
     "claimListing": "Thibitisha umiliki",
     "openNow": "Wazi Sasa",
-    "closed": "Imefungwa"
+    "closed": "Imefungwa",
+    "viewProfile": "Tazama Wasifu"
   },
   "tenant": {
     "switchTenant": "Badilisha saraka",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "Rudi kwenye Orodha",
+    "verifiedBusiness": "Biashara Iliyothibitishwa",
+    "about": "Kuhusu Biashara",
+    "highlights": "Viwango Bora Vilivyothibitishwa",
+    "highlightVerified": "Utambulisho Uliothibitishwa 100%",
+    "highlightVerifiedDesc": "Imethibitishwa rasmi kwenye saraka ya kimataifa ya biashara.",
+    "highlightDirect": "Mawasiliano ya Moja kwa Moja na Mmiliki",
+    "highlightDirectDesc": "Wasiliana moja kwa moja bila madalali au kamisheni.",
+    "highlightSpeed": "Upatikanaji wa Haraka",
+    "highlightSpeedDesc": "Majibu ya haraka wakati wa saa rasmi za kazi.",
+    "contactAndLocation": "Mawasiliano na Mahali",
+    "openGoogleMaps": "Fungua kwenye Google Maps",
+    "callNow": "Piga Simu Sasa",
+    "visitWebsite": "Tembelea Tovuti",
+    "openingHours": "Masaa ya Kazi",
+    "reviews": "Maoni ya Wateja",
+    "writeReview": "Andika Maoni",
+    "claimListing": "Dai Umiliki wa Biashara",
+    "claimListingDesc": "Je, biashara hii ni yako? Ithibitishe na uisimamie leo.",
+    "ownerDashboard": "Dashibodi ya Mmiliki",
+    "ownerDashboardDesc": "Sasisha nambari za simu na masaa ya kazi moja kwa moja.",
+    "share": "Shiriki",
+    "copied": "Kiungo kimenakiliwa!",
+    "notFound": "Biashara Haikupatikana",
+    "notFoundDesc": "Wasifu wa biashara uliotafutwa haupo au ulihamishwa.",
+    "exploreMore": "Chunguza Biashara Nyingine"
   }
 }

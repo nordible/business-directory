@@ -52,7 +52,8 @@
     "reviews": "评价",
     "claimListing": "认领企业",
     "openNow": "营业中",
-    "closed": "已打烊"
+    "closed": "已打烊",
+    "viewProfile": "查看企业主页"
   },
   "tenant": {
     "switchTenant": "切换名录",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "返回目录",
+    "verifiedBusiness": "官方认证企业",
+    "about": "关于企业",
+    "highlights": "认证品质优势",
+    "highlightVerified": "100% 身份官方认证",
+    "highlightVerifiedDesc": "在国际商业名录中通过官方实名核验与认证。",
+    "highlightDirect": "店主直接对接",
+    "highlightDirectDesc": "直接沟通，无中介加价与佣金抽成。",
+    "highlightSpeed": "极速响应",
+    "highlightSpeedDesc": "营业时间内快速专业响应。",
+    "contactAndLocation": "联系与地址",
+    "openGoogleMaps": "在谷歌地图中打开",
+    "callNow": "立即致电",
+    "visitWebsite": "访问官方网站",
+    "openingHours": "营业时间",
+    "reviews": "客户真实评价",
+    "writeReview": "撰写评价",
+    "claimListing": "认领此企业",
+    "claimListingDesc": "您是该企业所有者吗？立即免费认领并管理您的主页。",
+    "ownerDashboard": "店主管理后台",
+    "ownerDashboardDesc": "随时自主更新联系电话与营业时间。",
+    "share": "分享",
+    "copied": "链接已复制！",
+    "notFound": "未找到企业",
+    "notFoundDesc": "您所访问的企业主页不存在或已被移动。",
+    "exploreMore": "浏览更多精选企业"
   }
 }

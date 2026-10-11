@@ -52,7 +52,8 @@
     "reviews": "समीक्षाएँ",
     "claimListing": "स्वामित्व का दावा करें",
     "openNow": "खुला है",
-    "closed": "बंद है"
+    "closed": "बंद है",
+    "viewProfile": "प्रोफ़ाइल देखें"
   },
   "tenant": {
     "switchTenant": "डायरेक्टरी बदलें",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "निर्देशिका पर वापस जाएं",
+    "verifiedBusiness": "सत्यापित व्यवसाय",
+    "about": "व्यवसाय के बारे में",
+    "highlights": "सत्यापित गुणवत्ता विशेषताएं",
+    "highlightVerified": "100% सत्यापित पहचान",
+    "highlightVerifiedDesc": "अंतर्राष्ट्रीय व्यापार निर्देशिका में आधिकारिक रूप से सत्यापित।",
+    "highlightDirect": "मालिक से सीधा संपर्क",
+    "highlightDirectDesc": "बिना किसी बिचौलिए या कमीशन के सीधा संपर्क।",
+    "highlightSpeed": "त्वरित प्रतिक्रिया",
+    "highlightSpeedDesc": "कार्य समय के दौरान त्वरित प्रतिक्रिया समय।",
+    "contactAndLocation": "संपर्क और स्थान",
+    "openGoogleMaps": "Google Maps पर खोलें",
+    "callNow": "अभी कॉल करें",
+    "visitWebsite": "वेबसाइट देखें",
+    "openingHours": "खुलने का समय",
+    "reviews": "ग्राहक समीक्षाएं",
+    "writeReview": "समीक्षा लिखें",
+    "claimListing": "व्यवसाय का दावा करें",
+    "claimListingDesc": "क्या यह व्यवसाय आपका है? इसे आज ही सत्यापित करें और प्रबंधित करें।",
+    "ownerDashboard": "मालिक डैशबोर्ड",
+    "ownerDashboardDesc": "अपनी संपर्क जानकारी और समय सीधे अपडेट करें।",
+    "share": "शेयर करें",
+    "copied": "लिंक कॉपी हो गया!",
+    "notFound": "व्यवसाय नहीं मिला",
+    "notFoundDesc": "खोजा गया व्यवसाय प्रोफ़ाइल मौजूद नहीं है या स्थानांतरित कर दिया गया है।",
+    "exploreMore": "अन्य व्यवसायों को देखें"
   }
 }

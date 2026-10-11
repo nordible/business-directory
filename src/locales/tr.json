@@ -52,7 +52,8 @@
     "reviews": "Değerlendirmeler",
     "claimListing": "İşletmeyi sahiplen",
     "openNow": "Açık",
-    "closed": "Kapalı"
+    "closed": "Kapalı",
+    "viewProfile": "Profili Görüntüle"
   },
   "tenant": {
     "switchTenant": "Dizini değiştir",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "Rehbere Geri Dön",
+    "verifiedBusiness": "Doğrulanmış İşletme",
+    "about": "İşletme Hakkında",
+    "highlights": "Doğrulanmış Kalite Standartları",
+    "highlightVerified": "%100 Doğrulanmış Kimlik",
+    "highlightVerifiedDesc": "Uluslararası işletme dizininde resmi olarak doğrulanmıştır.",
+    "highlightDirect": "Doğrudan İşletme Sahibi İletişimi",
+    "highlightDirectDesc": "Aracı veya komisyon olmadan doğrudan iletişim imkanı.",
+    "highlightSpeed": "Yüksek Erişilebilirlik",
+    "highlightSpeedDesc": "Çalışma saatleri içinde hızlı yanıt süreleri.",
+    "contactAndLocation": "İletişim ve Konum",
+    "openGoogleMaps": "Google Haritalar'da Aç",
+    "callNow": "Hemen Ara",
+    "visitWebsite": "Web Sitesini Ziyaret Et",
+    "openingHours": "Çalışma Saatleri",
+    "reviews": "Müşteri Değerlendirmeleri",
+    "writeReview": "Yorum Yaz",
+    "claimListing": "İşletmeyi Sahiplen",
+    "claimListingDesc": "Bu işletmenin sahibi misiniz? Hemen doğrulayın ve yönetin.",
+    "ownerDashboard": "İşletme Sahibi Paneli",
+    "ownerDashboardDesc": "İletişim bilgilerinizi ve çalışma saatlerinizi doğrudan güncelleyin.",
+    "share": "Paylaş",
+    "copied": "Bağlantı kopyalandı!",
+    "notFound": "İşletme Bulunamadı",
+    "notFoundDesc": "Aradığınız işletme profili bulunamadı veya taşındı.",
+    "exploreMore": "Diğer İşletmeleri Keşfet"
   }
 }

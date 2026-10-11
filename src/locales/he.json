@@ -52,7 +52,8 @@
     "reviews": "חוות דעת",
     "claimListing": "דרוש בעלות על העסק",
     "openNow": "פתוח עכשיו",
-    "closed": "סגור"
+    "closed": "סגור",
+    "viewProfile": "הצג פרופיל"
   },
   "tenant": {
     "switchTenant": "החלף אינדקס",
@@ -299,5 +300,33 @@
     "city": "City & Postal Code",
     "description": "Company Description",
     "saveChanges": "Save Changes"
+  },
+  "business": {
+    "backToDirectory": "חזרה למדריך",
+    "verifiedBusiness": "עסק מאומת",
+    "about": "על אודות העסק",
+    "highlights": "יתרונות איכות מאומתים",
+    "highlightVerified": "זהות מאומתת ב-100%",
+    "highlightVerifiedDesc": "מאומת רשמית במדריך העסקים הבינלאומי.",
+    "highlightDirect": "קשר ישיר עם בעל העסק",
+    "highlightDirectDesc": "פנייה ישירה מובטחת ללא עמלות או מתווכים.",
+    "highlightSpeed": "זמינות גבוהה",
+    "highlightSpeedDesc": "מענה מהיר בשעות הפעילות.",
+    "contactAndLocation": "יצירת קשר ומיקום",
+    "openGoogleMaps": "פתח ב-Google Maps",
+    "callNow": "התקשר עכשיו",
+    "visitWebsite": "ביקור באתר",
+    "openingHours": "שעות פעילות",
+    "reviews": "חוות דעת של לקוחות",
+    "writeReview": "כתיבת חוות דעת",
+    "claimListing": "דרוש בעלות על העסק",
+    "claimListingDesc": "האם העסק הזה שייך לך? אמת ונהל את הפרופיל כעת.",
+    "ownerDashboard": "לוח בקרה לבעלים",
+    "ownerDashboardDesc": "עדכון פרטי קשר ושעות פעילות בקלות.",
+    "share": "שתף",
+    "copied": "הקישור הועתק!",
+    "notFound": "עסק לא נמצא",
+    "notFoundDesc": "הפרופיל המבוקש לא קיים או הועבר.",
+    "exploreMore": "גלה עסקים נוספים"
   }
 }
