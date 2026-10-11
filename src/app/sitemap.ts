@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { SUPPORTED_LOCALES } from '@/lib/types';
 import { siteConfig } from '@/config/site';
+import { MOCK_LISTINGS } from '@/lib/mockData';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.urls.base || 'https://nordible.co';
@@ -8,11 +9,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const entries: MetadataRoute.Sitemap = [];
 
-  const routes = [
-    { path: '', priority: 1.0, changeFrequency: 'daily' as const },
-    { path: '/directory', priority: 0.9, changeFrequency: 'daily' as const },
-    { path: '/partner', priority: 0.7, changeFrequency: 'weekly' as const },
+  const routes: { path: string; priority: number; changeFrequency: 'daily' | 'weekly' }[] = [
+    { path: '', priority: 1.0, changeFrequency: 'daily' },
+    { path: '/directory', priority: 0.9, changeFrequency: 'daily' },
+    { path: '/partner', priority: 0.7, changeFrequency: 'weekly' },
   ];
+
+  MOCK_LISTINGS.forEach((listing) => {
+    routes.push({
+      path: `/directory/${listing.id}`,
+      priority: 0.8,
+      changeFrequency: 'weekly',
+    });
+  });
 
   routes.forEach((route) => {
     SUPPORTED_LOCALES.forEach((locale) => {

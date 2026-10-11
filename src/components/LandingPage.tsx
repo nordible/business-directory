@@ -211,9 +211,14 @@ export function LandingPage() {
 
                     <div className="flex items-start gap-3 my-2">
                       <ListingLogo logoUrl={listing.logoUrl} name={listing.name} size={36} />
-                      <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-[#145BFF] transition-colors tracking-tight leading-snug">
-                        {listing.name}
-                      </h3>
+                      <Link
+                        href={`/${locale}/directory/${listing.id}`}
+                        className="group/title block"
+                      >
+                        <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover/title:text-[#145BFF] transition-colors tracking-tight leading-snug">
+                          {listing.name}
+                        </h3>
+                      </Link>
                     </div>
 
                     <p className="text-xs text-slate-600 line-clamp-3 mt-2 leading-relaxed">
@@ -227,23 +232,33 @@ export function LandingPage() {
                   </div>
 
                   <div className="mt-5 pt-3 border-t border-[#E8ECF4] flex items-center justify-between">
-                    <a
-                      href={listing.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href={`/${locale}/directory/${listing.id}`}
                       className="text-xs font-bold text-[#145BFF] hover:underline flex items-center gap-1"
                     >
-                      <Globe className="w-3 h-3" />
-                      <span>{t('landing.visitWebsite')}</span>
-                    </a>
+                      <span>{t('listing.viewProfile')}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
 
-                    <a
-                      href={`tel:${listing.phone}`}
-                      className="p-2 rounded-xl bg-white border border-[#E8ECF4] text-slate-600 hover:text-[#0D2B75] hover:bg-[#F3F7FF] transition-colors"
-                      title={t('listing.call')}
-                    >
-                      <Phone className="w-3.5 h-3.5" />
-                    </a>
+                    <div className="flex items-center gap-1.5">
+                      <a
+                        href={listing.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-xl bg-white border border-[#E8ECF4] text-slate-600 hover:text-[#0D2B75] hover:bg-[#F3F7FF] transition-colors"
+                        title={t('listing.website')}
+                      >
+                        <Globe className="w-3.5 h-3.5" />
+                      </a>
+
+                      <a
+                        href={`tel:${listing.phone}`}
+                        className="p-2 rounded-xl bg-white border border-[#E8ECF4] text-slate-600 hover:text-[#0D2B75] hover:bg-[#F3F7FF] transition-colors"
+                        title={t('listing.call')}
+                      >
+                        <Phone className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
                 </article>
               ))}

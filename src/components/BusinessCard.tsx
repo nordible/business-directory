@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { BusinessListing } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
-import { Star, ShieldCheck, MapPin, Phone, Globe, ChevronDown, ChevronUp, Clock, Settings } from 'lucide-react';
+import { Star, ShieldCheck, MapPin, Phone, Globe, ChevronDown, ChevronUp, Clock, Settings, ArrowRight } from 'lucide-react';
 
 interface BusinessCardProps {
   listing: BusinessListing;
@@ -64,9 +65,14 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
           )}
 
           <div className="min-w-0 flex-1">
-            <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] group-hover:text-[#145BFF] transition-colors tracking-tight leading-snug">
-              {listing.name}
-            </h3>
+            <Link
+              href={`/${locale}/directory/${listing.id}`}
+              className="group/title block"
+            >
+              <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] group-hover/title:text-[#145BFF] transition-colors tracking-tight leading-snug">
+                {listing.name}
+              </h3>
+            </Link>
 
             <div className="flex flex-wrap items-center gap-1.5 mt-1">
               <button
@@ -187,6 +193,13 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
         </button>
 
         <div className="flex items-center gap-2">
+          <Link
+            href={`/${locale}/directory/${listing.id}`}
+            className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-[#145BFF] bg-blue-50/70 hover:bg-blue-100/80 transition-colors"
+          >
+            <span>{t('listing.viewProfile')}</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
           <a
             href={`tel:${listing.phone}`}
             className="p-2.5 rounded-xl bg-[#FAFBFF] hover:bg-[#F3F7FF] text-gray-700 transition-colors border border-[#E8ECF4]"
@@ -198,7 +211,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
             href={listing.website}
             target="_blank"
             rel="noreferrer"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-white shadow-xs transition-transform active:scale-95 flex items-center gap-1.5 hover:opacity-95"
+            className="px-3.5 py-2 rounded-xl text-xs font-bold text-white shadow-xs transition-transform active:scale-95 flex items-center gap-1.5 hover:opacity-95"
             style={{ backgroundColor: primaryColor }}
           >
             <span>{t('listing.website')}</span>
