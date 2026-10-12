@@ -27,7 +27,9 @@
     "backHome": "الرئيسية",
     "partner": "الشراكات",
     "tagline": "The International Business Directory for all types of businesses across the world",
-    "toDirectory": "Directory"
+    "toDirectory": "Directory",
+    "betaBadge": "تجريبي",
+    "betaNotice": "هذه المنصة تخضع حالياً للاختبار (نسخة تجريبية)."
   },
   "search": {
     "placeholder": "ابحث عن الشركات والخدمات والمواقع...",

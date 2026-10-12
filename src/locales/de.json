@@ -27,7 +27,9 @@
     "backHome": "Startseite",
     "partner": "Partnerschaft",
     "tagline": "Das internationale Branchenverzeichnis für alle Unternehmensarten weltweit",
-    "toDirectory": "Verzeichnis"
+    "toDirectory": "Verzeichnis",
+    "betaBadge": "Beta",
+    "betaNotice": "Diese Plattform befindet sich derzeit in der Testphase."
   },
   "search": {
     "placeholder": "Unternehmen, Services, Branchen suchen...",

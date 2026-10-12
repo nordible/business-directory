@@ -27,7 +27,9 @@
     "backHome": "Ana Sayfa",
     "partner": "İş Ortaklığı",
     "tagline": "The International Business Directory for all types of businesses across the world",
-    "toDirectory": "Directory"
+    "toDirectory": "Directory",
+    "betaBadge": "Beta",
+    "betaNotice": "Bu platform şu anda test aşamasındadır."
   },
   "search": {
     "placeholder": "İşletmeleri, hizmetleri, konumları arayın...",

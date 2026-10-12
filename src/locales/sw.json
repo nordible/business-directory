@@ -27,7 +27,9 @@
     "backHome": "Mwanzo",
     "partner": "Ushirikiano",
     "tagline": "The International Business Directory for all types of businesses across the world",
-    "toDirectory": "Directory"
+    "toDirectory": "Directory",
+    "betaBadge": "Beta",
+    "betaNotice": "Jukwaa hili kwa sasa liko kwenye majaribio."
   },
   "search": {
     "placeholder": "Tafuta biashara, huduma, maeneo...",

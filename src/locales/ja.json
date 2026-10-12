@@ -27,7 +27,9 @@
     "backHome": "ホーム",
     "partner": "パートナーシップ",
     "tagline": "世界中のあらゆる業種のための国際ビジネスディレクトリ",
-    "toDirectory": "ディレクトリ"
+    "toDirectory": "ディレクトリ",
+    "betaBadge": "ベータ",
+    "betaNotice": "このプラットフォームは現在テスト中です。"
   },
   "search": {
     "placeholder": "企業名、サービス、地域を検索...",

@@ -27,7 +27,9 @@
     "backHome": "Beranda",
     "partner": "Kemitraan",
     "tagline": "Direktori Bisnis Internasional untuk semua jenis usaha di seluruh dunia",
-    "toDirectory": "Direktori"
+    "toDirectory": "Direktori",
+    "betaBadge": "Beta",
+    "betaNotice": "Platform ini sedang dalam tahap pengujian."
   },
   "search": {
     "placeholder": "Cari bisnis, layanan, lokasi...",

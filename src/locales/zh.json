@@ -27,7 +27,9 @@
     "backHome": "首页",
     "partner": "合作伙伴",
     "tagline": "The International Business Directory for all types of businesses across the world",
-    "toDirectory": "Directory"
+    "toDirectory": "Directory",
+    "betaBadge": "公测",
+    "betaNotice": "该平台目前处于测试阶段。"
   },
   "search": {
     "placeholder": "搜索企业、服务、地点...",

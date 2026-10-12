@@ -58,6 +58,15 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 by {siteConfig.appNameShort}
               </a>
+              {siteConfig.isBeta && (
+                <span
+                  title={t('nav.betaNotice')}
+                  className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-extrabold text-amber-700 border border-amber-500/20 tracking-wider uppercase cursor-help select-none"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                  {t('nav.betaBadge')}
+                </span>
+              )}
             </div>
             <p className="text-[11px] text-gray-500 leading-tight hidden md:block">
               {t('nav.tagline')}

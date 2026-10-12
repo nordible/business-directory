@@ -27,7 +27,9 @@
     "backHome": "Inicio",
     "partner": "Asociación",
     "tagline": "The International Business Directory for all types of businesses across the world",
-    "toDirectory": "Directory"
+    "toDirectory": "Directory",
+    "betaBadge": "Beta",
+    "betaNotice": "Esta plataforma se encuentra actualmente en fase de pruebas."
   },
   "search": {
     "placeholder": "Buscar empresas, servicios, lugares...",
