@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from '@/lib/i18n';
-import { INITIAL_TENANTS } from '@/lib/mockData';
+import { DEFAULT_TENANT } from '@/lib/db/client';
 import { TenantBranding } from '@/lib/types';
 import { Mascot } from '@/components/mascot/Mascot';
 import { TenantCustomizer } from '@/components/TenantCustomizer';
@@ -26,7 +26,7 @@ import {
 export default function PartnerPage() {
   const { locale, t } = useTranslation();
 
-  const [currentTenant, setCurrentTenant] = useState<TenantBranding>(INITIAL_TENANTS[0]);
+  const [currentTenant, setCurrentTenant] = useState<TenantBranding>(DEFAULT_TENANT);
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [isDomainSettingsOpen, setIsDomainSettingsOpen] = useState(false);

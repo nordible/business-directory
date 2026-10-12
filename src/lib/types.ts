@@ -88,6 +88,7 @@ export interface Category {
 export interface BusinessListing {
   id: string;
   tenantId: string;
+  slug?: string;
   name: string;
   categoryId: string;
   description: LocalizedString;

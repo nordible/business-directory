@@ -2,8 +2,14 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { INITIAL_TENANTS, CATEGORIES, MOCK_LISTINGS } from '@/lib/mockData';
-import { TenantBranding, BusinessListing } from '@/lib/types';
+import { TenantBranding, BusinessListing, Category } from '@/lib/types';
+import {
+  DEFAULT_TENANT,
+  DEFAULT_CATEGORIES,
+  getAllBusinesses,
+  getCategories,
+  getDefaultTenant,
+} from '@/lib/db/client';
 import { useTranslation } from '@/lib/i18n';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -18,26 +24,38 @@ import { Mascot } from '@/components/mascot/Mascot';
 import { siteConfig } from '@/config/site';
 import { Search, SlidersHorizontal, Sparkles, ArrowRight, ArrowLeft } from 'lucide-react';
 
-function getInitialTenant(): TenantBranding {
-  if (typeof window !== 'undefined') {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tenantParam = urlParams.get('tenant');
-    const hostname = window.location.hostname;
-    const subdomain = hostname.split('.')[0];
-    const targetSlug = tenantParam || subdomain;
-    const matched = INITIAL_TENANTS.find(
-      (tItem) => tItem.slug === targetSlug || tItem.id === targetSlug
-    );
-    if (matched) return matched;
-  }
-  return INITIAL_TENANTS[0];
+interface DirectoryAppPageProps {
+  initialListings?: BusinessListing[];
+  initialTenant?: TenantBranding;
+  initialCategories?: Category[];
 }
 
-export default function DirectoryAppPage() {
+export default function DirectoryAppPage({
+  initialListings = [],
+  initialTenant = DEFAULT_TENANT,
+  initialCategories = DEFAULT_CATEGORIES,
+}: DirectoryAppPageProps) {
   const { locale, t } = useTranslation();
 
-  const [currentTenant] = useState<TenantBranding>(getInitialTenant);
-  const [listings, setListings] = useState<BusinessListing[]>(MOCK_LISTINGS);
+  const [currentTenant, setCurrentTenant] = useState<TenantBranding>(initialTenant);
+  const [categories, setCategories] = useState<Category[]>(initialCategories);
+  const [listings, setListings] = useState<BusinessListing[]>(initialListings);
+
+  React.useEffect(() => {
+    if (initialListings.length === 0) {
+      getAllBusinesses().then((data) => {
+        if (data.length > 0) setListings(data);
+      });
+    }
+    if (initialCategories.length <= 1) {
+      getCategories().then((cats) => {
+        if (cats.length > 0) setCategories(cats);
+      });
+    }
+    getDefaultTenant().then((tnt) => {
+      if (tnt) setCurrentTenant(tnt);
+    });
+  }, [initialListings.length, initialCategories.length]);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('cat-all');
@@ -106,7 +124,7 @@ export default function DirectoryAppPage() {
   };
 
   const getCategoryName = (catId: string) => {
-    const found = CATEGORIES.find((c) => c.id === catId);
+    const found = categories.find((c) => c.id === catId || c.slug === catId);
     return found ? found.name[locale] || found.name['de'] : catId;
   };
 
@@ -214,7 +232,7 @@ export default function DirectoryAppPage() {
 
             {/* Category Quick Chips */}
             <div className="flex items-center justify-center gap-2 mt-4 overflow-x-auto py-1 max-w-full scrollbar-none">
-              {CATEGORIES.map((cat) => {
+              {categories.map((cat) => {
                 const isActive = selectedCategory === cat.id;
                 return (
                   <button
@@ -341,7 +359,7 @@ export default function DirectoryAppPage() {
       <FilterSheet
         isOpen={isFilterSheetOpen}
         onClose={() => setIsFilterSheetOpen(false)}
-        categories={CATEGORIES}
+        categories={categories}
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
         onlyOpenNow={onlyOpenNow}

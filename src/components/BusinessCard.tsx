@@ -66,7 +66,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
 
           <div className="min-w-0 flex-1">
             <Link
-              href={`/${locale}/directory/${listing.id}`}
+              href={`/${locale}/directory/${listing.slug || listing.id}`}
               className="group/title block"
             >
               <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] group-hover/title:text-[#145BFF] transition-colors tracking-tight leading-snug">
@@ -194,7 +194,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
 
         <div className="flex items-center gap-2">
           <Link
-            href={`/${locale}/directory/${listing.id}`}
+            href={`/${locale}/directory/${listing.slug || listing.id}`}
             className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-[#145BFF] bg-blue-50/70 hover:bg-blue-100/80 transition-colors"
           >
             <span>{t('listing.viewProfile')}</span>

@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from '@/lib/i18n';
-import { MOCK_LISTINGS, INITIAL_TENANTS } from '@/lib/mockData';
+import { BusinessListing, TenantBranding } from '@/lib/types';
+import { DEFAULT_TENANT, getAllBusinesses } from '@/lib/db/client';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Mascot } from '@/components/mascot/Mascot';
@@ -56,10 +57,27 @@ function ListingLogo({ logoUrl, name, size = 36 }: { logoUrl?: string; name: str
   );
 }
 
-export function LandingPage() {
+interface LandingPageProps {
+  initialBusinesses?: BusinessListing[];
+  tenant?: TenantBranding;
+}
+
+export function LandingPage({
+  initialBusinesses = [],
+  tenant = DEFAULT_TENANT,
+}: LandingPageProps) {
   const { locale, t } = useTranslation();
+  const [businesses, setBusinesses] = useState<BusinessListing[]>(initialBusinesses);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  React.useEffect(() => {
+    if (initialBusinesses.length === 0) {
+      getAllBusinesses().then((data) => {
+        if (data.length > 0) setBusinesses(data);
+      });
+    }
+  }, [initialBusinesses]);
 
   const toggleFaq = (idx: number) => {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
@@ -93,7 +111,7 @@ export function LandingPage() {
 
       {/* Header */}
       <Header
-        currentTenant={INITIAL_TENANTS[0]}
+        currentTenant={tenant}
         onOpenAiModal={() => setIsAddModalOpen(true)}
       />
 
@@ -190,7 +208,7 @@ export function LandingPage() {
 
             {/* Business Cards Grid Preview */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {MOCK_LISTINGS.map((listing) => (
+              {businesses.map((listing) => (
                 <article
                   key={listing.id}
                   className="bg-[#FAFBFF] rounded-2xl border border-[#E8ECF4] p-5 shadow-xs hover:shadow-md transition-all flex flex-col justify-between hover:border-[#145BFF]/30 group"
@@ -212,7 +230,7 @@ export function LandingPage() {
                     <div className="flex items-start gap-3 my-2">
                       <ListingLogo logoUrl={listing.logoUrl} name={listing.name} size={36} />
                       <Link
-                        href={`/${locale}/directory/${listing.id}`}
+                        href={`/${locale}/directory/${listing.slug || listing.id}`}
                         className="group/title block"
                       >
                         <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover/title:text-[#145BFF] transition-colors tracking-tight leading-snug">
@@ -233,7 +251,7 @@ export function LandingPage() {
 
                   <div className="mt-5 pt-3 border-t border-[#E8ECF4] flex items-center justify-between">
                     <Link
-                      href={`/${locale}/directory/${listing.id}`}
+                      href={`/${locale}/directory/${listing.slug || listing.id}`}
                       className="text-xs font-bold text-[#145BFF] hover:underline flex items-center gap-1"
                     >
                       <span>{t('listing.viewProfile')}</span>

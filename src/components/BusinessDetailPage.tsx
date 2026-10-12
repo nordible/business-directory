@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BusinessListing, TenantBranding } from '@/lib/types';
-import { CATEGORIES, INITIAL_TENANTS, MOCK_LISTINGS } from '@/lib/mockData';
+import { BusinessListing, TenantBranding, Category } from '@/lib/types';
+import { DEFAULT_TENANT, DEFAULT_CATEGORIES, getBusinessByIdOrSlug } from '@/lib/db/client';
 import { useTranslation } from '@/lib/i18n';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -33,33 +33,40 @@ import {
 
 interface BusinessDetailPageProps {
   businessId: string;
+  initialListing?: BusinessListing | null;
+  tenant?: TenantBranding;
+  categories?: Category[];
 }
 
-export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({ businessId }) => {
+export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
+  businessId,
+  initialListing = null,
+  tenant,
+  categories = DEFAULT_CATEGORIES,
+}) => {
   const { locale, t } = useTranslation();
 
-  // Find business from mock data (by id or normalized name slug)
-  const initialListing = MOCK_LISTINGS.find(
-    (b) =>
-      b.id === businessId ||
-      b.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') === businessId
-  );
-
-  const [listing, setListing] = useState<BusinessListing | null>(initialListing || null);
+  const [listing, setListing] = useState<BusinessListing | null>(initialListing);
   const [imgError, setImgError] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  React.useEffect(() => {
+    if (!initialListing && businessId) {
+      getBusinessByIdOrSlug(businessId).then((data) => {
+        if (data) setListing(data);
+      });
+    }
+  }, [initialListing, businessId]);
 
   // Modals state
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const [isDashboardModalOpen, setIsDashboardModalOpen] = useState(false);
 
-  const currentTenant: TenantBranding =
-    (listing && INITIAL_TENANTS.find((tItem) => tItem.id === listing.tenantId)) ||
-    INITIAL_TENANTS[0];
+  const currentTenant: TenantBranding = tenant || DEFAULT_TENANT;
 
   const category = listing
-    ? CATEGORIES.find((c) => c.id === listing.categoryId)
+    ? categories.find((c) => c.id === listing.categoryId || c.slug === listing.categoryId)
     : null;
   const categoryName = category ? category.name[locale] || category.name['de'] : '';
 

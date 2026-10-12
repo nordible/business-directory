@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
 import { SUPPORTED_LOCALES } from '@/lib/types';
 import { siteConfig } from '@/config/site';
-import { MOCK_LISTINGS } from '@/lib/mockData';
+import { getAllBusinesses } from '@/lib/db/client';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.urls.base || 'https://nordible.co';
   const currentDate = new Date().toISOString();
 
@@ -15,9 +15,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/partner', priority: 0.7, changeFrequency: 'weekly' },
   ];
 
-  MOCK_LISTINGS.forEach((listing) => {
+  const businesses = await getAllBusinesses();
+
+  businesses.forEach((listing) => {
     routes.push({
-      path: `/directory/${listing.id}`,
+      path: `/directory/${listing.slug || listing.id}`,
       priority: 0.8,
       changeFrequency: 'weekly',
     });
