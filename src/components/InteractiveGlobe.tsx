@@ -618,8 +618,8 @@ export function InteractiveGlobe() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-slate-300">
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#FF9F1A] animate-ping" />
-              <span className="text-white font-bold">Frankfurt am Main</span>
-              <span className="text-slate-400">• Digital- & Wirtschaftszentrum</span>
+              <span className="text-white font-bold">Made in Frankfurt am Main</span>
+              <span className="text-slate-400">• Digital- & Finanzzentrum</span>
             </div>
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />

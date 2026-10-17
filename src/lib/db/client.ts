@@ -119,6 +119,7 @@ function mapDbBusiness(b: Record<string, unknown>): BusinessListing {
     slug: b.slug ? String(b.slug) : undefined,
     categoryId: String(b.category_id),
     categoryName: (b.categories as { name?: string })?.name || undefined,
+    categorySlug: (b.categories as { slug?: string })?.slug || undefined,
     name: String(b.name),
     description: {
       de: String(b.description || ''),
@@ -253,8 +254,8 @@ export async function getAllBusinesses(includeUnpublished = false): Promise<Busi
 
   try {
     const query = includeUnpublished
-      ? '?select=*&order=created_at.desc'
-      : '?is_published=eq.true&select=*&order=created_at.desc';
+      ? '?select=*,categories(id,slug,name)&order=created_at.desc'
+      : '?is_published=eq.true&select=*,categories(id,slug,name)&order=created_at.desc';
 
     const res = await fetch(`${SUPABASE_URL}/rest/v1/businesses${query}`, {
       headers: getHeaders(),
@@ -280,7 +281,7 @@ export async function getListingsByTenant(tenantId: string, includeUnpublished =
       : `tenant_id=eq.${tenantId}&is_published=eq.true`;
 
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/businesses?${filter}&select=*&order=created_at.desc`,
+      `${SUPABASE_URL}/rest/v1/businesses?${filter}&select=*,categories(id,slug,name)&order=created_at.desc`,
       {
         headers: getHeaders(),
         next: { revalidate: 15 },
@@ -298,17 +299,29 @@ export async function getListingsByTenant(tenantId: string, includeUnpublished =
 }
 
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const SHORT_HEX_REGEX = /^[0-9a-f]{8}$/i;
 
 export async function getBusinessByIdOrSlug(idOrSlug: string): Promise<BusinessListing | null> {
   if (!isDbConfigured || !idOrSlug) return null;
 
   try {
-    const extractedId = extractIdFromPermalink(idOrSlug);
-    const isUuid = UUID_REGEX.test(extractedId);
-    const filter = isUuid ? `id=eq.${extractedId}` : `slug=eq.${encodeURIComponent(extractedId)}`;
+    const extracted = extractIdFromPermalink(idOrSlug);
+    const isFullUuid = UUID_REGEX.test(extracted);
+    const isShortHex = SHORT_HEX_REGEX.test(extracted);
+
+    let filter = '';
+    if (isFullUuid) {
+      filter = `id=eq.${extracted}`;
+    } else if (isShortHex) {
+      const minUuid = `${extracted.toLowerCase()}-0000-0000-0000-000000000000`;
+      const maxUuid = `${extracted.toLowerCase()}-ffff-ffff-ffff-ffffffffffff`;
+      filter = `id=gte.${minUuid}&id=lte.${maxUuid}`;
+    } else {
+      filter = `slug=eq.${encodeURIComponent(extracted)}`;
+    }
 
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/businesses?${filter}&select=*&limit=1`,
+      `${SUPABASE_URL}/rest/v1/businesses?${filter}&select=*,categories(id,slug,name)&limit=1`,
       {
         headers: getHeaders(),
         next: { revalidate: 15 },
@@ -321,7 +334,7 @@ export async function getBusinessByIdOrSlug(idOrSlug: string): Promise<BusinessL
       // Fallback: search across all listings (supports partial IDs, legacy slugs, and full permalinks)
       const all = await getAllBusinesses(true);
       const normalizedTarget = idOrSlug.toLowerCase();
-      const normalizedExtracted = extractedId.toLowerCase();
+      const normalizedExtracted = extracted.toLowerCase();
 
       return (
         all.find(

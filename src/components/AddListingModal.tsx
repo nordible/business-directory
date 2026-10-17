@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useSyncExternalStore } from 'react';
+import React, { useState, useEffect, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 
 const emptySubscribe = () => () => {};
@@ -31,12 +31,14 @@ interface AddListingModalProps {
   isOpen: boolean;
   onClose: () => void;
   primaryColor?: string;
+  initialWantsGrowthResource?: boolean;
 }
 
 export const AddListingModal: React.FC<AddListingModalProps> = ({
   isOpen,
   onClose,
   primaryColor = '#145BFF',
+  initialWantsGrowthResource = false,
 }) => {
   const { locale } = useTranslation();
   const isDe = locale === 'de';
@@ -59,7 +61,14 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
   });
 
   const [openingHoursJson, setOpeningHoursJson] = useState<WeekSchedule>(DEFAULT_WEEK_SCHEDULE);
-  const [wantsGrowthResource, setWantsGrowthResource] = useState(false);
+  const [wantsGrowthResource, setWantsGrowthResource] = useState(initialWantsGrowthResource);
+
+  useEffect(() => {
+    if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setWantsGrowthResource(initialWantsGrowthResource);
+    }
+  }, [isOpen, initialWantsGrowthResource]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

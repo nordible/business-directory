@@ -70,7 +70,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   const [locale, setLocaleState] = useState<Locale>(() => {
-    return getLocaleFromPath(pathname) || 'en';
+    return getLocaleFromPath(pathname) || 'de';
   });
 
   // Keep state in sync with URL pathname

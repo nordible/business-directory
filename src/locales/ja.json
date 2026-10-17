@@ -98,7 +98,20 @@
     "ctaBannerTitle": "{{name}} を今すぐ始めましょう",
     "ctaBannerSubtitle": "認証済みのビジネスパートナーを見つけるか、無料の基本掲載にお申し込みください。",
     "ctaBannerOpen": "ディレクトリを開く",
-    "ctaBannerSubmit": "企業を登録"
+    "ctaBannerSubmit": "企業を登録",
+    "frankfurtGrowthBadge": "📍 Exclusive for Businesses in Frankfurt & Rhine-Main",
+    "frankfurtGrowthTitle": "Looking to Grow Your Business in Frankfurt & Nearby Cities?",
+    "frankfurtGrowthSubtitle": "Claim free growth resources by Nordible Technologies: Expand your regional reach, boost AI discovery, and generate verified B2B customer leads across Frankfurt am Main and surrounding cities.",
+    "frankfurtGrowthBenefit1Title": "Free Premium Directory Listing",
+    "frankfurtGrowthBenefit1Desc": "Includes verified do-follow backlink, Schema.org structured data, and Google indexing for maximum local authority.",
+    "frankfurtGrowthBenefit2Title": "AI & Search Engine Visibility Check",
+    "frankfurtGrowthBenefit2Desc": "Complimentary audit of how AI engines (ChatGPT, Perplexity & Google AI Overviews) recommend your enterprise locally.",
+    "frankfurtGrowthBenefit3Title": "Direct Local Support in Frankfurt",
+    "frankfurtGrowthBenefit3Desc": "Direct contact with the Nordible Technologies engineering team headquartered in Frankfurt am Main (Breitlacherstr. 101).",
+    "frankfurtGrowthCta": "Claim Free Resources & Add Business",
+    "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
+    "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
   },
   "globe": {
     "badge": "リアルタイム・コネクティビティ • 世界規模",

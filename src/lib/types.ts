@@ -125,6 +125,7 @@ export interface BusinessListing {
   name: string;
   categoryId: string;
   categoryName?: string;
+  categorySlug?: string;
   description: LocalizedString;
   address: string;
   postalCode?: string;

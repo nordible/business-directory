@@ -8,5 +8,5 @@ interface PageProps {
 
 export default async function DirectoryBusinessRedirect({ params }: PageProps) {
   const { id } = await params;
-  redirect(`/en/directory/${id}`);
+  redirect(`/de/directory/${id}`);
 }

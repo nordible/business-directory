@@ -5,7 +5,7 @@ import { sendInquiryNotificationToBusiness, sendInquiryConfirmationToCustomer } 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { businessId, tenantId, customerName, customerEmail, customerPhone, subject, message, locale = 'en' } = body;
+    const { businessId, tenantId, customerName, customerEmail, customerPhone, subject, message, locale = 'de' } = body;
 
     if (!businessId || !customerEmail || !subject || !message) {
       return NextResponse.json(

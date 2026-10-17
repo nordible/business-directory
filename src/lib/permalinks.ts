@@ -22,50 +22,74 @@ export function slugify(str?: string): string {
 }
 
 export interface PermalinkSource {
-  id: string;
+  id?: string;
   name: string;
   categoryId?: string;
   categoryName?: string;
+  categorySlug?: string;
   country?: string;
   state?: string;
   postalCode?: string;
   city?: string;
+  legalForm?: string;
   slug?: string;
 }
 
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 /**
- * Builds the canonical business URL slug:
- * {uniqueId}-{category}-{country}-{state}-{postalCode}-{city}-{name}
+ * Builds the canonical business URL slug with compact unique ID at the end:
+ * {category}-{country}-{city}-{businessType}-{name}-{shortId}
  */
 export function buildBusinessSlug(business: PermalinkSource): string {
-  if (!business.id) return slugify(business.name) || 'business';
+  // 1. Extract 8-character compact unique ID from UUID
+  const shortId = (business.id || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+    .substring(0, 8);
 
-  const categoryPart = slugify(business.categoryName || business.categoryId);
-  const countryPart = slugify(business.country || 'deutschland');
-  const statePart = slugify(business.state);
-  const postalCodePart = slugify(business.postalCode);
-  const cityPart = slugify(business.city);
-  const namePart = slugify(business.name);
+  const parts: string[] = [];
 
-  const descriptiveParts = [
-    categoryPart,
-    countryPart,
-    statePart,
-    postalCodePart,
-    cityPart,
-    namePart,
-  ].filter(Boolean);
-
-  if (descriptiveParts.length === 0) {
-    return business.id;
+  // 2. Category part (never allow a raw UUID!)
+  let categoryPart = '';
+  if (business.categorySlug && !UUID_PATTERN.test(business.categorySlug)) {
+    categoryPart = slugify(business.categorySlug);
+  } else if (business.categoryName && !UUID_PATTERN.test(business.categoryName)) {
+    categoryPart = slugify(business.categoryName);
+  } else if (business.categoryId && !UUID_PATTERN.test(business.categoryId)) {
+    categoryPart = slugify(business.categoryId.replace(/^cat-/, ''));
   }
+  if (categoryPart) parts.push(categoryPart);
 
-  return `${business.id}-${descriptiveParts.join('-')}`;
+  // 3. Country part
+  const countryPart = slugify(business.country);
+  if (countryPart) parts.push(countryPart);
+
+  // 4. City / Location part
+  const cityPart = slugify(business.city);
+  if (cityPart && cityPart !== countryPart) parts.push(cityPart);
+
+  // 5. Business Type / Legal Form (e.g. gmbh, llc, ag, ug)
+  const cleanLegalForm = business.legalForm ? business.legalForm.replace(/\./g, '') : '';
+  const legalFormPart = slugify(cleanLegalForm);
+  if (legalFormPart) parts.push(legalFormPart);
+
+  // 6. Name / Slug part (deduplicated against city)
+  let namePart = slugify(business.slug || business.name);
+  if (cityPart && namePart.endsWith(`-${cityPart}`)) {
+    namePart = namePart.slice(0, -(cityPart.length + 1));
+  }
+  if (namePart) parts.push(namePart);
+
+  // 7. Short ID at the end
+  if (shortId) parts.push(shortId);
+
+  return parts.filter(Boolean).join('-') || business.id || 'business';
 }
 
 /**
  * Generates the full localized permalink path:
- * /{locale}/directory/{uniqueId}-{category}-{country}-{state}-{postalCode}-{city}-{name}
+ * /{locale}/directory/{category}-{country}-{city}-{businessType}-{name}-{shortId}
  */
 export function getBusinessPermalink(
   business: PermalinkSource,
@@ -75,19 +99,37 @@ export function getBusinessPermalink(
 }
 
 /**
- * Extracts the primary identifier (e.g. UUID) from an ID-first permalink.
+ * Extracts the primary identifier (short 8-char ID, full UUID, or bare slug) from a permalink.
  * Supports:
- * - Full UUID at start: "66cb4b29-1894-4e6e-97ed-f8c7788bca8a-tech-..." -> "66cb4b29-1894-4e6e-97ed-f8c7788bca8a"
- * - Exact bare UUID: "66cb4b29-1894-4e6e-97ed-f8c7788bca8a"
- * - Fallback to original string (for legacy slugs like "nordible-technologies")
+ * - End short 8-char ID: "...-quasi-homes-4a9d18fb" -> "4a9d18fb"
+ * - Start short 8-char ID: "4a9d18fb-..." -> "4a9d18fb"
+ * - Full UUID at start/anywhere: "4a9d18fb-eb4d-4aa8-adaf-666d8c40ab6b-..." -> "4a9d18fb-eb4d-4aa8-adaf-666d8c40ab6b"
+ * - Bare UUID: "4a9d18fb-eb4d-4aa8-adaf-666d8c40ab6b"
+ * - Bare slug: "quasi-homes-dubai" -> "quasi-homes-dubai"
  */
 export function extractIdFromPermalink(idOrSlug: string): string {
   if (!idOrSlug) return '';
-  const uuidMatch = idOrSlug.match(
-    /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:-.*)?$/i
+  const trimmed = idOrSlug.trim();
+
+  // 1. Full UUID (36 chars) anywhere:
+  const fullUuidMatch = trimmed.match(
+    /([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i
   );
-  if (uuidMatch) {
-    return uuidMatch[1];
+  if (fullUuidMatch) {
+    return fullUuidMatch[1];
   }
-  return idOrSlug;
+
+  // 2. Short 8-char hex ID at the end: "*-4a9d18fb"
+  const shortEndMatch = trimmed.match(/-([0-9a-f]{8})$/i);
+  if (shortEndMatch) {
+    return shortEndMatch[1];
+  }
+
+  // 3. Short 8-char hex ID at start: "4a9d18fb-*"
+  const shortStartMatch = trimmed.match(/^([0-9a-f]{8})-(.*)/i);
+  if (shortStartMatch) {
+    return shortStartMatch[1];
+  }
+
+  return trimmed;
 }

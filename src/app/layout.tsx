@@ -71,7 +71,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="de"
       className={`${sora.variable} ${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >
