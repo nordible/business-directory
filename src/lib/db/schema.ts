@@ -4,8 +4,9 @@ export interface DbTenant {
   id: string;
   slug: string;
   name: string;
-  tagline_de: string;
-  tagline_en: string;
+  tagline: string;
+  tagline_en?: string | null;
+  tagline_de?: string | null;
   primary_color: string;
   accent_color: string;
   logo_text: string;
@@ -27,8 +28,9 @@ export interface DbCategory {
   id: string;
   tenant_id: string;
   slug: string;
-  name_de: string;
-  name_en: string;
+  name: string;
+  name_en?: string | null;
+  name_de?: string | null;
   icon: string;
   created_at: string;
 }
@@ -39,8 +41,9 @@ export interface DbBusiness {
   category_id: string;
   owner_id?: string | null;
   name: string;
-  description_de?: string | null;
+  description?: string | null;
   description_en?: string | null;
+  description_de?: string | null;
   address: string;
   city: string;
   phone?: string | null;
@@ -58,13 +61,14 @@ export interface DbBusiness {
  * Mapper utilities converting database rows to UI entities
  */
 export function mapDbTenantToTenantBranding(dbTenant: DbTenant) {
+  const taglineStr = dbTenant.tagline || dbTenant.tagline_en || dbTenant.tagline_de || '';
   return {
     id: dbTenant.id,
     slug: dbTenant.slug,
     name: dbTenant.name,
     tagline: {
-      de: dbTenant.tagline_de,
-      en: dbTenant.tagline_en,
+      de: taglineStr,
+      en: taglineStr,
     } as LocalizedString,
     primaryColor: dbTenant.primary_color,
     accentColor: dbTenant.accent_color,
@@ -74,14 +78,15 @@ export function mapDbTenantToTenantBranding(dbTenant: DbTenant) {
 }
 
 export function mapDbBusinessToBusinessListing(dbBusiness: DbBusiness) {
+  const desc = dbBusiness.description || dbBusiness.description_en || dbBusiness.description_de || '';
   return {
     id: dbBusiness.id,
     tenantId: dbBusiness.tenant_id,
     categoryId: dbBusiness.category_id,
     name: dbBusiness.name,
     description: {
-      de: dbBusiness.description_de || '',
-      en: dbBusiness.description_en || '',
+      de: desc,
+      en: desc,
     },
     address: dbBusiness.address,
     city: dbBusiness.city,

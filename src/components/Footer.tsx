@@ -1,11 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from '@/lib/i18n';
 import { Sparkles, ArrowUpRight, ShieldCheck, Mail, Globe, Bug } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
+import { CustomerInboxDrawer } from '@/components/CustomerInboxDrawer';
 import { siteConfig } from '@/config/site';
 
 interface FooterProps {
@@ -14,6 +15,7 @@ interface FooterProps {
 
 export function Footer({ showPromo = true }: FooterProps = {}) {
   const { locale, t } = useTranslation();
+  const [isInboxOpen, setIsInboxOpen] = useState(false);
 
   return (
     <footer className="mt-16 border-t border-[#E8ECF4] bg-[#0D2B75] text-white">
@@ -174,24 +176,28 @@ export function Footer({ showPromo = true }: FooterProps = {}) {
                 </a>
               </li>
               <li>
-                <a
-                  href={`${siteConfig.urls.base}/privacy`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={`/${locale}/impressum`}
+                  className="hover:text-white transition-colors"
+                >
+                  {t('footer.legalNotice')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${locale}/datenschutz`}
                   className="hover:text-white transition-colors"
                 >
                   {t('footer.privacy')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href={`${siteConfig.urls.base}/terms`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={`/${locale}/agb`}
                   className="hover:text-white transition-colors"
                 >
                   {t('footer.terms')}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -200,7 +206,7 @@ export function Footer({ showPromo = true }: FooterProps = {}) {
         {/* Bottom bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-100/60">
           <p>© {new Date().getFullYear()} {siteConfig.company.name}. {t('footer.rights')}</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
             <a
               href={`mailto:${siteConfig.contact.email}?subject=%5B${encodeURIComponent(siteConfig.appName)}%20Feedback%5D`}
               className="hover:text-white transition-colors flex items-center gap-1"
@@ -213,9 +219,32 @@ export function Footer({ showPromo = true }: FooterProps = {}) {
               <Globe className="h-3.5 w-3.5 text-[#145BFF]" />
               <span>{t('footer.madeWithLove')}</span>
             </div>
+            <span className="text-white/20">•</span>
+            {/* Subtle administrative & future mailbox links below regular view */}
+            <button
+              type="button"
+              onClick={() => setIsInboxOpen(true)}
+              className="hover:text-white transition-colors cursor-pointer text-[11px] text-blue-200/50 hover:text-white/90"
+              title={t('footer.inboxTitle')}
+            >
+              {t('footer.inbox')}
+            </button>
+            <span className="text-white/20">•</span>
+            <Link
+              href={`/${locale}/admin`}
+              className="hover:text-white transition-colors text-[11px] text-blue-200/50 hover:text-white/90"
+              title={t('footer.adminTitle')}
+            >
+              {t('footer.admin')}
+            </Link>
           </div>
         </div>
       </div>
+
+      <CustomerInboxDrawer
+        isOpen={isInboxOpen}
+        onClose={() => setIsInboxOpen(false)}
+      />
     </footer>
   );
 }

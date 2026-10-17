@@ -9,10 +9,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const entries: MetadataRoute.Sitemap = [];
 
-  const routes: { path: string; priority: number; changeFrequency: 'daily' | 'weekly' }[] = [
+  const routes: { path: string; priority: number; changeFrequency: 'daily' | 'weekly' | 'monthly' }[] = [
     { path: '', priority: 1.0, changeFrequency: 'daily' },
     { path: '/directory', priority: 0.9, changeFrequency: 'daily' },
     { path: '/partner', priority: 0.7, changeFrequency: 'weekly' },
+    { path: '/impressum', priority: 0.4, changeFrequency: 'monthly' },
+    { path: '/datenschutz', priority: 0.4, changeFrequency: 'monthly' },
+    { path: '/agb', priority: 0.4, changeFrequency: 'monthly' },
   ];
 
   const businesses = await getAllBusinesses();

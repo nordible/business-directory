@@ -7,6 +7,7 @@ import {
   getDefaultTenant,
   getCategories,
 } from '@/lib/db/client';
+import { buildBusinessSlug } from '@/lib/permalinks';
 import { siteConfig } from '@/config/site';
 
 interface PageProps {
@@ -21,8 +22,15 @@ export async function generateStaticParams() {
   const params: { lang: string; id: string }[] = [];
   for (const l of SUPPORTED_LANGUAGES) {
     for (const listing of businesses) {
-      if (listing.slug) params.push({ lang: l.code, id: listing.slug });
-      params.push({ lang: l.code, id: listing.id });
+      // Pre-render the full ID-first canonical permalink as well as the bare ID
+      const canonicalSlug = buildBusinessSlug(listing);
+      params.push({ lang: l.code, id: canonicalSlug });
+      if (listing.id && listing.id !== canonicalSlug) {
+        params.push({ lang: l.code, id: listing.id });
+      }
+      if (listing.slug && listing.slug !== canonicalSlug && listing.slug !== listing.id) {
+        params.push({ lang: l.code, id: listing.slug });
+      }
     }
   }
   return params;
@@ -44,18 +52,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     listing.description['en'] ||
     '';
 
-  const canonicalId = listing.slug || listing.id;
+  const canonicalSlug = buildBusinessSlug(listing);
 
   return {
     title: `${listing.name} – ${listing.city} | ${siteConfig.appName}`,
     description: desc,
     alternates: {
-      canonical: `${siteConfig.urls.base}/${lang}/directory/${canonicalId}`,
+      canonical: `${siteConfig.urls.base}/${lang}/directory/${canonicalSlug}`,
     },
     openGraph: {
       title: `${listing.name} – ${listing.city} | ${siteConfig.appName}`,
       description: desc,
-      url: `${siteConfig.urls.base}/${lang}/directory/${canonicalId}`,
+      url: `${siteConfig.urls.base}/${lang}/directory/${canonicalSlug}`,
       siteName: siteConfig.appName,
       type: 'website',
     },

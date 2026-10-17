@@ -192,12 +192,14 @@ export default function PartnerPage() {
               <div className="w-20 h-20 mx-auto mb-3">
                 <Mascot variant="celebrate" alt="Partner Mascot" />
               </div>
-              <div
-                className="inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-2"
-                style={{ backgroundColor: currentTenant.primaryColor }}
-              >
-                {currentTenant.logoText}
-              </div>
+              {currentTenant.logoText && !currentTenant.logoText.includes(currentTenant.name) && (
+                <div
+                  className="inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-2"
+                  style={{ backgroundColor: currentTenant.primaryColor }}
+                >
+                  {currentTenant.logoText}
+                </div>
+              )}
               <h4 className="font-heading font-extrabold text-base text-[#0D2B75]">
                 {currentTenant.name}
               </h4>

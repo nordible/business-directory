@@ -73,6 +73,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${sora.variable} ${inter.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         <link rel="help" type="text/plain" href="/llms.txt" title="AI Agent Listing Protocol" />

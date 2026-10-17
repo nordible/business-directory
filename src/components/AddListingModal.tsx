@@ -1,130 +1,167 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
+
+const emptySubscribe = () => () => {};
 import { useTranslation } from '@/lib/i18n';
+import Image from 'next/image';
 import {
   X,
-  Mail,
-  Check,
-  Copy,
+  CheckCircle2,
   Building2,
   Globe,
   MapPin,
   Phone,
-  FileText,
-  Image as ImageIcon,
-  ArrowRight,
-  ShieldCheck,
-  Bot,
-  User,
-  ExternalLink,
+  Mail,
   Sparkles,
-  ArrowUpRight,
+  Loader2,
+  ShieldCheck,
+  ImageIcon,
+  TrendingUp,
 } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
-import { siteConfig } from '@/config/site';
+import { CategoryAutocomplete } from '@/components/CategoryAutocomplete';
+import { LegalFormAutocomplete } from '@/components/LegalFormAutocomplete';
+import { PhoneInputWithCountry } from '@/components/PhoneInputWithCountry';
+import { OpeningHoursPicker, DEFAULT_WEEK_SCHEDULE } from '@/components/OpeningHoursPicker';
+import { WeekSchedule } from '@/lib/types';
 
 interface AddListingModalProps {
   isOpen: boolean;
   onClose: () => void;
   primaryColor?: string;
-  defaultTab?: 'human' | 'ai';
 }
 
 export const AddListingModal: React.FC<AddListingModalProps> = ({
   isOpen,
   onClose,
   primaryColor = '#145BFF',
-  defaultTab = 'human',
 }) => {
-  const { t, locale } = useTranslation();
-  const [activeTab, setActiveTab] = useState<'human' | 'ai'>(defaultTab);
-  const [copiedText, setCopiedText] = useState(false);
-  const [copiedAi, setCopiedAi] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { locale } = useTranslation();
+  const isDe = locale === 'de';
 
-  useEffect(() => {
-    if (isOpen) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveTab(defaultTab);
-      setIsSubmitted(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    categoryId: '',
+    categoryName: '',
+    legalForm: '',
+    address: '',
+    postalCode: '',
+    city: '',
+    state: '',
+    country: '',
+    phone: '',
+    email: '',
+    website: '',
+    logoUrl: '',
+    description: '',
+  });
+
+  const [openingHoursJson, setOpeningHoursJson] = useState<WeekSchedule>(DEFAULT_WEEK_SCHEDULE);
+  const [wantsGrowthResource, setWantsGrowthResource] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+
+  const handleClose = () => {
+    setIsSuccess(false);
+    setErrorMessage(null);
+    onClose();
+  };
+
+  if (!isOpen || !isMounted) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (
+      !formData.name.trim() ||
+      (!formData.categoryId && !formData.categoryName.trim()) ||
+      !formData.address.trim() ||
+      !formData.city.trim()
+    ) {
+      setErrorMessage(
+        isDe
+          ? 'Bitte füllen Sie mindestens Unternehmensname, Branche, Straße und Stadt aus.'
+          : 'Please fill in at least Company Name, Category, Street, and City.'
+      );
+      return;
     }
-  }, [isOpen, defaultTab]);
 
-  if (!isOpen) return null;
+    setIsSubmitting(true);
+    setErrorMessage(null);
 
-  const emailSubject = encodeURIComponent(
-    locale === 'de'
-      ? `Eintragsanfrage für ${siteConfig.appName}`
-      : `Listing Request for ${siteConfig.appName}`
-  );
+    try {
+      const res = await fetch('/api/businesses/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          categoryId: formData.categoryId || undefined,
+          categoryName: formData.categoryName.trim() || undefined,
+          legalForm: formData.legalForm,
+          address: formData.address.trim(),
+          postalCode: formData.postalCode.trim() || undefined,
+          city: formData.city.trim(),
+          state: formData.state.trim() || undefined,
+          country: formData.country.trim() || (isDe ? 'Deutschland' : 'Germany'),
+          phone: formData.phone.trim() || undefined,
+          email: formData.email.trim() || undefined,
+          website: formData.website.trim()
+            ? /^https?:\/\//i.test(formData.website.trim())
+              ? formData.website.trim()
+              : `https://${formData.website.trim()}`
+            : undefined,
+          logoUrl: formData.logoUrl.trim() || undefined,
+          descriptionDe: formData.description.trim(),
+          descriptionEn: formData.description.trim(),
+          openingHoursJson,
+          wantsGrowthResource,
+        }),
+      });
 
-  const rawTemplate =
-    locale === 'de'
-      ? `Hallo ${siteConfig.company.name} Team,\n\nich möchte mein Unternehmen gerne in ${siteConfig.appName} listen lassen:\n\n• Unternehmensname & Branche: \n• Offizielle Webseite / URL: \n• Standort (Stadt & Land): \n• Telefonnummer & Ansprechpartner: \n• Kurzbeschreibung der Leistungen: \n• Logo-URL (z.B. https://domain.de/logo.png): \n\nViele Grüße,\n`
-      : `Hello ${siteConfig.company.name} Team,\n\nI would like to list my business in ${siteConfig.appName}:\n\n• Company Name & Industry: \n• Official Website / URL: \n• Location (City & Country): \n• Phone Number & Contact: \n• Short Description of Services: \n• Hosted Logo URL (e.g. https://domain.com/logo.png): \n\nBest regards,\n`;
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || (isDe ? 'Fehler beim Einreichen.' : 'Submission failed.'));
+      }
 
-  const emailBody = encodeURIComponent(rawTemplate);
-  const mailtoUrl = `mailto:${siteConfig.contact.email}?subject=${emailSubject}&body=${emailBody}`;
-
-  const aiJsonTemplate = JSON.stringify(
-    {
-      requestType: 'business_listing_submission',
-      companyName: 'YOUR_COMPANY_NAME',
-      industry: 'YOUR_INDUSTRY',
-      websiteUrl: 'https://your-website.com',
-      location: {
-        city: 'YOUR_CITY',
-        country: 'YOUR_COUNTRY',
-        address: 'YOUR_ADDRESS',
-      },
-      contact: {
-        phone: '+49 ...',
-        email: 'contact@your-website.com',
-        contactPerson: 'CONTACT_NAME',
-      },
-      description: 'SHORT_DESCRIPTION_OF_SERVICES',
-      logoUrl: 'https://your-website.com/logo.png',
-    },
-    null,
-    2
-  );
-
-  const handleCopyTextTemplate = () => {
-    navigator.clipboard.writeText(rawTemplate);
-    setCopiedText(true);
-    setTimeout(() => setCopiedText(false), 2000);
+      setIsSuccess(true);
+    } catch (err: unknown) {
+      setErrorMessage(err instanceof Error ? err.message : isDe ? 'Fehler beim Einreichen.' : 'Submission failed.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleCopyAiTemplate = () => {
-    navigator.clipboard.writeText(aiJsonTemplate);
-    setCopiedAi(true);
-    setTimeout(() => setCopiedAi(false), 2000);
-  };
-
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       className="fixed inset-0 z-50 flex flex-col justify-end md:justify-center md:items-center bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in"
     >
-      <div className="absolute inset-0 -z-10" onClick={onClose} />
+      <div className="absolute inset-0 -z-10" onClick={handleClose} />
 
-      <div className="bg-white w-full md:max-w-lg md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden border border-[#E8ECF4]">
+      <div className="bg-white w-full md:max-w-2xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-[#E8ECF4]">
         {/* Mobile drag handle */}
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 md:hidden" />
 
         {/* Modal Header */}
-        <div className="px-6 py-3.5 border-b border-[#E8ECF4] flex items-center justify-between bg-white">
+        <div className="px-6 py-4 border-b border-[#E8ECF4] flex items-center justify-between bg-white">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-200">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>{t('addModal.verifiedBadge')}</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#145BFF] border border-blue-200">
+              <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+              <span>{isDe ? 'Unternehmen eintragen' : 'Add Business'}</span>
             </span>
           </div>
 
           <button
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Close"
             className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-gray-800 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
           >
@@ -132,282 +169,366 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
           </button>
         </div>
 
-        {/* Audience Segment Tabs (Business Owner vs AI Agent) */}
-        {!isSubmitted && (
-          <div className="px-6 pt-3 bg-white">
-            <div className="grid grid-cols-2 p-1 bg-[#F4F6FB] rounded-xl border border-[#E8ECF4] text-xs font-extrabold">
-              <button
-                type="button"
-                onClick={() => setActiveTab('human')}
-                className={`flex items-center justify-center gap-2 py-2 rounded-lg transition-all cursor-pointer ${
-                  activeTab === 'human'
-                    ? 'bg-white text-[#0D2B75] shadow-xs'
-                    : 'text-slate-500 hover:text-[#0D2B75]'
-                }`}
-              >
-                <User className="w-3.5 h-3.5 text-[#145BFF]" />
-                <span>Business Owner</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('ai')}
-                className={`flex items-center justify-center gap-2 py-2 rounded-lg transition-all cursor-pointer ${
-                  activeTab === 'ai'
-                    ? 'bg-white text-[#0D2B75] shadow-xs'
-                    : 'text-slate-500 hover:text-[#0D2B75]'
-                }`}
-              >
-                <Bot className="w-3.5 h-3.5 text-[#FF9F1A]" />
-                <span>AI Agent / Crawler</span>
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Modal Body */}
-        {isSubmitted ? (
-          <div className="p-6 overflow-y-auto space-y-5 animate-in fade-in duration-200">
-            {/* Confirmation Header */}
-            <div className="text-center space-y-2">
-              <div className="w-20 h-20 mx-auto drop-shadow-md">
-                <Mascot variant="celebrate" alt="Listing submission initiated" priority />
+        {/* Modal Content */}
+        <div className="p-6 overflow-y-auto space-y-6">
+          {isSuccess ? (
+            <div className="py-8 text-center space-y-4">
+              <div className="w-20 h-20 mx-auto">
+                <Mascot variant="celebrate" alt="Success" />
               </div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                <span>{t('addModal.submittedBadge')}</span>
-              </span>
-              <h3 className="font-heading font-black text-lg sm:text-xl text-[#0D2B75] tracking-tight">
-                {t('addModal.submittedTitle')}
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <ShieldCheck className="w-4 h-4" />
+                <span>{isDe ? 'Erfolgreich eingereicht' : 'Successfully Submitted'}</span>
+              </div>
+              <h3 className="font-heading font-black text-xl text-[#0D2B75]">
+                {isDe ? 'Vielen Dank für Ihre Registrierung!' : 'Thank you for your registration!'}
               </h3>
-              <p className="text-xs text-slate-600 font-medium max-w-sm mx-auto leading-relaxed">
-                {t('addModal.submittedSubtitle')}
+              <p className="text-xs text-gray-600 max-w-sm mx-auto leading-relaxed font-medium">
+                {isDe
+                  ? 'Ihr Unternehmenseintrag wurde in der Datenbank gespeichert und befindet sich im Status „Ausstehend“. Nach Prüfung durch den Administrator wird er im Verzeichnis freigeschaltet.'
+                  : 'Your business listing has been saved to the database in "Pending" status. After review by the administrator, it will be published to the directory.'}
               </p>
-            </div>
-
-            {/* Reciprocity Agency Card */}
-            <div className="rounded-2xl bg-gradient-to-br from-[#0D2B75] via-[#123E9B] to-[#0D2B75] text-white p-5 space-y-3.5 shadow-xl border border-blue-900/40">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/15 text-[#FF9F1A] border border-white/20">
-                  <Sparkles className="w-3 h-3" />
-                  <span>{t('addModal.pitchBadge')}</span>
-                </span>
-              </div>
-              <h4 className="text-sm sm:text-base font-extrabold font-heading text-white">
-                {t('addModal.pitchTitle')}
-              </h4>
-              <p className="text-xs text-blue-100/80 leading-relaxed">
-                {t('addModal.pitchDesc')}
-              </p>
-              <div className="space-y-2 pt-1">
-                <a
-                  href={siteConfig.urls.agencyServices}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#FF9F1A] hover:bg-amber-400 text-[#0D2B75] text-xs font-black flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 cursor-pointer"
-                >
-                  <span>{t('addModal.pitchExploreBtn')}</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-                <a
-                  href={siteConfig.urls.agencyContact}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-                >
-                  <span>{t('addModal.pitchConsultBtn')}</span>
-                  <ArrowUpRight className="w-4 h-4 opacity-80" />
-                </a>
-              </div>
-            </div>
-
-            {/* Controls */}
-            <div className="flex flex-col items-center gap-2 pt-1">
               <button
                 type="button"
-                onClick={onClose}
-                className="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors cursor-pointer"
+                onClick={handleClose}
+                className="mt-4 px-6 py-2.5 rounded-xl text-white text-xs font-bold shadow-md cursor-pointer transition-transform active:scale-95"
+                style={{ backgroundColor: primaryColor }}
               >
-                {t('addModal.pitchDoneBtn')}
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsSubmitted(false)}
-                className="text-[11px] text-slate-500 hover:text-slate-800 underline transition-colors cursor-pointer"
-              >
-                {t('addModal.viewTemplateAgain')}
+                {isDe ? 'Schließen' : 'Close'}
               </button>
             </div>
-          </div>
-        ) : (
-          <div className="p-6 overflow-y-auto space-y-5">
-            {activeTab === 'human' ? (
-              <>
-                {/* Clean Welcome Header */}
-                <div className="text-center space-y-1.5">
-                  <div className="w-16 h-16 mx-auto drop-shadow-sm">
-                    <Mascot variant="mail-send" alt="Mascot sending mail" priority />
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <h3 className="font-heading font-black text-lg text-[#0D2B75]">
+                  {isDe ? 'Neues Unternehmen registrieren' : 'Register New Business'}
+                </h3>
+                <p className="text-xs text-gray-500 mt-0.5 font-medium">
+                  {isDe
+                    ? 'Tragen Sie Ihre Geschäftsdaten vollständig ein, um beste Sichtbarkeit und Kundenanfragen zu erhalten.'
+                    : 'Submit your business details accurately to maximize visibility and receive customer inquiries.'}
+                </p>
+              </div>
+
+              {errorMessage && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium">
+                  {errorMessage}
+                </div>
+              )}
+
+              {/* SECTION 1: Unternehmensdaten & Logo */}
+              <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-4">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#145BFF] flex items-center gap-1.5">
+                  <Building2 className="w-3.5 h-3.5" />
+                  <span>{isDe ? 'Unternehmensdaten & Profil' : 'Company Details & Profile'}</span>
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Unternehmensname *' : 'Company Name *'}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder={isDe ? 'z. B. Nordible Technologies' : 'e.g., Nordible Technologies'}
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                    />
                   </div>
-                  <h3 className="font-heading font-black text-lg sm:text-xl text-[#0D2B75] tracking-tight">
-                    {t('addModal.title')}
-                  </h3>
-                  <p className="text-xs text-slate-600 font-medium max-w-sm mx-auto leading-relaxed">
-                    {t('addModal.subtitle')}
-                  </p>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Rechtsform' : 'Legal Form'}
+                    </label>
+                    <LegalFormAutocomplete
+                      value={formData.legalForm}
+                      onChange={(val) => setFormData({ ...formData, legalForm: val })}
+                    />
+                  </div>
                 </div>
 
-                {/* Compact 2-Column Checklist */}
-                <div className="bg-[#FAFBFF] rounded-2xl border border-[#E8ECF4] p-4 space-y-2.5">
-                  <span className="text-[11px] font-extrabold text-[#0D2B75] uppercase tracking-wider font-heading block">
-                    {t('addModal.infoNeeded')}
-                  </span>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 font-medium">
-                    <div className="flex items-center gap-2 p-1.5 bg-white rounded-lg border border-[#E8ECF4]">
-                      <Building2 className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
-                      <span className="truncate">{t('addModal.field1')}</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-1.5 bg-white rounded-lg border border-[#E8ECF4]">
-                      <Globe className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
-                      <span className="truncate">{t('addModal.field2')}</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-1.5 bg-white rounded-lg border border-[#E8ECF4]">
-                      <MapPin className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
-                      <span className="truncate">{t('addModal.field3')}</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-1.5 bg-white rounded-lg border border-[#E8ECF4]">
-                      <Phone className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
-                      <span className="truncate">{t('addModal.field4')}</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-1.5 bg-white rounded-lg border border-[#E8ECF4]">
-                      <FileText className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
-                      <span className="truncate">{t('addModal.field5')}</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-1.5 bg-white rounded-lg border border-[#E8ECF4]">
-                      <ImageIcon className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
-                      <span className="truncate">{t('addModal.field6')}</span>
-                    </div>
-                  </div>
+                {/* Dynamic Category Autocomplete */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    {isDe
+                      ? 'Branche / Kategorie * (auswählen oder frei eingeben)'
+                      : 'Industry / Category * (select or type new)'}
+                  </label>
+                  <CategoryAutocomplete
+                    value={formData.categoryName}
+                    onChange={(cat) =>
+                      setFormData({
+                        ...formData,
+                        categoryId: cat.id || '',
+                        categoryName: cat.name,
+                      })
+                    }
+                  />
                 </div>
 
-                {/* Dual Action Buttons */}
-                <div className="space-y-2 pt-1">
-                  <a
-                    href={mailtoUrl}
-                    onClick={() => setIsSubmitted(true)}
-                    className="w-full py-3.5 px-4 rounded-xl text-white text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 transition-all hover:opacity-95 active:scale-98 cursor-pointer"
-                    style={{ backgroundColor: primaryColor }}
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span>{t('addModal.sendEmailBtn')}</span>
-                    <ArrowRight className="w-4 h-4 ml-1 opacity-80" />
-                  </a>
-
-                  <button
-                    type="button"
-                    onClick={handleCopyTextTemplate}
-                    className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#F3F7FF] border border-[#E8ECF4] text-[#0D2B75] text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
-                  >
-                    {copiedText ? (
-                      <>
-                        <Check className="w-4 h-4 text-emerald-600" />
-                        <span className="text-emerald-700">{t('addModal.copied')}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4 text-slate-500" />
-                        <span>{t('addModal.copyEmailBtn')} ({siteConfig.contact.email})</span>
-                      </>
-                    )}
-                  </button>
-
-                  <div className="text-center pt-1">
-                    <button
-                      type="button"
-                      onClick={() => setIsSubmitted(true)}
-                      className="text-[11px] text-slate-500 hover:text-[#145BFF] underline transition-colors cursor-pointer"
-                    >
-                      Already sent your email? View confirmation & next steps →
-                    </button>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                {/* AI Agent / Crawler Protocol Screen */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#0D2B75] text-white">
-                      <Bot className="w-3 h-3 text-[#FF9F1A]" />
-                      <span>{t('addModal.aiAgentBadge')}</span>
-                    </span>
-                    <span className="text-xs font-mono font-bold text-[#145BFF]">
-                      {siteConfig.contact.email}
-                    </span>
-                  </div>
-
-                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                    {t('addModal.aiAgentNotice')}
-                  </p>
-
-                  {/* Pre-formatted JSON code preview */}
-                  <div className="relative bg-slate-900 text-slate-200 rounded-xl p-3.5 text-[11px] font-mono overflow-x-auto max-h-48 border border-slate-800">
-                    <pre className="leading-tight">{aiJsonTemplate}</pre>
-                  </div>
-
-                  {/* Actions for AI & Automated Workflows */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={handleCopyAiTemplate}
-                      className="py-2.5 px-3 rounded-xl bg-white hover:bg-[#F3F7FF] border border-[#E8ECF4] text-[#0D2B75] text-xs font-bold flex items-center justify-center gap-2 shadow-2xs transition-all active:scale-95 cursor-pointer"
-                    >
-                      {copiedAi ? (
-                        <>
-                          <Check className="w-4 h-4 text-emerald-600" />
-                          <span className="text-emerald-700">{t('addModal.copiedAiTemplate')}</span>
-                        </>
+                {/* Business Logo URL with Live Preview */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    {isDe
+                      ? 'Firmenlogo URL (optional Bildlink)'
+                      : 'Company Logo URL (optional image link)'}
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <div className="relative flex-1">
+                      <ImageIcon className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 pointer-events-none" />
+                      <input
+                        type="url"
+                        value={formData.logoUrl}
+                        onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })}
+                        placeholder="https://example.com/logo.png"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      />
+                    </div>
+                    {/* Live Thumbnail Preview */}
+                    <div className="w-9 h-9 rounded-xl border border-[#E8ECF4] bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-2xs">
+                      {formData.logoUrl ? (
+                        <Image
+                          src={formData.logoUrl}
+                          alt="Logo Preview"
+                          width={36}
+                          height={36}
+                          className="w-full h-full object-cover"
+                          unoptimized
+                        />
                       ) : (
-                        <>
-                          <Copy className="w-4 h-4 text-[#145BFF]" />
-                          <span>{t('addModal.copyAiTemplate')}</span>
-                        </>
+                        <Building2 className="w-4 h-4 text-gray-300" />
                       )}
-                    </button>
-
-                    <a
-                      href={`mailto:${siteConfig.contact.email}?subject=%5BAI%20Agent%20Listing%20Request%5D&body=${encodeURIComponent(aiJsonTemplate)}`}
-                      onClick={() => setIsSubmitted(true)}
-                      className="py-2.5 px-3 rounded-xl bg-[#0D2B75] hover:bg-[#145BFF] text-white text-xs font-bold flex items-center justify-center gap-2 transition-all active:scale-95 text-center cursor-pointer"
-                    >
-                      <Mail className="w-4 h-4 text-[#FF9F1A]" />
-                      <span>Send JSON Email</span>
-                    </a>
-                  </div>
-
-                  <div className="text-center pt-1">
-                    <a
-                      href="/llms.txt"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#145BFF] hover:underline"
-                    >
-                      <span>View Machine-Readable Protocol (/llms.txt)</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
+                    </div>
                   </div>
                 </div>
-              </>
-            )}
-          </div>
-        )}
+              </div>
 
-        {/* Modal Footer */}
-        {!isSubmitted && (
-          <div className="px-6 py-2.5 bg-[#FAFBFF] border-t border-[#E8ECF4] text-center text-[11px] text-slate-500 font-medium">
-            {t('addModal.footerNotice')}
-          </div>
-        )}
+              {/* SECTION 2: Standort & Granulare Anschrift */}
+              <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-4">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#145BFF] flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>{isDe ? 'Standort & Adresse' : 'Location & Address'}</span>
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Straße & Hausnummer *' : 'Street & Number *'}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.address}
+                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                      placeholder={isDe ? 'z. B. Taunusanlage 8' : 'e.g. 100 Main Street'}
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Postleitzahl (PLZ)' : 'Postal Code (ZIP)'}
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.postalCode}
+                      onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+                      placeholder={isDe ? 'z. B. 60329' : 'e.g. 10001'}
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Stadt / Ort *' : 'City *'}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.city}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      placeholder={isDe ? 'z. B. Frankfurt am Main' : 'e.g. Berlin'}
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Bundesland / Region' : 'State / Region'}
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.state}
+                      onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                      placeholder={isDe ? 'z. B. Hessen' : 'e.g. Bavaria'}
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Land' : 'Country'}
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.country}
+                      onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                      placeholder={isDe ? 'z. B. Deutschland, Österreich, USA...' : 'e.g. Germany, United States, UK...'}
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* SECTION 3: Kontakt & Kommunikation */}
+              <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-4">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#145BFF] flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>{isDe ? 'Kontaktkanäle für Kunden' : 'Customer Contact Channels'}</span>
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Geschäfts-E-Mail (für Anfragen)' : 'Business Email (for inquiries)'}
+                    </label>
+                    <div className="relative">
+                      <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="contact@company.com"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Telefonnummer' : 'Phone Number'}
+                    </label>
+                    <PhoneInputWithCountry
+                      value={formData.phone}
+                      onChange={(val) => setFormData({ ...formData, phone: val })}
+                      placeholder={isDe ? '1521 1234567' : '555 123 4567'}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isDe ? 'Webseite' : 'Website'}
+                    </label>
+                    <div className="relative">
+                      <Globe className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
+                      <input
+                        type="url"
+                        value={formData.website}
+                        onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                        placeholder="https://..."
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SECTION 4: 7-Tage Öffnungszeiten */}
+              <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-3">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#145BFF]">
+                  {isDe ? 'Öffnungszeiten (7 Tage / Woche)' : 'Opening Hours (7 Days / Week)'}
+                </h4>
+                <OpeningHoursPicker
+                  value={openingHoursJson}
+                  onChange={(val) => setOpeningHoursJson(val)}
+                />
+              </div>
+
+              {/* SECTION 5: Leistungsbeschreibung */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">
+                  {isDe
+                    ? 'Beschreibung der Dienstleistungen & Spezialisierungen'
+                    : 'Description of Services & Specialties'}
+                </label>
+                <textarea
+                  rows={3}
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  placeholder={
+                    isDe
+                      ? 'Beschreiben Sie Ihre Kernleistungen, Produkte, Zielgruppen und Schwerpunkte...'
+                      : 'Describe your core services, specialties, target audiences, and products...'
+                  }
+                  className="w-full p-3 text-xs rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] transition-all font-medium text-slate-800 resize-none"
+                />
+              </div>
+
+              {/* SECTION 6: Wachstumsstrategie & Ressourcen */}
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50/80 via-white to-blue-50/40 border border-blue-200/70 shadow-xs">
+                <label className="flex items-start gap-3 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={wantsGrowthResource}
+                    onChange={(e) => setWantsGrowthResource(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded border-gray-300 text-[#145BFF] focus:ring-[#145BFF] accent-[#145BFF] cursor-pointer"
+                  />
+                  <div className="space-y-1">
+                    <span className="text-xs font-extrabold text-[#0D2B75] flex items-center gap-1.5">
+                      <TrendingUp className="w-3.5 h-3.5 text-[#145BFF]" />
+                      <span>
+                        {isDe
+                          ? 'Kostenlose Wachstumsstrategie & Ressourcen erhalten'
+                          : 'Receive Free Growth Strategy & Resources'}
+                      </span>
+                    </span>
+                    <p className="text-[11px] text-slate-600 leading-relaxed font-medium">
+                      {isDe
+                        ? 'Möchten Sie praxiserprobte Strategien und Ressourcen erhalten, um Ihren Kundenstamm, Ihre digitale Reichweite und Ihren Umsatz nachhaltig zu steigern? Wir senden Ihnen das Material unverbindlich zu.'
+                        : 'Would you like to receive proven strategies and resources to sustainably increase your customer reach and revenue? We will send the materials free of charge.'}
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              {/* Submit Action */}
+              <div className="pt-2 flex items-center justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  className="px-4 py-2.5 rounded-xl border border-[#E8ECF4] text-xs font-bold text-slate-600 hover:bg-[#F3F7FF] transition-colors cursor-pointer"
+                >
+                  {isDe ? 'Abbrechen' : 'Cancel'}
+                </button>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-white text-xs font-extrabold shadow-md transition-transform active:scale-95 disabled:opacity-50 cursor-pointer"
+                  style={{ backgroundColor: primaryColor }}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>{isDe ? 'Wird gespeichert...' : 'Submitting...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>{isDe ? 'Eintrag zur Prüfung einreichen' : 'Submit Listing for Review'}</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

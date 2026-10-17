@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
-import { Check, Sparkles, X, CreditCard, Shield, Globe, ArrowRight, Loader2 } from 'lucide-react';
+import { siteConfig } from '@/config/site';
+import { Check, Sparkles, X, CreditCard, Shield, Globe, Mail, Copy, ExternalLink } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
 
 interface PricingModalProps {
@@ -18,33 +19,14 @@ export const PricingModal: React.FC<PricingModalProps> = ({
   primaryColor,
   onOpenDomainSettings,
 }) => {
-  const { t } = useTranslation();
+  const { locale, t } = useTranslation();
+  const isDe = locale === 'de';
+
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [selectedPlanId, setSelectedPlanId] = useState<'starter' | 'pro' | 'enterprise'>('pro');
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
   if (!isOpen) return null;
-
-  const handleSelectPlan = async (planId: 'starter' | 'pro' | 'enterprise') => {
-    setLoadingPlan(planId);
-    try {
-      const res = await fetch('/api/billing/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId, billingCycle }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        setTimeout(() => {
-          setLoadingPlan(null);
-          alert(t('pricing.checkoutSuccess', { plan: planId.toUpperCase(), cycle: billingCycle }));
-          onClose();
-        }, 800);
-      }
-    } catch {
-      setLoadingPlan(null);
-      alert(t('pricing.checkoutError'));
-    }
-  };
 
   const plans = [
     {
@@ -94,6 +76,27 @@ export const PricingModal: React.FC<PricingModalProps> = ({
       isPopular: false,
     },
   ];
+
+  const currentPlan = plans.find((p) => p.id === selectedPlanId) || plans[1];
+  const cycleLabel = billingCycle === 'yearly' ? (isDe ? 'Jährlich' : 'Yearly') : (isDe ? 'Monatlich' : 'Monthly');
+
+  const emailSubject = isDe
+    ? `Partner-Tarif Anfrage: ${currentPlan.name} (${cycleLabel})`
+    : `Partner Plan Inquiry: ${currentPlan.name} (${cycleLabel})`;
+
+  const emailBody = isDe
+    ? `Hallo Nordible-Team,\n\nich interessiere mich für den Partner-Tarif: ${currentPlan.name}\nAbrechnungszyklus: ${cycleLabel}\nUnternehmen / Wunsch-Domain:\n`
+    : `Hello Nordible Team,\n\nI am interested in subscribing to the Partner Plan: ${currentPlan.name}\nBilling Cycle: ${cycleLabel}\nOrganization / Custom Domain:\n`;
+
+  const mailtoUrl = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+  const copyToClipboard = (text: string) => {
+    if (typeof window !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    }
+  };
 
   return (
     <div
@@ -167,20 +170,23 @@ export const PricingModal: React.FC<PricingModalProps> = ({
           </div>
 
           {/* Pricing Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
             {plans.map((plan) => {
               const price = billingCycle === 'yearly' ? plan.priceYearly : plan.priceMonthly;
-              const isSelectedLoading = loadingPlan === plan.id;
+              const isSelected = selectedPlanId === plan.id;
 
               return (
                 <div
                   key={plan.id}
-                  className={`rounded-2xl p-5 border flex flex-col justify-between transition-all ${
-                    plan.isPopular
-                      ? 'border-2 shadow-lg relative bg-white'
+                  onClick={() => setSelectedPlanId(plan.id)}
+                  className={`rounded-2xl p-5 border flex flex-col justify-between transition-all cursor-pointer ${
+                    isSelected
+                      ? 'border-2 shadow-lg relative bg-white ring-2 ring-blue-500/20'
+                      : plan.isPopular
+                      ? 'border-2 shadow-md relative bg-white'
                       : 'border-[#E8ECF4] bg-[#FAFBFF] hover:bg-white'
                   }`}
-                  style={plan.isPopular ? { borderColor: primaryColor } : {}}
+                  style={isSelected || plan.isPopular ? { borderColor: primaryColor } : {}}
                 >
                   {plan.isPopular && (
                     <>
@@ -223,31 +229,74 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                   <div className="mt-6 pt-4 border-t border-[#E8ECF4]">
                     <button
                       type="button"
-                      disabled={isSelectedLoading}
-                      onClick={() => handleSelectPlan(plan.id)}
-                      className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-98 cursor-pointer disabled:opacity-50 ${
-                        plan.isPopular
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedPlanId(plan.id);
+                      }}
+                      className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-98 cursor-pointer ${
+                        isSelected
                           ? 'text-white shadow-md'
-                          : 'bg-[#0D2B75] text-white hover:bg-[#145BFF]'
+                          : 'bg-[#F3F7FF] text-[#0D2B75] hover:bg-[#145BFF] hover:text-white border border-[#E8ECF4]'
                       }`}
-                      style={plan.isPopular ? { backgroundColor: primaryColor } : {}}
+                      style={isSelected ? { backgroundColor: primaryColor } : {}}
                     >
-                      {isSelectedLoading ? (
-                        <>
-                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                          <span>{t('pricing.redirectingStripe')}</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>{t('pricing.subscribe')}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </>
-                      )}
+                      <span>{isSelected ? (isDe ? 'Ausgewählt' : 'Selected') : (isDe ? 'Diesen Tarif wählen' : 'Choose Plan')}</span>
                     </button>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Concierge Activation Box for Selected Plan */}
+          <div className="bg-gradient-to-br from-[#FAFBFF] to-[#F3F7FF] border border-[#D5E1F8] rounded-2xl p-5 shadow-xs space-y-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-[#145BFF]/10 text-[#145BFF] flex items-center justify-center">
+                <Mail className="w-4 h-4 text-[#145BFF]" />
+              </div>
+              <div>
+                <h4 className="font-heading font-extrabold text-sm text-[#0D2B75]">
+                  {isDe
+                    ? `Tarif „${currentPlan.name}“ buchen / freischalten`
+                    : `Subscribe to "${currentPlan.name}"`}
+                </h4>
+                <p className="text-xs text-gray-600">
+                  {isDe
+                    ? 'Unser Team richtet Ihren Partner-Account, Ihre Lizenz und Ihre Wunsch-Domain direkt für Sie ein. Senden Sie uns einfach eine E-Mail:'
+                    : 'Our team will set up your partner account, directory license, and custom domain directly for you. Send us an email:'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <a
+                href={mailtoUrl}
+                className="flex-1 py-3 px-4 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 active:scale-98 transition-all"
+                style={{ backgroundColor: primaryColor }}
+              >
+                <Mail className="w-4 h-4" />
+                <span>
+                  {isDe
+                    ? `Tarif „${currentPlan.name}“ per E-Mail anfragen`
+                    : `Inquire about "${currentPlan.name}" via Email`}
+                </span>
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+              </a>
+
+              <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white border border-[#E8ECF4] text-xs">
+                <span className="font-mono font-bold text-[#0D2B75] text-xs mr-3">
+                  {siteConfig.contact.email}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(siteConfig.contact.email)}
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#145BFF] hover:text-[#0D2B75] transition-colors cursor-pointer"
+                >
+                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedEmail ? (isDe ? 'Kopiert' : 'Copied') : (isDe ? 'Kopieren' : 'Copy')}</span>
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Custom Domain & SSL Direct Shortcut */}

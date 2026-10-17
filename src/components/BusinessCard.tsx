@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BusinessListing } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
+import { getBusinessPermalink } from '@/lib/permalinks';
+import { isBusinessOpenNow } from '@/lib/openingHours';
 import { Star, ShieldCheck, MapPin, Phone, Globe, ChevronDown, ChevronUp, Clock, Settings, ArrowRight } from 'lucide-react';
 
 interface BusinessCardProps {
@@ -27,20 +29,37 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
   const { locale, t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const openStatus = isBusinessOpenNow(listing, locale);
 
   return (
     <article className="bg-white rounded-2xl border border-[#E8ECF4] p-5 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between hover:border-[#145BFF]/30">
       <div>
         {/* Top badges */}
         <div className="flex items-center justify-between gap-2 mb-3">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4]">
-            {categoryName}
-          </span>
-          {listing.isVerified && (
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4]">
+              {listing.categoryName || categoryName}
+            </span>
+            {listing.legalForm && (
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                {listing.legalForm}
+              </span>
+            )}
+          </div>
+          {listing.isVerified ? (
             <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
               <ShieldCheck className="w-3.5 h-3.5" />
               {t('listing.verified')}
             </span>
+          ) : (
+            <button
+              type="button"
+              onClick={() => onClaimListing?.(listing)}
+              className="flex items-center gap-1 text-[11px] font-medium text-amber-800 bg-amber-50 hover:bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200 transition-colors cursor-pointer"
+              title={t('business.claimListing')}
+            >
+              <span>{t('business.unverifiedBadge')}</span>
+            </button>
           )}
         </div>
 
@@ -66,7 +85,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
 
           <div className="min-w-0 flex-1">
             <Link
-              href={`/${locale}/directory/${listing.slug || listing.id}`}
+              href={getBusinessPermalink(listing, locale)}
               className="group/title block"
             >
               <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] group-hover/title:text-[#145BFF] transition-colors tracking-tight leading-snug">
@@ -75,26 +94,38 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
             </Link>
 
             <div className="flex flex-wrap items-center gap-1.5 mt-1">
-              <button
-                type="button"
-                onClick={() => onOpenReviews?.(listing)}
-                className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer group"
-              >
-                <div className="flex items-center text-[#FF9F1A]">
-                  <Star className="w-3.5 h-3.5 fill-[#FF9F1A] text-[#FF9F1A]" />
-                  <span className="ml-1 text-xs font-bold text-[#0D2B75] group-hover:underline">
-                    {listing.rating.toFixed(1)}
-                  </span>
-                </div>
-                <span className="text-[11px] text-gray-400 font-normal">({listing.reviewCount})</span>
-              </button>
+              {listing.reviewCount > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => onOpenReviews?.(listing)}
+                  className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer group"
+                >
+                  <div className="flex items-center text-[#FF9F1A]">
+                    <Star className="w-3.5 h-3.5 fill-[#FF9F1A] text-[#FF9F1A]" />
+                    <span className="ml-1 text-xs font-bold text-[#0D2B75] group-hover:underline">
+                      {listing.rating.toFixed(1)}
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-gray-400 font-normal">({listing.reviewCount})</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => onOpenReviews?.(listing)}
+                  className="flex items-center gap-1 text-[11px] text-gray-400 hover:text-[#145BFF] transition-colors cursor-pointer group"
+                  title={t('business.writeReview')}
+                >
+                  <Star className="w-3 h-3 text-gray-300 group-hover:text-[#FF9F1A]" />
+                  <span className="group-hover:underline">{t('business.noReviews')}</span>
+                </button>
+              )}
               <span className="text-xs text-gray-300">•</span>
               <span
                 className={`text-[11px] font-semibold ${
-                  listing.isOpenNow ? 'text-emerald-600' : 'text-rose-500'
+                  openStatus.isOpen ? 'text-emerald-600' : 'text-rose-500'
                 }`}
               >
-                • {listing.isOpenNow ? t('listing.openNow') : t('listing.closed')}
+                • {openStatus.isOpen ? t('listing.openNow') : t('listing.closed')}
               </span>
             </div>
           </div>
@@ -105,11 +136,30 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
           {listing.description[locale] || listing.description.en || listing.description.de}
         </p>
 
+        {/* Services Badges (from Database) */}
+        {listing.services && listing.services.length > 0 && (
+          <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
+            {listing.services.slice(0, 2).map((srv, idx) => (
+              <span
+                key={idx}
+                className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4]"
+              >
+                {srv}
+              </span>
+            ))}
+            {listing.services.length > 2 && (
+              <span className="text-[10px] text-gray-400 font-medium">
+                +{listing.services.length - 2}
+              </span>
+            )}
+          </div>
+        )}
+
         {/* Address */}
         <div className="flex items-center gap-1.5 mt-3 text-xs text-gray-600">
           <MapPin className="w-4 h-4 text-[#145BFF] shrink-0" />
           <span>
-            {listing.address}, {listing.city}
+            {listing.address}, {[listing.postalCode, listing.city].filter(Boolean).join(' ')}
           </span>
         </div>
 
@@ -120,6 +170,11 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
               <Clock className="w-4 h-4 text-gray-500 shrink-0" />
               <span>
                 <strong className="text-[#0D2B75]">{t('listing.openingHours')}:</strong> {listing.hours}
+                {openStatus.localTime && (
+                  <span className="text-gray-400 text-[11px] ml-1.5 font-medium">
+                    ({t('business.localTimeLabel', { location: openStatus.locationName })} {openStatus.localTime})
+                  </span>
+                )}
               </span>
             </div>
 
@@ -194,7 +249,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
 
         <div className="flex items-center gap-2">
           <Link
-            href={`/${locale}/directory/${listing.slug || listing.id}`}
+            href={getBusinessPermalink(listing, locale)}
             className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-[#145BFF] bg-blue-50/70 hover:bg-blue-100/80 transition-colors"
           >
             <span>{t('listing.viewProfile')}</span>

@@ -1,8 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from '@/lib/i18n';
 import { BusinessListing, Category } from '@/lib/types';
+import { PhoneInputWithCountry } from '@/components/PhoneInputWithCountry';
+
+const emptySubscribe = () => () => {};
 import {
   Sparkles,
   X,
@@ -11,7 +15,6 @@ import {
   CheckCircle2,
   Building,
   MapPin,
-  Phone,
   Clock,
   ArrowRight,
   RefreshCw,
@@ -69,7 +72,13 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
     }
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+
+  if (!isOpen || !isMounted) return null;
 
   const handleStartExtraction = async (
     overrideUrl?: string,
@@ -108,14 +117,14 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           setExtractedListing(data.listing);
           setStep('review');
         } else {
-          alert('Fehler bei der Extraktion');
+          alert(locale === 'de' ? 'Fehler bei der Extraktion' : 'Error during extraction');
           setStep('input');
         }
       }, 2000);
     } catch {
       clearTimeout(t1);
       clearTimeout(t2);
-      alert('Verbindungsfehler beim Extrahieren');
+      alert(locale === 'de' ? 'Verbindungsfehler beim Extrahieren' : 'Connection error during extraction');
       setStep('input');
     }
   };
@@ -145,12 +154,16 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
 
   const handleConfirmListing = () => {
     if (extractedListing) {
-      onListingCreated(extractedListing);
+      const rawWeb = extractedListing.website?.trim() || '';
+      const normalizedWeb = rawWeb
+        ? (/^https?:\/\//i.test(rawWeb) ? rawWeb : `https://${rawWeb}`)
+        : '';
+      onListingCreated({ ...extractedListing, website: normalizedWeb });
       onClose();
     }
   };
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -288,31 +301,41 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               {activeTab === 'prompt' && (
                 <div className="space-y-3">
                   <label className="block text-xs font-bold text-[#0D2B75]">
-                    Freitext oder KI-Prompt (auch für KI-Agenten)
+                    {locale === 'de'
+                      ? 'Freitext oder KI-Prompt (auch für KI-Agenten)'
+                      : 'Free text or AI prompt (also for AI agents)'}
                   </label>
                   <textarea
                     rows={4}
                     value={promptInput}
                     onChange={(e) => setPromptInput(e.target.value)}
-                    placeholder="z.B. Trage Nordible Technologies ein: Software-Agentur aus Frankfurt am Main, Web: https://nordible.co, Tel: +49 69 9999 8888, Spezialisiert auf KI-Agenten und Webplattformen."
+                    placeholder={
+                      locale === 'de'
+                        ? 'z.B. Trage Nordible Technologies ein: Software-Agentur aus Frankfurt am Main, Web: https://nordible.co, Tel: +49 69 9999 8888, Spezialisiert auf KI-Agenten und Webplattformen.'
+                        : 'e.g. Add Nordible Technologies: Software agency from Frankfurt, Web: https://nordible.co, Tel: +49 69 9999 8888, Specializing in AI agents and web platforms.'
+                    }
                     className="w-full p-3 bg-[#FAFBFF] border border-[#E8ECF4] rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium leading-relaxed"
                   />
 
                   {/* Sample Prompt Chips */}
                   <div className="pt-1">
                     <span className="text-[11px] font-bold text-gray-600 block mb-1.5">
-                      Prompt-Beispiel testen:
+                      {locale === 'de' ? 'Prompt-Beispiel testen:' : 'Try sample prompt:'}
                     </span>
                     <button
                       type="button"
                       onClick={() =>
                         handleApplyPromptSample(
-                          'Trage Nordible Technologies ein: AI & Software Engineering Agentur aus Frankfurt, Web: https://nordible.co, Tel: +49 69 9999 8888'
+                          locale === 'de'
+                            ? 'Trage Nordible Technologies ein: AI & Software Engineering Agentur aus Frankfurt, Web: https://nordible.co, Tel: +49 69 9999 8888'
+                            : 'Add Nordible Technologies: AI & Software Engineering agency from Frankfurt, Web: https://nordible.co, Tel: +49 69 9999 8888'
                         )
                       }
                       className="px-3 py-1.5 text-xs bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4] rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-semibold text-left block"
                     >
-                      🤖 „Trage Nordible Technologies ein: Software & KI-Agentur aus Frankfurt...“
+                      {locale === 'de'
+                        ? '🤖 „Trage Nordible Technologies ein: Software & KI-Agentur aus Frankfurt...“'
+                        : '🤖 "Add Nordible Technologies: Software & AI agency from Frankfurt..."'}
                     </button>
                   </div>
                 </div>
@@ -333,7 +356,9 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       {t('aiModal.uploadPlaceholder')}
                     </p>
                     <p className="text-[11px] text-gray-500 mt-1">
-                      Klicken zum Hochladen oder hier ablegen
+                      {locale === 'de'
+                        ? 'Klicken zum Hochladen oder hier ablegen'
+                        : 'Click to upload or drag & drop here'}
                     </p>
                   </div>
                 </div>
@@ -353,7 +378,9 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   {t('aiModal.analyzing')}
                 </h4>
                 <p className="text-xs text-gray-500 mt-1">
-                  Extraktion läuft automatisch im Hintergrund
+                  {locale === 'de'
+                    ? 'Extraktion läuft automatisch im Hintergrund'
+                    : 'Extraction is running automatically in the background'}
                 </p>
               </div>
 
@@ -420,7 +447,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   className="text-xs font-semibold text-gray-500 hover:text-[#145BFF] flex items-center gap-1 cursor-pointer"
                 >
                   <RefreshCw className="w-3 h-3" />
-                  <span>Neu erfassen</span>
+                  <span>{locale === 'de' ? 'Neu erfassen' : 'Reset / Start over'}</span>
                 </button>
               </div>
 
@@ -513,20 +540,15 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                     <label className="block text-[11px] font-bold text-gray-600 mb-1">
                       {t('aiModal.phone')}
                     </label>
-                    <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
-                      <Phone className="w-4 h-4 text-gray-400 mr-1.5 shrink-0" />
-                      <input
-                        type="text"
-                        value={extractedListing.phone}
-                        onChange={(e) =>
-                          setExtractedListing({
-                            ...extractedListing,
-                            phone: e.target.value,
-                          })
-                        }
-                        className="w-full text-xs font-medium text-gray-900 focus:outline-none"
-                      />
-                    </div>
+                    <PhoneInputWithCountry
+                      value={extractedListing.phone}
+                      onChange={(val) =>
+                        setExtractedListing({
+                          ...extractedListing,
+                          phone: val,
+                        })
+                      }
+                    />
                   </div>
 
                   <div>
@@ -572,7 +594,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
 
                 <div>
                   <label className="block text-[11px] font-bold text-gray-600 mb-1">
-                    {t('aiModal.descDe')}
+                    {locale === 'de' ? t('aiModal.descDe') : 'Description'}
                   </label>
                   <textarea
                     rows={2}
@@ -626,7 +648,9 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
 
           {step === 'processing' && (
             <div className="w-full text-center text-xs font-semibold text-[#0D2B75] py-1">
-              KI analysiert und formatiert die Daten...
+              {locale === 'de'
+                ? 'KI analysiert und formatiert die Daten...'
+                : 'AI is analyzing and formatting the data...'}
             </div>
           )}
 
@@ -653,6 +677,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

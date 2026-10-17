@@ -27,7 +27,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
   currentTenant,
   onSaveTenant,
 }) => {
-  const { t } = useTranslation();
+  const { locale, t } = useTranslation();
 
   const [name, setName] = useState(currentTenant.name);
   const [taglineDe, setTaglineDe] = useState(currentTenant.tagline.de);
@@ -168,7 +168,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
               </div>
               <div>
                 <div className="font-bold text-sm text-gray-900">{name || t('brand.defaultName')}</div>
-                <div className="text-xs text-gray-600 line-clamp-1">{taglineDe || t('brand.defaultTagline')}</div>
+                <div className="text-xs text-gray-600 line-clamp-1">{(locale === 'de' ? taglineDe : taglineEn) || t('brand.defaultTagline')}</div>
               </div>
             </div>
           </div>

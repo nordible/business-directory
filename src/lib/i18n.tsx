@@ -19,8 +19,8 @@ import guDict from '@/locales/gu.json';
 import heDict from '@/locales/he.json';
 import urDict from '@/locales/ur.json';
 import faDict from '@/locales/fa.json';
-import { Locale, LanguageOption, SUPPORTED_LANGUAGES, SUPPORTED_LOCALES, RTL_LOCALES } from './types';
-export { SUPPORTED_LANGUAGES, SUPPORTED_LOCALES, RTL_LOCALES };
+import { Locale, LanguageOption, SUPPORTED_LANGUAGES, SUPPORTED_LOCALES, RTL_LOCALES, DISPLAYED_LANGUAGES } from './types';
+export { SUPPORTED_LANGUAGES, SUPPORTED_LOCALES, RTL_LOCALES, DISPLAYED_LANGUAGES };
 export type { LanguageOption };
 
 type Translations = typeof enDict;

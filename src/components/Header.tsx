@@ -3,8 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { TenantBranding, Locale } from '@/lib/types';
-import { useTranslation, SUPPORTED_LANGUAGES } from '@/lib/i18n';
+import { TenantBranding, Locale, LanguageOption } from '@/lib/types';
+import { useTranslation, SUPPORTED_LANGUAGES, DISPLAYED_LANGUAGES } from '@/lib/i18n';
 import { Globe, PlusCircle, ChevronDown, Compass } from 'lucide-react';
 
 import { siteConfig } from '@/config/site';
@@ -56,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({
                 rel="noopener noreferrer"
                 className="rounded-full bg-slate-100 hover:bg-[#F3F7FF] border border-[#E8ECF4] px-2 py-0.5 text-[10px] font-bold text-slate-600 hover:text-[#145BFF] transition-colors hidden sm:inline-block"
               >
-                by {siteConfig.appNameShort}
+                {t('nav.by', { name: siteConfig.appNameShort })}
               </a>
               {siteConfig.isBeta && (
                 <span
@@ -105,11 +105,19 @@ export const Header: React.FC<HeaderProps> = ({
               aria-label="Select Language / Sprache wählen"
               className="appearance-none pl-7 pr-6 py-1.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] text-xs font-extrabold text-[#0D2B75] hover:bg-white hover:border-[#145BFF]/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#145BFF] cursor-pointer"
             >
-              {SUPPORTED_LANGUAGES.map((lang) => (
-                <option key={lang.code} value={lang.code}>
-                  {lang.flag} {lang.name}
-                </option>
-              ))}
+              {(() => {
+                const options = DISPLAYED_LANGUAGES.some((l) => l.code === locale)
+                  ? DISPLAYED_LANGUAGES
+                  : [
+                      ...DISPLAYED_LANGUAGES,
+                      SUPPORTED_LANGUAGES.find((l) => l.code === locale),
+                    ].filter((l): l is LanguageOption => Boolean(l));
+                return options.map((lang) => (
+                  <option key={lang.code} value={lang.code}>
+                    {lang.flag} {lang.name}
+                  </option>
+                ));
+              })()}
             </select>
             <ChevronDown className="w-3 h-3 text-slate-400 absolute right-2 pointer-events-none" />
           </div>

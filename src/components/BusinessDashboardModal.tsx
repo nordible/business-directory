@@ -1,51 +1,60 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from '@/lib/i18n';
 import { BusinessListing } from '@/lib/types';
-import { LayoutDashboard, X, Clock, Phone, Globe, MapPin, CheckCircle, Save } from 'lucide-react';
+import { siteConfig } from '@/config/site';
+import { getBusinessPermalink } from '@/lib/permalinks';
+import { Settings, X, Mail, Copy, Check, Sparkles, ExternalLink } from 'lucide-react';
+
+const emptySubscribe = () => () => {};
 
 interface BusinessDashboardModalProps {
   isOpen: boolean;
   onClose: () => void;
   listing: BusinessListing | null;
-  primaryColor: string;
-  onSaveListing: (updated: BusinessListing) => void;
+  primaryColor?: string;
+  onSaveListing?: (updated: BusinessListing) => void;
 }
 
 export const BusinessDashboardModal: React.FC<BusinessDashboardModalProps> = ({
   isOpen,
   onClose,
   listing,
-  primaryColor,
-  onSaveListing,
+  primaryColor = '#145BFF',
 }) => {
   const { locale, t } = useTranslation();
-  const [prevListingId, setPrevListingId] = useState<string | undefined>(listing?.id);
-  const [formData, setFormData] = useState<BusinessListing | null>(listing);
-  const [savedSuccess, setSavedSuccess] = useState(false);
 
-  // Sync state during render when listing prop changes
-  if (listing && listing.id !== prevListingId) {
-    setPrevListingId(listing.id);
-    setFormData(listing);
-    setSavedSuccess(false);
-  }
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
-  if (!isOpen || !formData) return null;
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData) return;
-    onSaveListing(formData);
-    setSavedSuccess(true);
-    setTimeout(() => {
-      setSavedSuccess(false);
-      onClose();
-    }, 1200);
+  if (!isOpen || !listing || !isMounted) return null;
+
+  const businessUrl = typeof window !== 'undefined'
+    ? window.location.href
+    : `${siteConfig.urls.base}${getBusinessPermalink(listing, locale)}`;
+
+  const emailSubject = t('business.updateEmailSubject', { name: listing.name });
+
+  const emailBody = `Business: ${listing.name}\nURL: ${businessUrl}\n\nI would like to request updates for this business profile:\n`;
+
+  const mailtoUrl = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+  const copyToClipboard = (text: string) => {
+    if (typeof window !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    }
   };
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -53,24 +62,24 @@ export const BusinessDashboardModal: React.FC<BusinessDashboardModalProps> = ({
     >
       <div className="absolute inset-0 -z-10" onClick={onClose} />
 
-      <div className="bg-white w-full md:max-w-lg md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden">
-        {/* Handle for mobile ergonomics */}
+      <div className="bg-white w-full md:max-w-md md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden border border-[#E8ECF4]">
+        {/* Mobile drag handle */}
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 md:hidden" />
 
         {/* Modal Header */}
         <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-white shadow-xs"
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-white shadow-xs shrink-0"
               style={{ backgroundColor: primaryColor }}
             >
-              <LayoutDashboard className="w-5 h-5" />
+              <Settings className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="font-extrabold text-gray-900 text-base leading-tight">
-                {t('dashboard.title')}
+              <h3 className="font-heading font-extrabold text-gray-900 text-sm md:text-base leading-tight">
+                {t('business.ownerDashboard')}
               </h3>
-              <p className="text-xs text-gray-600 line-clamp-1">{formData.name}</p>
+              <p className="text-[11px] text-gray-500 line-clamp-1">{listing.name}</p>
             </div>
           </div>
           <button
@@ -81,153 +90,63 @@ export const BusinessDashboardModal: React.FC<BusinessDashboardModalProps> = ({
           </button>
         </div>
 
-        {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-4 flex-1">
-          {savedSuccess && (
-            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs font-semibold flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>{t('dashboard.saved')}</span>
-            </div>
-          )}
+        {/* Modal Body */}
+        <div className="p-6 overflow-y-auto space-y-4 text-xs">
+          <p className="text-gray-600 leading-relaxed">
+            {t('business.ownerUpdateNotice')}
+          </p>
 
-          {/* Quick Toggle: Open/Closed status */}
-          <div className="flex items-center justify-between p-3.5 bg-gray-50 border border-gray-200 rounded-xl">
-            <div className="flex items-center gap-2">
-              <span
-                className={`w-3 h-3 rounded-full ${
-                  formData.isOpenNow ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'
-                }`}
-              />
-              <span className="text-xs font-bold text-gray-800">
-                {t('dashboard.isOpenLabel')}
-              </span>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.isOpenNow}
-                onChange={(e) =>
-                  setFormData({ ...formData, isOpenNow: e.target.checked })
-                }
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
-            </label>
-          </div>
-
-          {/* Opening Hours */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
-              {t('dashboard.hours')}
-            </label>
-            <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
-              <Clock className="w-4 h-4 text-gray-500 mr-2 shrink-0" />
-              <input
-                type="text"
-                value={formData.hours}
-                onChange={(e) => setFormData({ ...formData, hours: e.target.value })}
-                className="w-full text-xs font-medium text-gray-900 bg-transparent focus:outline-none"
-              />
-            </div>
-          </div>
-
-          {/* Phone & Website */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
-                {t('dashboard.phone')}
-              </label>
-              <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
-                <Phone className="w-4 h-4 text-gray-500 mr-2 shrink-0" />
-                <input
-                  type="text"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full text-xs font-medium text-gray-900 bg-transparent focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
-                {t('dashboard.website')}
-              </label>
-              <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
-                <Globe className="w-4 h-4 text-gray-500 mr-2 shrink-0" />
-                <input
-                  type="text"
-                  value={formData.website}
-                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                  className="w-full text-xs font-medium text-gray-900 bg-transparent focus:outline-none"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Address & City */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
-                {t('dashboard.address')}
-              </label>
-              <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
-                <MapPin className="w-4 h-4 text-gray-500 mr-2 shrink-0" />
-                <input
-                  type="text"
-                  value={formData.address}
-                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full text-xs font-medium text-gray-900 bg-transparent focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">
-                {t('dashboard.city')}
-              </label>
-              <input
-                type="text"
-                value={formData.city}
-                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-xs font-medium text-gray-900 focus:outline-none"
-              />
-            </div>
-          </div>
-
-          {/* Description */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1">
-              {t('dashboard.description')}
-            </label>
-            <textarea
-              rows={3}
-              value={formData.description[locale]}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  description: {
-                    ...formData.description,
-                    [locale]: e.target.value,
-                  },
-                })
-              }
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-xs font-medium text-gray-900 focus:outline-none resize-none"
-            />
-          </div>
-
-          {/* Action button anchored at bottom */}
-          <div className="pt-2">
-            <button
-              type="submit"
-              className="w-full py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 cursor-pointer"
+          {/* Action button: Direct click to email */}
+          <div className="space-y-2 pt-1">
+            <a
+              href={mailtoUrl}
+              className="w-full py-3 px-4 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 active:scale-98 transition-all"
               style={{ backgroundColor: primaryColor }}
             >
-              <Save className="w-4 h-4" />
-              <span>{t('dashboard.saveChanges')}</span>
-            </button>
+              <Mail className="w-4 h-4" />
+              <span>{t('business.requestUpdatesBtn')}</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+            </a>
+
+            <div className="flex items-center justify-between p-3 rounded-xl bg-[#FAFBFF] border border-[#E8ECF4]">
+              <div className="text-[11px] text-gray-500 font-medium">
+                {t('claimModal.emailLabel')}{' '}
+                <strong className="text-[#0D2B75] font-mono">{siteConfig.contact.email}</strong>
+              </div>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(siteConfig.contact.email)}
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#145BFF] hover:text-[#0D2B75] transition-colors cursor-pointer"
+              >
+                {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedEmail ? t('claimModal.copied') : t('claimModal.copy')}</span>
+              </button>
+            </div>
           </div>
-        </form>
+
+          <div className="p-3.5 bg-blue-50/60 rounded-xl border border-blue-100 text-[11px] text-gray-600 space-y-1">
+            <div className="flex items-center gap-1.5 font-bold text-[#0D2B75]">
+              <Sparkles className="w-3.5 h-3.5 text-[#145BFF]" />
+              <span>{t('claimModal.reqTitle')}</span>
+            </div>
+            <p className="leading-relaxed">
+              {t('claimModal.guarantee')}
+            </p>
+          </div>
+        </div>
+
+        {/* Modal Footer */}
+        <div className="px-6 py-3.5 bg-[#FAFBFF] border-t border-[#E8ECF4] flex justify-end">
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs transition-colors cursor-pointer"
+          >
+            {t('claimModal.close')}
+          </button>
+        </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

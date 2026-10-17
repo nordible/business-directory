@@ -29,7 +29,8 @@
     "tagline": "Das internationale Branchenverzeichnis für alle Unternehmensarten weltweit",
     "toDirectory": "Verzeichnis",
     "betaBadge": "Beta",
-    "betaNotice": "Diese Plattform befindet sich derzeit in der Testphase."
+    "betaNotice": "Diese Plattform befindet sich derzeit in der Testphase.",
+    "by": "von {{name}}"
   },
   "search": {
     "placeholder": "Unternehmen, Services, Branchen suchen...",
@@ -83,7 +84,31 @@
     "copied": "Link kopiert!",
     "notFound": "Unternehmen nicht gefunden",
     "notFoundDesc": "Der gesuchte Firmeneintrag existiert leider nicht oder wurde entfernt.",
-    "exploreMore": "Andere Unternehmen erkunden"
+    "exploreMore": "Andere Unternehmen erkunden",
+    "legalFormTitle": "Rechtsform: {{form}}",
+    "unverifiedTitle": "Eintrag noch nicht verifiziert - jetzt beanspruchen",
+    "unverifiedBadge": "Nicht verifiziert (Beanspruchen)",
+    "localTimeLabel": "Ortszeit ({{location}}):",
+    "noReviews": "Noch keine Bewertungen",
+    "servicesTitle": "Leistungen & Schwerpunkte",
+    "addReviewViaEmail": "Bewertung per E-Mail einreichen",
+    "howToReviewTitle": "So reichen Sie eine Kundenbewertung ein",
+    "howToReviewDesc": "Um gefälschte Bewertungen und Manipulationen auszuschließen, werden alle Bewertungen in unserem Branchenverzeichnis redaktionell geprüft. Senden Sie uns eine E-Mail mit der Unternehmens-URL, Ihrer Sternbewertung (1–5) und Ihrem Feedback – unser Redaktionsteam prüft Ihre Angaben und veröffentlicht die Bewertung für Sie:",
+    "sendReviewEmailBtn": "Jetzt Bewertung per E-Mail senden",
+    "viewTemplateBtn": "Vorlage im Detail ansehen",
+    "inquiryTitle": "Nachricht oder Angebot anfragen",
+    "inquirySubtitle": "Direkter Kontakt • Antwort per E-Mail & Postfach",
+    "inquiryPrompt": "Stellen Sie eine Frage oder fordern Sie ein persönliches Angebot direkt bei {{name}} an.",
+    "sendMessageTo": "Nachricht an {{name}} senden",
+    "socialProfiles": "Soziale Medien & Profile",
+    "claimEmailBtn": "Eintrag per E-Mail beanspruchen",
+    "instructionsBtn": "Anleitung",
+    "ownerUpdateNotice": "Möchten Sie Öffnungszeiten, Kontaktdaten oder Profilinformationen aktualisieren? Schreiben Sie uns eine E-Mail mit der Unternehmens-URL und Ihren Änderungen – unser Team aktualisiert Ihr Inhaber-Dashboard und Unternehmensprofil für Sie.",
+    "requestUpdatesBtn": "Änderungen per E-Mail anfragen",
+    "sendInquiryMobile": "Anfrage senden",
+    "reviewEmailSubject": "Kundenbewertung: {{name}}",
+    "claimEmailSubject": "Eintrag beanspruchen: {{name}}",
+    "updateEmailSubject": "Änderungswunsch: {{name}}"
   },
   "tenant": {
     "switchTenant": "Verzeichnis wechseln",
@@ -142,14 +167,14 @@
     "exploreHubs": "Wirtschaftszentren erkunden:"
   },
   "directory": {
-    "backToOverview": "← Zurück zur Startseite",
+    "backToOverview": "← Zurück zur Übersicht",
     "badgeTitle": "Internationales Branchenverzeichnis • Weltweit",
-    "emptyTitle": "Keine Unternehmen gefunden",
-    "emptyDesc": "Bitte passen Sie Ihre Suchbegriffe oder die ausgewählte Branche an.",
+    "emptyTitle": "Keine Einträge gefunden",
+    "emptyDesc": "Versuchen Sie, Ihre Suchkriterien oder Branchenfilter anzupassen.",
     "resetFilters": "Filter zurücksetzen",
-    "ctaCardTitle": "Eigenes Unternehmen eintragen",
-    "ctaCardDesc": "Lassen Sie Ihr Unternehmen im weltweiten Branchenindex listen.",
-    "ctaCardBtn": "Eintrag anfragen"
+    "ctaCardTitle": "Tragen Sie Ihr Unternehmen ein",
+    "ctaCardDesc": "Lassen Sie Ihren Betrieb im internationalen Branchenverzeichnis listen.",
+    "ctaCardBtn": "Eintrag einreichen"
   },
   "footer": {
     "promoBadge": "📍 Frankfurt am Main • Für Europa & Weltweit",
@@ -173,7 +198,11 @@
     "contactLegal": "Kontakt & Rechtliches",
     "terms": "Nutzungsbedingungen",
     "feedback": "Feedback geben",
-    "madeWithLove": "Mit ❤️ für Unternehmer entwickelt"
+    "madeWithLove": "Mit ❤️ für Unternehmer entwickelt",
+    "inbox": "Kunden-Postfach",
+    "inboxTitle": "Kunden-Postfach (In Vorbereitung)",
+    "admin": "Administration",
+    "adminTitle": "Administration (Ausschließlich für autorisierte Admins)"
   },
   "partner": {
     "backToDirectory": "Zurück zum Verzeichnis",
@@ -239,18 +268,18 @@
     "viewTemplateAgain": "← Eintrags-Vorlage nochmals ansehen"
   },
   "claimModal": {
-    "title": "Inhaber-Verifizierung",
-    "subtitle": "Beanspruchen Sie {{name}}",
-    "emailLabel": "Offizielle Geschäfts-E-Mail",
-    "emailPlaceholder": "inhaber@ihrefirma.de",
-    "sendCode": "Sicherheitscode anfordern",
-    "codeLabel": "6-stelliger Bestätigungscode",
-    "verifyCode": "Code bestätigen & Inhaber werden",
-    "successTitle": "Erfolgreich verifiziert!",
-    "successSubtitle": "Sie sind nun als offizieller Inhaber hinterlegt.",
-    "openDashboard": "Zum Inhaber-Dashboard",
-    "securityCodeNote": "Wir senden einen 6-stelligen Sicherheitscode an diese E-Mail-Adresse.",
-    "testCodeHint": "Testcode: Beliebigen 6-stelligen Code eingeben."
+    "modalTitle": "Unternehmenseintrag beanspruchen & verifizieren",
+    "guarantee": "Um Inhaber vor unbefugter Übernahme zu schützen, wird die Inhaberschaft direkt durch unser Redaktionsteam verifiziert.",
+    "instruction": "Senden Sie uns einfach eine E-Mail von Ihrer geschäftlichen Domain. Unser Team verifiziert Ihre Identität und schaltet Ihr Dashboard frei.",
+    "sendClaimEmail": "Eintrag per E-Mail beanspruchen",
+    "emailLabel": "Offizielle Verifizierungs-E-Mail:",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "reqTitle": "Erforderliche Nachweise:",
+    "req1": "Unternehmensname & offizielle Webadresse",
+    "req2": "Ihre Funktion / Position im Unternehmen",
+    "req3": "Offizielle Kontaktdaten",
+    "close": "Schließen"
   },
   "reviewsModal": {
     "title": "Bewertungen",
@@ -329,5 +358,60 @@
     "city": "Stadt & PLZ",
     "description": "Unternehmensbeschreibung",
     "saveChanges": "Änderungen speichern"
+  },
+  "inquiry": {
+    "title": "Nachricht an {{name}}",
+    "subtitle": "Direktanfrage • Schnelle Antwort per E-Mail & Postfach",
+    "subjectGeneral": "Allgemeine Anfrage",
+    "subjectQuote": "Angebot & Preise einholen",
+    "subjectAppointment": "Termin vereinbaren",
+    "subjectPartnership": "Kooperation / Partnerschaft",
+    "subjectLabel": "Betreff der Anfrage",
+    "nameLabel": "Ihr Name",
+    "emailLabel": "Ihre E-Mail-Adresse",
+    "phoneLabel": "Telefonnummer",
+    "optional": "optional",
+    "optionalCallback": "optional für Rückruf",
+    "namePlaceholder": "z. B. Max Mustermann",
+    "phonePlaceholder": "+49 1521 1234567",
+    "messageLabel": "Ihre Nachricht",
+    "messagePlaceholder": "Guten Tag,\n\nich interessiere mich für Ihre Dienstleistungen und hätte folgende Frage...",
+    "assistantLabel": "Intelligenter Assistent:",
+    "assistantDesc": "Ihre Nachricht wird automatisch kategorisiert, damit das Team von {{name}} schnell reagieren kann.",
+    "submit": "Anfrage jetzt absenden",
+    "submitting": "Wird übertragen & triagiert...",
+    "successTitle": "Anfrage erfolgreich gesendet!",
+    "successDesc": "Ihre Nachricht wurde an {{name}} übermittelt. Eine Bestätigung wurde an {{email}} gesendet.",
+    "notificationTitle": "Automatisierte Benachrichtigung aktiviert",
+    "notificationDesc": "Sobald das Unternehmen antwortet, erhalten Sie eine E-Mail und können die Nachricht direkt in Ihrem Kunden-Postfach verfolgen.",
+    "openInbox": "Zum Kunden-Postfach öffnen",
+    "close": "Schließen",
+    "errorRequired": "Bitte füllen Sie alle Pflichtfelder aus (E-Mail und Nachricht).",
+    "errorSending": "Fehler beim Senden der Anfrage.",
+    "errorUnexpected": "Ein unerwarteter Fehler ist aufgetreten."
+  },
+  "reviewModal": {
+    "modalTitle": "Kundenbewertung einreichen",
+    "guarantee": "Um gefälschte Bewertungen und Manipulationen auszuschließen, prüft unser Redaktionsteam alle Kundenstimmen vor der Veröffentlichung manuell.",
+    "instruction": "Senden Sie uns einfach eine E-Mail mit Ihrer Sternebewertung (1–5) und Ihrem Feedback für {{name}}. Unser Team prüft Ihre Angaben und schaltet die Bewertung für Sie im Verzeichnis frei.",
+    "sendEmail": "Bewertung per E-Mail senden",
+    "emailLabel": "E-Mail-Adresse:",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "autoDetailsTitle": "Automatisch vorbereitete Angaben:",
+    "detail1": "Unternehmensname & URL",
+    "detail2": "Ihre Sternebewertung (1–5 Sterne)",
+    "detail3": "Ihr persönlicher Erfahrungsbericht",
+    "close": "Schließen"
+  },
+  "categories": {
+    "all": "Alle Branchen",
+    "tech": "IT, Software & Medien",
+    "architektur-planung": "Architektur & Planung",
+    "gastronomie": "Gastronomie & Food",
+    "immobilien-beratung": "Immobilien, Finanzen & Beratung",
+    "gesundheit-wellness": "Gesundheit & Medizin",
+    "handel-ecommerce": "Handel & E-Commerce",
+    "industrie-bau": "Industrie, Fertigung & Handwerk"
   }
 }

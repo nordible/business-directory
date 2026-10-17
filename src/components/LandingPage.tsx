@@ -12,23 +12,24 @@ import { Mascot } from '@/components/mascot/Mascot';
 import { AddListingModal } from '@/components/AddListingModal';
 import { StructuredData } from '@/components/StructuredData';
 import { InteractiveGlobe } from '@/components/InteractiveGlobe';
+import { getBusinessPermalink } from '@/lib/permalinks';
 import { siteConfig } from '@/config/site';
 import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
   Star,
-  MapPin,
   ChevronDown,
   ChevronUp,
   Globe,
   Compass,
-  Phone,
   TrendingUp,
   Coins,
   Search,
   CheckCircle2,
   Bot,
+  Pause,
+  Play,
 } from 'lucide-react';
 
 function ListingLogo({ logoUrl, name, size = 36 }: { logoUrl?: string; name: string; size?: number }) {
@@ -70,6 +71,7 @@ export function LandingPage({
   const [businesses, setBusinesses] = useState<BusinessListing[]>(initialBusinesses);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
 
   React.useEffect(() => {
     if (initialBusinesses.length === 0) {
@@ -191,118 +193,7 @@ export function LandingPage({
           </div>
         </section>
 
-        {/* FEATURED VERIFIED BUSINESSES SHOWCASE */}
-        <section className="py-16 sm:py-20 bg-white border-b border-[#E8ECF4]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-[#FF9F1A] font-heading">
-                {t('landing.featuredTitle')}
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight mt-1">
-                {t('landing.featuredHeading')}
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500 mt-2 font-medium">
-                {t('landing.featuredSubtitle')}
-              </p>
-            </div>
 
-            {/* Business Cards Grid Preview */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {businesses.map((listing) => (
-                <article
-                  key={listing.id}
-                  className="bg-[#FAFBFF] rounded-2xl border border-[#E8ECF4] p-5 shadow-xs hover:shadow-md transition-all flex flex-col justify-between hover:border-[#145BFF]/30 group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-2.5">
-                      <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                        <ShieldCheck className="w-3.5 h-3.5" />
-                        <span>{t('landing.verifiedPill')}</span>
-                      </span>
-
-                      <div className="flex items-center gap-1 text-amber-500 font-bold text-xs">
-                        <Star className="w-3.5 h-3.5 fill-[#FF9F1A] text-[#FF9F1A]" />
-                        <span>{listing.rating.toFixed(1)}</span>
-                        <span className="text-gray-400 font-normal">({listing.reviewCount})</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 my-2">
-                      <ListingLogo logoUrl={listing.logoUrl} name={listing.name} size={36} />
-                      <Link
-                        href={`/${locale}/directory/${listing.slug || listing.id}`}
-                        className="group/title block"
-                      >
-                        <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover/title:text-[#145BFF] transition-colors tracking-tight leading-snug">
-                          {listing.name}
-                        </h3>
-                      </Link>
-                    </div>
-
-                    <p className="text-xs text-slate-600 line-clamp-3 mt-2 leading-relaxed">
-                      {listing.description[locale] || listing.description['en'] || listing.description['de']}
-                    </p>
-
-                    <div className="flex items-center gap-1.5 mt-3.5 text-xs text-slate-500 font-medium">
-                      <MapPin className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
-                      <span>{listing.address}, {listing.city}</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 pt-3 border-t border-[#E8ECF4] flex items-center justify-between">
-                    <Link
-                      href={`/${locale}/directory/${listing.slug || listing.id}`}
-                      className="text-xs font-bold text-[#145BFF] hover:underline flex items-center gap-1"
-                    >
-                      <span>{t('listing.viewProfile')}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-
-                    <div className="flex items-center gap-1.5">
-                      <a
-                        href={listing.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-xl bg-white border border-[#E8ECF4] text-slate-600 hover:text-[#0D2B75] hover:bg-[#F3F7FF] transition-colors"
-                        title={t('listing.website')}
-                      >
-                        <Globe className="w-3.5 h-3.5" />
-                      </a>
-
-                      <a
-                        href={`tel:${listing.phone}`}
-                        className="p-2 rounded-xl bg-white border border-[#E8ECF4] text-slate-600 hover:text-[#0D2B75] hover:bg-[#F3F7FF] transition-colors"
-                        title={t('listing.call')}
-                      >
-                        <Phone className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            {/* Action Buttons Under Cards */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-10">
-              <Link
-                href={`/${locale}/directory`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#0D2B75] hover:bg-[#145BFF] text-white px-7 py-3.5 text-xs sm:text-sm font-bold shadow-md transition-all active:scale-95"
-              >
-                <span>{t('landing.ctaExplore')}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => setIsAddModalOpen(true)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-[#F3F7FF] border border-[#E8ECF4] text-[#0D2B75] px-6 py-3.5 text-xs sm:text-sm font-bold shadow-xs transition-colors cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
-                <span>{t('landing.ctaAdd')}</span>
-              </button>
-            </div>
-          </div>
-        </section>
 
         {/* REVENUE & MARKETING ROI VALUE PROPOSITION (CRO-OPTIMIZED) */}
         <section className="py-16 sm:py-24 bg-[#FAFBFF] border-b border-[#E8ECF4] relative overflow-hidden">
@@ -482,6 +373,127 @@ export function LandingPage({
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* SOCIAL PROOF: CONTINUOUS MOVING VERIFIED BUSINESSES CAROUSEL (BELOW FAQ) */}
+        <section className="py-12 sm:py-16 bg-white border-t border-b border-[#E8ECF4] overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#FF9F1A] font-heading">
+                {t('landing.featuredTitle')}
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-[#0D2B75] font-heading tracking-tight mt-0.5">
+                {locale === 'de' ? 'Bereits gelistete Unternehmen weltweit' : 'Verified Businesses Listed Worldwide'}
+              </h2>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {/* Accessible Pause / Play Control */}
+              <button
+                type="button"
+                onClick={() => setIsCarouselPaused((prev) => !prev)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] hover:bg-white text-[#0D2B75] text-xs font-bold shadow-2xs transition-colors cursor-pointer"
+                title={
+                  isCarouselPaused
+                    ? locale === 'de'
+                      ? 'Laufband fortsetzen'
+                      : 'Play Carousel'
+                    : locale === 'de'
+                    ? 'Laufband anhalten'
+                    : 'Pause Carousel'
+                }
+              >
+                {isCarouselPaused ? (
+                  <>
+                    <Play className="w-3 h-3 text-[#145BFF] fill-[#145BFF]" />
+                    <span>{locale === 'de' ? 'Fortsetzen' : 'Play'}</span>
+                  </>
+                ) : (
+                  <>
+                    <Pause className="w-3 h-3 text-[#145BFF]" />
+                    <span>{locale === 'de' ? 'Pause' : 'Pause'}</span>
+                  </>
+                )}
+              </button>
+
+              <Link
+                href={`/${locale}/directory`}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#145BFF] hover:underline whitespace-nowrap"
+              >
+                <span>
+                  {locale === 'de'
+                    ? 'Alle Unternehmen im Verzeichnis ansehen'
+                    : 'Explore all businesses in directory'}
+                </span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Smooth Horizontal Scrolling Ribbon */}
+          <div className="relative w-full overflow-hidden">
+            {/* Subtle Gradient Fade Masks at Left & Right Edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+            {/* Continuous Marquee Track */}
+            <div
+              className={`animate-marquee gap-5 py-3 px-4 ${
+                isCarouselPaused ? 'animate-marquee-paused' : ''
+              }`}
+            >
+              {(businesses.length < 6
+                ? [...businesses, ...businesses, ...businesses, ...businesses]
+                : [...businesses, ...businesses]
+              ).map((listing, index) => (
+                <Link
+                  key={`${listing.id}-${index}`}
+                  href={getBusinessPermalink(listing, locale)}
+                  className="w-72 sm:w-80 shrink-0 bg-[#FAFBFF] hover:bg-white rounded-2xl border border-[#E8ECF4] p-4 shadow-2xs hover:shadow-lg hover:border-[#145BFF]/40 transition-all flex flex-col justify-between group cursor-pointer"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        <ShieldCheck className="w-3 h-3" />
+                        <span>{t('landing.verifiedPill')}</span>
+                      </span>
+                      <div className="flex items-center gap-1 text-amber-500 font-bold text-xs">
+                        <Star className="w-3 h-3 fill-[#FF9F1A] text-[#FF9F1A]" />
+                        <span>{listing.rating.toFixed(1)}</span>
+                        <span className="text-gray-400 font-normal">({listing.reviewCount})</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 my-2">
+                      <ListingLogo logoUrl={listing.logoUrl} name={listing.name} size={32} />
+                      <div className="truncate">
+                        <h3 className="font-heading font-extrabold text-sm text-[#0D2B75] group-hover:text-[#145BFF] transition-colors truncate">
+                          {listing.name}
+                        </h3>
+                        <p className="text-[11px] text-slate-500 truncate">
+                          {listing.city} &bull; {listing.categoryName || listing.categoryId}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-slate-600 line-clamp-2 mt-1 leading-relaxed">
+                      {listing.description[locale] || listing.description['en'] || listing.description['de']}
+                    </p>
+                  </div>
+
+                  <div className="mt-3 pt-2.5 border-t border-[#E8ECF4] flex items-center justify-between text-xs font-bold text-[#145BFF]">
+                    <span className="group-hover:underline flex items-center gap-1">
+                      {t('listing.viewProfile')}
+                      <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                    <span className="text-[11px] text-slate-400 font-medium">
+                      {locale === 'de' ? 'Im Verzeichnis' : 'In Directory'}
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

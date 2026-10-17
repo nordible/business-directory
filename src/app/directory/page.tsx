@@ -84,7 +84,11 @@ export default function DirectoryAppPage({
         const query = searchQuery.toLowerCase();
         const matchesName = item.name.toLowerCase().includes(query);
         const matchesCity = item.city.toLowerCase().includes(query);
-        const descText = item.description[locale] || item.description['de'] || '';
+        const descText =
+          (locale === 'de' ? item.description['de'] : item.description['en']) ||
+          item.description['en'] ||
+          item.description[locale] ||
+          '';
         const matchesDesc = descText.toLowerCase().includes(query);
         return matchesName || matchesCity || matchesDesc;
       }
@@ -125,7 +129,11 @@ export default function DirectoryAppPage({
 
   const getCategoryName = (catId: string) => {
     const found = categories.find((c) => c.id === catId || c.slug === catId);
-    return found ? found.name[locale] || found.name['de'] : catId;
+    if (!found) return catId;
+    const key = `categories.${found.slug}`;
+    const translated = t(key);
+    if (translated && translated !== key) return translated;
+    return found.name['en'] || (locale === 'de' ? found.name['de'] : found.name['en']) || catId;
   };
 
   return (
@@ -166,17 +174,10 @@ export default function DirectoryAppPage({
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#145BFF]/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-center">
-            {/* Mascot Badge */}
-            <div className="flex items-center gap-3 mb-3">
+            {/* Mascot */}
+            <div className="mb-3">
               <div className="w-12 h-12 drop-shadow-md">
                 <Mascot variant="hero-wave" alt="Nordible Mascot" priority />
-              </div>
-              <div
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-white shadow-xs"
-                style={{ backgroundColor: currentTenant.primaryColor }}
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>{currentTenant.logoText}</span>
               </div>
             </div>
 
@@ -185,7 +186,7 @@ export default function DirectoryAppPage({
             </h1>
 
             <p className="mt-2.5 text-xs sm:text-sm text-gray-600 leading-relaxed max-w-xl font-medium">
-              {currentTenant.tagline[locale] || currentTenant.tagline['de']}
+              {currentTenant.tagline[locale] || (locale === 'de' ? currentTenant.tagline['de'] : currentTenant.tagline['en'] || t('nav.tagline'))}
             </p>
 
             {/* Ergonomic Search Bar */}
@@ -234,6 +235,12 @@ export default function DirectoryAppPage({
             <div className="flex items-center justify-center gap-2 mt-4 overflow-x-auto py-1 max-w-full scrollbar-none">
               {categories.map((cat) => {
                 const isActive = selectedCategory === cat.id;
+                const key = `categories.${cat.slug}`;
+                const translated = t(key);
+                const displayName =
+                  translated && translated !== key
+                    ? translated
+                    : (cat.name['en'] || (locale === 'de' ? cat.name['de'] : cat.name['en']) || cat.slug);
                 return (
                   <button
                     key={cat.id}
@@ -245,7 +252,7 @@ export default function DirectoryAppPage({
                     }`}
                     style={isActive ? { backgroundColor: currentTenant.primaryColor } : {}}
                   >
-                    {cat.name[locale] || cat.name['de']}
+                    {displayName}
                   </button>
                 );
               })}
@@ -297,13 +304,13 @@ export default function DirectoryAppPage({
         ) : (
           <div className="bg-white rounded-3xl border border-[#E8ECF4] p-8 sm:p-12 text-center max-w-md mx-auto my-10 shadow-xs">
             <div className="w-24 h-24 mx-auto mb-4">
-              <Mascot variant="working-laptop" alt="Keine Einträge gefunden" />
+              <Mascot variant="working-laptop" alt={t('directory.emptyTitle')} />
             </div>
             <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75]">
-              Keine Einträge gefunden
+              {t('directory.emptyTitle')}
             </h3>
             <p className="text-xs text-gray-500 mt-1.5 leading-relaxed font-medium">
-              Versuchen Sie, Ihre Filter anzupassen oder einen anderen Suchbegriff einzugeben.
+              {t('directory.emptyDesc')}
             </p>
             <button
               onClick={handleResetFilters}
