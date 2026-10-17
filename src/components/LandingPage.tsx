@@ -30,9 +30,6 @@ import {
   Bot,
   Pause,
   Play,
-  MapPin,
-  Rocket,
-  Building2,
 } from 'lucide-react';
 
 function ListingLogo({ logoUrl, name, size = 36 }: { logoUrl?: string; name: string; size?: number }) {
@@ -334,120 +331,6 @@ export function LandingPage({
                 <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
                 <span>{t('landing.ctaAdd')}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* FRANKFURT & RHEIN-MAIN REGIONAL BUSINESS GROWTH SECTION */}
-        <section className="py-16 sm:py-24 bg-[#0A1738] text-white relative overflow-hidden border-y border-[#1E3A8A]">
-          {/* Subtle Ambient Radial Glow */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#145BFF]/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-[#FF9F1A]/10 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Header / Intro */}
-            <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-              <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/15 border border-blue-400/30 px-4 py-1.5 text-xs font-bold text-sky-300 shadow-xs">
-                <MapPin className="w-3.5 h-3.5 text-[#FF9F1A]" />
-                <span>{t('landing.frankfurtGrowthBadge')}</span>
-              </div>
-
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white font-heading tracking-tight leading-tight">
-                {t('landing.frankfurtGrowthTitle')}
-              </h2>
-
-              <p className="text-xs sm:text-base text-slate-300 font-medium leading-relaxed max-w-2xl mx-auto">
-                {t('landing.frankfurtGrowthSubtitle')}
-              </p>
-            </div>
-
-            {/* 3 Core Value Pillars */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
-              {/* Pillar 1: Directory & Backlink */}
-              <div className="bg-white/5 hover:bg-white/[0.08] border border-white/10 hover:border-blue-400/40 rounded-3xl p-6 sm:p-7 backdrop-blur-xs transition-all flex flex-col justify-between group">
-                <div>
-                  <div className="w-12 h-12 rounded-2xl bg-blue-500/20 text-sky-400 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform border border-blue-400/20">
-                    <Rocket className="w-6 h-6 text-[#FF9F1A]" />
-                  </div>
-                  <h3 className="font-heading font-extrabold text-base sm:text-lg text-white mb-2 leading-snug">
-                    {t('landing.frankfurtGrowthBenefit1Title')}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-                    {t('landing.frankfurtGrowthBenefit1Desc')}
-                  </p>
-                </div>
-                <div className="pt-6 mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-sky-300">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>100% Kostenfrei & Dauerhaft</span>
-                </div>
-              </div>
-
-              {/* Pillar 2: AI & Google Visibility */}
-              <div className="bg-gradient-to-b from-white/10 to-white/5 border-2 border-[#FF9F1A]/50 rounded-3xl p-6 sm:p-7 backdrop-blur-xs transition-all flex flex-col justify-between relative shadow-xl shadow-amber-500/5 group">
-                <div className="absolute -top-3.5 right-6 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#FF9F1A] text-slate-950 shadow-sm">
-                  Kostenlose Analyse
-                </div>
-                <div>
-                  <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-[#FF9F1A] flex items-center justify-center mb-5 group-hover:scale-105 transition-transform border border-amber-400/30">
-                    <Bot className="w-6 h-6 text-[#FF9F1A]" />
-                  </div>
-                  <h3 className="font-heading font-extrabold text-base sm:text-lg text-white mb-2 leading-snug">
-                    {t('landing.frankfurtGrowthBenefit2Title')}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-                    {t('landing.frankfurtGrowthBenefit2Desc')}
-                  </p>
-                </div>
-                <div className="pt-6 mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-amber-300">
-                  <CheckCircle2 className="w-4 h-4 text-[#FF9F1A] shrink-0" />
-                  <span>ChatGPT, Perplexity & Google AI</span>
-                </div>
-              </div>
-
-              {/* Pillar 3: Direct Frankfurt Support */}
-              <div className="bg-white/5 hover:bg-white/[0.08] border border-white/10 hover:border-blue-400/40 rounded-3xl p-6 sm:p-7 backdrop-blur-xs transition-all flex flex-col justify-between group">
-                <div>
-                  <div className="w-12 h-12 rounded-2xl bg-blue-500/20 text-sky-400 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform border border-blue-400/20">
-                    <Building2 className="w-6 h-6 text-sky-300" />
-                  </div>
-                  <h3 className="font-heading font-extrabold text-base sm:text-lg text-white mb-2 leading-snug">
-                    {t('landing.frankfurtGrowthBenefit3Title')}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-                    {t('landing.frankfurtGrowthBenefit3Desc')}
-                  </p>
-                </div>
-                <div className="pt-6 mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-sky-300">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Nordible Technologies • Frankfurt</span>
-                </div>
-              </div>
-            </div>
-
-            {/* High-Converting CTA & Regional Cities Badges */}
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
-              <div className="space-y-2 text-center lg:text-left">
-                <div className="text-xs font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-center lg:justify-start gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#FF9F1A]" />
-                  <span>{t('landing.frankfurtGrowthHubsTitle')}</span>
-                </div>
-                <div className="text-xs sm:text-sm text-slate-300 font-medium">
-                  {t('landing.frankfurtGrowthHubs')}
-                </div>
-                <div className="text-[11px] text-slate-400 font-medium">
-                  {t('landing.frankfurtGrowthGuaranteed')}
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => openAddModal(true)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#FF9F1A] hover:bg-[#FFAF38] text-slate-950 px-8 py-4 text-sm sm:text-base font-black shadow-xl shadow-amber-500/20 transition-all active:scale-95 shrink-0 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-slate-950" />
-                <span>{t('landing.frankfurtGrowthCta')}</span>
-                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
