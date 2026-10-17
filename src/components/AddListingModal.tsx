@@ -119,8 +119,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
               : `https://${formData.website.trim()}`
             : undefined,
           logoUrl: formData.logoUrl.trim() || undefined,
-          descriptionDe: formData.description.trim(),
-          descriptionEn: formData.description.trim(),
+          description: formData.description.trim(),
           openingHoursJson,
           wantsGrowthResource,
         }),

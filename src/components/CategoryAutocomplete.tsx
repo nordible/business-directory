@@ -66,19 +66,17 @@ export const CategoryAutocomplete: React.FC<CategoryAutocompleteProps> = ({
   const filteredCategories = categories.filter((c) => {
     const q = query.toLowerCase().trim();
     if (!q) return true;
-    const nameDe = c.name?.de?.toLowerCase() || '';
-    const nameEn = c.name?.en?.toLowerCase() || '';
+    const catName = (c.name?.en || c.slug).toLowerCase();
+    const localized = t(`categories.${c.slug}`).toLowerCase();
     const slug = c.slug.toLowerCase();
-    return nameDe.includes(q) || nameEn.includes(q) || slug.includes(q);
+    return catName.includes(q) || (localized !== `categories.${slug}` && localized.includes(q)) || slug.includes(q);
   });
 
   const exactMatch = categories.find((c) => {
     const q = query.toLowerCase().trim();
-    return (
-      c.name?.de?.toLowerCase() === q ||
-      c.name?.en?.toLowerCase() === q ||
-      c.slug.toLowerCase() === q
-    );
+    const catName = (c.name?.en || c.slug).toLowerCase();
+    const localized = t(`categories.${c.slug}`).toLowerCase();
+    return catName === q || localized === q || c.slug.toLowerCase() === q;
   });
 
   const handleSelect = (category: Category) => {

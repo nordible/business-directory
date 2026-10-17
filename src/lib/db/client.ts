@@ -118,11 +118,11 @@ function mapDbBusiness(b: Record<string, unknown>): BusinessListing {
     tenantId: String(b.tenant_id),
     slug: b.slug ? String(b.slug) : undefined,
     categoryId: String(b.category_id),
-    categoryName: (b.categories as { name_de?: string; name_en?: string })?.name_en || (b.categories as { name_de?: string; name_en?: string })?.name_de || undefined,
+    categoryName: (b.categories as { name?: string })?.name || undefined,
     name: String(b.name),
     description: {
-      de: String(b.description_de || b.description_en || ''),
-      en: String(b.description_en || ''),
+      de: String(b.description || ''),
+      en: String(b.description || ''),
     },
     address: String(b.address || ''),
     postalCode: b.postal_code ? String(b.postal_code) : undefined,
@@ -166,11 +166,12 @@ export async function getTenants(): Promise<TenantBranding[]> {
       if (t.name && logoText.includes(t.name)) {
         logoText = logoText.replace(t.name, '').trim();
       }
+      const taglineText = t.tagline || '';
       return {
         id: t.id,
         slug: t.slug,
         name: t.name,
-        tagline: { de: t.tagline_de || t.tagline_en, en: t.tagline_en },
+        tagline: { de: taglineText, en: taglineText },
         primaryColor: t.primary_color,
         accentColor: t.accent_color,
         logoText,
@@ -208,7 +209,7 @@ export async function getCategories(): Promise<Category[]> {
     };
 
     const fetched: Category[] = data.map((c: Record<string, string>) => {
-      const englishName = c.name_en || c.name || c.name_de || c.slug;
+      const englishName = c.name || c.slug;
       return {
         id: c.id,
         slug: c.slug,
@@ -344,8 +345,7 @@ export interface SubmitBusinessPayload {
   name: string;
   categoryId?: string;
   categoryName?: string;
-  descriptionDe?: string;
-  descriptionEn?: string;
+  description?: string;
   address: string;
   postalCode?: string;
   city: string;
@@ -428,8 +428,7 @@ export async function getOrCreateCategory(name: string, tenantId?: string): Prom
       body: JSON.stringify({
         tenant_id: effectiveTenantId,
         slug,
-        name_de: trimmed,
-        name_en: trimmed,
+        name: trimmed,
         icon: 'Building2',
       }),
     });
@@ -437,10 +436,11 @@ export async function getOrCreateCategory(name: string, tenantId?: string): Prom
     if (res.ok) {
       const created = await res.json();
       if (Array.isArray(created) && created[0]) {
+        const catName = created[0].name || trimmed;
         return {
           id: created[0].id,
           slug: created[0].slug,
-          name: { de: created[0].name_de || created[0].name_en, en: created[0].name_en },
+          name: { en: catName },
           icon: created[0].icon || 'Building2',
         };
       }
@@ -452,10 +452,11 @@ export async function getOrCreateCategory(name: string, tenantId?: string): Prom
       if (lookupRes.ok) {
         const rows = await lookupRes.json();
         if (Array.isArray(rows) && rows[0]) {
+          const catName = rows[0].name || trimmed;
           return {
             id: rows[0].id,
             slug: rows[0].slug,
-            name: { de: rows[0].name_de || rows[0].name_en, en: rows[0].name_en },
+            name: { en: catName },
             icon: rows[0].icon || 'Building2',
           };
         }
@@ -536,13 +537,12 @@ export async function submitBusinessListing(payload: SubmitBusinessPayload): Pro
       category_id: finalCategoryId,
       slug,
       name: payload.name.trim(),
-      description_de: payload.descriptionDe || '',
-      description_en: payload.descriptionEn || payload.descriptionDe || '',
+      description: payload.description?.trim() || '',
       address: payload.address.trim(),
       postal_code: payload.postalCode?.trim() || null,
       city: payload.city.trim(),
       state: payload.state?.trim() || null,
-      country: payload.country?.trim() || 'Deutschland',
+      country: payload.country?.trim() || 'Germany',
       phone: payload.phone || null,
       email: payload.email?.trim() || null,
       website: payload.website || null,

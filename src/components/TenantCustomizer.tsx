@@ -27,11 +27,10 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
   currentTenant,
   onSaveTenant,
 }) => {
-  const { locale, t } = useTranslation();
+  const { t } = useTranslation();
 
   const [name, setName] = useState(currentTenant.name);
-  const [taglineDe, setTaglineDe] = useState(currentTenant.tagline.de);
-  const [taglineEn, setTaglineEn] = useState(currentTenant.tagline.en);
+  const [tagline, setTagline] = useState(currentTenant.tagline.en || currentTenant.tagline.de || '');
   const [logoText, setLogoText] = useState(currentTenant.logoText);
   const [primaryColor, setPrimaryColor] = useState(currentTenant.primaryColor);
 
@@ -45,8 +44,8 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
       logoText,
       primaryColor,
       tagline: {
-        de: taglineDe,
-        en: taglineEn,
+        en: tagline,
+        de: tagline,
       },
     });
     onClose();
@@ -126,31 +125,17 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
             </div>
           </div>
 
-          {/* German Tagline */}
+          {/* Tagline */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
-              {t('brand.tagline')} (Deutsch)
+              {t('brand.tagline')}
             </label>
             <textarea
               rows={2}
-              value={taglineDe}
-              onChange={(e) => setTaglineDe(e.target.value)}
+              value={tagline}
+              onChange={(e) => setTagline(e.target.value)}
               className="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-              placeholder={t('brand.taglineDePlaceholder')}
-            />
-          </div>
-
-          {/* English Tagline */}
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
-              {t('brand.tagline')} (English)
-            </label>
-            <textarea
-              rows={2}
-              value={taglineEn}
-              onChange={(e) => setTaglineEn(e.target.value)}
-              className="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-              placeholder={t('brand.taglineEnPlaceholder')}
+              placeholder={t('brand.taglinePlaceholder')}
             />
           </div>
 
@@ -168,7 +153,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
               </div>
               <div>
                 <div className="font-bold text-sm text-gray-900">{name || t('brand.defaultName')}</div>
-                <div className="text-xs text-gray-600 line-clamp-1">{(locale === 'de' ? taglineDe : taglineEn) || t('brand.defaultTagline')}</div>
+                <div className="text-xs text-gray-600 line-clamp-1">{tagline || t('brand.defaultTagline')}</div>
               </div>
             </div>
           </div>

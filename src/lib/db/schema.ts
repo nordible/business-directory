@@ -5,8 +5,6 @@ export interface DbTenant {
   slug: string;
   name: string;
   tagline: string;
-  tagline_en?: string | null;
-  tagline_de?: string | null;
   primary_color: string;
   accent_color: string;
   logo_text: string;
@@ -29,8 +27,6 @@ export interface DbCategory {
   tenant_id: string;
   slug: string;
   name: string;
-  name_en?: string | null;
-  name_de?: string | null;
   icon: string;
   created_at: string;
 }
@@ -42,8 +38,6 @@ export interface DbBusiness {
   owner_id?: string | null;
   name: string;
   description?: string | null;
-  description_en?: string | null;
-  description_de?: string | null;
   address: string;
   city: string;
   phone?: string | null;
@@ -61,14 +55,13 @@ export interface DbBusiness {
  * Mapper utilities converting database rows to UI entities
  */
 export function mapDbTenantToTenantBranding(dbTenant: DbTenant) {
-  const taglineStr = dbTenant.tagline || dbTenant.tagline_en || dbTenant.tagline_de || '';
   return {
     id: dbTenant.id,
     slug: dbTenant.slug,
     name: dbTenant.name,
     tagline: {
-      de: taglineStr,
-      en: taglineStr,
+      de: dbTenant.tagline,
+      en: dbTenant.tagline,
     } as LocalizedString,
     primaryColor: dbTenant.primary_color,
     accentColor: dbTenant.accent_color,
@@ -78,7 +71,7 @@ export function mapDbTenantToTenantBranding(dbTenant: DbTenant) {
 }
 
 export function mapDbBusinessToBusinessListing(dbBusiness: DbBusiness) {
-  const desc = dbBusiness.description || dbBusiness.description_en || dbBusiness.description_de || '';
+  const desc = dbBusiness.description || '';
   return {
     id: dbBusiness.id,
     tenantId: dbBusiness.tenant_id,

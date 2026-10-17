@@ -45,7 +45,7 @@ export async function POST(request: Request) {
       website: body.website,
       logoUrl: body.logoUrl,
       hours: readableHours,
-      description: body.descriptionDe || body.descriptionEn,
+      description: body.description,
       wantsGrowthResource: Boolean(body.wantsGrowthResource),
     }).catch(() => {
       // Background email dispatch error handled silently
