@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from '@/lib/i18n';
-import { Sparkles, ArrowUpRight, ShieldCheck, Mail, Globe, Bug } from 'lucide-react';
-import { Mascot } from '@/components/mascot/Mascot';
+import { ArrowUpRight, ShieldCheck, Mail, Globe, Bug } from 'lucide-react';
 import { CustomerInboxDrawer } from '@/components/CustomerInboxDrawer';
 import { siteConfig } from '@/config/site';
 
@@ -13,59 +12,12 @@ interface FooterProps {
   showPromo?: boolean;
 }
 
-export function Footer({ showPromo = true }: FooterProps = {}) {
+export function Footer({}: FooterProps = {}) {
   const { locale, t } = useTranslation();
   const [isInboxOpen, setIsInboxOpen] = useState(false);
 
   return (
     <footer className="mt-16 border-t border-[#E8ECF4] bg-[#0D2B75] text-white">
-      {/* High-Converting Agency Promo Banner */}
-      {showPromo && (
-        <div className="border-b border-white/10 bg-gradient-to-r from-[#0D2B75] via-[#145BFF]/25 to-[#0D2B75] py-12 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 drop-shadow-2xl">
-              <Mascot variant="hero-wave" alt="Nordible Mascot Googloo" priority />
-            </div>
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1 text-xs font-bold text-[#FF9F1A]">
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>
-                  {t('footer.promoBadge')}
-                </span>
-              </div>
-              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight font-heading">
-                {t('footer.promoTitle')}
-              </h2>
-              <p className="text-xs sm:text-sm text-blue-100/80 max-w-2xl leading-relaxed">
-                {t('footer.promoDesc')}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <a
-              href={siteConfig.urls.agencyServices}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 px-4 py-2.5 text-xs font-bold text-white transition-all active:scale-95 cursor-pointer"
-            >
-              <span>{t('footer.promoExplore')}</span>
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
-            <a
-              href={siteConfig.urls.agencyContact}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#145BFF] hover:bg-[#0F47D1] px-5 py-2.5 text-xs font-black text-white shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-0.5 active:scale-95 cursor-pointer"
-            >
-              <span>{t('footer.promoTalk')}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-      )}
-
       {/* Main Footer Links & Information */}
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
@@ -239,6 +191,39 @@ export function Footer({ showPromo = true }: FooterProps = {}) {
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Large Nordible Technologies Footer Brand Section (Single Line) */}
+      <div className="w-full border-t border-white/10 py-10 sm:py-14 bg-gradient-to-b from-transparent to-black/25">
+        <a
+          href={siteConfig.company.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center focus:outline-hidden transition-all duration-300"
+          aria-label={`${siteConfig.company.name} - ${siteConfig.company.website}`}
+        >
+          <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5">
+            {/* Logo */}
+            <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-xl sm:rounded-2xl bg-white p-2 sm:p-2.5 md:p-3 shadow-xl shadow-black/40 ring-1 ring-white/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-blue-500/25 shrink-0 flex items-center justify-center">
+              <Image
+                src={siteConfig.assets.logoIcon}
+                alt={siteConfig.company.name}
+                width={80}
+                height={80}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Very large brand name on one line */}
+            <span className="font-heading font-black tracking-tight uppercase whitespace-nowrap text-[5.2vw] sm:text-4xl md:text-5xl lg:text-6xl text-white/90 group-hover:text-white transition-colors duration-300 select-none">
+              {siteConfig.company.name}
+            </span>
+          </div>
+
+          <p className="text-xs sm:text-sm text-blue-200/80 font-medium max-w-2xl group-hover:text-blue-100 transition-colors">
+            {t('nav.tagline')}
+          </p>
+        </a>
       </div>
 
       <CustomerInboxDrawer
