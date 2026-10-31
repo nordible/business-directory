@@ -21,7 +21,6 @@ import {
   Star,
   ChevronDown,
   ChevronUp,
-  Globe,
   Compass,
   TrendingUp,
   Coins,
@@ -91,13 +90,6 @@ export function LandingPage({
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
   };
 
-  const globalBadges = [
-    { name: t('landing.badgeInternational'), highlight: true },
-    { name: t('landing.badgeCrossBorder'), highlight: false },
-    { name: t('landing.badgeVerified'), highlight: false },
-    { name: t('landing.badgeAllIndustries'), highlight: true },
-  ];
-
   const faqs = [
     {
       q: t('landing.faq1Q'),
@@ -110,6 +102,10 @@ export function LandingPage({
     {
       q: t('landing.faq3Q'),
       a: t('landing.faq3A'),
+    },
+    {
+      q: t('landing.faq4Q'),
+      a: t('landing.faq4A'),
     },
   ];
 
@@ -146,23 +142,6 @@ export function LandingPage({
                   {t('landing.heroSubtitle')}
                 </p>
 
-                {/* Global Multi-Industry Target Chips */}
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
-                  {globalBadges.map((badge, i) => (
-                    <span
-                      key={i}
-                      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors ${
-                        badge.highlight
-                          ? 'bg-[#145BFF]/10 text-[#145BFF] border border-[#145BFF]/30'
-                          : 'bg-white border border-[#E8ECF4] text-slate-600'
-                      }`}
-                    >
-                      <Globe className="w-3.5 h-3.5 text-[#145BFF]" />
-                      <span>{badge.name}</span>
-                    </span>
-                  ))}
-                </div>
-
                 {/* Primary CTA (Fitts's Law Conversion Action) */}
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-4">
                   <Link
@@ -181,6 +160,23 @@ export function LandingPage({
                     <Sparkles className="h-4 w-4 text-[#FF9F1A]" />
                     <span>{t('landing.ctaAdd')}</span>
                   </button>
+                </div>
+
+                {/* Friction-Free & AI-Agent Micro-Trust Row */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1 text-xs">
+                  <span className="inline-flex items-center gap-1.5 text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/80 font-bold shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>{t('landing.heroFreeTrust')}</span>
+                  </span>
+                  <Link
+                    href="/llms.txt"
+                    target="_blank"
+                    className="inline-flex items-center gap-1.5 text-blue-700 bg-blue-50 hover:bg-blue-100/70 px-3 py-1 rounded-full border border-blue-200/80 font-bold transition-colors shadow-2xs group"
+                  >
+                    <Bot className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
+                    <span>{t('landing.heroAiAgentsTrust')}</span>
+                    <ArrowRight className="w-3 h-3 text-[#145BFF] transition-transform group-hover:translate-x-0.5" />
+                  </Link>
                 </div>
               </div>
 
@@ -307,18 +303,41 @@ export function LandingPage({
             </div>
 
             {/* Direct Conversion Action Bar */}
-            <div className="mt-10 bg-white rounded-2xl border border-[#E8ECF4] p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5 text-center sm:text-left">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#145BFF] shrink-0 hidden sm:flex items-center justify-center">
-                  <CheckCircle2 className="w-5 h-5" />
+            <div className="mt-10 bg-white rounded-3xl border border-[#E8ECF4] p-5 sm:p-7 shadow-xs flex flex-col md:flex-row items-center justify-between gap-5">
+              <div className="flex items-start sm:items-center gap-4 text-center sm:text-left">
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#145BFF] shrink-0 hidden sm:flex items-center justify-center shadow-2xs">
+                  <Bot className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-xs sm:text-sm font-bold text-[#0D2B75]">
-                    {t('addModal.footerNotice')}
+                  <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
+                    <span className="text-xs sm:text-sm font-extrabold text-[#0D2B75]">
+                      {t('addModal.footerNotice')}
+                    </span>
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      {t('landing.heroFreeTrust')}
+                    </span>
                   </div>
-                  <div className="text-[11px] text-slate-500 font-medium flex items-center gap-2 mt-0.5 justify-center sm:justify-start">
-                    <Bot className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                    <span>{t('addModal.aiAgentNotice')} <strong className="font-mono text-[#0D2B75]">mail@nordible.co</strong></span>
+                  <div className="text-xs text-slate-600 font-medium flex flex-wrap items-center gap-2 mt-1.5 justify-center sm:justify-start">
+                    <span className="font-bold text-[#145BFF] inline-flex items-center gap-1">
+                      <Bot className="w-3.5 h-3.5 text-[#145BFF]" />
+                      <span>{t('landing.aiAgentBannerTitle')}:</span>
+                    </span>
+                    <span>{t('addModal.aiAgentNotice')}</span>
+                    <a
+                      href="mailto:mail@nordible.co"
+                      className="font-mono text-[#0D2B75] font-bold underline hover:text-[#145BFF]"
+                    >
+                      mail@nordible.co
+                    </a>
+                    <span className="text-slate-300 hidden sm:inline">•</span>
+                    <Link
+                      href="/llms.txt"
+                      target="_blank"
+                      className="font-bold text-[#145BFF] hover:underline inline-flex items-center gap-1"
+                    >
+                      <span>llms.txt</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -326,7 +345,7 @@ export function LandingPage({
               <button
                 type="button"
                 onClick={() => openAddModal(false)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white px-6 py-3.5 text-xs sm:text-sm font-extrabold shadow-md shadow-blue-500/20 transition-all active:scale-95 shrink-0 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-[#145BFF] hover:bg-[#0D2B75] text-white px-7 py-4 text-xs sm:text-sm font-extrabold shadow-md shadow-blue-500/20 transition-all hover:scale-102 active:scale-95 shrink-0 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
                 <span>{t('landing.ctaAdd')}</span>
