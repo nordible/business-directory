@@ -25,7 +25,7 @@
     "launchDirectory": "Apri Directory",
     "backHome": "Home",
     "partner": "Partnership",
-    "tagline": "La directory globale delle imprese per aziende verificate in tutto il mondo e dalla Germania",
+    "tagline": "La directory aziendale globale gratuita per imprese verificate in tutto il mondo e dalla Germania",
     "toDirectory": "Directory",
     "betaBadge": "Beta",
     "betaNotice": "Questa piattaforma è attualmente in fase di test.",
@@ -62,9 +62,9 @@
     "activeTenant": "Directory attiva"
   },
   "landing": {
-    "badge": "Directory aziendale ufficiale • 100% Verificata",
-    "heroTitle": "Aziende e servizi verificati nella tua regione",
-    "heroSubtitle": "Scopri agenzie tech selezionate, gastronomia d'eccellenza, architetti rinomati ed esperti immobiliari certificati.",
+    "badge": "Directory aziendale internazionale 100% gratuita • Per esseri umani e agenti IA",
+    "heroTitle": "La directory aziendale globale gratuita per imprese verificate in tutto il mondo",
+    "heroSubtitle": "Profili permanenti gratuiti al 100% per imprese verificate. Registra la tua azienda manualmente o lascia che agenti IA autonomi la inseriscano in pochi secondi — sviluppata nel cuore di Francoforte sul Meno per le aziende di tutto il mondo.",
     "ctaExplore": "Esplora la Directory",
     "ctaAdd": "Registra la tua attività",
     "geoBadge": "Ricerca locale per i principali hub economici",
@@ -82,7 +82,7 @@
     "faq1Q": "Come posso inserire la mia azienda nella directory?",
     "faq1A": "Clicca su 'Registra la tua attività' o invia i tuoi dati a mail@nordible.co per una registrazione prioritaria.",
     "faq2Q": "La scheda base è gratuita?",
-    "faq2A": "Sì, l'inserimento standard per attività verificate è permanentemente gratuito.",
+    "faq2A": "Sì, l'inserimento standard per aziende e partner verificati è gratuito al 100% per sempre, senza tariffe di attivazione né commissioni.",
     "faq3Q": "Quali città e regioni sono coperte?",
     "faq3A": "Copriamo principalmente Francoforte, Berlino, Monaco, Amburgo, la regione DACH e partner internazionali.",
     "badgeInternational": "International Business Directory",
@@ -111,7 +111,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "100% Gratuito per sempre",
+    "heroAiAgentsTrust": "Aperto agli agenti IA (API e llms.txt)",
+    "aiAgentBannerTitle": "Agenti IA autonomi benvenuti",
+    "faq4Q": "Gli agenti IA e i bot automatizzati possono inserire un'azienda?",
+    "faq4A": "Sì! Nordible offre un protocollo aperto per l'IA. Gli agenti IA autonomi, bot e crawler LLM (come i flussi di ChatGPT, Claude e Perplexity) possono aggiungere profili aziendali verificati tramite e-mail a mail@nordible.co o consultando il nostro protocollo pubblico llms.txt."
   },
   "addModal": {
     "verifiedBadge": "Iscrizione Verificata Gratuita",

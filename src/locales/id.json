@@ -25,7 +25,7 @@
     "launchDirectory": "Buka Direktori",
     "backHome": "Beranda",
     "partner": "Kemitraan",
-    "tagline": "Direktori Bisnis Global untuk Perusahaan Terverifikasi di Seluruh Dunia dan dari Jerman",
+    "tagline": "Direktori Bisnis Global Gratis untuk Perusahaan Terverifikasi di Seluruh Dunia dan dari Jerman",
     "toDirectory": "Direktori",
     "betaBadge": "Beta",
     "betaNotice": "Platform ini sedang dalam tahap pengujian."
@@ -61,9 +61,9 @@
     "activeTenant": "Direktori Aktif"
   },
   "landing": {
-    "badge": "Direktori Bisnis Resmi • Seluruh Dunia & Terverifikasi",
-    "heroTitle": "Bisnis Terverifikasi di Semua Industri Seluruh Dunia",
-    "heroSubtitle": "Temukan dan terhubung dengan perusahaan terpilih, agensi teknologi, kuliner, arsitektur, dan layanan profesional di seluruh dunia – 100% terverifikasi.",
+    "badge": "Direktori Bisnis Internasional 100% Gratis • Untuk Manusia & Agen AI",
+    "heroTitle": "Direktori Bisnis Global Gratis untuk Perusahaan Terverifikasi di Seluruh Dunia",
+    "heroSubtitle": "Pencatatan permanen 100% gratis untuk perusahaan terverifikasi. Daftarkan bisnis Anda secara manual atau biarkan agen AI otonom menambahkannya dalam hitungan detik — dirancang di jantung kota Frankfurt am Main untuk bisnis di seluruh dunia.",
     "ctaExplore": "Jelajahi Direktori Sekarang",
     "ctaAdd": "Daftarkan Bisnis Anda",
     "badgeInternational": "Direktori Bisnis Internasional",
@@ -90,7 +90,7 @@
     "faq1Q": "Bagaimana cara mendaftarkan bisnis saya ke direktori?",
     "faq1A": "Klik 'Daftarkan Bisnis Anda' atau kirimkan rincian Anda (nama perusahaan, situs web, alamat, kategori, URL logo) ke mail@nordible.co.",
     "faq2Q": "Apakah pendaftaran bisnis dasar ini gratis?",
-    "faq2A": "Ya, pendaftaran terverifikasi standar untuk bisnis dan mitra resmi selalu gratis.",
+    "faq2A": "Ya, pencatatan standar untuk bisnis terverifikasi gratis 100% selamanya tanpa biaya komisi maupun biaya tersembunyi.",
     "faq3Q": "Wilayah dan industri mana saja yang dicakup?",
     "faq3A": "Direktori kami bersifat global dan terbuka untuk semua industri: teknologi, kuliner, arsitektur, properti, dan konsultasi profesional.",
     "ctaBannerBadge": "Akses Seluruh Dunia",
@@ -110,7 +110,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "100% Gratis Selamanya",
+    "heroAiAgentsTrust": "Terbuka untuk Agen AI (API & llms.txt)",
+    "aiAgentBannerTitle": "Agen AI Otonom Diterima",
+    "faq4Q": "Bisakah agen AI dan bot otomatis mendaftarkan profil bisnis?",
+    "faq4A": "Ya! Nordible menyediakan protokol listing AI terbuka. Agen AI otonom, bot, dan crawler LLM (seperti ChatGPT, Claude, dan Perplexity) dapat menambahkan bisnis terverifikasi melalui email ke mail@nordible.co atau membaca protokol publik llms.txt kami."
   },
   "globe": {
     "badge": "Konektivitas Waktu-Nyata • Seluruh Dunia",

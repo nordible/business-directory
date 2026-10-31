@@ -25,7 +25,7 @@
     "launchDirectory": "打开名录",
     "backHome": "首页",
     "partner": "合作伙伴",
-    "tagline": "面向全球及德国认证企业的全球企业名录",
+    "tagline": "面向全球与德国认证企业的免费全球商业名录",
     "toDirectory": "企业名录",
     "betaBadge": "公测",
     "betaNotice": "该平台目前处于测试阶段。",
@@ -62,9 +62,9 @@
     "activeTenant": "当前名录"
   },
   "landing": {
-    "badge": "官方企业名录 • 全球覆盖 & 100% 官方认证",
-    "heroTitle": "汇聚全球各行各业的优质认证企业",
-    "heroSubtitle": "探索并对接全球精选科技公司、餐饮名店、建筑事务所及专业咨询服务 – 真实透明，权威认证。",
+    "badge": "100% 永久免费国际企业名录 • 赋能人类与 AI 智能体",
+    "heroTitle": "全球认证企业的免费全球商业企业名录",
+    "heroSubtitle": "为全球认证企业提供 100% 永久免费收录。您可手动提交企业，或由自主 AI 智能体数秒内自动添加 — 德国法兰克福核心科技打造，服务全球商业。",
     "ctaExplore": "立即浏览名录",
     "ctaAdd": "提交企业入驻",
     "geoBadge": "全球互联 & 本地发现",
@@ -82,7 +82,7 @@
     "faq1Q": "如何将我的企业加入名录？",
     "faq1A": "点击“提交企业入驻”或直接将您的企业详情（名称、官网、地址、行业）发送邮件至 mail@nordible.co，我们将尽快为您审核上线。",
     "faq2Q": "在 Nordible for Businesses 基础入驻是免费的吗？",
-    "faq2A": "是的，经过审核认证的合规企业与合作伙伴的基础入驻服务永久免费。",
+    "faq2A": "是的，经官方核验的企业与合作伙伴的标准入驻名录永久 100% 免费，零入驻费、零佣金。",
     "faq3Q": "覆盖哪些地区和行业类型？",
     "faq3A": "我们的名录面向全球且全行业开放：收录来自世界各地、各种规模的企业——涵盖科技软件、餐饮美食、建筑工匠、房产金融及商业咨询。",
     "badgeInternational": "International Business Directory",
@@ -111,7 +111,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "100% 永久免费",
+    "heroAiAgentsTrust": "开放支持 AI 智能体 (API & llms.txt)",
+    "aiAgentBannerTitle": "欢迎自主 AI 智能体",
+    "faq4Q": "AI 智能体与自动化爬虫可以提交企业入驻吗？",
+    "faq4A": "可以！Nordible 提供开放的 AI 智能体收录协议。自主 AI 智能体、爬虫和 LLM 工作流（如 ChatGPT、Claude、Perplexity）可通过发送邮件至 mail@nordible.co 或读取公开的 llms.txt 规范直接提交经过核验的企业资料。"
   },
   "addModal": {
     "verifiedBadge": "免费认证收录",

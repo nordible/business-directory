@@ -25,7 +25,7 @@
     "launchDirectory": "Dizini Aç",
     "backHome": "Ana Sayfa",
     "partner": "İş Ortaklığı",
-    "tagline": "Dünya Çapında ve Almanya'dan Doğrulanmış İşletmeler için Küresel İş Rehberi",
+    "tagline": "Dünya genelinden ve Almanya'dan doğrulanmış işletmeler için ücretsiz küresel rehber",
     "toDirectory": "Directory",
     "betaBadge": "Beta",
     "betaNotice": "Bu platform şu anda test aşamasındadır."
@@ -61,9 +61,9 @@
     "activeTenant": "Aktif Dizin"
   },
   "landing": {
-    "badge": "Resmi İşletme Rehberi • Dünya Çapında & Doğrulanmış",
-    "heroTitle": "Dünya Çapında Tüm Sektörlerden Doğrulanmış İşletmeler",
-    "heroSubtitle": "Seçkin şirketleri, yenilikçi teknoloji firmalarını, restoranları, zanaatkarları ve profesyonel hizmetleri küresel ölçekte keşfedin – %100 doğrulanmış.",
+    "badge": "%100 Ücretsiz Uluslararası İş Rehberi • İnsanlar ve Yapay Zeka Ajanları İçin",
+    "heroTitle": "Dünya Çapındaki Doğrulanmış İşletmeler İçin Ücretsiz Küresel İş Rehberi",
+    "heroSubtitle": "Doğrulanmış işletmeler için kalıcı olarak %100 ücretsiz kayıt. İşletmenizi manuel olarak ekleyin veya otonom yapay zeka ajanlarının saniyeler içinde eklemesini sağlayın — tüm dünyadaki işletmeler için Frankfurt am Main merkezinde geliştirildi.",
     "ctaExplore": "Dizini Şimdi Keşfet",
     "ctaAdd": "İşletmenizi Ekleyin",
     "geoBadge": "Küresel Erişim & Yerel Keşif",
@@ -81,7 +81,7 @@
     "faq1Q": "İşletmemi dizine nasıl ekleyebilirim?",
     "faq1A": "'İşletmenizi Ekleyin' butonuna tıklayın veya şirket bilgilerinizi (ad, web sitesi, adres, sektör) mail@nordible.co adresine e-posta ile gönderin.",
     "faq2Q": "Nordible for Businesses dizininde temel listeleme ücretsiz mi?",
-    "faq2A": "Evet, doğrulanmış işletmeler ve ortaklar için standart listeleme kalıcı olarak ücretsizdir.",
+    "faq2A": "Evet, doğrulanmış işletmeler ve iş ortakları için standart temel kayıtlar sıfır komisyon ve sıfır ücretle kalıcı olarak %100 ücretsizdir.",
     "faq3Q": "Hangi bölgeler ve sektörler kapsanmaktadır?",
     "faq3A": "Dizinimiz küreseldir ve tüm sektörlere açıktır: Teknolojiden gastronomiye, mimarlıktan ticarete kadar dünya genelindeki her ölçekteki işletmeyi listeliyoruz.",
     "badgeInternational": "International Business Directory",
@@ -110,7 +110,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "%100 Kalıcı Olarak Ücretsiz",
+    "heroAiAgentsTrust": "Yapay Zeka Ajanlarına Açık (API & llms.txt)",
+    "aiAgentBannerTitle": "Otonom Yapay Zeka Ajanları Hoş Geldiniz",
+    "faq4Q": "Yapay zeka ajanları ve otomatik botlar işletme kaydı ekleyebilir mi?",
+    "faq4A": "Evet! Nordible açık bir yapay zeka listeleme protokolü sunar. Otonom yapay zeka ajanları, botlar ve LLM tarayıcıları (ChatGPT, Claude, Perplexity iş akışları gibi) mail@nordible.co adresine e-posta göndererek veya herkese açık llms.txt protokolümüzü okuyarak doğrulanmış işletme ekleyebilir."
   },
   "addModal": {
     "verifiedBadge": "Ücretsiz Doğrulanmış Kayıt",

@@ -25,7 +25,7 @@
     "launchDirectory": "Ouvrir l'annuaire",
     "backHome": "Accueil",
     "partner": "Partenariat",
-    "tagline": "L'annuaire mondial des entreprises pour les entreprises vérifiées dans le monde entier et d'Allemagne",
+    "tagline": "L'annuaire mondial gratuit pour les entreprises vérifiées dans le monde entier et d'Allemagne",
     "toDirectory": "Annuaire",
     "betaBadge": "Bêta",
     "betaNotice": "Cette plateforme est actuellement en phase de test.",
@@ -62,9 +62,9 @@
     "activeTenant": "Annuaire actif"
   },
   "landing": {
-    "badge": "Annuaire professionnel officiel • 100% Vérifié",
-    "heroTitle": "Entreprises et services vérifiés dans votre région",
-    "heroSubtitle": "Découvrez des agences tech sélectionnées, une gastronomie de premier plan, des architectes renommés et des experts immobiliers.",
+    "badge": "Annuaire international 100% gratuit • Conçu pour les humains & agents IA",
+    "heroTitle": "L'annuaire mondial gratuit des entreprises vérifiées dans le monde entier",
+    "heroSubtitle": "Fiches permanentes 100% gratuites pour les entreprises vérifiées. Inscrivez votre entreprise manuellement ou laissez des agents IA autonomes l'ajouter en quelques secondes — conçu au cœur de Francfort-sur-le-Main pour les entreprises du monde entier.",
     "ctaExplore": "Explorer l'annuaire",
     "ctaAdd": "Inscrire votre entreprise",
     "geoBadge": "Recherche locale pour les métropoles clés",
@@ -82,7 +82,7 @@
     "faq1Q": "Comment inscrire mon entreprise dans l'annuaire ?",
     "faq1A": "Cliquez sur 'Inscrire votre entreprise' ou envoyez vos informations à mail@nordible.co pour un traitement prioritaire.",
     "faq2Q": "L'inscription de base est-elle gratuite ?",
-    "faq2A": "Oui, la fiche standard pour les entreprises vérifiées est gratuite de manière permanente.",
+    "faq2A": "Oui, les fiches standards pour les entreprises vérifiées sont 100% gratuites de manière permanente, sans frais d'inscription ni commissions.",
     "faq3Q": "Quelles villes et régions sont couvertes ?",
     "faq3A": "Nous couvrons principalement Francfort, Berlin, Munich, Hambourg, la région DACH et des partenaires internationaux.",
     "badgeInternational": "International Business Directory",
@@ -111,7 +111,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "100% Gratuit en permanence",
+    "heroAiAgentsTrust": "Ouvert aux agents IA (API & llms.txt)",
+    "aiAgentBannerTitle": "Agents IA autonomes bienvenus",
+    "faq4Q": "Les agents IA et robots automatisés peuvent-ils inscrire une entreprise ?",
+    "faq4A": "Oui ! Nordible propose un protocole ouvert pour l'IA. Les agents IA autonomes, robots et crawlers LLM (comme ChatGPT, Claude ou Perplexity) peuvent soumettre des fiches vérifiées par e-mail à mail@nordible.co ou via notre protocole public llms.txt."
   },
   "addModal": {
     "verifiedBadge": "Inscription Vérifiée Gratuite",

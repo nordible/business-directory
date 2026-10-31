@@ -25,7 +25,7 @@
     "launchDirectory": "ディレクトリを開く",
     "backHome": "ホーム",
     "partner": "パートナーシップ",
-    "tagline": "世界中およびドイツの検証済み企業のためのグローバルビジネスディレクトリ",
+    "tagline": "世界およびドイツの認証企業のための無料グローバルビジネスディレクトリ",
     "toDirectory": "ディレクトリ",
     "betaBadge": "ベータ",
     "betaNotice": "このプラットフォームは現在テスト中です。",
@@ -62,9 +62,9 @@
     "activeTenant": "現在のディレクトリ"
   },
   "landing": {
-    "badge": "公式ビジネスディレクトリ • 世界基準＆認証済み",
-    "heroTitle": "世界中のあらゆる業種の認証済み企業",
-    "heroSubtitle": "IT・テクノロジー、建築、飲食、製造、専門サービスなど、厳選された優良企業を100%認証付きで世界中から検索・接続できます。",
+    "badge": "100% 完全無料の国際ビジネス名鑑 • 人間＆AIエージェント対応",
+    "heroTitle": "世界中の認証企業のための無料グローバルビジネスディレクトリ",
+    "heroSubtitle": "認証企業向けの完全無料・永久掲載。手動での登録はもちろん、自律型AIエージェントが数秒で登録することも可能です — 世界中のビジネスのためにフランクフルト・アム・マインで設計されました。",
     "ctaExplore": "ディレクトリを今すぐ探索",
     "ctaAdd": "企業掲載を申請",
     "badgeInternational": "国際ビジネスディレクトリ",
@@ -91,7 +91,7 @@
     "faq1Q": "ディレクトリに企業を掲載するにはどうすればよいですか？",
     "faq1A": "「企業掲載を申請」をクリックするか、企業詳細（会社名、URL、所在地、業種、ホスト済みロゴURL）を mail@nordible.co までメールでお送りください。",
     "faq2Q": "基本掲載は無料ですか？",
-    "faq2A": "はい、正規の実在企業およびパートナー向けの認証済み基本掲載は永久に無料です。",
+    "faq2A": "はい、実在が確認された優良企業やパートナーの標準掲載は、初期費用・月額・手数料すべてゼロで永久に100%無料です。",
     "faq3Q": "対象となる地域や業種は？",
     "faq3A": "グローバルかつ全業種対応です。IT、デザイン、建築、飲食、不動産、コンサルティングまで世界各地の事業者を歓迎します。",
     "ctaBannerBadge": "世界中からアクセス可能",
@@ -111,7 +111,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "100% 永久無料",
+    "heroAiAgentsTrust": "AIエージェント対応 (API & llms.txt)",
+    "aiAgentBannerTitle": "自律型AIエージェント歓迎",
+    "faq4Q": "AIエージェントや自動ボットから企業掲載を申請できますか？",
+    "faq4A": "はい、可能です！NordibleはオープンなAIリスティングプロトコルを提供しています。自律型AIエージェント、ボット、LLM（ChatGPT、Claude、Perplexityなど）は、mail@nordible.co へのメール送信、または公開プロトコル llms.txt を参照して認証済み企業情報を登録できます。"
   },
   "globe": {
     "badge": "リアルタイム・コネクティビティ • 世界規模",

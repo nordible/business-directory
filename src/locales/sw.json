@@ -25,7 +25,7 @@
     "launchDirectory": "Fungua Saraka",
     "backHome": "Mwanzo",
     "partner": "Ushirikiano",
-    "tagline": "Saraka ya Biashara Ulimwenguni kwa Mashirika Yaliyothibitishwa Duniani Kote na kutoka Ujerumani",
+    "tagline": "Saraka ya Biashara ya Kimataifa Isiyolipishwa kwa Biashara Zilizothibitishwa Ulimwenguni Pote na kutoka Ujerumani",
     "toDirectory": "Directory",
     "betaBadge": "Beta",
     "betaNotice": "Jukwaa hili kwa sasa liko kwenye majaribio."
@@ -61,9 +61,9 @@
     "activeTenant": "Saraka Inayotumika"
   },
   "landing": {
-    "badge": "Saraka Rasmi ya Biashara • Ulimwenguni Pote & Imethibitishwa",
-    "heroTitle": "Biashara Zilizothibitishwa Katika Sekta Zote Duniani",
-    "heroSubtitle": "Gundua na uungane na kampuni bora za teknolojia, migahawa, wasanifu majengo, na watoa huduma za kitaalamu duniani kote – 100% zilizothibitishwa.",
+    "badge": "Saraka ya Biashara ya Kimataifa ya 100% Bure • Imejengwa kwa Binadamu na Ajenti za AI",
+    "heroTitle": "Saraka ya Kimataifa Isiyolipishwa kwa Biashara Zilizothibitishwa Ulimwenguni Pote",
+    "heroSubtitle": "Uorodheshaji wa kudumu wa 100% bure kwa biashara zilizothibitishwa. Sajili biashara yako mwenyewe au ruhusu ajenti huru za AI kuiongeza kwa sekunde — imeundwa katikati ya Frankfurt am Main kwa biashara kote ulimwenguni.",
     "ctaExplore": "Gundua Saraka Sasa",
     "ctaAdd": "Wasilisha Biashara Yako",
     "geoBadge": "Ufikiaji wa Kimataifa na Ugunduzi wa Ndani",
@@ -81,7 +81,7 @@
     "faq1Q": "Ninawezaje kuongeza biashara yangu kwenye saraka?",
     "faq1A": "Bofya 'Wasilisha Biashara Yako' au tuma maelezo yako (jina, tovuti, anwani, sekta) kwa mail@nordible.co. Timu yetu itaithibitisha mara moja.",
     "faq2Q": "Je, orodha ya msingi katika Nordible for Businesses ni bure?",
-    "faq2A": "Ndiyo, usajili wa kawaida uliothibitishwa kwa biashara na washirika ni wa bure daima.",
+    "faq2A": "Ndiyo, uorodheshaji wa kawaida kwa biashara zilizothibitishwa ni 100% bure daima bila ada wala kamisheni.",
     "faq3Q": "Je, ni maeneo na sekta gani zinazojumuishwa?",
     "faq3A": "Saraka yetu ni ya kimataifa na inakaribisha sekta zote: Tunaorodhesha biashara za viwango vyote duniani – kuanzia teknolojia na vyakula hadi ujenzi, mali isiyohamishika na ushauri wa kibiashara.",
     "badgeInternational": "International Business Directory",
@@ -110,7 +110,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "100% Bure Daima",
+    "heroAiAgentsTrust": "Wazi kwa Ajenti za AI (API & llms.txt)",
+    "aiAgentBannerTitle": "Ajenti Huru za AI Zinakaribishwa",
+    "faq4Q": "Je, ajenti za AI na boti za kiotomatiki zinaweza kusajili biashara?",
+    "faq4A": "Ndiyo! Nordible hutoa itifaki wazi ya uorodheshaji wa AI. Ajenti huru za AI, boti, na watambazaji wa LLM (kama ChatGPT, Claude, na Perplexity) wanaweza kuongeza biashara iliyothibitishwa kwa barua pepe kwa mail@nordible.co au kupitia itifaki yetu ya umma ya llms.txt."
   },
   "addModal": {
     "verifiedBadge": "Orodha ya Bure Iliyothibitishwa",

@@ -25,7 +25,7 @@
     "launchDirectory": "Abrir Directorio",
     "backHome": "Inicio",
     "partner": "Asociación",
-    "tagline": "El Directorio Global de Empresas para Negocios Verificados en Todo el Mundo y de Alemania",
+    "tagline": "El directorio empresarial mundial gratuito para empresas verificadas de todo el mundo y de Alemania",
     "toDirectory": "Directorio",
     "betaBadge": "Beta",
     "betaNotice": "Esta plataforma se encuentra actualmente en fase de pruebas.",
@@ -62,9 +62,9 @@
     "activeTenant": "Directorio activo"
   },
   "landing": {
-    "badge": "Directorio empresarial oficial • 100% Verificado",
-    "heroTitle": "Empresas y servicios verificados en su región",
-    "heroSubtitle": "Descubra agencias tecnológicas seleccionadas, gastronomía de primer nivel, arquitectos de renombre y expertos inmobiliarios.",
+    "badge": "Directorio internacional 100% gratuito • Para personas y agentes de IA",
+    "heroTitle": "El directorio empresarial mundial gratuito para empresas verificadas de todo el mundo",
+    "heroSubtitle": "Listados permanentes 100% gratuitos para empresas verificadas. Registre su empresa manualmente o permita que agentes de IA autónomos la agreguen en segundos — diseñado en el corazón de Fráncfort del Meno para empresas de todo el mundo.",
     "ctaExplore": "Explorar Directorio Ahora",
     "ctaAdd": "Registrar su empresa",
     "geoBadge": "Búsqueda local para centros económicos",
@@ -82,7 +82,7 @@
     "faq1Q": "¿Cómo registro mi empresa en el directorio?",
     "faq1A": "Haga clic en 'Registrar su empresa' o envíe sus datos a mail@nordible.co para un procesamiento prioritario.",
     "faq2Q": "¿Es gratuito el registro básico?",
-    "faq2A": "Sí, el perfil estándar para empresas verificadas es gratuito de forma permanente.",
+    "faq2A": "Sí, los listados estándar para empresas y socios verificados son 100% gratuitos para siempre, sin comisiones ni tarifas ocultas.",
     "faq3Q": "¿Qué regiones y ciudades están cubiertas?",
     "faq3A": "Cubrimos principalmente Fráncfort, Berlín, Múnich, Hamburgo, la región DACH y socios internacionales.",
     "badgeInternational": "International Business Directory",
@@ -111,7 +111,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "100% Permanente y gratuito",
+    "heroAiAgentsTrust": "Abierto para agentes de IA (API y llms.txt)",
+    "aiAgentBannerTitle": "Agentes de IA autónomos bienvenidos",
+    "faq4Q": "¿Pueden los agentes de IA y bots automatizados registrar una empresa?",
+    "faq4A": "¡Sí! Nordible cuenta con un protocolo abierto para IA. Los agentes de IA autónomos, bots y rastreadores LLM (como los flujos de trabajo de ChatGPT, Claude y Perplexity) pueden registrar empresas verificadas por correo a mail@nordible.co o consultando nuestro protocolo público llms.txt."
   },
   "addModal": {
     "verifiedBadge": "Registro Verificado Gratuito",

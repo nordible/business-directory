@@ -25,7 +25,7 @@
     "launchDirectory": "디렉토리 열기",
     "backHome": "홈",
     "partner": "파트너십",
-    "tagline": "전 세계 및 독일의 검증된 기업을 위한 글로벌 비즈니스 디렉토리",
+    "tagline": "전 세계 및 독일 공식 인증 기업을 위한 무료 글로벌 비즈니스 디렉토리",
     "toDirectory": "디렉토리",
     "betaBadge": "베타",
     "betaNotice": "이 플랫폼은 현재 테스트 중입니다.",
@@ -62,9 +62,9 @@
     "activeTenant": "활성 디렉토리"
   },
   "landing": {
-    "badge": "공식 비즈니스 디렉토리 • 전 세계 & 100% 인증",
-    "heroTitle": "전 세계 모든 산업의 공식 인증 비즈니스",
-    "heroSubtitle": "엄선된 IT 테크 기업, 식음료, 건축, 전문 서비스 등 전 세계의 우수 비즈니스를 투명하게 발견하고 직접 연결하세요.",
+    "badge": "100% 무료 국제 비즈니스 디렉토리 • 사람과 AI 에이전트 모두 지원",
+    "heroTitle": "전 세계 검증된 엔터프라이즈를 위한 무료 글로벌 비즈니스 디렉토리",
+    "heroSubtitle": "검증된 기업을 위한 100% 평생 무료 등록. 수동 등록은 물론 자율형 AI 에이전트가 단 몇 초 만에 등록할 수 있습니다 — 전 세계 비즈니스를 위해 프랑크푸르트 암마인 중심부에서 개발되었습니다.",
     "ctaExplore": "지금 디렉토리 탐색",
     "ctaAdd": "기업 무료 등록 신청",
     "badgeInternational": "국제 비즈니스 디렉토리",
@@ -91,7 +91,7 @@
     "faq1Q": "디렉토리에 우리 기업을 어떻게 등록하나요?",
     "faq1A": "‘기업 무료 등록 신청’ 버튼을 누르거나 회사 정보(회사명, 웹사이트, 주소, 카테고리, 호스팅된 로고 URL)를 mail@nordible.co 로 보내주시면 빠르게 등록해 드립니다.",
     "faq2Q": "기본 기업 등록은 무료인가요?",
-    "faq2A": "네, 합법적이고 검증된 기업 및 파트너를 위한 기본 등록은 영구적으로 무료입니다.",
+    "faq2A": "네, 검증된 정식 기업의 기본 등재는 등록비나 수수료 없이 영구적으로 100% 무료입니다.",
     "faq3Q": "지원되는 지역과 업종은 어떻게 되나요?",
     "faq3A": "글로벌 전 지역과 모든 업종을 지원합니다. IT, 디자인, 건축, 외식업, 부동산, 컨설팅 등 전 세계 비즈니스를 환영합니다.",
     "ctaBannerBadge": "전 세계 어디서나 접근 가능",
@@ -111,7 +111,12 @@
     "frankfurtGrowthCta": "Claim Free Resources & Add Business",
     "frankfurtGrowthHubsTitle": "Rhine-Main Growth Focus:",
     "frankfurtGrowthHubs": "Frankfurt am Main • Offenbach • Wiesbaden • Darmstadt • Mainz • Hanau • Bad Homburg • Rüsselsheim",
-    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership"
+    "frankfurtGrowthGuaranteed": "100% Free • No Hidden Fees • Verified Ownership",
+    "heroFreeTrust": "100% 평생 무료",
+    "heroAiAgentsTrust": "AI 에이전트 개방형 프로토콜 (API & llms.txt)",
+    "aiAgentBannerTitle": "자율형 AI 에이전트 환영",
+    "faq4Q": "AI 에이전트나 자동화 봇도 비즈니스를 등록할 수 있나요?",
+    "faq4A": "네, 가능합니다! Nordible은 오픈 AI 등록 프로토콜을 제공합니다. 자율형 AI 에이전트, 봇 및 LLM 크롤러(ChatGPT, Claude, Perplexity 등)는 mail@nordible.co 로 이메일을 보내거나 공개된 llms.txt 프로토콜을 통해 검증된 비즈니스를 등록할 수 있습니다."
   },
   "globe": {
     "badge": "실시간 글로벌 연결 • Worldwide",
