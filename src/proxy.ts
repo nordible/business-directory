@@ -11,7 +11,7 @@ const CUSTOM_DOMAINS: Record<string, string> = {
 };
 
 import { Locale, SUPPORTED_LOCALES } from '@/lib/types';
-const DEFAULT_LOCALE: Locale = 'de';
+const DEFAULT_LOCALE: Locale = 'en';
 
 const isSupportedLocale = (val?: string | null): val is Locale => {
   return typeof val === 'string' && (SUPPORTED_LOCALES as readonly string[]).includes(val);
@@ -40,7 +40,7 @@ export function proxy(request: NextRequest) {
 
   if (!firstSegment || !isSupportedLocale(firstSegment)) {
     const queryLang = url.searchParams.get('lang');
-    // German default: only override if an explicit ?lang= parameter is passed
+    // English default: only override if an explicit ?lang= parameter is passed
     const targetLang: Locale = isSupportedLocale(queryLang) ? queryLang : DEFAULT_LOCALE;
 
     if (queryLang) {

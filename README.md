@@ -4,9 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald?style=flat-square)](LICENSE)
 [![Open Source](https://img.shields.io/badge/Open%20Source-FOSS-blueviolet?style=flat-square)](https://github.com/nordible/business-directory)
 [![Architecture](https://img.shields.io/badge/Architecture-Agentic%20AI-purple?style=flat-square)](http://business-directory.nordible.co/)
-[![Commission](https://img.shields.io/badge/Commission-0%25%20Free%20Forever-orange?style=flat-square)](http://business-directory.nordible.co/)
+[![Commission](https://img.shields.io/badge/Pricing-Free%20to%20Use%20(0%25%20Commission)-orange?style=flat-square)](http://business-directory.nordible.co/)
 
-> **The Agentic, 100% Free, and Open-Source B2B Directory engineered to empower verified businesses with direct customer inquiries, 0% commissions, and native discoverability by autonomous AI search agents (ChatGPT, Perplexity, Gemini, Claude).**
+> **The Agentic, Free, and Open-Source B2B Directory engineered to empower verified businesses with direct customer inquiries, 0% commissions, and native discoverability by autonomous AI search agents (ChatGPT, Perplexity, Gemini, Claude).**
 
 ---
 
@@ -17,9 +17,9 @@
    - Every profile generates machine-readable `Schema.org` entity graphs (`Organization`, `LocalBusiness` JSON-LD) and exposes an AI crawler ingestion protocol.
    - When autonomous AI agents, ChatGPT Search, or Perplexity answer customer buying questions (*"Find me a verified B2B software partner in Frankfurt"*), the platform acts as an authoritative, structured entity index for agentic citations and recommendations.
 
-2. **🎁 100% Free Forever (0% Commission)**:
+2. **🎁 Free to Use (0% Commission)**:
    - Traditional directories and lead brokers (Yelp, Thumbtack, Bark, MyHammer) trap business owners behind paywalls, charging **15% to 30% cuts on closed deals** or €50+ for a single shared lead.
-   - **Nordible for Businesses** is a completely free public service.
+   - **Nordible for Businesses** is free to join and list your business.
    - Direct connection via phone, email, and WhatsApp without broker lock-in. Every euro earned belongs 100% to the business owner.
 
 3. **🔓 100% Open Source**:
