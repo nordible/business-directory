@@ -62,6 +62,15 @@ export function Footer({}: FooterProps = {}) {
               </li>
               <li className="pt-1">
                 <Link
+                  href={`/${locale}/fuer-unternehmen`}
+                  className="text-white hover:text-[#FF9F1A] font-bold flex items-center gap-1 transition-colors"
+                >
+                  <span>{locale === 'de' ? 'Für Unternehmen (Kostenlos eintragen)' : 'For Businesses (Free Listing)'}</span>
+                  <ArrowUpRight className="h-3 w-3" />
+                </Link>
+              </li>
+              <li className="pt-1">
+                <Link
                   href={`/${locale}/partner`}
                   className="text-[#FF9F1A] hover:underline font-bold flex items-center gap-1"
                 >

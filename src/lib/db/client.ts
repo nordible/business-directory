@@ -1,21 +1,14 @@
 import { BusinessListing, TenantBranding, Category, Conversation, Message, WeekSchedule, LegalForm } from '@/lib/types';
 import { extractIdFromPermalink } from '@/lib/permalinks';
 import { isBusinessOpenNow } from '@/lib/openingHours';
+import { env } from '@/config/env';
 
 /**
  * Directory Database Service
  * Provides direct connection to Supabase REST API (supporting both server-only and client env variables).
  */
-const SUPABASE_URL =
-  process.env.SUPABASE_URL ||
-  process.env.NEXT_PUBLIC_SUPABASE_URL ||
-  '';
-
-const SUPABASE_KEY =
-  process.env.SUPABASE_ANON_KEY ||
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  '';
+const SUPABASE_URL = env.supabase.url;
+const SUPABASE_KEY = env.supabase.anonKey;
 
 export const isDbConfigured = Boolean(SUPABASE_URL && SUPABASE_KEY);
 

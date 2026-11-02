@@ -4,6 +4,7 @@ import { Sora, Inter } from 'next/font/google';
 import './globals.css';
 import { I18nProvider } from '@/lib/i18n';
 import { siteConfig } from '@/config/site';
+import { env } from '@/config/env';
 
 const sora = Sora({
   variable: '--font-sora',
@@ -83,7 +84,7 @@ export default function RootLayout({
 
         {/* Google Analytics (matches main portfolio & invoice generator) */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || 'G-E5H1MEHYYB'}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${env.gaId}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -91,7 +92,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID || 'G-E5H1MEHYYB'}');
+            gtag('config', '${env.gaId}');
           `}
         </Script>
       </body>

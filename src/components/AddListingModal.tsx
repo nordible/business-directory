@@ -62,6 +62,9 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
 
   const [openingHoursJson, setOpeningHoursJson] = useState<WeekSchedule>(DEFAULT_WEEK_SCHEDULE);
   const [wantsGrowthResource, setWantsGrowthResource] = useState(initialWantsGrowthResource);
+  const [aiUrlInput, setAiUrlInput] = useState('');
+  const [isExtracting, setIsExtracting] = useState(false);
+  const [extractSuccess, setExtractSuccess] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -82,7 +85,63 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
   const handleClose = () => {
     setIsSuccess(false);
     setErrorMessage(null);
+    setAiUrlInput('');
+    setExtractSuccess(false);
     onClose();
+  };
+
+  const handleExtractFromUrl = async () => {
+    if (!aiUrlInput.trim()) return;
+    setIsExtracting(true);
+    setErrorMessage(null);
+    setExtractSuccess(false);
+
+    let formattedUrl = aiUrlInput.trim();
+    if (!/^https?:\/\//i.test(formattedUrl)) {
+      formattedUrl = `https://${formattedUrl}`;
+    }
+
+    try {
+      const res = await fetch('/api/ai/extract', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: formattedUrl }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.listing) {
+        throw new Error(data.error || (isDe ? 'Extraktion fehlgeschlagen' : 'Extraction failed'));
+      }
+
+      const item = data.listing;
+      setFormData((prev) => ({
+        ...prev,
+        name: item.name && item.name !== 'Unternehmenseintrag' ? item.name : prev.name,
+        legalForm: item.legalForm || prev.legalForm,
+        categoryId: item.categoryId || prev.categoryId,
+        categoryName: item.categoryName || prev.categoryName,
+        address: item.address || prev.address,
+        postalCode: item.postalCode || prev.postalCode,
+        city: item.city || prev.city,
+        state: item.state || prev.state,
+        country: item.country || prev.country || (isDe ? 'Deutschland' : 'Germany'),
+        phone: item.phone || prev.phone,
+        email: item.email || prev.email,
+        website: item.website || formattedUrl,
+        logoUrl: item.logoUrl || prev.logoUrl,
+        description:
+          (isDe ? item.description?.de : item.description?.en) ||
+          item.description?.de ||
+          item.description?.en ||
+          prev.description,
+      }));
+      setExtractSuccess(true);
+    } catch (err: unknown) {
+      setErrorMessage(
+        err instanceof Error ? err.message : isDe ? 'Fehler beim Auslesen der Website' : 'Error reading website'
+      );
+    } finally {
+      setIsExtracting(false);
+    }
   };
 
   if (!isOpen || !isMounted) return null;
@@ -223,6 +282,66 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                   {errorMessage}
                 </div>
               )}
+
+              {/* AI URL Ingestion Bar (Hick's Law Friction Reduction) */}
+              <div className="bg-gradient-to-br from-blue-50/80 via-[#F3F7FF] to-indigo-50/60 p-4 rounded-2xl border-2 border-[#145BFF]/30 shadow-xs space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
+                    <span className="text-xs font-black text-[#0D2B75] uppercase tracking-wider font-heading">
+                      {isDe ? '⚡ Blitz-Eintrag mit KI aus Website-URL' : '⚡ 1-Click AI Import via Website URL'}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-black text-[#145BFF] bg-blue-100/70 border border-blue-200/80 px-2 py-0.5 rounded-full">
+                    {isDe ? 'Automatisch' : 'Automated'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                  {isDe
+                    ? 'Geben Sie die Firmenwebsite ein – unsere KI liest Name, Branche, Adresse & Kontaktdaten automatisch aus.'
+                    : 'Enter the company website – our AI extracts name, category, address & contact info automatically.'}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <div className="relative flex-1">
+                    <Globe className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
+                    <input
+                      type="url"
+                      value={aiUrlInput}
+                      onChange={(e) => setAiUrlInput(e.target.value)}
+                      placeholder="https://beispiel-firma.de"
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    disabled={isExtracting || !aiUrlInput.trim()}
+                    onClick={handleExtractFromUrl}
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white text-xs font-bold transition-all disabled:opacity-50 cursor-pointer shadow-xs active:scale-95"
+                  >
+                    {isExtracting ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>{isDe ? 'Liest Website...' : 'Extracting...'}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+                        <span>{isDe ? 'Mit KI ausfüllen' : 'Auto-fill with AI'}</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+                {extractSuccess && (
+                  <div className="text-[11px] text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl animate-in fade-in">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>
+                      {isDe
+                        ? 'Firmendaten erfolgreich mit KI übernommen! Bitte kurz prüfen und anpassen.'
+                        : 'Business data extracted successfully! Please review below.'}
+                    </span>
+                  </div>
+                )}
+              </div>
 
               {/* SECTION 1: Unternehmensdaten & Logo */}
               <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-4">

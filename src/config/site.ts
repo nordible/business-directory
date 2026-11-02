@@ -1,3 +1,5 @@
+import { env } from '@/config/env';
+
 export const siteConfig = {
   appName: 'Nordible for Businesses',
   appNameShort: 'Nordible',
@@ -26,9 +28,10 @@ export const siteConfig = {
     bookingUrl: 'https://calendar.app.google/N4XakE4t9zZVmHqYA',
   },
   urls: {
-    base: process.env.NEXT_PUBLIC_SITE_URL || 'https://nordible.co',
+    base: env.siteUrl,
     directory: '/directory',
     partner: '/partner',
+    forBusinesses: '/fuer-unternehmen',
     agencyServices: 'https://nordible.co/#services',
     agencyContact: 'https://nordible.co/#contact',
   },

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useTranslation } from '@/lib/i18n';
 import { BusinessListing, TenantBranding } from '@/lib/types';
 import { DEFAULT_TENANT, getAllBusinesses } from '@/lib/db/client';
@@ -22,11 +23,9 @@ import {
   ChevronDown,
   ChevronUp,
   Compass,
-  TrendingUp,
   Coins,
   Search,
   CheckCircle2,
-  Bot,
   Pause,
   Play,
 } from 'lucide-react';
@@ -67,15 +66,28 @@ export function LandingPage({
   tenant = DEFAULT_TENANT,
 }: LandingPageProps) {
   const { locale, t } = useTranslation();
+  const isDe = locale === 'de';
+  const router = useRouter();
   const [businesses, setBusinesses] = useState<BusinessListing[]>(initialBusinesses);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [modalWantsGrowth, setModalWantsGrowth] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const openAddModal = (wantsGrowth = false) => {
     setModalWantsGrowth(wantsGrowth);
     setIsAddModalOpen(true);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const query = searchQuery.trim();
+    if (query) {
+      router.push(`/${locale}/directory?q=${encodeURIComponent(query)}`);
+    } else {
+      router.push(`/${locale}/directory`);
+    }
   };
 
   React.useEffect(() => {
@@ -89,6 +101,14 @@ export function LandingPage({
   const toggleFaq = (idx: number) => {
     setOpenFaqIndex(openFaqIndex === idx ? null : idx);
   };
+
+  const quickCategories = [
+    { name: isDe ? 'Handwerk & Bau' : 'Craft & Construction', query: 'Handwerk', icon: '🛠️' },
+    { name: isDe ? 'IT & Software' : 'IT & Software', query: 'Software', icon: '💻' },
+    { name: isDe ? 'Gastronomie' : 'Dining & Cafés', query: 'Restaurant', icon: '🍽️' },
+    { name: isDe ? 'Gesundheit' : 'Health & Medical', query: 'Gesundheit', icon: '🩺' },
+    { name: isDe ? 'Beratung & Recht' : 'Legal & Consulting', query: 'Beratung', icon: '⚖️' },
+  ];
 
   const faqs = [
     {
@@ -120,21 +140,21 @@ export function LandingPage({
       />
 
       <main className="flex-1">
-        {/* HERO SECTION */}
-        <section className="relative overflow-hidden pt-10 pb-20 lg:pt-18 lg:pb-28 border-b border-[#E8ECF4]">
+        {/* CONSUMER-FIRST HERO SECTION */}
+        <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-[#E8ECF4]">
           {/* Subtle Ambient Glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent pointer-events-none" />
 
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Left Column: Headlines & High-Converting CTAs */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              {/* Left Column: Headlines & Search Form */}
               <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-3.5 py-1 text-xs font-bold text-emerald-700 shadow-2xs">
                   <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span>{t('landing.badge')}</span>
                 </div>
 
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#0D2B75] tracking-tight font-heading leading-[1.12]">
+                <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black text-[#0D2B75] tracking-tight font-heading leading-[1.14]">
                   {t('landing.heroTitle')}
                 </h1>
 
@@ -142,11 +162,52 @@ export function LandingPage({
                   {t('landing.heroSubtitle')}
                 </p>
 
-                {/* Primary CTA (Fitts's Law Conversion Action) */}
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-4">
+                {/* Instant Consumer Service Search Input */}
+                <form
+                  onSubmit={handleSearchSubmit}
+                  className="bg-white rounded-2xl border-2 border-[#145BFF]/30 p-2 shadow-lg shadow-blue-500/10 flex flex-col sm:flex-row items-center gap-2"
+                >
+                  <div className="relative flex-1 w-full">
+                    <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder={isDe ? 'Dienstleistung, Handwerker, Stadt suchen...' : 'Search service, craftsman, city...'}
+                      className="w-full pl-10 pr-3 py-2.5 text-xs sm:text-sm rounded-xl focus:outline-none font-medium text-slate-800"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white px-6 py-3 text-xs sm:text-sm font-extrabold shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
+                  >
+                    <Search className="w-3.5 h-3.5" />
+                    <span>{isDe ? 'Suchen' : 'Search'}</span>
+                  </button>
+                </form>
+
+                {/* Quick 1-Tap Category Pills (Fitts's Law Mobile Reach) */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-xs">
+                  <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider hidden sm:inline">
+                    {isDe ? 'Beliebt:' : 'Popular:'}
+                  </span>
+                  {quickCategories.map((cat, idx) => (
+                    <Link
+                      key={idx}
+                      href={`/${locale}/directory?q=${encodeURIComponent(cat.query)}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E8ECF4] hover:border-[#145BFF]/40 hover:bg-[#F3F7FF] text-[#0D2B75] font-bold text-xs transition-colors shadow-2xs"
+                    >
+                      <span>{cat.icon}</span>
+                      <span>{cat.name}</span>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Action CTAs */}
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
                   <Link
                     href={`/${locale}/directory`}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#145BFF] px-8 py-4 text-sm font-extrabold text-white shadow-xl shadow-blue-500/25 hover:bg-[#0D2B75] transition-all hover:scale-102 active:scale-95"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#0D2B75] px-7 py-3.5 text-sm font-extrabold text-white shadow-md hover:bg-[#145BFF] transition-all hover:scale-102 active:scale-95"
                   >
                     <Compass className="h-4 w-4" />
                     <span>{t('landing.ctaExplore')} →</span>
@@ -155,28 +216,23 @@ export function LandingPage({
                   <button
                     type="button"
                     onClick={() => openAddModal(false)}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-white border border-[#E8ECF4] hover:bg-[#F3F7FF] px-6 py-4 text-sm font-bold text-[#0D2B75] shadow-xs transition-colors cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-white border border-[#E8ECF4] hover:bg-[#F3F7FF] px-6 py-3.5 text-sm font-bold text-[#0D2B75] shadow-xs transition-colors cursor-pointer"
                   >
                     <Sparkles className="h-4 w-4 text-[#FF9F1A]" />
                     <span>{t('landing.ctaAdd')}</span>
                   </button>
                 </div>
 
-                {/* Friction-Free & AI-Agent Micro-Trust Row */}
+                {/* Friction-Free Consumer Trust Row */}
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1 text-xs">
                   <span className="inline-flex items-center gap-1.5 text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/80 font-bold shadow-2xs">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>{t('landing.heroFreeTrust')}</span>
                   </span>
-                  <Link
-                    href="/llms.txt"
-                    target="_blank"
-                    className="inline-flex items-center gap-1.5 text-blue-700 bg-blue-50 hover:bg-blue-100/70 px-3 py-1 rounded-full border border-blue-200/80 font-bold transition-colors shadow-2xs group"
-                  >
-                    <Bot className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
-                    <span>{t('landing.heroAiAgentsTrust')}</span>
-                    <ArrowRight className="w-3 h-3 text-[#145BFF] transition-transform group-hover:translate-x-0.5" />
-                  </Link>
+                  <span className="inline-flex items-center gap-1.5 text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/80 font-bold shadow-2xs">
+                    <Star className="w-3.5 h-3.5 fill-[#FF9F1A] text-[#FF9F1A] shrink-0" />
+                    <span>{isDe ? 'Echte Kundenbewertungen' : 'Real Customer Reviews'}</span>
+                  </span>
                 </div>
               </div>
 
@@ -195,162 +251,114 @@ export function LandingPage({
           </div>
         </section>
 
-
-
-        {/* REVENUE & MARKETING ROI VALUE PROPOSITION (CRO-OPTIMIZED) */}
-        <section className="py-16 sm:py-24 bg-[#FAFBFF] border-b border-[#E8ECF4] relative overflow-hidden">
-          {/* Subtle Ambient Background Gradients */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent pointer-events-none" />
-
+        {/* CONSUMER VALUE LOOP: HOW IT WORKS FOR CUSTOMERS */}
+        <section className="py-16 sm:py-20 bg-white border-b border-[#E8ECF4] relative overflow-hidden">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-14">
               <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/80 px-3.5 py-1 text-xs font-extrabold text-[#145BFF] mb-3 shadow-2xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
-                <span>{t('addModal.verifiedBadge')}</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#145BFF]" />
+                <span>{t('landing.benefitsBadge')}</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight leading-tight">
-                {t('addModal.benefitsTitle')}
+                {t('landing.benefitsTitle')}
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 mt-3 font-medium max-w-2xl mx-auto leading-relaxed">
-                {t('landing.ctaBannerSubtitle')}
-              </p>
             </div>
 
-            {/* 4 Pillars of Tangible Commercial ROI */}
+            {/* 4 Customer Pillars */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {/* Pillar 1: More Paying Clients */}
-              <div className="bg-white rounded-3xl border border-emerald-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-emerald-300">
+              {/* Pillar 1 */}
+              <div className="bg-[#FAFBFF] rounded-3xl border border-[#E8ECF4] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-[#145BFF]/40">
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <TrendingUp className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                      + Deals
-                    </span>
+                  <div className="w-11 h-11 rounded-2xl bg-blue-50 text-[#145BFF] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <Search className="w-5 h-5" />
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-emerald-700 transition-colors mb-2 leading-snug">
-                    {t('addModal.benefit1Title')}
+                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2 leading-snug">
+                    {t('landing.benefit1Title')}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                    {t('addModal.benefit1Desc')}
+                    {t('landing.benefit1Desc')}
                   </p>
                 </div>
               </div>
 
-              {/* Pillar 2: 0% Commission (Spotlight Card) */}
-              <div className="bg-gradient-to-b from-white to-blue-50/30 rounded-3xl border-2 border-[#145BFF]/30 p-6 shadow-md transition-all flex flex-col justify-between relative group hover:border-[#145BFF]">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#145BFF] text-white text-[10px] font-black tracking-wider uppercase px-3 py-0.5 rounded-full shadow-xs">
-                  100% Margin
-                </div>
+              {/* Pillar 2 */}
+              <div className="bg-[#FAFBFF] rounded-3xl border border-[#E8ECF4] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-emerald-300">
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-blue-50 text-[#145BFF] flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <Coins className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-full bg-blue-50 text-[#145BFF] border border-blue-200">
-                      0% Fees
-                    </span>
+                  <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <Coins className="w-5 h-5" />
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-[#145BFF] transition-colors mb-2 leading-snug">
-                    {t('addModal.benefit2Title')}
+                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2 leading-snug">
+                    {t('landing.benefit2Title')}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                    {t('addModal.benefit2Desc')}
+                    {t('landing.benefit2Desc')}
                   </p>
                 </div>
               </div>
 
-              {/* Pillar 3: Cut Costly Ad Spend */}
-              <div className="bg-white rounded-3xl border border-amber-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-amber-300">
+              {/* Pillar 3 */}
+              <div className="bg-[#FAFBFF] rounded-3xl border border-[#E8ECF4] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-amber-300">
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-amber-50 text-[#FF9F1A] flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <Search className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-                      €0 Clicks
-                    </span>
+                  <div className="w-11 h-11 rounded-2xl bg-amber-50 text-[#FF9F1A] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <Star className="w-5 h-5 fill-[#FF9F1A]" />
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-amber-800 transition-colors mb-2 leading-snug">
-                    {t('addModal.benefit3Title')}
+                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2 leading-snug">
+                    {t('landing.benefit3Title')}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                    {t('addModal.benefit3Desc')}
+                    {t('landing.benefit3Desc')}
                   </p>
                 </div>
               </div>
 
-              {/* Pillar 4: Verified Trust Badge */}
-              <div className="bg-white rounded-3xl border border-indigo-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-indigo-300">
+              {/* Pillar 4 */}
+              <div className="bg-[#FAFBFF] rounded-3xl border border-[#E8ECF4] p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-indigo-300">
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <ShieldCheck className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
-                      Trust Seal
-                    </span>
+                  <div className="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <ShieldCheck className="w-5 h-5" />
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] group-hover:text-indigo-700 transition-colors mb-2 leading-snug">
-                    {t('addModal.benefit4Title')}
+                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2 leading-snug">
+                    {t('landing.benefit4Title')}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                    {t('addModal.benefit4Desc')}
+                    {t('landing.benefit4Desc')}
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Direct Conversion Action Bar */}
-            <div className="mt-10 bg-white rounded-3xl border border-[#E8ECF4] p-5 sm:p-7 shadow-xs flex flex-col md:flex-row items-center justify-between gap-5">
-              <div className="flex items-start sm:items-center gap-4 text-center sm:text-left">
-                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#145BFF] shrink-0 hidden sm:flex items-center justify-center shadow-2xs">
-                  <Bot className="w-6 h-6" />
+            {/* DEDICATED HIGH-CONVERTING B2B BANNER (PROVING CONSUMER DEMAND TO BUSINESSES) */}
+            <div className="mt-12 bg-gradient-to-br from-[#0D2B75] to-[#145BFF] rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
+              <div className="space-y-2 text-center lg:text-left">
+                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 text-blue-100 text-[11px] font-bold border border-white/20">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+                  <span>{t('landing.b2bBannerBadge')}</span>
                 </div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
-                    <span className="text-xs sm:text-sm font-extrabold text-[#0D2B75]">
-                      {t('addModal.footerNotice')}
-                    </span>
-                    <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                      {t('landing.heroFreeTrust')}
-                    </span>
-                  </div>
-                  <div className="text-xs text-slate-600 font-medium flex flex-wrap items-center gap-2 mt-1.5 justify-center sm:justify-start">
-                    <span className="font-bold text-[#145BFF] inline-flex items-center gap-1">
-                      <Bot className="w-3.5 h-3.5 text-[#145BFF]" />
-                      <span>{t('landing.aiAgentBannerTitle')}:</span>
-                    </span>
-                    <span>{t('addModal.aiAgentNotice')}</span>
-                    <a
-                      href="mailto:mail@nordible.co"
-                      className="font-mono text-[#0D2B75] font-bold underline hover:text-[#145BFF]"
-                    >
-                      mail@nordible.co
-                    </a>
-                    <span className="text-slate-300 hidden sm:inline">•</span>
-                    <Link
-                      href="/llms.txt"
-                      target="_blank"
-                      className="font-bold text-[#145BFF] hover:underline inline-flex items-center gap-1"
-                    >
-                      <span>llms.txt</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-                </div>
+                <h3 className="font-heading font-black text-xl sm:text-2xl tracking-tight">
+                  {t('landing.b2bBannerTitle')}
+                </h3>
+                <p className="text-xs sm:text-sm text-blue-100/80 max-w-xl leading-relaxed font-medium">
+                  {t('landing.b2bBannerSubtitle')}
+                </p>
               </div>
 
-              <button
-                type="button"
-                onClick={() => openAddModal(false)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-[#145BFF] hover:bg-[#0D2B75] text-white px-7 py-4 text-xs sm:text-sm font-extrabold shadow-md shadow-blue-500/20 transition-all hover:scale-102 active:scale-95 shrink-0 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
-                <span>{t('landing.ctaAdd')}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full lg:w-auto">
+                <Link
+                  href={`/${locale}/fuer-unternehmen`}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white hover:bg-[#F3F7FF] text-[#0D2B75] font-extrabold text-xs sm:text-sm transition-all active:scale-95 shadow-md text-center"
+                >
+                  <span>{t('landing.b2bBannerCtaBusiness')}</span>
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() => openAddModal(false)}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#FF9F1A] hover:bg-amber-400 text-[#0D2B75] font-extrabold text-xs sm:text-sm transition-all active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4 text-[#0D2B75]" />
+                  <span>{t('landing.b2bBannerCtaAdd')}</span>
+                </button>
+              </div>
             </div>
           </div>
         </section>

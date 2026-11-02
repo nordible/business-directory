@@ -1,6 +1,7 @@
 import crypto from 'crypto';
+import { env } from '@/config/env';
 
-const AUTH_SECRET = process.env.MAIL_API_SECRET || 'nordible-secure-auth-secret-key-321';
+const AUTH_SECRET = env.mail.apiSecret || 'nordible-secure-auth-secret-key-321';
 const COOKIE_NAME = 'nordible_customer_session';
 
 export { COOKIE_NAME };
@@ -109,18 +110,14 @@ export function verifyCustomerSessionToken(token: string): string | null {
   }
 }
 
-export const ADMIN_EMAILS = [
-  'mail@nordible.co',
-  'nordiblesolutions@gmail.com',
-  ...(process.env.ADMIN_EMAILS ? process.env.ADMIN_EMAILS.split(',').map((s) => s.trim().toLowerCase()) : []),
-];
+export const ADMIN_EMAILS = env.mail.adminEmails;
 
 export function isUserAdmin(email: string | null | undefined): boolean {
   if (!email) return false;
   return ADMIN_EMAILS.includes(email.toLowerCase().trim());
 }
 
-const ADMIN_SECRET = process.env.ADMIN_SECRET || process.env.MAIL_API_SECRET || 'Golya123';
+const ADMIN_SECRET = env.mail.adminSecret;
 
 /**
  * Checks whether an incoming HTTP request is authenticated as an admin.

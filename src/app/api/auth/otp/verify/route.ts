@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { verifyOtpToken, createCustomerSessionToken, COOKIE_NAME } from '@/lib/auth-customer';
+import { env } from '@/config/env';
 
 export async function POST(req: Request) {
   try {
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
       name: COOKIE_NAME,
       value: sessionToken,
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: env.isProduction,
       sameSite: 'lax',
       path: '/',
       maxAge: 30 * 24 * 60 * 60, // 30 days

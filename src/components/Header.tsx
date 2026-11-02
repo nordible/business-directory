@@ -79,11 +79,20 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Quick link to Directory Tool */}
           <Link
             href={`/${locale}/directory`}
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] hover:bg-[#F3F7FF] text-[#0D2B75] transition-colors"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] hover:bg-[#F3F7FF] text-[#0D2B75] transition-colors"
             title={t('nav.toDirectory')}
           >
             <Compass className="w-3.5 h-3.5 text-[#145BFF]" />
             <span>{t('nav.toDirectory')}</span>
+          </Link>
+
+          {/* Dedicated Page for Businesses */}
+          <Link
+            href={`/${locale}/fuer-unternehmen`}
+            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl border border-[#E8ECF4] bg-white hover:bg-blue-50/50 text-[#145BFF] hover:border-[#145BFF]/40 transition-colors"
+            title={locale === 'de' ? 'Für Unternehmen & Dienstleister' : 'For Businesses & Service Providers'}
+          >
+            <span>{locale === 'de' ? 'Für Unternehmen' : 'For Businesses'}</span>
           </Link>
 
           {/* Add Business / Eintragen Button */}

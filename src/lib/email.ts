@@ -1,10 +1,12 @@
+import { env } from '@/config/env';
+
 /**
  * Centralized Email Service for Nordible Directory
  * Dispatches transactional notifications and authentication OTPs via mail.nordible.co API
  */
 
-const MAIL_API_URL = process.env.MAIL_API_URL || 'https://email.nordible.co/api/send-email';
-const MAIL_API_SECRET = process.env.MAIL_API_SECRET || 'Golya123';
+const MAIL_API_URL = env.mail.apiUrl;
+const MAIL_API_SECRET = env.mail.apiSecret;
 
 export interface SendEmailPayload {
   to: string | string[];
