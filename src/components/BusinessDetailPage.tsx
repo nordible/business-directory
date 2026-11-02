@@ -33,7 +33,6 @@ import {
   Sparkles,
   MessageSquare,
   Settings,
-  CheckCircle2,
   CheckCircle,
   Navigation,
   Building2,
@@ -415,58 +414,6 @@ export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
                       <span>{service}</span>
                     </div>
                   ))}
-                </div>
-              </section>
-            )}
-
-            {/* Quality Highlights (Science-backed Trust Signals) - Only shown when verified */}
-            {listing.isVerified && (
-              <section className="bg-white rounded-3xl border border-[#E8ECF4] p-6 sm:p-8 shadow-xs">
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
-                    <ShieldCheck className="w-4 h-4" />
-                  </div>
-                  <h2 className="font-heading font-extrabold text-lg text-[#0D2B75]">
-                    {t('business.highlights')}
-                  </h2>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="p-4 rounded-2xl bg-[#FAFBFF] border border-[#E8ECF4]">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-2.5">
-                      <ShieldCheck className="w-4 h-4" />
-                    </div>
-                    <h3 className="font-heading font-bold text-xs text-[#0D2B75] mb-1">
-                      {t('business.highlightVerified')}
-                    </h3>
-                    <p className="text-[11px] text-gray-500 leading-relaxed">
-                      {t('business.highlightVerifiedDesc')}
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-[#FAFBFF] border border-[#E8ECF4]">
-                    <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#145BFF] flex items-center justify-center mb-2.5">
-                      <CheckCircle2 className="w-4 h-4" />
-                    </div>
-                    <h3 className="font-heading font-bold text-xs text-[#0D2B75] mb-1">
-                      {t('business.highlightDirect')}
-                    </h3>
-                    <p className="text-[11px] text-gray-500 leading-relaxed">
-                      {t('business.highlightDirectDesc')}
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-[#FAFBFF] border border-[#E8ECF4]">
-                    <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center mb-2.5">
-                      <Clock className="w-4 h-4" />
-                    </div>
-                    <h3 className="font-heading font-bold text-xs text-[#0D2B75] mb-1">
-                      {t('business.highlightSpeed')}
-                    </h3>
-                    <p className="text-[11px] text-gray-500 leading-relaxed">
-                      {t('business.highlightSpeedDesc')}
-                    </p>
-                  </div>
                 </div>
               </section>
             )}
