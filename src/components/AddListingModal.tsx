@@ -123,15 +123,15 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
         postalCode: item.postalCode || prev.postalCode,
         city: item.city || prev.city,
         state: item.state || prev.state,
-        country: item.country || prev.country || (isDe ? 'Deutschland' : 'Germany'),
+        country: item.country || prev.country || '',
         phone: item.phone || prev.phone,
         email: item.email || prev.email,
         website: item.website || formattedUrl,
         logoUrl: item.logoUrl || prev.logoUrl,
         description:
-          (isDe ? item.description?.de : item.description?.en) ||
-          item.description?.de ||
-          item.description?.en ||
+          (typeof item.description === 'string'
+            ? item.description
+            : item.description?.de || item.description?.en) ||
           prev.description,
       }));
       setExtractSuccess(true);
