@@ -134,7 +134,6 @@ function mapDbBusiness(b: Record<string, unknown>): BusinessListing {
     isOpenNow: calculatedOpen.isOpen,
     hours: hoursStr,
     openingHoursJson: openingSchedule,
-    status: (b.status as 'pending' | 'verified' | 'published') || (b.is_published ? 'published' : 'pending'),
     isPublished: b.is_published !== undefined ? Boolean(b.is_published) : true,
   };
 }
@@ -561,7 +560,6 @@ export async function submitBusinessListing(payload: SubmitBusinessPayload): Pro
       hours: readableHours,
       opening_hours_json: payload.openingHoursJson || {},
       is_verified: false,
-      status: 'pending',
       is_published: false,
     };
 
@@ -595,7 +593,6 @@ export async function verifyBusiness(id: string): Promise<boolean> {
       headers: getHeaders(),
       body: JSON.stringify({
         is_verified: true,
-        status: 'verified',
       }),
     });
     return res.ok;
@@ -613,7 +610,6 @@ export async function publishBusiness(id: string): Promise<boolean> {
       headers: getHeaders(),
       body: JSON.stringify({
         is_published: true,
-        status: 'published',
       }),
     });
     return res.ok;

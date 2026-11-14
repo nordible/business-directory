@@ -338,7 +338,6 @@ export async function POST(request: Request) {
       services: combined.services && combined.services.length > 0 ? combined.services : undefined,
       isVerified: false,
       isOpenNow: true,
-      status: 'pending',
       isPublished: false,
     };
 

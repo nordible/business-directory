@@ -146,7 +146,6 @@ export interface BusinessListing {
   isOpenNow: boolean;
   hours: string;
   openingHoursJson?: WeekSchedule;
-  status?: 'pending' | 'verified' | 'published';
   isPublished?: boolean;
 }
 
