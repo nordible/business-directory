@@ -291,7 +291,7 @@ export interface BusinessRegistrationConfirmationOptions {
  * Sends a confirmation email to the business owner after their listing registration is submitted
  */
 export async function sendBusinessRegistrationConfirmation(options: BusinessRegistrationConfirmationOptions) {
-  const isDe = options.locale === 'de' || !options.locale;
+  const isDe = options.locale === 'de';
   const subject = isDe
     ? `Eingangsbestätigung: Registrierung für ${options.businessName} erhalten`
     : `Confirmation: Listing registration for ${options.businessName} received`;
@@ -330,15 +330,23 @@ export async function sendBusinessRegistrationConfirmation(options: BusinessRegi
           ` : ''}
           <tr>
             <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Status:' : 'Status:'}</td>
-            <td style="padding: 6px 0; font-weight: 700; color: #f59e0b;">${isDe ? '⏳ In Prüfung (Freischaltung in ca. 24h)' : '⏳ In Review (Verification within ~24h)'}</td>
+            <td style="padding: 6px 0; font-weight: 700; color: #f59e0b;">${isDe ? '⏳ In redaktioneller Prüfung' : '⏳ Under Editorial Review'}</td>
           </tr>
         </table>
       </div>
 
+      <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin: 20px 0;">
+        <p style="margin: 0; color: #1e40af; font-size: 13px; font-weight: 700; line-height: 1.5;">
+          ${isDe
+            ? '👉 Bitte antworten Sie direkt auf diese E-Mail, um Ihr Unternehmen zu bestätigen und den Veröffentlichungsprozess zu beschleunigen.'
+            : '👉 Please reply directly to this email to confirm your business and expedite the publishing process.'}
+        </p>
+      </div>
+
       <p style="color: #64748b; font-size: 13px; line-height: 1.6;">
         ${isDe
-          ? 'Sobald Ihr Profil geprüft und im Verzeichnis freigeschaltet wurde, erhalten Sie eine Benachrichtigung. Bei Fragen können Sie direkt auf diese E-Mail antworten.'
-          : 'Once your listing has been verified and published, you will be notified. If you have any questions, simply reply directly to this email.'}
+          ? 'Sobald die Bestätigung vorliegt, wird Ihr Unternehmensprofil im Verzeichnis veröffentlicht.'
+          : 'Once confirmed, your business profile will be published live in the directory.'}
       </p>
 
       <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 24px; text-align: center;">
@@ -352,8 +360,8 @@ export async function sendBusinessRegistrationConfirmation(options: BusinessRegi
     subject,
     html,
     text: isDe
-      ? `Vielen Dank für Ihre Registrierung! Wir haben die Daten für ${options.businessName} erhalten und prüfen diese zeitnah.`
-      : `Thank you for your registration! We have received the details for ${options.businessName} and will verify them shortly.`,
+      ? `Vielen Dank für Ihre Registrierung für ${options.businessName}!\n\nStatus: In Prüfung\n\nWichtig: Bitte antworten Sie direkt auf diese E-Mail, um Ihr Unternehmen zu bestätigen und den Veröffentlichungsprozess zu beschleunigen.`
+      : `Thank you for registering ${options.businessName}!\n\nStatus: Under Review\n\nImportant: Please reply directly to this email to confirm your business and expedite the publishing process.`,
     replyTo: 'mail@nordible.co',
   });
 }
@@ -378,92 +386,92 @@ export interface NewListingNotificationOptions {
 
 /**
  * Sends a single consolidated notification to admins when a new business listing is registered.
- * Includes every single field submitted in the form and whether resources were opted in.
+ * Admin emails are ALWAYS in English as the standardized operational language.
  */
 export async function sendNewListingNotificationToAdmin(listing: NewListingNotificationOptions) {
-  const subject = `Neue Unternehmensregistrierung: ${listing.businessName} (${listing.city || listing.country || 'International'})`;
+  const subject = `[Admin Notification] New Business Registration: ${listing.businessName} (${listing.city || listing.country || 'Global'})`;
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
       <div style="border-bottom: 2px solid #145bff; padding-bottom: 16px; margin-bottom: 20px;">
         <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
         <span style="font-size: 11px; font-weight: 800; color: #145bff; text-transform: uppercase; letter-spacing: 0.5px;">${APP_TITLE} &bull; Administration</span>
-        <h2 style="font-size: 20px; font-weight: 800; color: #0D2B75; margin: 8px 0 0 0;">Neue Unternehmensregistrierung</h2>
+        <h2 style="font-size: 20px; font-weight: 800; color: #0D2B75; margin: 8px 0 0 0;">New Business Registration</h2>
       </div>
 
       <p style="font-size: 14px; color: #334155; margin-bottom: 20px; line-height: 1.5;">
-        Ein neues Unternehmen hat sich im Verzeichnis registriert. Nachfolgend finden Sie alle übermittelten Unternehmensdaten zur Prüfung:
+        A new business listing has registered in the directory. Please review the submitted profile details below:
       </p>
 
       <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; border: 1px solid #f1f5f9; border-radius: 8px; overflow: hidden;">
         <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600; width: 38%;">Unternehmensname:</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600; width: 38%;">Business Name:</td>
           <td style="padding: 10px 12px; font-weight: 700; color: #0D2B75; font-size: 15px;">${listing.businessName}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Rechtsform:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.legalForm || 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Legal Form:</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.legalForm || 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Branche / Kategorie:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.categoryName || 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Category / Industry:</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.categoryName || 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Straße & Hausnummer:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.address || 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Street Address:</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.address || 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Postleitzahl (PLZ):</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.postalCode || 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Postal Code (ZIP):</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.postalCode || 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Stadt:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.city || 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">City:</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.city || 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Bundesland / Region:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.state || 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">State / Region:</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.state || 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Land:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.country || 'Deutschland'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Country:</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.country || 'Global'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Telefonnummer:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.phone ? `<a href="tel:${listing.phone}" style="color: #145bff; text-decoration: none;">${listing.phone}</a>` : 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Phone Number:</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.phone ? `<a href="tel:${listing.phone}" style="color: #145bff; text-decoration: none;">${listing.phone}</a>` : 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">E-Mail-Adresse:</td>
-          <td style="padding: 10px 12px; font-weight: 600;">${listing.email ? `<a href="mailto:${listing.email}" style="color: #145bff; font-weight: 700; text-decoration: none;">${listing.email}</a>` : 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Email Address:</td>
+          <td style="padding: 10px 12px; font-weight: 600;">${listing.email ? `<a href="mailto:${listing.email}" style="color: #145bff; font-weight: 700; text-decoration: none;">${listing.email}</a>` : 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Webseite:</td>
-          <td style="padding: 10px 12px; font-weight: 600;">${listing.website ? `<a href="${listing.website}" target="_blank" style="color: #145bff; text-decoration: underline;">${listing.website}</a>` : 'Nicht angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Website:</td>
+          <td style="padding: 10px 12px; font-weight: 600;">${listing.website ? `<a href="${listing.website}" target="_blank" style="color: #145bff; text-decoration: underline;">${listing.website}</a>` : 'Not specified'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Firmenlogo (URL):</td>
-          <td style="padding: 10px 12px; font-weight: 600;">${listing.logoUrl ? `<a href="${listing.logoUrl}" target="_blank" style="color: #145bff; text-decoration: underline;">${listing.logoUrl}</a>` : 'Kein Logo angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Logo URL:</td>
+          <td style="padding: 10px 12px; font-weight: 600;">${listing.logoUrl ? `<a href="${listing.logoUrl}" target="_blank" style="color: #145bff; text-decoration: underline;">${listing.logoUrl}</a>` : 'None'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Öffnungszeiten:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.hours || '24/7 Geöffnet (Rund um die Uhr)'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Opening Hours:</td>
+          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.hours || '24/7 Open'}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600; vertical-align: top;">Beschreibung:</td>
-          <td style="padding: 10px 12px; font-weight: 400; color: #1e293b; line-height: 1.5; white-space: pre-wrap;">${listing.description || 'Keine Beschreibung angegeben'}</td>
+          <td style="padding: 10px 12px; color: #64748b; font-weight: 600; vertical-align: top;">Description:</td>
+          <td style="padding: 10px 12px; font-weight: 400; color: #1e293b; line-height: 1.5; white-space: pre-wrap;">${listing.description || 'No description provided'}</td>
         </tr>
         <tr style="border-bottom: 2px solid #e2e8f0; background: ${listing.wantsGrowthResource ? '#eff6ff' : '#ffffff'};">
-          <td style="padding: 12px 12px; color: ${listing.wantsGrowthResource ? '#1e40af' : '#64748b'}; font-weight: 700;">Wachstumsressourcen:</td>
+          <td style="padding: 12px 12px; color: ${listing.wantsGrowthResource ? '#1e40af' : '#64748b'}; font-weight: 700;">Growth Resources:</td>
           <td style="padding: 12px 12px; font-weight: 700; color: ${listing.wantsGrowthResource ? '#1e40af' : '#64748b'};">
             ${listing.wantsGrowthResource 
-              ? '✅ Ja (Hat kostenlose Ressourcen für Unternehmenswachstum angefordert)' 
-              : '❌ Nein'}
+              ? '✅ Yes (Requested free business growth resources)' 
+              : '❌ No'}
           </td>
         </tr>
       </table>
 
       <div style="margin-top: 28px; text-align: center;">
         <a href="https://business-directory.nordible.co/admin" style="display: inline-block; background: #0D2B75; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 14px;">
-          Im Admin-Bereich prüfen & freischalten &rarr;
+          Review & Publish in Admin Portal &rarr;
         </a>
       </div>
 
@@ -473,19 +481,19 @@ export async function sendNewListingNotificationToAdmin(listing: NewListingNotif
     </div>
   `;
 
-  const text = `Neue Unternehmensregistrierung: ${listing.businessName}
-Rechtsform: ${listing.legalForm || 'Nicht angegeben'}
-Branche: ${listing.categoryName || 'Nicht angegeben'}
-Adresse: ${listing.address || 'Nicht angegeben'}, ${listing.postalCode || ''} ${listing.city || ''}, ${listing.state || ''}, ${listing.country || 'Deutschland'}
-Telefon: ${listing.phone || 'Nicht angegeben'}
-E-Mail: ${listing.email || 'Nicht angegeben'}
-Webseite: ${listing.website || 'Nicht angegeben'}
-Logo: ${listing.logoUrl || 'Kein Logo'}
-Öffnungszeiten: ${listing.hours || '24/7 Geöffnet'}
-Beschreibung: ${listing.description || 'Keine Angabe'}
-Wachstumsressourcen angefordert: ${listing.wantsGrowthResource ? 'Ja' : 'Nein'}
+  const text = `New Business Registration: ${listing.businessName}
+Legal Form: ${listing.legalForm || 'Not specified'}
+Category: ${listing.categoryName || 'Not specified'}
+Address: ${listing.address || 'Not specified'}, ${listing.postalCode || ''} ${listing.city || ''}, ${listing.state || ''}, ${listing.country || 'Global'}
+Phone: ${listing.phone || 'Not specified'}
+Email: ${listing.email || 'Not specified'}
+Website: ${listing.website || 'Not specified'}
+Logo: ${listing.logoUrl || 'None'}
+Hours: ${listing.hours || '24/7 Open'}
+Description: ${listing.description || 'None'}
+Growth Resources: ${listing.wantsGrowthResource ? 'Yes' : 'No'}
 
-Prüfen & Freischalten: https://business-directory.nordible.co/admin`;
+Review & Publish: https://business-directory.nordible.co/admin`;
 
   return sendEmail({
     to: ADMIN_NOTIFICATION_EMAILS,

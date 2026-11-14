@@ -46,9 +46,11 @@ export async function POST(request: Request) {
         ? formatWeekScheduleToString(body.openingHoursJson)
         : '24/7 Geöffnet (Rund um die Uhr)');
 
-    const locale = body.locale || 'de';
+    // Determine business language: German for DACH countries, English for international
+    const isDachCountry = /deutschland|germany|österreich|austria|schweiz|switzerland/i.test(body.country || '');
+    const businessLocale = body.locale || (isDachCountry ? 'de' : 'en');
 
-    // Dispatch admin notification and confirmation to business submitter (with global BCC)
+    // Dispatch admin notification (always in English) and confirmation to business submitter (in business language)
     const emailPromises: Promise<unknown>[] = [
       sendNewListingNotificationToAdmin({
         businessName: body.name,
@@ -74,7 +76,7 @@ export async function POST(request: Request) {
         sendBusinessRegistrationConfirmation({
           to: body.email.trim(),
           businessName: body.name.trim(),
-          locale,
+          locale: businessLocale,
           city: body.city,
           categoryName: body.categoryName,
         })
