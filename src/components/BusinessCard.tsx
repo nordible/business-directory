@@ -7,7 +7,7 @@ import { BusinessListing } from '@/lib/types';
 import { useTranslation } from '@/lib/i18n';
 import { getBusinessPermalink } from '@/lib/permalinks';
 import { isBusinessOpenNow } from '@/lib/openingHours';
-import { Star, ShieldCheck, MapPin, Phone, Globe, ChevronDown, ChevronUp, Clock, Settings, ArrowRight } from 'lucide-react';
+import { ShieldCheck, MapPin, Phone, Globe, ChevronDown, ChevronUp, Clock, Settings, ArrowRight } from 'lucide-react';
 
 interface BusinessCardProps {
   listing: BusinessListing;
@@ -15,7 +15,6 @@ interface BusinessCardProps {
   primaryColor: string;
   onClaimListing?: (listing: BusinessListing) => void;
   onOpenDashboard?: (listing: BusinessListing) => void;
-  onOpenReviews?: (listing: BusinessListing) => void;
 }
 
 export const BusinessCard: React.FC<BusinessCardProps> = ({
@@ -24,7 +23,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
   primaryColor,
   onClaimListing,
   onOpenDashboard,
-  onOpenReviews,
 }) => {
   const { locale, t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -93,39 +91,14 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
               </h3>
             </Link>
 
-            <div className="flex flex-wrap items-center gap-1.5 mt-1">
-              {listing.reviewCount > 0 ? (
-                <button
-                  type="button"
-                  onClick={() => onOpenReviews?.(listing)}
-                  className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer group"
-                >
-                  <div className="flex items-center text-[#FF9F1A]">
-                    <Star className="w-3.5 h-3.5 fill-[#FF9F1A] text-[#FF9F1A]" />
-                    <span className="ml-1 text-xs font-bold text-[#0D2B75] group-hover:underline">
-                      {listing.rating.toFixed(1)}
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-gray-400 font-normal">({listing.reviewCount})</span>
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => onOpenReviews?.(listing)}
-                  className="flex items-center gap-1 text-[11px] text-gray-400 hover:text-[#145BFF] transition-colors cursor-pointer group"
-                  title={t('business.writeReview')}
-                >
-                  <Star className="w-3 h-3 text-gray-300 group-hover:text-[#FF9F1A]" />
-                  <span className="group-hover:underline">{t('business.noReviews')}</span>
-                </button>
-              )}
-              <span className="text-xs text-gray-300">•</span>
+            <div className="flex items-center gap-1.5 mt-1">
               <span
-                className={`text-[11px] font-semibold ${
+                className={`text-[11px] font-semibold flex items-center gap-1 ${
                   openStatus.isOpen ? 'text-emerald-600' : 'text-rose-500'
                 }`}
               >
-                • {openStatus.isOpen ? t('listing.openNow') : t('listing.closed')}
+                <span className={`w-1.5 h-1.5 rounded-full ${openStatus.isOpen ? 'bg-emerald-500' : 'bg-rose-500'}`} />
+                {openStatus.isOpen ? t('listing.openNow') : t('listing.closed')}
               </span>
             </div>
           </div>
