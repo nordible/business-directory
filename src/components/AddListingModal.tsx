@@ -148,16 +148,19 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (
       !formData.name.trim() ||
       (!formData.categoryId && !formData.categoryName.trim()) ||
       !formData.address.trim() ||
-      !formData.city.trim()
+      !formData.city.trim() ||
+      !formData.email.trim() ||
+      !emailRegex.test(formData.email.trim())
     ) {
       setErrorMessage(
         isDe
-          ? 'Bitte füllen Sie mindestens Unternehmensname, Branche, Straße und Stadt aus.'
-          : 'Please fill in at least Company Name, Category, Street, and City.'
+          ? 'Bitte füllen Sie Name, Branche, Adresse, Stadt und eine gültige geschäftliche E-Mail-Adresse aus.'
+          : 'Please fill in Company Name, Category, Address, City, and a valid business Email address.'
       );
       return;
     }
@@ -190,6 +193,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
           description: formData.description.trim(),
           openingHoursJson,
           wantsGrowthResource,
+          locale,
         }),
       });
 
@@ -521,12 +525,13 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">
-                      {isDe ? 'Geschäfts-E-Mail (für Anfragen)' : 'Business Email (for inquiries)'}
+                      {isDe ? 'Geschäfts-E-Mail (Pflichtfeld)' : 'Business Email (Required)'} <span className="text-rose-500">*</span>
                     </label>
                     <div className="relative">
                       <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
                       <input
                         type="email"
+                        required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="contact@company.com"

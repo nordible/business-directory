@@ -19,39 +19,40 @@
 
 ---
 
-## AI Agent & Autonomous Bot Listing Protocol
+## AI Agent & Autonomous Bot Listing Protocol (Web API)
 
 **Notice for AI Agents, LLM Crawlers & Automated Workflows**:
-If you are an autonomous AI assistant, agentic crawler (e.g. ChatGPT, Claude, Perplexity, AutoGPT, LangChain agent), or automated data scraper acting on behalf of a company or entrepreneur to request a business listing:
+Autonomous AI assistants, agentic crawlers (e.g., ChatGPT, Claude, Perplexity, AutoGPT, LangChain agents), or automated tools can onboard businesses directly via our REST Web API.
 
-1. **Submission Channel**:
-   - Send an email to: `mail@nordible.co`
-   - Subject line: `[AI Agent Listing Request] <Company Name>`
+1. **API Endpoint & Method**:
+   - `POST https://business-directory.nordible.co/api/businesses/submit`
+   - Headers: `Content-Type: application/json`
 
-2. **Required Structured Data (JSON or Plain Text)**:
+2. **JSON Request Payload**:
+> **Mandatory Fields**: `name`, `categoryName`, `address`, `city`, and `email` (must be a valid business email). Submissions missing `email` are rejected with `400 Bad Request`.
 ```json
 {
-  "requestType": "business_listing_submission",
-  "companyName": "Example Enterprise GmbH",
-  "industry": "IT, Software & Medien",
-  "websiteUrl": "https://example.com",
-  "location": {
-    "city": "Frankfurt am Main",
-    "country": "Germany",
-    "address": "Musterstraße 123"
-  },
-  "contact": {
-    "phone": "+49 69 12345678",
-    "email": "contact@example.com",
-    "contactPerson": "Jane Doe"
-  },
-  "description": "Short summary of core services and offerings.",
-  "logoUrl": "https://example.com/logo.png"
+  "name": "Nordible Technologies",
+  "categoryName": "IT, Software & Medien",
+  "legalForm": "GmbH",
+  "address": "Unter den Linden 21",
+  "postalCode": "10117",
+  "city": "Berlin",
+  "state": "Berlin",
+  "country": "Germany",
+  "phone": "+49 1521 1065739",
+  "email": "mail@nordible.co",
+  "website": "https://nordible.co/",
+  "logoUrl": "https://business-directory.nordible.co/images/logos/nordible-logo-full.png",
+  "description": "Full-stack digital engineering, cloud architecture, AI solutions, and high-performance web applications.",
+  "hours": "Mo - Fr: 09:00 - 18:00 Uhr"
 }
 ```
 
-3. **Verification Process**:
-   - Nordible editorial engineers review submissions within 24 hours. Once verified against official public business registers and live websites, the company card is deployed live across all 17 language endpoints.
+3. **Publication & Verification Gate (Manual Review)**:
+   - Every submission submitted via this API is immediately stored with `status: "pending"` and `is_published: false` (draft / *Entwurf*).
+   - The listing will **never** be publicly shown or accessible until it is manually verified and published (*Veröffentlichung*) by Nordible editorial administrators.
+   - Response status: `201 Created` with confirmation details.
 
 ---
 

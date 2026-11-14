@@ -294,7 +294,7 @@ export async function getListingsByTenant(tenantId: string, includeUnpublished =
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const SHORT_HEX_REGEX = /^[0-9a-f]{8}$/i;
 
-export async function getBusinessByIdOrSlug(idOrSlug: string): Promise<BusinessListing | null> {
+export async function getBusinessByIdOrSlug(idOrSlug: string, includeUnpublished = false): Promise<BusinessListing | null> {
   if (!isDbConfigured || !idOrSlug) return null;
 
   try {
@@ -313,6 +313,10 @@ export async function getBusinessByIdOrSlug(idOrSlug: string): Promise<BusinessL
       filter = `slug=eq.${encodeURIComponent(extracted)}`;
     }
 
+    if (!includeUnpublished) {
+      filter += '&is_published=eq.true';
+    }
+
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/businesses?${filter}&select=*,categories(id,slug,name)&limit=1`,
       {
@@ -325,7 +329,7 @@ export async function getBusinessByIdOrSlug(idOrSlug: string): Promise<BusinessL
     const data = await res.json();
     if (!Array.isArray(data) || data.length === 0) {
       // Fallback: search across all listings (supports partial IDs, legacy slugs, and full permalinks)
-      const all = await getAllBusinesses(true);
+      const all = await getAllBusinesses(includeUnpublished);
       const normalizedTarget = idOrSlug.toLowerCase();
       const normalizedExtracted = extracted.toLowerCase();
 
@@ -368,6 +372,7 @@ export interface SubmitBusinessPayload {
   openingHoursJson?: WeekSchedule;
   tenantId?: string;
   wantsGrowthResource?: boolean;
+  locale?: string;
 }
 
 export function formatWeekScheduleToString(s?: WeekSchedule): string {

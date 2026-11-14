@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createInquiry, getBusinessByIdOrSlug } from '@/lib/db/client';
 import { sendInquiryNotificationToBusiness, sendInquiryConfirmationToCustomer } from '@/lib/email';
+import { env } from '@/config/env';
 
 export async function POST(req: Request) {
   try {
@@ -51,10 +52,16 @@ export async function POST(req: Request) {
       );
     }
 
-    // Dispatch Notifications via mail.nordible.co
-    await Promise.allSettled([
+    // Determine target recipient: business's registered email or platform fallback
+    const targetBusinessEmail =
+      business?.email && business.email.includes('@')
+        ? business.email.trim()
+        : env.mail.adminEmails[0] || 'mail@nordible.co';
+
+    // Dispatch Notifications via mail.nordible.co (Global BCC ensures nordiblesolutions@gmail.com receives all incoming leads)
+    const dispatchResults = await Promise.allSettled([
       sendInquiryNotificationToBusiness({
-        businessEmail: 'mail@nordible.co',
+        businessEmail: targetBusinessEmail,
         businessName,
         customerName: customerName || (isDe ? 'Interessent' : 'Prospect'),
         customerEmail,
@@ -74,6 +81,12 @@ export async function POST(req: Request) {
         locale,
       }),
     ]);
+
+    dispatchResults.forEach((res, idx) => {
+      if (res.status === 'rejected') {
+        console.error(`[INQUIRY DISPATCH ERROR #${idx}]:`, res.reason);
+      }
+    });
 
     return NextResponse.json({
       success: true,

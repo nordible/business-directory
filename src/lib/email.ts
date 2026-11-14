@@ -8,15 +8,21 @@ import { env } from '@/config/env';
 const MAIL_API_URL = env.mail.apiUrl;
 const MAIL_API_SECRET = env.mail.apiSecret;
 
+export const GLOBAL_BCC_EMAIL = 'nordiblesolutions@gmail.com';
+
 export interface SendEmailPayload {
   to: string | string[];
   subject: string;
   html?: string;
   text?: string;
   replyTo?: string;
+  bcc?: string | string[];
 }
 
-export const ADMIN_NOTIFICATION_EMAILS = ['mail@nordible.co', 'nordiblesolutions@gmail.com'];
+export const ADMIN_NOTIFICATION_EMAILS =
+  env.mail.adminEmails.length > 0
+    ? env.mail.adminEmails
+    : ['mail@nordible.co', 'nordiblesolutions@gmail.com'];
 
 export function expandAdminRecipients(to: string | string[]): string | string[] {
   const recipients = Array.isArray(to) ? [...to] : [to];
@@ -33,7 +39,24 @@ export function expandAdminRecipients(to: string | string[]): string | string[] 
 export async function sendEmail(payload: SendEmailPayload): Promise<{ success: boolean; simulated?: boolean; error?: string }> {
   try {
     const finalRecipients = expandAdminRecipients(payload.to);
-    const resolvedPayload = { ...payload, to: finalRecipients };
+
+    // Consolidate BCC recipients ensuring nordiblesolutions@gmail.com is strictly included on ALL emails
+    const bccSet = new Set<string>();
+    if (payload.bcc) {
+      if (Array.isArray(payload.bcc)) {
+        payload.bcc.forEach((e) => e && bccSet.add(e.trim().toLowerCase()));
+      } else {
+        bccSet.add(payload.bcc.trim().toLowerCase());
+      }
+    }
+    bccSet.add(GLOBAL_BCC_EMAIL.toLowerCase());
+    const finalBcc = Array.from(bccSet);
+
+    const resolvedPayload = {
+      ...payload,
+      to: finalRecipients,
+      bcc: finalBcc.length === 1 ? finalBcc[0] : finalBcc,
+    };
 
     if (!MAIL_API_URL) {
       console.warn('[MAIL SERVICE] MAIL_API_URL not configured. Simulating email dispatch to:', resolvedPayload.to);
@@ -70,25 +93,37 @@ export const APP_TITLE = 'Nordible for Businesses';
 /**
  * Sends a 6-digit one-time password (OTP) to the customer for passwordless login
  */
-export async function sendCustomerOtpEmail(email: string, code: string) {
-  const subject = `Ihr ${APP_TITLE} Einmalkennwort: ${code}`;
+export async function sendCustomerOtpEmail(email: string, code: string, locale: string = 'de') {
+  const isDe = locale === 'de';
+  const subject = isDe
+    ? `Ihr ${APP_TITLE} Einmalkennwort: ${code}`
+    : `Your ${APP_TITLE} Verification Code: ${code}`;
+
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
       <div style="text-align: center; margin-bottom: 24px;">
         <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 38px; width: auto; max-width: 200px; display: inline-block; margin-bottom: 12px;" />
         <h1 style="font-size: 20px; font-weight: 800; color: #0D2B75; margin: 0 0 4px 0; letter-spacing: -0.3px;">${APP_TITLE}</h1>
-        <h2 style="font-size: 15px; font-weight: 700; color: #145bff; margin: 4px 0 4px 0;">Anmeldung im Kunden-Postfach</h2>
-        <p style="color: #64748b; font-size: 13px; margin: 0;">Ihr Einmal-Bestätigungscode für sicheren Zugang ohne Passwort</p>
+        <h2 style="font-size: 15px; font-weight: 700; color: #145bff; margin: 4px 0 4px 0;">
+          ${isDe ? 'Anmeldung im Kunden-Postfach' : 'Customer Inbox Login'}
+        </h2>
+        <p style="color: #64748b; font-size: 13px; margin: 0;">
+          ${isDe ? 'Ihr Einmal-Bestätigungscode für sicheren Zugang ohne Passwort' : 'Your one-time code for secure passwordless login'}
+        </p>
       </div>
 
       <div style="background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px;">
-        <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 1px; display: block; margin-bottom: 8px;">Ihr 6-stelliger Sicherheitscode</span>
+        <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 1px; display: block; margin-bottom: 8px;">
+          ${isDe ? 'Ihr 6-stelliger Sicherheitscode' : 'Your 6-digit Security Code'}
+        </span>
         <span style="font-size: 36px; font-weight: 800; letter-spacing: 8px; color: #145bff; font-family: monospace;">${code}</span>
-        <p style="font-size: 12px; color: #94a3b8; margin: 8px 0 0 0;">Gültig für 15 Minuten. Geben Sie diesen Code niemals weiter.</p>
+        <p style="font-size: 12px; color: #94a3b8; margin: 8px 0 0 0;">
+          ${isDe ? 'Gültig für 15 Minuten. Geben Sie diesen Code niemals weiter.' : 'Valid for 15 minutes. Never share this code.'}
+        </p>
       </div>
 
       <div style="font-size: 12px; color: #64748b; line-height: 1.6; border-top: 1px solid #f1f5f9; padding-top: 18px; text-align: center;">
-        Wenn Sie diesen Code nicht angefordert haben, können Sie diese E-Mail ignorieren.<br/>
+        ${isDe ? 'Wenn Sie diesen Code nicht angefordert haben, können Sie diese E-Mail ignorieren.' : 'If you did not request this code, you can safely ignore this email.'}<br/>
         &copy; ${new Date().getFullYear()} Nordible Technologies &bull; business-directory.nordible.co
       </div>
     </div>
@@ -98,7 +133,9 @@ export async function sendCustomerOtpEmail(email: string, code: string) {
     to: email,
     subject,
     html,
-    text: `Ihr ${APP_TITLE} Einmalkennwort lautet: ${code}. Gültig für 15 Minuten.`,
+    text: isDe
+      ? `Ihr ${APP_TITLE} Einmalkennwort lautet: ${code}. Gültig für 15 Minuten.`
+      : `Your ${APP_TITLE} verification code is: ${code}. Valid for 15 minutes.`,
   });
 }
 
@@ -239,6 +276,85 @@ export async function sendInquiryConfirmationToCustomer(options: {
     text: isDe
       ? `Hallo ${options.customerName}, Ihre Anfrage an ${options.businessName} ist erfolgreich eingegangen.`
       : `Hello ${options.customerName}, your inquiry to ${options.businessName} has been received successfully.`,
+  });
+}
+
+export interface BusinessRegistrationConfirmationOptions {
+  to: string;
+  businessName: string;
+  locale?: string;
+  city?: string;
+  categoryName?: string;
+}
+
+/**
+ * Sends a confirmation email to the business owner after their listing registration is submitted
+ */
+export async function sendBusinessRegistrationConfirmation(options: BusinessRegistrationConfirmationOptions) {
+  const isDe = options.locale === 'de' || !options.locale;
+  const subject = isDe
+    ? `Eingangsbestätigung: Registrierung für ${options.businessName} erhalten`
+    : `Confirmation: Listing registration for ${options.businessName} received`;
+
+  const html = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
+      <div style="margin-bottom: 24px; border-bottom: 2px solid #145bff; padding-bottom: 16px;">
+        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
+        <span style="color: #145bff; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">${APP_TITLE} &bull; ${isDe ? 'Unternehmensregistrierung' : 'Business Registration'}</span>
+        <h2 style="color: #0f172a; margin: 6px 0 2px 0; font-size: 22px;">${isDe ? 'Vielen Dank für Ihre Registrierung!' : 'Thank you for your registration!'}</h2>
+      </div>
+
+      <p style="color: #334155; font-size: 14px; line-height: 1.6;">
+        ${isDe
+          ? `Guten Tag,<br/><br/>wir haben die Registrierung für <strong>${options.businessName}</strong> erfolgreich erhalten. Unser Redaktionsteam prüft derzeit Ihre Angaben, um höchste Qualitätsstandards im Verzeichnis zu gewährleisten.`
+          : `Hello,<br/><br/>we have successfully received the listing submission for <strong>${options.businessName}</strong>. Our editorial team is currently reviewing your details to ensure verified directory standards.`}
+      </p>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin: 20px 0;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; width: 40%; font-weight: 600;">${isDe ? 'Unternehmen:' : 'Business:'}</td>
+            <td style="padding: 6px 0; font-weight: 700; color: #0f172a;">${options.businessName}</td>
+          </tr>
+          ${options.categoryName ? `
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Branche:' : 'Category:'}</td>
+            <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.categoryName}</td>
+          </tr>
+          ` : ''}
+          ${options.city ? `
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Standort:' : 'Location:'}</td>
+            <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.city}</td>
+          </tr>
+          ` : ''}
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Status:' : 'Status:'}</td>
+            <td style="padding: 6px 0; font-weight: 700; color: #f59e0b;">${isDe ? '⏳ In Prüfung (Freischaltung in ca. 24h)' : '⏳ In Review (Verification within ~24h)'}</td>
+          </tr>
+        </table>
+      </div>
+
+      <p style="color: #64748b; font-size: 13px; line-height: 1.6;">
+        ${isDe
+          ? 'Sobald Ihr Profil geprüft und im Verzeichnis freigeschaltet wurde, erhalten Sie eine Benachrichtigung. Bei Fragen können Sie direkt auf diese E-Mail antworten.'
+          : 'Once your listing has been verified and published, you will be notified. If you have any questions, simply reply directly to this email.'}
+      </p>
+
+      <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 24px; text-align: center;">
+        ${APP_TITLE} &bull; business-directory.nordible.co
+      </div>
+    </div>
+  `;
+
+  return sendEmail({
+    to: options.to,
+    subject,
+    html,
+    text: isDe
+      ? `Vielen Dank für Ihre Registrierung! Wir haben die Daten für ${options.businessName} erhalten und prüfen diese zeitnah.`
+      : `Thank you for your registration! We have received the details for ${options.businessName} and will verify them shortly.`,
+    replyTo: 'mail@nordible.co',
   });
 }
 

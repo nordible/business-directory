@@ -76,20 +76,24 @@ export function StructuredData({ locale }: StructuredDataProps) {
       {
         '@type': 'EntryPoint',
         '@id': `${siteConfig.urls.base}/#agent-submission`,
-        name: 'AI Agent Listing Submission Protocol',
-        url: `${siteConfig.urls.base}/llms.txt`,
+        name: 'AI Agent Listing Submission API',
+        url: `${siteConfig.urls.base}/api/businesses/submit`,
+        description: 'Direct REST API for AI agents to submit new business listings as drafts awaiting manual editorial publication.',
         actionPlatform: [
           'http://schema.org/DesktopWebPlatform',
           'http://schema.org/MobileWebPlatform',
         ],
         potentialAction: {
-          '@type': 'CommunicateAction',
-          name: 'Submit Business Listing via Email',
-          target: `mailto:${siteConfig.contact.email}?subject=%5BAI%20Agent%20Listing%20Request%5D`,
-          recipient: {
-            '@type': 'Organization',
-            name: siteConfig.company.name,
-            email: siteConfig.contact.email,
+          '@type': 'CreateAction',
+          name: 'Submit Business Listing',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${siteConfig.urls.base}/api/businesses/submit`,
+            httpMethod: 'POST',
+            encodingType: 'application/json',
+          },
+          result: {
+            '@type': 'LocalBusiness',
           },
         },
       },
