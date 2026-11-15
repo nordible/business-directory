@@ -131,9 +131,7 @@ export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
 
   const mapsQuery = encodeURIComponent(`${listing.name}, ${listing.address}, ${listing.city}`);
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-  const businessUrl = typeof window !== 'undefined'
-    ? window.location.href
-    : `${siteConfig.urls.base}${getBusinessPermalink(listing, locale)}`;
+  const businessUrl = `${siteConfig.urls.base}${getBusinessPermalink(listing, locale)}`;
 
   const openStatus = isBusinessOpenNow(listing, locale);
 
