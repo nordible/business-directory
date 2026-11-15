@@ -131,9 +131,7 @@ export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
 
   const mapsQuery = encodeURIComponent(`${listing.name}, ${listing.address}, ${listing.city}`);
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-  const businessUrl = typeof window !== 'undefined'
-    ? window.location.href
-    : `${siteConfig.urls.base}${getBusinessPermalink(listing, locale)}`;
+  const businessUrl = `${siteConfig.urls.base}${getBusinessPermalink(listing, locale)}`;
 
   const openStatus = isBusinessOpenNow(listing, locale);
 
@@ -152,7 +150,7 @@ export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
       addressLocality: listing.city,
       addressCountry: listing.country || 'DE',
     },
-    ...(listing.reviewCount > 0
+    ...(typeof listing.reviewCount === 'number' && listing.reviewCount > 0
       ? {
           aggregateRating: {
             '@type': 'AggregateRating',
@@ -307,29 +305,6 @@ export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
                 </h1>
 
                 <div className="flex flex-wrap items-center gap-3 mt-2.5 text-xs text-gray-500">
-                  {listing.reviewCount > 0 ? (
-                    <div className="flex items-center gap-1.5">
-                      <div className="flex items-center text-[#FF9F1A]">
-                        <Star className="w-4 h-4 fill-[#FF9F1A] text-[#FF9F1A]" />
-                        <span className="ml-1 font-extrabold text-[#0D2B75]">
-                          {listing.rating.toFixed(1)}
-                        </span>
-                      </div>
-                      <span className="text-gray-400 font-medium">
-                        ({listing.reviewCount} {t('listing.reviews')})
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-1.5 text-gray-400">
-                      <Star className="w-4 h-4 text-gray-300" />
-                      <span className="font-medium">
-                        {t('business.noReviews')}
-                      </span>
-                    </div>
-                  )}
-
-                  <span className="text-gray-300">•</span>
-
                   <div className="flex items-center gap-1 font-medium">
                     <MapPin className="w-3.5 h-3.5 text-[#145BFF]" />
                     <span>
@@ -431,8 +406,8 @@ export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
                     </h2>
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
-                    {listing.reviewCount > 0
-                      ? `${listing.rating.toFixed(1)} / 5.0 (${listing.reviewCount} ${t('listing.reviews')})`
+                    {typeof listing.reviewCount === 'number' && listing.reviewCount > 0
+                      ? `${listing.rating?.toFixed(1)} / 5.0 (${listing.reviewCount} ${t('listing.reviews')})`
                       : t('business.noReviews')}
                   </p>
                 </div>

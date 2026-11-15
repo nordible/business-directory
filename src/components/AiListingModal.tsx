@@ -594,17 +594,17 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
 
                 <div>
                   <label className="block text-[11px] font-bold text-gray-600 mb-1">
-                    {locale === 'de' ? t('aiModal.descDe') : 'Description'}
+                    {t('listing.description')}
                   </label>
                   <textarea
                     rows={2}
-                    value={extractedListing.description.de}
+                    value={extractedListing.description.de || extractedListing.description.en || ''}
                     onChange={(e) =>
                       setExtractedListing({
                         ...extractedListing,
                         description: {
-                          ...extractedListing.description,
                           de: e.target.value,
+                          en: e.target.value,
                         },
                       })
                     }

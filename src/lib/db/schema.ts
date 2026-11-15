@@ -42,10 +42,10 @@ export interface DbBusiness {
   city: string;
   phone?: string | null;
   website?: string | null;
-  rating: number;
-  review_count: number;
+  rating?: number;
+  review_count?: number;
   is_verified: boolean;
-  is_open_now: boolean;
+  is_open_now?: boolean;
   hours?: string | null;
   created_at: string;
   updated_at: string;
@@ -85,10 +85,10 @@ export function mapDbBusinessToBusinessListing(dbBusiness: DbBusiness) {
     city: dbBusiness.city,
     phone: dbBusiness.phone || '',
     website: dbBusiness.website || '',
-    rating: Number(dbBusiness.rating),
-    reviewCount: dbBusiness.review_count,
+    rating: dbBusiness.rating !== undefined ? Number(dbBusiness.rating) : undefined,
+    reviewCount: dbBusiness.review_count !== undefined ? Number(dbBusiness.review_count) : undefined,
     isVerified: dbBusiness.is_verified,
-    isOpenNow: dbBusiness.is_open_now,
+    isOpenNow: Boolean(dbBusiness.is_open_now),
     hours: dbBusiness.hours || '',
   };
 }

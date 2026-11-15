@@ -140,13 +140,12 @@ export interface BusinessListing {
   legalForm?: string;
   services?: string[];
   socialLinks?: Record<string, string>;
-  rating: number;
-  reviewCount: number;
+  rating?: number;
+  reviewCount?: number;
   isVerified: boolean;
   isOpenNow: boolean;
   hours: string;
   openingHoursJson?: WeekSchedule;
-  status?: 'pending' | 'verified' | 'published';
   isPublished?: boolean;
 }
 

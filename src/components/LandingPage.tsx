@@ -492,11 +492,13 @@ export function LandingPage({
                         <ShieldCheck className="w-3 h-3" />
                         <span>{t('landing.verifiedPill')}</span>
                       </span>
-                      <div className="flex items-center gap-1 text-amber-500 font-bold text-xs">
-                        <Star className="w-3 h-3 fill-[#FF9F1A] text-[#FF9F1A]" />
-                        <span>{listing.rating.toFixed(1)}</span>
-                        <span className="text-gray-400 font-normal">({listing.reviewCount})</span>
-                      </div>
+                      {typeof listing.reviewCount === 'number' && listing.reviewCount > 0 && (
+                        <div className="flex items-center gap-1 text-amber-500 font-bold text-xs">
+                          <Star className="w-3 h-3 fill-[#FF9F1A] text-[#FF9F1A]" />
+                          <span>{listing.rating?.toFixed(1)}</span>
+                          <span className="text-gray-400 font-normal">({listing.reviewCount})</span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex items-center gap-2.5 my-2">

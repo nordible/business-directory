@@ -134,7 +134,7 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
       const res = await fetch('/api/auth/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: inputEmail }),
+        body: JSON.stringify({ email: inputEmail, locale }),
       });
       const data = await res.json();
       if (!res.ok || !data.success) {

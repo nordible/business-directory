@@ -297,7 +297,6 @@ export default function DirectoryAppPage({
                 primaryColor={currentTenant.primaryColor}
                 onClaimListing={(item) => setClaimTarget(item)}
                 onOpenDashboard={(item) => setDashboardTarget(item)}
-                onOpenReviews={(item) => setReviewTarget(item)}
               />
             ))}
           </div>
