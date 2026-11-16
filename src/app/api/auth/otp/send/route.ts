@@ -4,11 +4,17 @@ import { sendCustomerOtpEmail } from '@/lib/email';
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const { email, locale = 'de' } = await req.json();
 
     if (!email || typeof email !== 'string' || !email.includes('@')) {
       return NextResponse.json(
-        { success: false, error: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' },
+        {
+          success: false,
+          error:
+            locale === 'de'
+              ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
+              : 'Please enter a valid email address.',
+        },
         { status: 400 }
       );
     }
@@ -19,8 +25,8 @@ export async function POST(req: Request) {
     const code = Math.floor(100000 + Math.random() * 900000).toString();
     const token = createOtpToken(cleanEmail, code);
 
-    // Send email via mail.nordible.co API
-    await sendCustomerOtpEmail(cleanEmail, code);
+    // Send email via mail.nordible.co API (in visitor's selected language)
+    await sendCustomerOtpEmail(cleanEmail, code, locale);
 
     // In local dev, also print code to server console for testing convenience
     console.log(`[AUTH OTP GENERATED] For: ${cleanEmail} -> Code: ${code}`);

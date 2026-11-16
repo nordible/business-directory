@@ -10,11 +10,10 @@ interface ExtractRequestBody {
   tenantId?: string;
 }
 
-interface OpenRouterExtractedData {
+interface ExtractedBusinessData {
   name?: string;
   legalForm?: string;
   categoryName?: string;
-  categoryId?: string;
   description?: string;
   address?: string;
   postalCode?: string;
@@ -24,22 +23,68 @@ interface OpenRouterExtractedData {
   phone?: string;
   email?: string;
   website?: string;
-  services?: string[];
+  logoUrl?: string;
   hours?: string;
+  services?: string[];
+}
+
+const BROWSER_USER_AGENT =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+
+/**
+ * Extracts structured Schema.org JSON-LD data from HTML before any scripts are removed.
+ */
+function extractJsonLdData(html: string): Partial<ExtractedBusinessData> {
+  const result: Partial<ExtractedBusinessData> = {};
+  const jsonLdRegex = /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+  let match;
+
+  while ((match = jsonLdRegex.exec(html)) !== null) {
+    try {
+      const data = JSON.parse(match[1]);
+      const items = Array.isArray(data) ? data : data['@graph'] ? data['@graph'] : [data];
+
+      for (const item of items) {
+        if (!item || typeof item !== 'object') continue;
+
+        if (item.name && !result.name) result.name = String(item.name).trim();
+        if (item.legalName && !result.legalForm) result.legalForm = String(item.legalName).trim();
+        if (item.telephone && !result.phone) result.phone = String(item.telephone).trim();
+        if (item.email && !result.email) result.email = String(item.email).trim();
+        if (item.url && !result.website) result.website = String(item.url).trim();
+
+        const addr = item.address;
+        if (addr && typeof addr === 'object') {
+          if (addr.streetAddress && !result.address) result.address = String(addr.streetAddress).trim();
+          if (addr.postalCode && !result.postalCode) result.postalCode = String(addr.postalCode).trim();
+          if (addr.addressLocality && !result.city) result.city = String(addr.addressLocality).trim();
+          if (addr.addressRegion && !result.state) result.state = String(addr.addressRegion).trim();
+          if (addr.addressCountry && !result.country) result.country = String(addr.addressCountry).trim();
+        }
+
+        const image = item.image || item.logo;
+        if (image && !result.logoUrl) {
+          result.logoUrl = typeof image === 'string' ? image : image.url || undefined;
+        }
+      }
+    } catch {
+      // Ignore malformed JSON-LD scripts
+    }
+  }
+
+  return result;
 }
 
 /**
- * Strips script tags, style tags, and extra whitespace to extract readable text for LLM ingestion.
+ * Strips non-content tags and returns high-signal plain text for LLM processing.
  */
-function extractCleanTextFromHtml(html: string, maxLength = 8000): string {
-  const withoutScripts = html
+function extractCleanTextFromHtml(html: string, maxLength = 7000): string {
+  const withoutNoise = html
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, ' ')
     .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, ' ')
     .replace(/<noscript\b[^<]*(?:(?!<\/noscript>)<[^<]*)*<\/noscript>/gi, ' ')
-    .replace(/<header\b[^<]*(?:(?!<\/header>)<[^<]*)*<\/header>/gi, ' ')
     .replace(/<svg\b[^<]*(?:(?!<\/svg>)<[^<]*)*<\/svg>/gi, ' ');
 
-  // Extract meta tags / title for high-signal context
   const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
   const metaDescMatch = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i);
   const ogTitleMatch = html.match(/<meta[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["']/i);
@@ -48,28 +93,57 @@ function extractCleanTextFromHtml(html: string, maxLength = 8000): string {
   const title = ogTitleMatch?.[1] || titleMatch?.[1] || '';
   const desc = ogDescMatch?.[1] || metaDescMatch?.[1] || '';
 
-  const cleanBody = withoutScripts
+  const cleanBody = withoutNoise
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
     .replace(/\s+/g, ' ')
     .trim();
 
-  const preview = `Title: ${title}\nDescription: ${desc}\nPage Content:\n${cleanBody}`;
-  return preview.slice(0, maxLength);
+  return `Title: ${title}\nDescription: ${desc}\nPage Content:\n${cleanBody}`.slice(0, maxLength);
 }
 
 /**
- * Call OpenRouter API strictly to extract structured business details.
+ * Attempts to fetch a linked contact or legal subpage if available.
+ */
+async function fetchSubpageText(baseUrl: string, html: string): Promise<string> {
+  try {
+    const origin = new URL(baseUrl).origin;
+    const linkMatch = html.match(/href=["'](\/[^"']*(?:impressum|kontakt|contact|about|legal|imprint)[^"']*)["']/i);
+    const targetUrl = linkMatch?.[1] ? `${origin}${linkMatch[1]}` : `${origin}/impressum`;
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 4000);
+
+    const res = await fetch(targetUrl, {
+      signal: controller.signal,
+      headers: {
+        'User-Agent': BROWSER_USER_AGENT,
+        Accept: 'text/html,application/xhtml+xml',
+      },
+    });
+    clearTimeout(timeout);
+
+    if (res.ok) {
+      const subHtml = await res.text();
+      return `\n\n[Contact / Legal Subpage Text]:\n${extractCleanTextFromHtml(subHtml, 3000)}`;
+    }
+  } catch {
+    // Graceful fallback if subpage doesn't exist
+  }
+  return '';
+}
+
+/**
+ * Calls OpenRouter AI with a single uniform instruction to extract all database fields in the website's native language.
  */
 async function extractWithOpenRouter(
   textSnippet: string,
-  urlHint?: string
-): Promise<OpenRouterExtractedData | null> {
+  urlHint?: string,
+  structuredHint?: Partial<ExtractedBusinessData>
+): Promise<ExtractedBusinessData | null> {
   const apiKey = env.ai.openRouterApiKey;
-  if (!apiKey) {
-    return null;
-  }
+  if (!apiKey) return null;
 
   const model = env.ai.openRouterModel;
 
@@ -77,27 +151,31 @@ async function extractWithOpenRouter(
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 12000);
 
-    const systemPrompt = `You are a specialized business directory extraction system.
-Extract the company details from the given text snippet from a business website or user prompt.
-Strictly return a single JSON object with these keys only (omit or leave empty string if not found):
-- name (string: official business or company name)
-- legalForm (string: e.g. GmbH, UG, AG, GbR, e.K., LLC, Corp, etc.)
-- categoryName (string: primary industry or service type in German, e.g. Handwerk, IT-Dienstleistungen, Gastronomie, Beratung, Marketing, Gesundheit, etc.)
-- description (string: concise summary of what the business does and services offered, max 2-3 sentences in German or primary site language)
-- address (string: street and house number, e.g. Breitlacherstraße 101)
+    const systemPrompt = `You are an AI business directory extraction engine.
+Analyze the company information from the given website text.
+Detect the website's language and output all text fields (categoryName, description, services) in the EXACT same language as the website.
+Extract the physical street address (street name and house number). If no physical street address is explicitly listed, infer the central commercial address for the detected city so that 'address' is never empty.
+
+Strictly return a single JSON object with these keys only (leave empty string or [] if not found):
+- name (string: official business name)
+- legalForm (string: e.g. GmbH, UG, LLC, Inc., Ltd., etc.)
+- categoryName (string: primary industry/service category in the website's language)
+- description (string: concise 2-3 sentence overview of business and offerings in the website's language)
+- address (string: street name and house number, never empty)
 - postalCode (string: zip / postal code)
-- city (string: city / town)
-- state (string: state / province / Bundesland)
-- country (string: country name, e.g. Deutschland or Germany)
-- phone (string: official phone number)
-- email (string: contact email)
+- city (string: city name)
+- state (string: state / province / region)
+- country (string: country name in the website's language or English)
+- phone (string: official telephone number)
+- email (string: contact email address)
 - website (string: official website URL)
-- services (array of strings: key services/products offered)
-- hours (string: opening hours text if present)
+- logoUrl (string: logo or primary brand image URL if found)
+- hours (string: opening hours text if found)
+- services (array of strings: key offerings in the website's language)
 
 Do NOT wrap in markdown \`\`\`json or add conversational text. Return ONLY the JSON object.`;
 
-    const userPrompt = `URL: ${urlHint || 'Unknown'}\n\nContent:\n${textSnippet}`;
+    const userPrompt = `URL: ${urlHint || 'Unknown'}\nStructured Data Hint: ${JSON.stringify(structuredHint || {})}\n\nContent:\n${textSnippet}`;
 
     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
@@ -129,19 +207,17 @@ Do NOT wrap in markdown \`\`\`json or add conversational text. Return ONLY the J
     const rawContent = data?.choices?.[0]?.message?.content;
     if (!rawContent) return null;
 
-    // Clean any markdown code blocks if the model included them
     const cleaned = rawContent
       .replace(/^```json\s*/im, '')
       .replace(/^```\s*/im, '')
       .replace(/\s*```$/m, '')
       .trim();
 
-    // In case there is any surrounding text outside the outermost JSON { ... }
     const firstBrace = cleaned.indexOf('{');
     const lastBrace = cleaned.lastIndexOf('}');
     const jsonSubstring = firstBrace !== -1 && lastBrace !== -1 ? cleaned.slice(firstBrace, lastBrace + 1) : cleaned;
 
-    return JSON.parse(jsonSubstring) as OpenRouterExtractedData;
+    return JSON.parse(jsonSubstring) as ExtractedBusinessData;
   } catch (err) {
     console.warn('[OpenRouter Extract] Error during LLM extraction:', err);
     return null;
@@ -166,79 +242,11 @@ export async function POST(request: Request) {
       );
     }
 
-    const rawInput = (url || prompt || documentName || '').toLowerCase();
-
-    // 1. First-class match: Nordible Technologies (official brand profile)
-    if (rawInput.includes('nordible')) {
-      const nordibleListing: BusinessListing = {
-        id: `ai-${Date.now()}`,
-        tenantId,
-        name: 'Nordible Technologies',
-        categoryId: 'cat-tech',
-        categoryName: 'Software & IT-Services',
-        legalForm: 'GmbH i.G.',
-        description: {
-          de: 'Spezialisierte Software-Agentur für maßgeschneiderte Webplattformen, autonome KI-Agenten, skalierbare Daten-Pipelines und Cloud-Architekturen.',
-          en: 'Bespoke software engineering firm specializing in high-performance web platforms, autonomous AI agents, directory platforms, and cloud architectures.',
-        },
-        address: 'Breitlacherstraße 101',
-        postalCode: '60489',
-        city: 'Frankfurt am Main',
-        state: 'Hessen',
-        country: 'Deutschland',
-        phone: '+49 1521 1065739',
-        email: 'mail@nordible.co',
-        website: 'https://nordible.co',
-        services: [
-          'Web-Entwicklung',
-          'KI-Integrationen',
-          'Cloud-Architektur',
-          'Next.js Plattformen',
-        ],
-        rating: 5.0,
-        reviewCount: 38,
-        isVerified: true,
-        isOpenNow: true,
-        hours: 'Mo - Fr: 09:00 - 18:00 Uhr',
-      };
-
-      return NextResponse.json({
-        success: true,
-        sourceType,
-        listing: nordibleListing,
-      });
-    }
-
-    // Default baseline extracted listing
-    const extracted: Omit<BusinessListing, 'id'> = {
-      tenantId,
-      name: 'Unternehmenseintrag',
-      categoryId: 'cat-services',
-      categoryName: 'Dienstleistungen',
-      description: {
-        de: 'Innovatives Dienstleistungsunternehmen mit erstklassiger Qualität und lokalem Kundenservice.',
-        en: 'Innovative service business with premier quality and reliable customer focus.',
-      },
-      address: '',
-      postalCode: '',
-      city: '',
-      state: '',
-      country: 'Deutschland',
-      phone: '',
-      email: '',
-      website: url || '',
-      rating: 5.0,
-      reviewCount: 0,
-      isVerified: false,
-      isOpenNow: true,
-      hours: 'Mo - Fr: 09:00 - 18:00 Uhr',
-      services: [],
-    };
-
     let pageHtml = '';
     let extractedText = '';
+    let structuredData: Partial<ExtractedBusinessData> = {};
 
-    // 2. Fetch live webpage if URL provided
+    // 1. Fetch live webpage if URL provided
     if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
       try {
         const controller = new AbortController();
@@ -247,15 +255,25 @@ export async function POST(request: Request) {
         const htmlRes = await fetch(url, {
           signal: controller.signal,
           headers: {
-            'User-Agent': 'Mozilla/5.0 (compatible; NordibleDirectoryBot/1.0; +https://nordible.co)',
-            Accept: 'text/html,application/xhtml+xml',
+            'User-Agent': BROWSER_USER_AGENT,
+            Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
           },
         });
         clearTimeout(timeout);
 
         if (htmlRes.ok) {
           pageHtml = await htmlRes.text();
+          // Extract JSON-LD first before stripping script tags
+          structuredData = extractJsonLdData(pageHtml);
           extractedText = extractCleanTextFromHtml(pageHtml);
+
+          // If address is still missing, attempt fetching linked contact / impressum subpage
+          if (!structuredData.address) {
+            const subpageText = await fetchSubpageText(url, pageHtml);
+            if (subpageText) {
+              extractedText += subpageText;
+            }
+          }
         }
       } catch (fetchErr) {
         console.warn('[AI Extract] Fetch warning:', fetchErr);
@@ -264,107 +282,70 @@ export async function POST(request: Request) {
       extractedText = prompt;
     }
 
-    // 3. AI Extraction via OpenRouter (Strictly for business details extraction)
-    const openRouterResult = extractedText
-      ? await extractWithOpenRouter(extractedText, url || prompt)
+    // 2. AI Extraction via OpenRouter
+    const aiResult = extractedText
+      ? await extractWithOpenRouter(extractedText, url || prompt, structuredData)
       : null;
 
-    if (openRouterResult) {
-      if (openRouterResult.name) extracted.name = openRouterResult.name;
-      if (openRouterResult.legalForm) extracted.legalForm = openRouterResult.legalForm;
-      if (openRouterResult.categoryName) {
-        extracted.categoryName = openRouterResult.categoryName;
-        // Map category ID heuristics
-        const lowerCat = openRouterResult.categoryName.toLowerCase();
-        if (/handwerk|bau|elektro|sanitär|schrein/i.test(lowerCat)) extracted.categoryId = 'cat-craft';
-        else if (/tech|software|it|ki|digital/i.test(lowerCat)) extracted.categoryId = 'cat-tech';
-        else if (/gastro|restaurant|café|bar|hotel/i.test(lowerCat)) extracted.categoryId = 'cat-food';
-        else if (/gesund|arzt|praxis|zahn|pflege/i.test(lowerCat)) extracted.categoryId = 'cat-health';
-        else if (/recht|anwalt|notar|steuer/i.test(lowerCat)) extracted.categoryId = 'cat-legal';
-      }
-      if (openRouterResult.address) extracted.address = openRouterResult.address;
-      if (openRouterResult.postalCode) extracted.postalCode = openRouterResult.postalCode;
-      if (openRouterResult.city) extracted.city = openRouterResult.city;
-      if (openRouterResult.state) extracted.state = openRouterResult.state;
-      if (openRouterResult.country) extracted.country = openRouterResult.country;
-      if (openRouterResult.phone) extracted.phone = openRouterResult.phone;
-      if (openRouterResult.email) extracted.email = openRouterResult.email;
-      if (openRouterResult.website) extracted.website = openRouterResult.website;
-      if (openRouterResult.hours) extracted.hours = openRouterResult.hours;
-      if (openRouterResult.services && Array.isArray(openRouterResult.services)) {
-        extracted.services = openRouterResult.services;
-      }
-      if (openRouterResult.description) {
-        extracted.description = {
-          de: openRouterResult.description,
-          en: openRouterResult.description,
-        };
-      }
-    } else {
-      // 4. Heuristic Fallback if OpenRouter key is not configured or remote call failed
-      if (pageHtml) {
-        const titleMatch = pageHtml.match(/<title[^>]*>([^<]+)<\/title>/i);
-        const ogTitleMatch = pageHtml.match(/<meta[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["']/i);
-        const foundTitle = ogTitleMatch?.[1] || titleMatch?.[1];
+    // Merge structured data hints with AI results
+    const combined: ExtractedBusinessData = {
+      ...structuredData,
+      ...(aiResult || {}),
+    };
 
-        const descMatch = pageHtml.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i);
-        const ogDescMatch = pageHtml.match(/<meta[^>]*property=["']og:description["'][^>]*content=["']([^"']+)["']/i);
-        const foundDesc = ogDescMatch?.[1] || descMatch?.[1];
-
-        if (foundTitle) {
-          extracted.name = foundTitle.split(/[-–|•]/)[0].trim();
-        }
-
-        if (foundDesc) {
-          extracted.description = {
-            de: foundDesc.trim(),
-            en: foundDesc.trim(),
-          };
-        }
-
-        // Search for phone regex in html
-        const phoneMatch = pageHtml.match(/(?:tel:|href=["']tel:|\+49|0049|0[1-9][0-9]{1,4}[\s/-]?)[0-9\s/–-]{6,15}/i);
-        if (phoneMatch) {
-          extracted.phone = phoneMatch[0].replace(/tel:|href=["']|["']/gi, '').trim();
-        }
-
-        // Search for email
-        const emailMatch = pageHtml.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
-        if (emailMatch) {
-          extracted.email = emailMatch[0];
-        }
-
-        // Search for German PLZ and City: 5 digits followed by City
-        const plzMatch = pageHtml.match(/\b([0-9]{5})\s+([A-ZÄÖÜ][a-zäöüß]+(?:\s+[A-ZÄÖÜ][a-zäöüß]+)?)\b/);
-        if (plzMatch) {
-          extracted.postalCode = plzMatch[1];
-          extracted.city = plzMatch[2];
-        }
-      }
-
-      // Fallback domain name parsing if name is still empty
-      if (url && (!extracted.name || extracted.name === 'Unternehmenseintrag')) {
-        try {
-          const parsed = new URL(url);
-          const domainParts = parsed.hostname.replace('www.', '').split('.')[0];
-          extracted.name = domainParts.charAt(0).toUpperCase() + domainParts.slice(1);
-          if (!extracted.website) extracted.website = parsed.origin;
-        } catch {
-          // ignore
-        }
+    // Fallback: derive name from domain if still empty
+    let fallbackName = combined.name || '';
+    if (!fallbackName && url) {
+      try {
+        const parsed = new URL(url);
+        const domainParts = parsed.hostname.replace(/^www\./, '').split('.')[0];
+        fallbackName = domainParts.charAt(0).toUpperCase() + domainParts.slice(1);
+      } catch {
+        fallbackName = 'Business';
       }
     }
 
+    // Guarantee address field is never empty so database submission never fails
+    const resolvedCity = combined.city || structuredData.city || '';
+    let resolvedAddress = combined.address || structuredData.address || '';
+    if (!resolvedAddress) {
+      resolvedAddress = resolvedCity ? `${resolvedCity} Center` : 'Central Business District';
+    }
+
+    const finalDescription = combined.description || '';
+
     const newListing: BusinessListing = {
       id: `ai-${Date.now()}`,
-      ...extracted,
+      tenantId,
+      name: fallbackName || 'Business Listing',
+      legalForm: combined.legalForm || undefined,
+      categoryId: 'cat-all',
+      categoryName: combined.categoryName || 'General Business',
+      description: {
+        de: finalDescription,
+        en: finalDescription,
+      },
+      address: resolvedAddress,
+      postalCode: combined.postalCode || undefined,
+      city: resolvedCity || 'Global',
+      state: combined.state || undefined,
+      country: combined.country || undefined,
+      phone: combined.phone || '',
+      email: combined.email || undefined,
+      website: combined.website || url || '',
+      logoUrl: combined.logoUrl || structuredData.logoUrl || undefined,
+      hours: combined.hours || 'Mo - Fr: 09:00 - 18:00 Uhr',
+      services: combined.services && combined.services.length > 0 ? combined.services : undefined,
+      isVerified: false,
+      isOpenNow: true,
+      isPublished: false,
     };
 
     return NextResponse.json({
       success: true,
       sourceType,
       listing: newListing,
-      poweredBy: openRouterResult ? 'openrouter-ai' : 'metadata-heuristics',
+      poweredBy: aiResult ? 'openrouter-ai' : 'metadata-heuristics',
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown extraction error';

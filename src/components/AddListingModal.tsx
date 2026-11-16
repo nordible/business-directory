@@ -123,15 +123,15 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
         postalCode: item.postalCode || prev.postalCode,
         city: item.city || prev.city,
         state: item.state || prev.state,
-        country: item.country || prev.country || (isDe ? 'Deutschland' : 'Germany'),
+        country: item.country || prev.country || '',
         phone: item.phone || prev.phone,
         email: item.email || prev.email,
         website: item.website || formattedUrl,
         logoUrl: item.logoUrl || prev.logoUrl,
         description:
-          (isDe ? item.description?.de : item.description?.en) ||
-          item.description?.de ||
-          item.description?.en ||
+          (typeof item.description === 'string'
+            ? item.description
+            : item.description?.de || item.description?.en) ||
           prev.description,
       }));
       setExtractSuccess(true);
@@ -148,8 +148,10 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (
       !formData.name.trim() ||
+<<<<<<< HEAD
       !formData.website.trim() ||
       !formData.email.trim()
     ) {
@@ -157,6 +159,18 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
         isDe
           ? 'Bitte füllen Sie mindestens Unternehmensname, Webseite und E-Mail aus.'
           : 'Please fill in at least Company Name, Website, and Email.'
+=======
+      (!formData.categoryId && !formData.categoryName.trim()) ||
+      !formData.address.trim() ||
+      !formData.city.trim() ||
+      !formData.email.trim() ||
+      !emailRegex.test(formData.email.trim())
+    ) {
+      setErrorMessage(
+        isDe
+          ? 'Bitte füllen Sie Name, Branche, Adresse, Stadt und eine gültige geschäftliche E-Mail-Adresse aus.'
+          : 'Please fill in Company Name, Category, Address, City, and a valid business Email address.'
+>>>>>>> a0d888f8b8cc63aecba01dab2973481faf443774
       );
       return;
     }
@@ -189,6 +203,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
           description: formData.description.trim(),
           openingHoursJson,
           wantsGrowthResource,
+          locale,
         }),
       });
 
@@ -518,7 +533,11 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">
+<<<<<<< HEAD
                       {isDe ? 'Geschäfts-E-Mail *' : 'Business Email *'}
+=======
+                      {isDe ? 'Geschäfts-E-Mail (Pflichtfeld)' : 'Business Email (Required)'} <span className="text-rose-500">*</span>
+>>>>>>> a0d888f8b8cc63aecba01dab2973481faf443774
                     </label>
                     <div className="relative">
                       <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />

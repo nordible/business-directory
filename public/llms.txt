@@ -19,6 +19,7 @@
 
 ---
 
+<<<<<<< HEAD
 ## AI Agent & Autonomous Bot Ingestion API
 
 **Notice for Autonomous AI Agents, LLM Crawlers & Automated Workflows**:
@@ -45,17 +46,52 @@ If you are an autonomous AI assistant, agentic crawler (e.g. ChatGPT, Claude, Pe
   "website": "https://example.com",
   "description": "Short summary of core services and offerings.",
   "services": ["Softwareentwicklung", "Webplattformen", "Cloud-Architektur"],
+=======
+## AI Agent & Autonomous Bot Listing Protocol (Web API)
+
+**Notice for AI Agents, LLM Crawlers & Automated Workflows**:
+Autonomous AI assistants, agentic crawlers (e.g., ChatGPT, Claude, Perplexity, AutoGPT, LangChain agents), or automated tools can onboard businesses directly via our REST Web API.
+
+1. **API Endpoint & Method**:
+   - `POST https://business-directory.nordible.co/api/businesses/submit`
+   - Headers: `Content-Type: application/json`
+
+2. **JSON Request Payload**:
+> **Mandatory Fields**: `name`, `categoryName`, `address`, `city`, and `email` (must be a valid business email). Submissions missing `email` are rejected with `400 Bad Request`.
+```json
+{
+  "name": "Nordible Technologies",
+  "categoryName": "IT, Software & Medien",
+  "legalForm": "GmbH",
+  "address": "Unter den Linden 21",
+  "postalCode": "10117",
+  "city": "Berlin",
+  "state": "Berlin",
+  "country": "Germany",
+  "phone": "+49 1521 1065739",
+  "email": "mail@nordible.co",
+  "website": "https://nordible.co/",
+  "logoUrl": "https://business-directory.nordible.co/images/logos/nordible-logo-full.png",
+  "description": "Full-stack digital engineering, cloud architecture, AI solutions, and high-performance web applications.",
+>>>>>>> a0d888f8b8cc63aecba01dab2973481faf443774
   "hours": "Mo - Fr: 09:00 - 18:00 Uhr"
 }
 ```
 *Mandatory fields*: `name`, `website`, `email` (`categoryName`, `address`, `city`, and other fields are optional).
 
+<<<<<<< HEAD
 3. **HTTP Response**:
    - `200 OK`: `{"success": true, "listing": {...}, "message": "Business listing submitted successfully for verification."}`
    - `400 Bad Request`: `{"error": "Name, Webseite und E-Mail sind Pflichtfelder."}`
 
 4. **Verification & Deployment**:
    - Upon API submission, listings are reviewed against official public business registers and deployed live across all 17 localized language endpoints.
+=======
+3. **Publication & Verification Gate (Manual Review)**:
+   - Every submission submitted via this API is immediately stored with `status: "pending"` and `is_published: false` (draft / *Entwurf*).
+   - The listing will **never** be publicly shown or accessible until it is manually verified and published (*Veröffentlichung*) by Nordible editorial administrators.
+   - Response status: `201 Created` with confirmation details.
+>>>>>>> a0d888f8b8cc63aecba01dab2973481faf443774
 
 ---
 

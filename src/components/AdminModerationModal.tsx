@@ -308,10 +308,10 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
           prev.map((item) => {
             if (item.id !== id) return item;
             if (action === 'verify') {
-              return { ...item, isVerified: true, status: 'verified' };
+              return { ...item, isVerified: true };
             }
             if (action === 'publish') {
-              return { ...item, isPublished: true, status: 'published' };
+              return { ...item, isPublished: true };
             }
             return item;
           })
