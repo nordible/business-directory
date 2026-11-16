@@ -21,6 +21,8 @@ import {
   Globe,
   ArrowRight,
   Zap,
+  Code2,
+  ArrowUpRight,
 } from 'lucide-react';
 
 export default function PartnerPage() {
@@ -213,6 +215,37 @@ export default function PartnerPage() {
               )}
             </div>
           </div>
+        </section>
+
+        {/* Open Source Transparency Section */}
+        <section className="bg-white rounded-3xl border border-[#E8ECF4] p-6 sm:p-8 mb-16 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4 text-center sm:text-left flex-col sm:flex-row">
+            <div className="w-12 h-12 rounded-2xl bg-[#0D2B75] text-[#FF9F1A] flex items-center justify-center shrink-0 shadow-xs">
+              <Code2 className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-1">
+                <span>100% Open Source (MIT)</span>
+              </div>
+              <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75]">
+                {locale === 'de' ? 'Vollständige Code-Transparenz auf GitHub' : 'Full Code Transparency on GitHub'}
+              </h3>
+              <p className="text-xs text-gray-500 max-w-xl leading-relaxed mt-0.5">
+                {locale === 'de'
+                  ? 'Prüfen Sie unsere Architektur, auditieren Sie die Sicherheitsstandards oder hosten Sie die Plattform auf eigener Infrastruktur.'
+                  : 'Audit the system architecture, inspect our data privacy standards, or self-host the directory platform on your own infrastructure.'}
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://github.com/nordible/business-directory"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#0D2B75] hover:bg-[#145BFF] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors shrink-0"
+          >
+            <span>{locale === 'de' ? 'GitHub Repository ansehen' : 'View GitHub Repository'}</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#FF9F1A]" />
+          </a>
         </section>
 
         {/* Contact & Consultation Banner */}

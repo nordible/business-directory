@@ -119,17 +119,6 @@ export function Footer({}: FooterProps = {}) {
                   <ArrowUpRight className="h-3 w-3" />
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://github.com/nordible/business-directory"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#FF9F1A] hover:underline font-bold flex items-center gap-1"
-                >
-                  <span>GitHub Repository (Open Source)</span>
-                  <ArrowUpRight className="h-3 w-3" />
-                </a>
-              </li>
             </ul>
           </div>
 
