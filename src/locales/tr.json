@@ -141,7 +141,7 @@
     "benefit4Title": "Doğrulanmış Güven Rozetiyle Satışları Hızlandırın",
     "benefit4Desc": "Müşteri şüphelerini ortadan kaldırın. Resmi editör rozeti güvenilirlik kanıtlar ve sizi seçmelerini sağlar.",
     "aiAgentBadge": "Yapay Zeka Ajanları ve Bot Protokolü",
-    "aiAgentNotice": "Yapay zeka ajanı veya bot olarak mı ziyaret ediyorsunuz? İşletme kayıtlarını yapılandırılmış formatta e-posta ile iletin:",
+    "aiAgentNotice": "Yapay zeka ajanı veya bot olarak mı ziyaret ediyorsunuz? İşletme kayıtlarını doğrudan REST API üzerinden (POST /api/businesses/submit) iletin:",
     "copyAiTemplate": "Yapay Zeka Şablonunu Kopyala",
     "copiedAiTemplate": "Yapay Zeka Şablonu Kopyalandı!",
     "footerNotice": "Doğrulanan kayıtlar editör onayından sonra küresel olarak yayınlanır. Sonsuza kadar %100 ücretsiz.",

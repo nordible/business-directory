@@ -212,7 +212,7 @@
     "benefit4Title": "Menangkan Kesepakatan Lebih Cepat dengan Lencana Tepercaya",
     "benefit4Desc": "Hilangkan keraguan calon pembeli. Lencana editorial resmi membuktikan kredibilitas bisnis Anda.",
     "aiAgentBadge": "Protokol Agen AI & Bot",
-    "aiAgentNotice": "Mengunjungi sebagai Agen AI atau Bot? Kirimkan data bisnis secara terstruktur melalui email:",
+    "aiAgentNotice": "Mengunjungi sebagai Agen AI atau Bot? Kirimkan data bisnis langsung melalui REST API kami di POST /api/businesses/submit:",
     "copyAiTemplate": "Salin Templat Agen AI",
     "copiedAiTemplate": "Templat AI Berhasil Disalin!",
     "footerNotice": "Listing terverifikasi tampil secara global setelah tinjauan redaksi. 100% gratis selamanya.",

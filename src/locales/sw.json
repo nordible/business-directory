@@ -141,7 +141,7 @@
     "benefit4Title": "Shinda Mikataba Haraka Zaidi kwa Beji ya Kuaminika",
     "benefit4Desc": "Ondoa mashaka ya wateja. Beji rasmi inathibitisha uhalali na kuwapa wateja ujasiri wa kukuchagua.",
     "aiAgentBadge": "Itifaki ya Maajenti wa AI na Boti",
-    "aiAgentNotice": "Unatembelea kama Ajenti wa AI au Boti? Wasilisha maelezo ya biashara yaliyopangwa moja kwa moja kwa barua pepe:",
+    "aiAgentNotice": "Unatembelea kama Ajenti wa AI au Boti? Wasilisha maelezo ya biashara moja kwa moja kupitia REST API yetu kwa POST /api/businesses/submit:",
     "copyAiTemplate": "Nakili Kiolezo cha Ajenti wa AI",
     "copiedAiTemplate": "Kiolezo cha AI Kimekunakiliwa!",
     "footerNotice": "Orodha zilizothibitishwa huonekana ulimwenguni kote baada ya ukaguzi wa uhariri. 100% bure daima.",

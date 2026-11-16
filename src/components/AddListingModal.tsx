@@ -150,14 +150,13 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
     e.preventDefault();
     if (
       !formData.name.trim() ||
-      (!formData.categoryId && !formData.categoryName.trim()) ||
-      !formData.address.trim() ||
-      !formData.city.trim()
+      !formData.website.trim() ||
+      !formData.email.trim()
     ) {
       setErrorMessage(
         isDe
-          ? 'Bitte füllen Sie mindestens Unternehmensname, Branche, Straße und Stadt aus.'
-          : 'Please fill in at least Company Name, Category, Street, and City.'
+          ? 'Bitte füllen Sie mindestens Unternehmensname, Webseite und E-Mail aus.'
+          : 'Please fill in at least Company Name, Website, and Email.'
       );
       return;
     }
@@ -173,19 +172,19 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
           name: formData.name.trim(),
           categoryId: formData.categoryId || undefined,
           categoryName: formData.categoryName.trim() || undefined,
-          legalForm: formData.legalForm,
-          address: formData.address.trim(),
+          legalForm: formData.legalForm || undefined,
+          address: formData.address.trim() || '',
           postalCode: formData.postalCode.trim() || undefined,
-          city: formData.city.trim(),
+          city: formData.city.trim() || '',
           state: formData.state.trim() || undefined,
           country: formData.country.trim() || (isDe ? 'Deutschland' : 'Germany'),
           phone: formData.phone.trim() || undefined,
-          email: formData.email.trim() || undefined,
+          email: formData.email.trim(),
           website: formData.website.trim()
             ? /^https?:\/\//i.test(formData.website.trim())
               ? formData.website.trim()
               : `https://${formData.website.trim()}`
-            : undefined,
+            : '',
           logoUrl: formData.logoUrl.trim() || undefined,
           description: formData.description.trim(),
           openingHoursJson,
@@ -380,8 +379,8 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
                     {isDe
-                      ? 'Branche / Kategorie * (auswählen oder frei eingeben)'
-                      : 'Industry / Category * (select or type new)'}
+                      ? 'Branche / Kategorie (auswählen oder frei eingeben)'
+                      : 'Industry / Category (select or type new)'}
                   </label>
                   <CategoryAutocomplete
                     value={formData.categoryName}
@@ -442,14 +441,13 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div className="sm:col-span-2">
                     <label className="block text-xs font-bold text-slate-700 mb-1">
-                      {isDe ? 'Straße & Hausnummer *' : 'Street & Number *'}
+                      {isDe ? 'Straße & Hausnummer' : 'Street & Number'}
                     </label>
                     <input
                       type="text"
-                      required
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      placeholder={isDe ? 'z. B. Taunusanlage 8' : 'e.g. 100 Main Street'}
+                      placeholder={isDe ? 'z. B. Taunusanlage 8 (optional)' : 'e.g. 100 Main Street (optional)'}
                       className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
                     />
                   </div>
@@ -471,14 +469,13 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">
-                      {isDe ? 'Stadt / Ort *' : 'City *'}
+                      {isDe ? 'Stadt / Ort' : 'City'}
                     </label>
                     <input
                       type="text"
-                      required
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      placeholder={isDe ? 'z. B. Frankfurt am Main' : 'e.g. Berlin'}
+                      placeholder={isDe ? 'z. B. Frankfurt am Main (optional)' : 'e.g. Berlin (optional)'}
                       className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
                     />
                   </div>
@@ -521,12 +518,13 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">
-                      {isDe ? 'Geschäfts-E-Mail (für Anfragen)' : 'Business Email (for inquiries)'}
+                      {isDe ? 'Geschäfts-E-Mail *' : 'Business Email *'}
                     </label>
                     <div className="relative">
                       <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
                       <input
                         type="email"
+                        required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="contact@company.com"
@@ -548,12 +546,13 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">
-                      {isDe ? 'Webseite' : 'Website'}
+                      {isDe ? 'Webseite *' : 'Website *'}
                     </label>
                     <div className="relative">
                       <Globe className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
                       <input
                         type="url"
+                        required
                         value={formData.website}
                         onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                         placeholder="https://..."

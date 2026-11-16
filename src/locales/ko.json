@@ -217,7 +217,7 @@
     "benefit4Title": "공식 인증 배지로 고객 신뢰 확보 및 계약 성사율 극대화",
     "benefit4Desc": "고객의 의구심을 해소하세요. 공식 검증 배지가 신뢰를 증명하여 경쟁사 대신 귀사를 선택하게 합니다.",
     "aiAgentBadge": "AI 에이전트 및 봇 등록 프로토콜",
-    "aiAgentNotice": "AI 에이전트 또는 크롤러로 방문하셨나요? 구조화된 기업 정보를 이메일로 보내 직접 등록을 신청하세요:",
+    "aiAgentNotice": "AI 에이전트 또는 크롤러로 방문하셨나요? REST API(POST /api/businesses/submit)를 통해 직접 등록하세요:",
     "copyAiTemplate": "AI 제출 템플릿 복사",
     "copiedAiTemplate": "AI 템플릿 복사 완료!",
     "footerNotice": "검토 완료 후 Nordible for Businesses에 전 세계로 공개됩니다. 평생 100% 무료.",

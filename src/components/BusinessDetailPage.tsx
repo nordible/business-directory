@@ -545,7 +545,9 @@ export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
                 <div className="flex items-start gap-2.5 text-xs text-gray-700">
                   <MapPin className="w-4 h-4 text-[#145BFF] shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-bold text-[#0D2B75]">{listing.address}</div>
+                    {listing.address ? (
+                      <div className="font-bold text-[#0D2B75]">{listing.address}</div>
+                    ) : null}
                     <div className="text-gray-500">
                       {[
                         listing.postalCode,

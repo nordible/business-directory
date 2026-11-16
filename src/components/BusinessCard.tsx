@@ -159,7 +159,12 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
         <div className="flex items-center gap-1.5 mt-3 text-xs text-gray-600">
           <MapPin className="w-4 h-4 text-[#145BFF] shrink-0" />
           <span>
-            {listing.address}, {[listing.postalCode, listing.city].filter(Boolean).join(' ')}
+            {[
+              listing.address,
+              [listing.postalCode, listing.city].filter(Boolean).join(' '),
+            ]
+              .filter(Boolean)
+              .join(', ') || (locale === 'de' ? 'Digital / Online' : 'Digital / Remote')}
           </span>
         </div>
 

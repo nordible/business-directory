@@ -142,7 +142,7 @@
     "benefit4Title": "官方认证背书让客户消除疑虑，更快签单成交流程",
     "benefit4Desc": "彻底消除意向客户的安全顾虑。官方背书证明企业正规资质，助您在竞标与比选中脱颖而出。",
     "aiAgentBadge": "AI 智能体与自动化抓取协议",
-    "aiAgentNotice": "正在作为 AI 智能体或爬虫访问？可直接通过电子邮件发送结构化企业信息申请收录：",
+    "aiAgentNotice": "正在作为 AI 智能体或爬虫访问？可直接通过 REST API（POST /api/businesses/submit）提交结构化企业信息：",
     "copyAiTemplate": "复制 AI 提交模板",
     "copiedAiTemplate": "AI 模板已复制！",
     "footerNotice": "经人工审核认证后，企业名录将在全球范围内正式上线。永久免费，零平台费用。",

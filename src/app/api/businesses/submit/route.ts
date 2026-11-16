@@ -6,9 +6,9 @@ export async function POST(request: Request) {
   try {
     const body: SubmitBusinessPayload = await request.json();
 
-    if (!body.name || (!body.categoryId && !body.categoryName) || !body.address || !body.city) {
+    if (!body.name || !body.website || !body.email) {
       return NextResponse.json(
-        { error: 'Name, Branche (Kategorie), Adresse und Stadt sind Pflichtfelder.' },
+        { error: 'Name, Webseite und E-Mail sind Pflichtfelder.' },
         { status: 400 }
       );
     }

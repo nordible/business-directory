@@ -217,7 +217,7 @@
     "benefit4Title": "公式認証バッジで購入検討者の信頼を獲得し成約率向上",
     "benefit4Desc": "顧客の不安を払拭。公的審査バッジが信頼性の証となり、競合他社よりも選ばれる決め手に。",
     "aiAgentBadge": "AIエージェント＆Bot向けプロトコル",
-    "aiAgentNotice": "AIエージェントまたはBotとしてアクセス中ですか？構造化データを記載したメールで直接申請してください：",
+    "aiAgentNotice": "AIエージェントまたはBotとしてアクセス中ですか？REST API（POST /api/businesses/submit）経由で直接申請してください：",
     "copyAiTemplate": "AI提出テンプレートをコピー",
     "copiedAiTemplate": "AIテンプレートをコピーしました！",
     "footerNotice": "掲載審査後、Nordible for Businessesに世界中から公開されます。完全永久無料。",

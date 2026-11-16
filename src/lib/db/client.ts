@@ -352,14 +352,14 @@ export interface SubmitBusinessPayload {
   categoryId?: string;
   categoryName?: string;
   description?: string;
-  address: string;
+  address?: string;
   postalCode?: string;
-  city: string;
+  city?: string;
   state?: string;
   country?: string;
   phone?: string;
-  email?: string;
-  website?: string;
+  email: string;
+  website: string;
   logoUrl?: string;
   bannerUrl?: string;
   legalForm?: string;
@@ -544,9 +544,9 @@ export async function submitBusinessListing(payload: SubmitBusinessPayload): Pro
       slug,
       name: payload.name.trim(),
       description: payload.description?.trim() || '',
-      address: payload.address.trim(),
+      address: payload.address?.trim() || '',
       postal_code: payload.postalCode?.trim() || null,
-      city: payload.city.trim(),
+      city: payload.city?.trim() || '',
       state: payload.state?.trim() || null,
       country: payload.country?.trim() || 'Germany',
       phone: payload.phone || null,
