@@ -19,20 +19,13 @@ export async function POST(request: Request) {
   try {
     const body: SubmitBusinessPayload = await request.json();
 
-<<<<<<< HEAD
-    if (!body.name || !body.website || !body.email) {
-      return NextResponse.json(
-        { error: 'Name, Webseite und E-Mail sind Pflichtfelder.' },
-        { status: 400 }
-=======
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const hasValidEmail = typeof body.email === 'string' && emailRegex.test(body.email.trim());
 
-    if (!body.name || (!body.categoryId && !body.categoryName) || !body.address || !body.city || !hasValidEmail) {
+    if (!body.name || !body.website || !hasValidEmail) {
       return NextResponse.json(
-        { error: 'Name, Branche (Kategorie), Adresse, Stadt und eine gültige geschäftliche E-Mail-Adresse sind Pflichtfelder.' },
+        { error: 'Name, Webseite und eine gültige geschäftliche E-Mail-Adresse sind Pflichtfelder.' },
         { status: 400, headers: CORS_HEADERS }
->>>>>>> a0d888f8b8cc63aecba01dab2973481faf443774
       );
     }
 
