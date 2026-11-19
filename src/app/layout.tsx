@@ -79,7 +79,7 @@ export default function RootLayout({
       <head>
         <link rel="help" type="text/plain" href="/llms.txt" title="AI Agent Listing Protocol" />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-[#FAFBFF] text-gray-900">
+      <body className="min-h-full flex flex-col font-sans bg-nordible-bg text-gray-900 overflow-x-clip">
         <I18nProvider>{children}</I18nProvider>
 
         {/* Google Analytics (matches main portfolio & invoice generator) */}

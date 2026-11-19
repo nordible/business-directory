@@ -29,11 +29,11 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
   const locationString = [listing.city, listing.country].filter(Boolean).join(', ');
 
   return (
-    <article className="group bg-white rounded-2xl border border-[#E8ECF4] p-5 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between hover:border-[#145BFF]/30">
+    <article className="group bg-white rounded-2xl border border-nordible-border p-5 shadow-xs hover:shadow-md transition-colors duration-200 flex flex-col justify-between hover:border-nordible-blue/30">
       <div>
         {/* Top Badges: Category & Verification */}
         <div className="flex items-center justify-between gap-2 mb-3">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4] truncate max-w-[200px]">
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-nordible-section-bg text-nordible-dark border border-nordible-border truncate max-w-[200px]">
             {listing.categoryName || categoryName}
           </span>
           {listing.isVerified ? (
@@ -52,7 +52,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
         <div className="flex items-start gap-3 mb-3">
           <Link href={permalink} className="shrink-0">
             {listing.logoUrl && !imgError ? (
-              <div className="w-12 h-12 rounded-xl bg-white p-1 border border-[#E8ECF4] shadow-2xs flex items-center justify-center overflow-hidden">
+              <div className="w-12 h-12 rounded-xl bg-white p-1 border border-nordible-border shadow-2xs flex items-center justify-center overflow-hidden">
                 <Image
                   src={listing.logoUrl}
                   alt={listing.name}
@@ -64,22 +64,22 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
                 />
               </div>
             ) : (
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#145BFF]/10 to-[#0D2B75]/10 border border-[#E8ECF4] text-[#0D2B75] font-black font-heading text-sm flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-nordible-blue/10 to-nordible-dark/10 border border-nordible-border text-nordible-dark font-black font-heading text-sm flex items-center justify-center">
                 {listing.name.slice(0, 2).toUpperCase()}
               </div>
             )}
           </Link>
 
           <div className="min-w-0 flex-1">
-            <Link href={permalink} className="block group-hover:text-[#145BFF] transition-colors">
-              <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75] group-hover:text-[#145BFF] transition-colors tracking-tight leading-snug line-clamp-1">
+            <Link href={permalink} className="block group-hover:text-nordible-blue transition-colors">
+              <h3 className="font-heading font-extrabold text-base sm:text-lg text-nordible-dark group-hover:text-nordible-blue transition-colors tracking-tight leading-snug line-clamp-1">
                 {listing.name}
               </h3>
             </Link>
 
             <div className="flex items-center gap-2 mt-1">
               <div className="flex items-center gap-1 text-xs text-gray-500 truncate">
-                <MapPin className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
+                <MapPin className="w-3.5 h-3.5 text-nordible-blue shrink-0" />
                 <span className="truncate">{locationString || (locale === 'de' ? 'Digital / Online' : 'Digital / Remote')}</span>
               </div>
               <span className="text-gray-300">•</span>
@@ -111,7 +111,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
             {listing.services.slice(0, 3).map((srv, idx) => (
               <span
                 key={idx}
-                className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4]"
+                className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-nordible-section-bg text-nordible-dark border border-nordible-border"
               >
                 {srv}
               </span>
@@ -126,10 +126,10 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
       </div>
 
       {/* Action Footer: High-Signal Action Flow */}
-      <div className="mt-5 pt-3 border-t border-[#E8ECF4] flex items-center justify-between gap-2">
+      <div className="mt-5 pt-3 border-t border-nordible-border flex items-center justify-between gap-2">
         <Link
           href={permalink}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-[#145BFF] bg-blue-50/70 hover:bg-blue-100 transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-nordible-blue bg-blue-50/70 hover:bg-blue-100 transition-colors"
         >
           <span>{t('listing.details')}</span>
           <ArrowRight className="w-3.5 h-3.5" />

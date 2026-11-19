@@ -105,17 +105,17 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in duration-200">
       <div className="absolute inset-0 -z-10" onClick={handleResetAndClose} />
       <div
-        className="w-full sm:max-w-xl bg-white rounded-t-3xl sm:rounded-3xl border border-[#E8ECF4] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] transition-all"
+        className="w-full sm:max-w-xl bg-white rounded-t-3xl sm:rounded-3xl border border-nordible-border shadow-2xl overflow-hidden flex flex-col max-h-[90vh] transition-colors"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-[#E8ECF4] bg-gradient-to-r from-[#F3F7FF] to-white">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-nordible-border bg-gradient-to-r from-nordible-section-bg to-white">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-50 text-[#145BFF] flex items-center justify-center shadow-xs">
+            <div className="w-10 h-10 rounded-2xl bg-blue-50 text-nordible-blue flex items-center justify-center shadow-xs">
               <MessageSquare className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-heading font-black text-lg text-[#0D2B75] leading-tight">
+              <h2 className="font-heading font-black text-lg text-nordible-dark leading-tight">
                 {t('inquiry.title', { name: business.name })}
               </h2>
               <p className="text-xs text-gray-500 font-medium">
@@ -140,7 +140,7 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="font-heading font-black text-xl text-[#0D2B75]">
+                <h3 className="font-heading font-black text-xl text-nordible-dark">
                   {t('inquiry.successTitle')}
                 </h3>
                 <p className="text-sm text-gray-600 max-w-md mx-auto mt-2 leading-relaxed">
@@ -148,9 +148,9 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#FAFBFF] border border-[#E8ECF4] text-left text-xs text-gray-700 space-y-1.5 max-w-md mx-auto">
-                <div className="font-bold text-[#0D2B75] flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#145BFF]" />
+              <div className="p-4 rounded-2xl bg-nordible-bg border border-nordible-border text-left text-xs text-gray-700 space-y-1.5 max-w-md mx-auto">
+                <div className="font-bold text-nordible-dark flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-nordible-blue" />
                   <span>{t('inquiry.notificationTitle')}</span>
                 </div>
                 <p className="text-gray-500">
@@ -166,7 +166,7 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
                       handleResetAndClose();
                       onOpenInbox();
                     }}
-                    className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-3 rounded-xl bg-nordible-blue hover:bg-nordible-dark text-white font-bold text-xs shadow-md transition-colors cursor-pointer"
                   >
                     {t('inquiry.openInbox')}
                   </button>
@@ -191,7 +191,7 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
 
               {/* Subject Presets */}
               <div>
-                <label className="block text-xs font-bold text-[#0D2B75] mb-2">
+                <label className="block text-xs font-bold text-nordible-dark mb-2">
                   {t('inquiry.subjectLabel')}
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -200,10 +200,10 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
                       key={s}
                       type="button"
                       onClick={() => setSubject(s)}
-                      className={`text-xs px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+                      className={`text-xs px-3 py-1.5 rounded-xl border transition-colors cursor-pointer ${
                         subject === s
-                          ? 'bg-[#145BFF] text-white border-[#145BFF] font-bold shadow-xs'
-                          : 'bg-[#FAFBFF] text-gray-700 border-[#E8ECF4] hover:border-blue-300'
+                          ? 'bg-nordible-blue text-white border-nordible-blue font-bold shadow-xs'
+                          : 'bg-nordible-bg text-gray-700 border-nordible-border hover:border-blue-300'
                       }`}
                     >
                       {s}
@@ -215,7 +215,7 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
               {/* Customer Info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                  <label className="block text-xs font-bold text-nordible-dark mb-1">
                     {t('inquiry.nameLabel')}{' '}
                     <span className="text-gray-400 font-normal">
                       ({t('inquiry.optional')})
@@ -226,11 +226,11 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                     placeholder={t('inquiry.namePlaceholder')}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-xs text-gray-900 outline-none transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-xs text-gray-900 outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                  <label className="block text-xs font-bold text-nordible-dark mb-1">
                     {t('inquiry.emailLabel')}{' '}
                     <span className="text-rose-500">*</span>
                   </label>
@@ -240,13 +240,13 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
                     value={customerEmail}
                     onChange={(e) => setCustomerEmail(e.target.value)}
                     placeholder="name@example.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-xs text-gray-900 outline-none transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-xs text-gray-900 outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                <label className="block text-xs font-bold text-nordible-dark mb-1">
                   {t('inquiry.phoneLabel')}{' '}
                   <span className="text-gray-400 font-normal">
                     ({t('inquiry.optionalCallback')})
@@ -261,7 +261,7 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
 
               {/* Message */}
               <div>
-                <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                <label className="block text-xs font-bold text-nordible-dark mb-1">
                   {t('inquiry.messageLabel')}{' '}
                   <span className="text-rose-500">*</span>
                 </label>
@@ -271,13 +271,13 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={t('inquiry.messagePlaceholder')}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-xs text-gray-900 outline-none transition-colors resize-none leading-relaxed"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-xs text-gray-900 outline-none transition-colors resize-none leading-relaxed"
                 />
               </div>
 
               {/* AI Triage Information Banner */}
-              <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-100 flex items-center gap-2.5 text-[11px] text-[#0D2B75]">
-                <Sparkles className="w-4 h-4 text-[#145BFF] shrink-0" />
+              <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-100 flex items-center gap-2.5 text-[11px] text-nordible-dark">
+                <Sparkles className="w-4 h-4 text-nordible-blue shrink-0" />
                 <span>
                   <strong>
                     {t('inquiry.assistantLabel')}
@@ -291,7 +291,7 @@ export const CustomerInquiryModal: React.FC<CustomerInquiryModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                  className="w-full py-3.5 px-4 rounded-xl bg-nordible-blue hover:bg-nordible-dark disabled:opacity-50 text-white font-bold text-xs shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer active:scale-98"
                 >
                   {isSubmitting ? (
                     <>

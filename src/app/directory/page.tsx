@@ -24,7 +24,7 @@ import { ReviewModal } from '@/components/ReviewModal';
 import { Mascot } from '@/components/mascot/Mascot';
 import { Pagination } from '@/components/Pagination';
 import { siteConfig } from '@/config/site';
-import { Search, SlidersHorizontal, Sparkles, ArrowRight, ArrowLeft, X } from 'lucide-react';
+import { Search, SlidersHorizontal, Sparkles, ArrowRight, ArrowLeft, X, Globe } from 'lucide-react';
 
 interface DirectoryAppPageProps {
   initialListings?: BusinessListing[];
@@ -258,7 +258,7 @@ function DirectoryAppContent({
   };
 
   return (
-    <div className="min-h-screen flex flex-col pb-20 md:pb-0 bg-[#FAFBFF]">
+    <div className="min-h-screen flex flex-col pb-20 md:pb-0 bg-nordible-bg">
       <style jsx global>{`
         :root {
           --tenant-primary: ${currentTenant.primaryColor};
@@ -277,22 +277,23 @@ function DirectoryAppContent({
         <div className="mb-6 flex items-center justify-between">
           <Link
             href={`/${locale}`}
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#145BFF] transition-colors group"
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-nordible-blue transition-colors group"
           >
-            <div className="w-7 h-7 rounded-lg bg-white border border-[#E8ECF4] flex items-center justify-center group-hover:border-[#145BFF]/30">
-              <ArrowLeft className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#145BFF]" />
+            <div className="w-7 h-7 rounded-lg bg-white border border-nordible-border flex items-center justify-center group-hover:border-nordible-blue/30">
+              <ArrowLeft className="w-3.5 h-3.5 text-slate-500 group-hover:text-nordible-blue" />
             </div>
             <span>{t('directory.backToOverview')}</span>
           </Link>
 
-          <span className="text-xs font-semibold text-slate-500 hidden sm:inline">
-            🌐 {t('directory.badgeTitle')}
+          <span className="text-xs font-semibold text-slate-500 hidden sm:inline-flex items-center gap-1.5">
+            <Globe className="w-3.5 h-3.5 text-nordible-blue" />
+            <span>{t('directory.badgeTitle')}</span>
           </span>
         </div>
 
         {/* Hero Section */}
         <section className="relative text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#145BFF]/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-nordible-blue/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-center">
             {/* Mascot */}
@@ -302,7 +303,7 @@ function DirectoryAppContent({
               </div>
             </div>
 
-            <h1 className="font-heading font-black text-2xl sm:text-4xl text-[#0D2B75] tracking-tight leading-tight">
+            <h1 className="font-heading font-black text-2xl sm:text-4xl text-nordible-dark tracking-tight leading-tight">
               {currentTenant.name}
             </h1>
 
@@ -318,10 +319,10 @@ function DirectoryAppContent({
                   resultsTopRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
               }}
-              className="mt-6 w-full max-w-2xl flex items-center gap-2 p-1.5 bg-white rounded-2xl border border-[#E8ECF4] shadow-md hover:border-[#145BFF]/30 transition-all"
+              className="mt-6 w-full max-w-2xl flex items-center gap-2 p-1.5 bg-white rounded-2xl border border-nordible-border shadow-md hover:border-nordible-blue/30 transition-colors"
             >
               <div className="flex items-center flex-1 pl-3 text-gray-400">
-                <Search className="w-5 h-5 mr-2 shrink-0 text-[#145BFF]" />
+                <Search className="w-5 h-5 mr-2 shrink-0 text-nordible-blue" />
                 <input
                   type="text"
                   value={searchQuery}
@@ -345,9 +346,9 @@ function DirectoryAppContent({
               <button
                 type="button"
                 onClick={() => setIsFilterSheetOpen(true)}
-                className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] text-xs font-bold text-[#0D2B75] hover:bg-[#F3F7FF] transition-colors cursor-pointer"
+                className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg text-xs font-bold text-nordible-dark hover:bg-nordible-section-bg disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
               >
-                <SlidersHorizontal className="w-4 h-4 text-[#145BFF]" />
+                <SlidersHorizontal className="w-4 h-4 text-nordible-blue" />
                 <span>{t('search.filterButton')}</span>
                 {activeFilterCount > 0 && (
                   <span
@@ -363,10 +364,10 @@ function DirectoryAppContent({
               <button
                 type="button"
                 onClick={() => setIsAddModalOpen(true)}
-                className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white text-xs font-extrabold shadow-sm transition-all active:scale-95 cursor-pointer shrink-0"
+                className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl bg-nordible-blue hover:bg-nordible-dark text-white text-xs font-extrabold shadow-sm transition-colors active:scale-95 cursor-pointer shrink-0"
                 title={t('landing.ctaAdd')}
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+                <Sparkles className="w-3.5 h-3.5 text-nordible-orange" />
                 <span>{t('landing.ctaAdd')}</span>
               </button>
             </form>
@@ -385,10 +386,10 @@ function DirectoryAppContent({
                   <button
                     key={cat.id}
                     onClick={() => handleCategorySelect(cat.id)}
-                    className={`px-3.5 py-1.5 text-xs font-bold rounded-full border transition-all cursor-pointer whitespace-nowrap ${
+                    className={`px-3.5 py-1.5 text-xs font-bold rounded-full border transition-colors cursor-pointer whitespace-nowrap ${
                       isActive
                         ? 'text-white border-transparent shadow-xs'
-                        : 'bg-white border-[#E8ECF4] text-[#0D2B75] hover:bg-[#F3F7FF]'
+                        : 'bg-white border-nordible-border text-nordible-dark hover:bg-nordible-section-bg'
                     }`}
                     style={isActive ? { backgroundColor: currentTenant.primaryColor } : {}}
                   >
@@ -403,31 +404,23 @@ function DirectoryAppContent({
         {/* Directory Results Header */}
         <div ref={resultsTopRef} className="flex items-center justify-between mb-4 px-1 gap-2 scroll-mt-6">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <div className="text-xs font-extrabold text-[#0D2B75]/70 uppercase tracking-wider font-heading">
-              {t('search.resultsFound', { count: totalItems })}
-            </div>
             {searchQuery.trim() && (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-blue-50 text-[#145BFF] text-xs font-bold border border-blue-200/60">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-blue-50 text-nordible-blue text-xs font-bold border border-blue-200/60">
                 <span>&ldquo;{searchQuery.trim()}&rdquo;</span>
                 <button
                   type="button"
                   onClick={handleClearSearch}
-                  className="hover:text-[#0D2B75] cursor-pointer"
+                  className="hover:text-nordible-dark cursor-pointer"
                   aria-label="Clear search"
                 >
                   <X className="w-3 h-3" />
                 </button>
               </span>
             )}
-            {totalPages > 1 && (
-              <span className="text-xs font-bold text-slate-400">
-                • {t('pagination.page')} {safeCurrentPage} {t('pagination.of')} {totalPages}
-              </span>
-            )}
             {activeFilterCount > 0 && (
               <button
                 onClick={handleResetFilters}
-                className="text-xs font-bold text-[#145BFF] hover:underline cursor-pointer"
+                className="text-xs font-bold text-nordible-blue hover:underline cursor-pointer"
               >
                 {t('search.resetFilters')}
               </button>
@@ -437,9 +430,9 @@ function DirectoryAppContent({
           <button
             type="button"
             onClick={() => setIsAddModalOpen(true)}
-            className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#145BFF] hover:text-[#0D2B75] bg-white hover:bg-[#F3F7FF] px-3.5 py-1.5 rounded-xl border border-blue-200/80 shadow-2xs transition-all active:scale-95 cursor-pointer shrink-0"
+            className="inline-flex items-center gap-1.5 text-xs font-extrabold text-nordible-blue hover:text-nordible-dark bg-white hover:bg-nordible-section-bg px-3.5 py-1.5 rounded-xl border border-blue-200/80 shadow-2xs transition-colors active:scale-95 cursor-pointer shrink-0"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+            <Sparkles className="w-3.5 h-3.5 text-nordible-orange" />
             <span>{t('landing.ctaAdd')}</span>
           </button>
         </div>
@@ -474,11 +467,11 @@ function DirectoryAppContent({
             />
           </>
         ) : (
-          <div className="bg-white rounded-3xl border border-[#E8ECF4] p-8 sm:p-12 text-center max-w-md mx-auto my-10 shadow-xs">
+          <div className="bg-white rounded-3xl border border-nordible-border p-8 sm:p-12 text-center max-w-md mx-auto my-10 shadow-xs">
             <div className="w-24 h-24 mx-auto mb-4">
               <Mascot variant="working-laptop" alt={t('directory.emptyTitle')} />
             </div>
-            <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#0D2B75]">
+            <h3 className="font-heading font-extrabold text-base sm:text-lg text-nordible-dark">
               {t('directory.emptyTitle')}
             </h3>
             <p className="text-xs text-gray-500 mt-1.5 leading-relaxed font-medium">
@@ -495,15 +488,12 @@ function DirectoryAppContent({
         )}
 
         {/* Bottom Banner: Directory Listing CTA */}
-        <section className="mt-16 bg-gradient-to-r from-[#0D2B75] via-[#145BFF]/85 to-[#0D2B75] rounded-3xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl relative overflow-hidden">
+        <section className="mt-16 bg-gradient-to-r from-nordible-dark via-nordible-blue/85 to-nordible-dark rounded-3xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl relative overflow-hidden">
           <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left z-10">
             <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 drop-shadow-xl">
               <Mascot variant="celebrate" alt={`${siteConfig.appName} Business Directory`} />
             </div>
             <div className="space-y-1.5">
-              <span className="text-xs font-extrabold tracking-wider uppercase text-[#FF9F1A]">
-                {t('landing.badgeVerified')} • {t('landing.badgeInternational')}
-              </span>
               <h3 className="text-xl sm:text-2xl font-black font-heading tracking-tight">
                 {t('directory.ctaCardTitle')}
               </h3>
@@ -517,7 +507,7 @@ function DirectoryAppContent({
             <button
               type="button"
               onClick={() => setIsAddModalOpen(true)}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#FF9F1A] hover:bg-amber-400 text-[#0D2B75] font-extrabold text-xs sm:text-sm transition-transform active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-nordible-orange hover:bg-amber-400 text-nordible-dark font-extrabold text-xs sm:text-sm transition-transform active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>{t('landing.ctaAdd')}</span>
               <ArrowRight className="w-4 h-4" />

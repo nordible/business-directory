@@ -17,7 +17,7 @@ export function Footer({}: FooterProps = {}) {
   const [isInboxOpen, setIsInboxOpen] = useState(false);
 
   return (
-    <footer className="mt-16 border-t border-[#E8ECF4] bg-[#0D2B75] text-white">
+    <footer className="mt-16 border-t border-nordible-border bg-nordible-dark text-white">
       {/* Main Footer Links & Information */}
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
@@ -40,12 +40,12 @@ export function Footer({}: FooterProps = {}) {
           </div>
 
           <div>
-            <h3 className="text-xs font-extrabold uppercase tracking-wider text-blue-200 mb-3 font-heading">
+            <h3 className="text-xs font-bold text-blue-200 mb-3 font-heading">
               {t('footer.featuresTitle')}
             </h3>
             <ul className="space-y-2 text-xs text-blue-100/80">
               <li className="flex items-center gap-1.5">
-                <ShieldCheck className="h-3.5 w-3.5 text-[#FF9F1A]" />
+                <ShieldCheck className="h-3.5 w-3.5 text-nordible-orange" />
                 <span>{t('footer.featVerified')}</span>
               </li>
               <li>{t('footer.featAi')}</li>
@@ -63,7 +63,7 @@ export function Footer({}: FooterProps = {}) {
               <li className="pt-1">
                 <Link
                   href={`/${locale}/fuer-unternehmen`}
-                  className="text-white hover:text-[#FF9F1A] font-bold flex items-center gap-1 transition-colors"
+                  className="text-white hover:text-nordible-orange font-bold flex items-center gap-1 transition-colors"
                 >
                   <span>{locale === 'de' ? 'Für Unternehmen (Kostenlos eintragen)' : 'For Businesses (Free Listing)'}</span>
                   <ArrowUpRight className="h-3 w-3" />
@@ -72,7 +72,7 @@ export function Footer({}: FooterProps = {}) {
               <li className="pt-1">
                 <Link
                   href={`/${locale}/partner`}
-                  className="text-[#FF9F1A] hover:underline font-bold flex items-center gap-1"
+                  className="text-nordible-orange hover:underline font-bold flex items-center gap-1"
                 >
                   <span>{t('footer.featPartner')}</span>
                   <ArrowUpRight className="h-3 w-3" />
@@ -82,7 +82,7 @@ export function Footer({}: FooterProps = {}) {
           </div>
 
           <div>
-            <h3 className="text-xs font-extrabold uppercase tracking-wider text-blue-200 mb-3 font-heading">
+            <h3 className="text-xs font-bold text-blue-200 mb-3 font-heading">
               {t('footer.ecosystemTitle')}
             </h3>
             <ul className="space-y-2 text-xs text-blue-100/80">
@@ -123,7 +123,7 @@ export function Footer({}: FooterProps = {}) {
           </div>
 
           <div>
-            <h3 className="text-xs font-extrabold uppercase tracking-wider text-blue-200 mb-3 font-heading">
+            <h3 className="text-xs font-bold text-blue-200 mb-3 font-heading">
               {t('footer.contactLegal')}
             </h3>
             <ul className="space-y-2 text-xs text-blue-100/80">
@@ -132,7 +132,7 @@ export function Footer({}: FooterProps = {}) {
                   href={`mailto:${siteConfig.contact.email}`}
                   className="hover:text-white transition-colors flex items-center gap-1.5"
                 >
-                  <Mail className="h-3.5 w-3.5 text-[#FF9F1A]" />
+                  <Mail className="h-3.5 w-3.5 text-nordible-orange" />
                   <span>{siteConfig.contact.email}</span>
                 </a>
               </li>
@@ -172,12 +172,12 @@ export function Footer({}: FooterProps = {}) {
               href={`mailto:${siteConfig.contact.email}?subject=%5B${encodeURIComponent(siteConfig.appName)}%20Feedback%5D`}
               className="hover:text-white transition-colors flex items-center gap-1"
             >
-              <Bug className="h-3.5 w-3.5 text-[#FF9F1A]" />
+              <Bug className="h-3.5 w-3.5 text-nordible-orange" />
               <span>{t('footer.feedback')}</span>
             </a>
             <span className="text-white/20">•</span>
             <div className="flex items-center gap-1">
-              <Globe className="h-3.5 w-3.5 text-[#145BFF]" />
+              <Globe className="h-3.5 w-3.5 text-nordible-blue" />
               <span>{t('footer.madeWithLove')}</span>
             </div>
             <span className="text-white/20">•</span>
@@ -208,12 +208,12 @@ export function Footer({}: FooterProps = {}) {
           href={siteConfig.company.website}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center focus:outline-hidden transition-all duration-300"
+          className="group flex flex-col items-center justify-center gap-3 sm:gap-4 px-4 text-center focus:outline-hidden transition-colors duration-300"
           aria-label={`${siteConfig.company.name} - ${siteConfig.company.website}`}
         >
           <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5">
             {/* Logo */}
-            <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-xl sm:rounded-2xl bg-white p-2 sm:p-2.5 md:p-3 shadow-xl shadow-black/40 ring-1 ring-white/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-blue-500/25 shrink-0 flex items-center justify-center">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-xl sm:rounded-2xl bg-white p-2 sm:p-2.5 md:p-3 shadow-xl shadow-black/40 ring-1 ring-white/20 transition-colors duration-300 group-hover:scale-105 group-hover:shadow-blue-500/25 shrink-0 flex items-center justify-center">
               <Image
                 src={siteConfig.assets.logoIcon}
                 alt={siteConfig.company.name}

@@ -173,12 +173,12 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
       <div className="absolute inset-0 -z-10" onClick={onClose} />
 
       {/* Sheet Content */}
-      <div className="bg-white w-full md:max-w-xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] md:max-h-[85vh] overflow-hidden border border-[#E8ECF4]">
+      <div className="bg-white w-full md:max-w-xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] md:max-h-[85vh] overflow-hidden border border-nordible-border">
         {/* Handle bar for mobile */}
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 md:hidden" />
 
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-[#E8ECF4] flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-nordible-border flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div
               className="w-9 h-9 rounded-xl flex items-center justify-center text-white shadow-xs"
@@ -187,7 +187,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-heading font-extrabold text-[#0D2B75] text-base leading-tight">
+              <h3 className="font-heading font-extrabold text-nordible-dark text-base leading-tight">
                 {t('aiModal.title')}
               </h3>
               <p className="text-xs text-gray-500 leading-tight">
@@ -197,7 +197,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-gray-800 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full bg-nordible-bg text-gray-500 hover:text-gray-800 border border-nordible-border flex items-center justify-center transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -209,41 +209,41 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           {step === 'input' && (
             <div className="space-y-5">
               {/* Tab Selector (Segmented Control) */}
-              <div className="flex bg-[#F3F7FF] border border-[#E8ECF4] p-1 rounded-2xl gap-1">
+              <div className="flex bg-nordible-section-bg border border-nordible-border p-1 rounded-2xl gap-1">
                 <button
                   type="button"
                   onClick={() => setActiveTab('url')}
-                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                     activeTab === 'url'
-                      ? 'bg-white text-[#0D2B75] shadow-xs'
+                      ? 'bg-white text-nordible-dark shadow-xs'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  <Globe className="w-3.5 h-3.5 text-[#145BFF]" />
+                  <Globe className="w-3.5 h-3.5 text-nordible-blue" />
                   <span>{t('aiModal.tabUrl')}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveTab('prompt')}
-                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                     activeTab === 'prompt'
-                      ? 'bg-white text-[#0D2B75] shadow-xs'
+                      ? 'bg-white text-nordible-dark shadow-xs'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  <MessageSquareCode className="w-3.5 h-3.5 text-[#FF9F1A]" />
+                  <MessageSquareCode className="w-3.5 h-3.5 text-nordible-orange" />
                   <span>AI Prompt</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveTab('upload')}
-                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  className={`flex-1 py-2 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
                     activeTab === 'upload'
-                      ? 'bg-white text-[#0D2B75] shadow-xs'
+                      ? 'bg-white text-nordible-dark shadow-xs'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  <UploadCloud className="w-3.5 h-3.5 text-[#145BFF]" />
+                  <UploadCloud className="w-3.5 h-3.5 text-nordible-blue" />
                   <span>{t('aiModal.tabUpload')}</span>
                 </button>
               </div>
@@ -251,7 +251,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               {/* Tab 1 Content: URL input */}
               {activeTab === 'url' && (
                 <div className="space-y-3">
-                  <label className="block text-xs font-bold text-[#0D2B75]">
+                  <label className="block text-xs font-bold text-nordible-dark">
                     {t('aiModal.urlLabel')}
                   </label>
                   <div className="relative">
@@ -261,7 +261,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       value={urlInput}
                       onChange={(e) => setUrlInput(e.target.value)}
                       placeholder="https://nordible.co"
-                      className="w-full pl-10 pr-4 py-3 bg-[#FAFBFF] border border-[#E8ECF4] rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium"
+                      className="w-full pl-10 pr-4 py-3 bg-nordible-bg border border-nordible-border rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium"
                     />
                   </div>
 
@@ -274,23 +274,23 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       <button
                         type="button"
                         onClick={() => handleApplySample('nordible')}
-                        className="px-2.5 py-1 text-xs bg-blue-50 text-[#145BFF] border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-bold flex items-center gap-1"
+                        className="px-2.5 py-1 text-xs bg-blue-50 text-nordible-blue border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-bold flex items-center gap-1"
                       >
-                        ⚡ nordible.co
+                        nordible.co
                       </button>
                       <button
                         type="button"
                         onClick={() => handleApplySample('coffee')}
                         className="px-2.5 py-1 text-xs bg-amber-50 text-amber-800 border border-amber-200 rounded-lg hover:bg-amber-100 transition-colors cursor-pointer font-medium"
                       >
-                        ☕ Café & Rösterei
+                        Café & Rösterei
                       </button>
                       <button
                         type="button"
                         onClick={() => handleApplySample('craft')}
                         className="px-2.5 py-1 text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors cursor-pointer font-medium"
                       >
-                        🪵 Tischlerei
+                        Tischlerei
                       </button>
                     </div>
                   </div>
@@ -300,7 +300,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               {/* Tab 2 Content: AI Prompt input */}
               {activeTab === 'prompt' && (
                 <div className="space-y-3">
-                  <label className="block text-xs font-bold text-[#0D2B75]">
+                  <label className="block text-xs font-bold text-nordible-dark">
                     {locale === 'de'
                       ? 'Freitext oder KI-Prompt (auch für KI-Agenten)'
                       : 'Free text or AI prompt (also for AI agents)'}
@@ -314,7 +314,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                         ? 'z.B. Trage Nordible Technologies ein: Software-Agentur, Web: https://nordible.co, Tel: +49 1521 1065739, Spezialisiert auf KI-Agenten und globale Plattformen.'
                         : 'e.g. Add Nordible Technologies: Global software agency, Web: https://nordible.co, Tel: +49 1521 1065739, Specializing in AI agents and enterprise platforms.'
                     }
-                    className="w-full p-3 bg-[#FAFBFF] border border-[#E8ECF4] rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium leading-relaxed"
+                    className="w-full p-3 bg-nordible-bg border border-nordible-border rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium leading-relaxed"
                   />
 
                   {/* Sample Prompt Chips */}
@@ -331,7 +331,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                             : 'Add Nordible Technologies: AI & Software Engineering agency, Web: https://nordible.co, Tel: +49 1521 1065739'
                         )
                       }
-                      className="px-3 py-1.5 text-xs bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4] rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-semibold text-left block"
+                      className="px-3 py-1.5 text-xs bg-nordible-section-bg text-nordible-dark border border-nordible-border rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-semibold text-left block"
                     >
                       {locale === 'de'
                         ? '🤖 „Trage Nordible Technologies ein: Software & KI-Agentur...“'
@@ -349,10 +349,10 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       setSelectedFileName('nordible-visitenkarte.pdf');
                       handleStartExtraction(undefined, 'nordible-visitenkarte.pdf');
                     }}
-                    className="border-2 border-dashed border-[#E8ECF4] hover:border-[#145BFF] rounded-2xl p-6 text-center cursor-pointer bg-[#FAFBFF] hover:bg-white transition-colors"
+                    className="border-2 border-dashed border-nordible-border hover:border-nordible-blue rounded-2xl p-6 text-center cursor-pointer bg-nordible-bg hover:bg-white transition-colors"
                   >
-                    <UploadCloud className="w-10 h-10 text-[#145BFF] mx-auto mb-2" />
-                    <p className="text-xs font-bold text-[#0D2B75]">
+                    <UploadCloud className="w-10 h-10 text-nordible-blue mx-auto mb-2" />
+                    <p className="text-xs font-bold text-nordible-dark">
                       {t('aiModal.uploadPlaceholder')}
                     </p>
                     <p className="text-[11px] text-gray-500 mt-1">
@@ -374,7 +374,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               </div>
 
               <div>
-                <h4 className="font-heading font-extrabold text-base text-[#0D2B75]">
+                <h4 className="font-heading font-extrabold text-base text-nordible-dark">
                   {t('aiModal.analyzing')}
                 </h4>
                 <p className="text-xs text-gray-500 mt-1">
@@ -385,7 +385,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               </div>
 
               {/* Progress Milestones */}
-              <div className="w-full max-w-sm space-y-3 text-left bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4]">
+              <div className="w-full max-w-sm space-y-3 text-left bg-nordible-bg p-4 rounded-2xl border border-nordible-border">
                 <div className="flex items-center gap-2.5 text-xs">
                   {progressStep >= 1 ? (
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -394,7 +394,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   )}
                   <span
                     className={
-                      progressStep >= 1 ? 'font-bold text-[#0D2B75]' : 'text-gray-500'
+                      progressStep >= 1 ? 'font-bold text-nordible-dark' : 'text-gray-500'
                     }
                   >
                     {t('aiModal.stepScraping')}
@@ -409,7 +409,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   )}
                   <span
                     className={
-                      progressStep >= 2 ? 'font-bold text-[#0D2B75]' : 'text-gray-500'
+                      progressStep >= 2 ? 'font-bold text-nordible-dark' : 'text-gray-500'
                     }
                   >
                     {t('aiModal.stepVision')}
@@ -424,7 +424,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   )}
                   <span
                     className={
-                      progressStep >= 3 ? 'font-bold text-[#0D2B75]' : 'text-gray-500'
+                      progressStep >= 3 ? 'font-bold text-nordible-dark' : 'text-gray-500'
                     }
                   >
                     {t('aiModal.stepValidation')}
@@ -438,13 +438,13 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           {step === 'review' && extractedListing && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold text-[#0D2B75] uppercase tracking-wider font-heading">
+                <span className="text-xs font-bold text-nordible-dark font-heading">
                   {t('aiModal.reviewTitle')}
                 </span>
                 <button
                   type="button"
                   onClick={() => setStep('input')}
-                  className="text-xs font-semibold text-gray-500 hover:text-[#145BFF] flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-semibold text-gray-500 hover:text-nordible-blue flex items-center gap-1 cursor-pointer"
                 >
                   <RefreshCw className="w-3 h-3" />
                   <span>{locale === 'de' ? 'Neu erfassen' : 'Reset / Start over'}</span>
@@ -452,12 +452,12 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               </div>
 
               {/* Editable Fields */}
-              <div className="space-y-3 bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4]">
+              <div className="space-y-3 bg-nordible-bg p-4 rounded-2xl border border-nordible-border">
                 <div>
                   <label className="block text-[11px] font-bold text-gray-600 mb-1">
                     {t('aiModal.businessName')}
                   </label>
-                  <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
+                  <div className="flex items-center bg-white border border-nordible-border rounded-xl px-3 py-2">
                     <Building className="w-4 h-4 text-gray-400 mr-2 shrink-0" />
                     <input
                       type="text"
@@ -465,7 +465,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       onChange={(e) =>
                         setExtractedListing({ ...extractedListing, name: e.target.value })
                       }
-                      className="w-full text-xs font-bold text-[#0D2B75] focus:outline-none"
+                      className="w-full text-xs font-bold text-nordible-dark focus:outline-none"
                     />
                   </div>
                 </div>
@@ -482,7 +482,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                         categoryId: e.target.value,
                       })
                     }
-                    className="w-full text-xs font-semibold bg-white border border-[#E8ECF4] rounded-xl px-3 py-2 text-[#0D2B75] focus:outline-none cursor-pointer"
+                    className="w-full text-xs font-semibold bg-white border border-nordible-border rounded-xl px-3 py-2 text-nordible-dark focus:outline-none cursor-pointer"
                   >
                     {categories
                       .filter((c) => c.id !== 'cat-all')
@@ -499,7 +499,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                     <label className="block text-[11px] font-bold text-gray-600 mb-1">
                       {t('aiModal.address')}
                     </label>
-                    <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
+                    <div className="flex items-center bg-white border border-nordible-border rounded-xl px-3 py-2">
                       <MapPin className="w-4 h-4 text-gray-400 mr-1.5 shrink-0" />
                       <input
                         type="text"
@@ -519,7 +519,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                     <label className="block text-[11px] font-bold text-gray-600 mb-1">
                       {t('aiModal.city')}
                     </label>
-                    <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
+                    <div className="flex items-center bg-white border border-nordible-border rounded-xl px-3 py-2">
                       <input
                         type="text"
                         value={extractedListing.city}
@@ -555,7 +555,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                     <label className="block text-[11px] font-bold text-gray-600 mb-1">
                       {t('aiModal.website')}
                     </label>
-                    <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
+                    <div className="flex items-center bg-white border border-nordible-border rounded-xl px-3 py-2">
                       <Globe className="w-4 h-4 text-gray-400 mr-1.5 shrink-0" />
                       <input
                         type="text"
@@ -576,7 +576,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   <label className="block text-[11px] font-bold text-gray-600 mb-1">
                     {t('aiModal.hours')}
                   </label>
-                  <div className="flex items-center bg-white border border-[#E8ECF4] rounded-xl px-3 py-2">
+                  <div className="flex items-center bg-white border border-nordible-border rounded-xl px-3 py-2">
                     <Clock className="w-4 h-4 text-gray-400 mr-2 shrink-0" />
                     <input
                       type="text"
@@ -612,7 +612,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                         description: e.target.value,
                       })
                     }
-                    className="w-full text-xs font-medium text-gray-900 bg-white border border-[#E8ECF4] rounded-xl p-2.5 focus:outline-none"
+                    className="w-full text-xs font-medium text-gray-900 bg-white border border-nordible-border rounded-xl p-2.5 focus:outline-none"
                   />
                 </div>
               </div>
@@ -621,7 +621,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
         </div>
 
         {/* Modal Actions */}
-        <div className="px-6 py-4 bg-[#FAFBFF] border-t border-[#E8ECF4] flex items-center justify-between gap-3">
+        <div className="px-6 py-4 bg-nordible-bg border-t border-nordible-border flex items-center justify-between gap-3">
           {step === 'input' && (
             <>
               <button
@@ -641,7 +641,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                     : false
                 }
                 onClick={() => handleStartExtraction()}
-                className="flex-1 py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                className="flex-1 py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-colors active:scale-98 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 style={{ backgroundColor: primaryColor }}
               >
                 <Sparkles className="w-4 h-4" />
@@ -651,7 +651,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
           )}
 
           {step === 'processing' && (
-            <div className="w-full text-center text-xs font-semibold text-[#0D2B75] py-1">
+            <div className="w-full text-center text-xs font-semibold text-nordible-dark py-1">
               {locale === 'de'
                 ? 'KI analysiert und formatiert die Daten...'
                 : 'AI is analyzing and formatting the data...'}
@@ -670,7 +670,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
               <button
                 type="button"
                 onClick={handleConfirmListing}
-                className="flex-1 py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 cursor-pointer"
+                className="flex-1 py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-colors active:scale-98 cursor-pointer"
                 style={{ backgroundColor: primaryColor }}
               >
                 <CheckCircle2 className="w-4 h-4" />

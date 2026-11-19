@@ -106,12 +106,12 @@ export const PricingModal: React.FC<PricingModalProps> = ({
     >
       <div className="absolute inset-0 -z-10" onClick={onClose} />
 
-      <div className="bg-white w-full md:max-w-4xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-[#E8ECF4]">
+      <div className="bg-white w-full md:max-w-4xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-nordible-border">
         {/* Mobile handle */}
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 md:hidden" />
 
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-[#E8ECF4] flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-nordible-border flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div
               className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-xs"
@@ -120,7 +120,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
               <CreditCard className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-heading font-extrabold text-[#0D2B75] text-base leading-tight">
+              <h3 className="font-heading font-extrabold text-nordible-dark text-base leading-tight">
                 {t('pricing.title')}
               </h3>
               <p className="text-xs text-gray-500 leading-tight">
@@ -130,7 +130,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-gray-800 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full bg-nordible-bg text-gray-500 hover:text-gray-800 border border-nordible-border flex items-center justify-center transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -140,13 +140,13 @@ export const PricingModal: React.FC<PricingModalProps> = ({
         <div className="p-6 overflow-y-auto space-y-6 flex-1">
           {/* Billing Cycle Switcher with savings anchor */}
           <div className="flex items-center justify-center">
-            <div className="bg-[#F3F7FF] border border-[#E8ECF4] p-1 rounded-2xl flex items-center shadow-inner">
+            <div className="bg-nordible-section-bg border border-nordible-border p-1 rounded-2xl flex items-center shadow-inner">
               <button
                 type="button"
                 onClick={() => setBillingCycle('monthly')}
-                className={`px-4 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                className={`px-4 py-2 text-xs font-bold rounded-xl transition-colors cursor-pointer ${
                   billingCycle === 'monthly'
-                    ? 'bg-white text-[#0D2B75] shadow-xs'
+                    ? 'bg-white text-nordible-dark shadow-xs'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -155,9 +155,9 @@ export const PricingModal: React.FC<PricingModalProps> = ({
               <button
                 type="button"
                 onClick={() => setBillingCycle('yearly')}
-                className={`px-4 py-2 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all cursor-pointer ${
+                className={`px-4 py-2 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer ${
                   billingCycle === 'yearly'
-                    ? 'bg-white text-[#0D2B75] shadow-xs'
+                    ? 'bg-white text-nordible-dark shadow-xs'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -179,12 +179,12 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                 <div
                   key={plan.id}
                   onClick={() => setSelectedPlanId(plan.id)}
-                  className={`rounded-2xl p-5 border flex flex-col justify-between transition-all cursor-pointer ${
+                  className={`rounded-2xl p-5 border flex flex-col justify-between transition-colors cursor-pointer ${
                     isSelected
                       ? 'border-2 shadow-lg relative bg-white ring-2 ring-blue-500/20'
                       : plan.isPopular
                       ? 'border-2 shadow-md relative bg-white'
-                      : 'border-[#E8ECF4] bg-[#FAFBFF] hover:bg-white'
+                      : 'border-nordible-border bg-nordible-bg hover:bg-white'
                   }`}
                   style={isSelected || plan.isPopular ? { borderColor: primaryColor } : {}}
                 >
@@ -196,7 +196,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                       </div>
 
                       <div
-                        className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-white text-[10px] font-extrabold tracking-wide uppercase shadow-xs flex items-center gap-1"
+                        className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-white text-[10px] font-bold shadow-xs flex items-center gap-1"
                         style={{ backgroundColor: primaryColor }}
                       >
                         <Sparkles className="w-3 h-3" />
@@ -206,11 +206,11 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                   )}
 
                   <div>
-                    <h4 className="font-heading font-extrabold text-base text-[#0D2B75]">{plan.name}</h4>
+                    <h4 className="font-heading font-extrabold text-base text-nordible-dark">{plan.name}</h4>
                     <p className="text-xs text-gray-500 mt-1 min-h-[32px]">{plan.description}</p>
 
                     <div className="mt-4 mb-5 flex items-baseline gap-1">
-                      <span className="text-3xl font-black text-[#0D2B75]">€{price}</span>
+                      <span className="text-3xl font-black text-nordible-dark">€{price}</span>
                       <span className="text-xs font-semibold text-gray-500">{t('pricing.perMonth')}</span>
                     </div>
 
@@ -226,17 +226,17 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                     </ul>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#E8ECF4]">
+                  <div className="mt-6 pt-4 border-t border-nordible-border">
                     <button
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedPlanId(plan.id);
                       }}
-                      className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-98 cursor-pointer ${
+                      className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors active:scale-98 cursor-pointer ${
                         isSelected
                           ? 'text-white shadow-md'
-                          : 'bg-[#F3F7FF] text-[#0D2B75] hover:bg-[#145BFF] hover:text-white border border-[#E8ECF4]'
+                          : 'bg-nordible-section-bg text-nordible-dark hover:bg-nordible-blue hover:text-white border border-nordible-border'
                       }`}
                       style={isSelected ? { backgroundColor: primaryColor } : {}}
                     >
@@ -249,13 +249,13 @@ export const PricingModal: React.FC<PricingModalProps> = ({
           </div>
 
           {/* Concierge Activation Box for Selected Plan */}
-          <div className="bg-gradient-to-br from-[#FAFBFF] to-[#F3F7FF] border border-[#D5E1F8] rounded-2xl p-5 shadow-xs space-y-4">
+          <div className="bg-gradient-to-br from-nordible-bg to-nordible-section-bg border border-nordible-border rounded-2xl p-5 shadow-xs space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-[#145BFF]/10 text-[#145BFF] flex items-center justify-center">
-                <Mail className="w-4 h-4 text-[#145BFF]" />
+              <div className="w-8 h-8 rounded-xl bg-nordible-blue/10 text-nordible-blue flex items-center justify-center">
+                <Mail className="w-4 h-4 text-nordible-blue" />
               </div>
               <div>
-                <h4 className="font-heading font-extrabold text-sm text-[#0D2B75]">
+                <h4 className="font-heading font-extrabold text-sm text-nordible-dark">
                   {isDe
                     ? `Tarif „${currentPlan.name}“ buchen / freischalten`
                     : `Subscribe to "${currentPlan.name}"`}
@@ -271,7 +271,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href={mailtoUrl}
-                className="flex-1 py-3 px-4 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 active:scale-98 transition-all"
+                className="flex-1 py-3 px-4 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:opacity-95 active:scale-98 transition-colors"
                 style={{ backgroundColor: primaryColor }}
               >
                 <Mail className="w-4 h-4" />
@@ -283,14 +283,14 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                 <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
 
-              <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white border border-[#E8ECF4] text-xs">
-                <span className="font-mono font-bold text-[#0D2B75] text-xs mr-3">
+              <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white border border-nordible-border text-xs">
+                <span className="font-mono font-bold text-nordible-dark text-xs mr-3">
                   {siteConfig.contact.email}
                 </span>
                 <button
                   type="button"
                   onClick={() => copyToClipboard(siteConfig.contact.email)}
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#145BFF] hover:text-[#0D2B75] transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-nordible-blue hover:text-nordible-dark transition-colors cursor-pointer"
                 >
                   {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedEmail ? (isDe ? 'Kopiert' : 'Copied') : (isDe ? 'Kopieren' : 'Copy')}</span>
@@ -300,13 +300,13 @@ export const PricingModal: React.FC<PricingModalProps> = ({
           </div>
 
           {/* Custom Domain & SSL Direct Shortcut */}
-          <div className="p-4 bg-[#F3F7FF] rounded-2xl border border-[#E8ECF4] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="p-4 bg-nordible-section-bg rounded-2xl border border-nordible-border flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-3 text-center sm:text-left">
-              <div className="w-10 h-10 rounded-xl bg-white border border-[#E8ECF4] flex items-center justify-center text-[#145BFF] shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-white border border-nordible-border flex items-center justify-center text-nordible-blue shrink-0">
                 <Globe className="w-5 h-5" />
               </div>
               <div>
-                <h5 className="font-heading font-bold text-xs text-[#0D2B75]">
+                <h5 className="font-heading font-bold text-xs text-nordible-dark">
                   {t('domain.title')}
                 </h5>
                 <p className="text-[11px] text-gray-600">
@@ -320,7 +320,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
                 onClose();
                 onOpenDomainSettings();
               }}
-              className="px-4 py-2 bg-white hover:bg-gray-50 border border-[#E8ECF4] rounded-xl text-xs font-bold text-[#0D2B75] shadow-2xs transition-colors cursor-pointer shrink-0"
+              className="px-4 py-2 bg-white hover:bg-gray-50 border border-nordible-border rounded-xl text-xs font-bold text-nordible-dark shadow-2xs transition-colors cursor-pointer shrink-0"
             >
               {t('partner.btnConfigureDomain')}
             </button>
@@ -328,7 +328,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3.5 bg-[#FAFBFF] border-t border-[#E8ECF4] flex items-center justify-between text-xs text-gray-500">
+        <div className="px-6 py-3.5 bg-nordible-bg border-t border-nordible-border flex items-center justify-between text-xs text-gray-500">
           <div className="flex items-center gap-1.5">
             <Shield className="w-4 h-4 text-emerald-600" />
             <span>{t('pricing.securePayment')}</span>

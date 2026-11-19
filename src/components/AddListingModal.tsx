@@ -218,15 +218,15 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
     >
       <div className="absolute inset-0 -z-10" onClick={handleClose} />
 
-      <div className="bg-white w-full md:max-w-2xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-[#E8ECF4]">
+      <div className="bg-white w-full md:max-w-2xl md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-nordible-border">
         {/* Mobile drag handle */}
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 md:hidden" />
 
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-[#E8ECF4] flex items-center justify-between bg-white">
+        <div className="px-6 py-4 border-b border-nordible-border flex items-center justify-between bg-white">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#145BFF] border border-blue-200">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-nordible-blue border border-blue-200">
+              <Sparkles className="w-3.5 h-3.5 text-nordible-orange" />
               <span>{isDe ? 'Unternehmen eintragen' : 'Add Business'}</span>
             </span>
           </div>
@@ -234,7 +234,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
           <button
             onClick={handleClose}
             aria-label="Close"
-            className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-gray-800 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full bg-nordible-bg text-gray-500 hover:text-gray-800 border border-nordible-border flex items-center justify-center transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -247,13 +247,12 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
               <div className="w-20 h-20 mx-auto">
                 <Mascot variant="celebrate" alt="Success" />
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                <ShieldCheck className="w-4 h-4" />
-                <span>{isDe ? 'Erfolgreich eingereicht' : 'Successfully Submitted'}</span>
-              </div>
-              <h3 className="font-heading font-black text-xl text-[#0D2B75]">
-                {isDe ? 'Vielen Dank für Ihre Registrierung!' : 'Thank you for your registration!'}
+              <h3 className="font-heading font-black text-xl text-nordible-dark">
+                {isDe ? 'Erfolgreich eingereicht' : 'Successfully Submitted'}
               </h3>
+              <p className="text-sm font-semibold text-emerald-700">
+                {isDe ? 'Vielen Dank für Ihre Registrierung!' : 'Thank you for your registration!'}
+              </p>
               <p className="text-xs text-gray-600 max-w-sm mx-auto leading-relaxed font-medium">
                 {isDe
                   ? 'Ihr Unternehmenseintrag wurde in der Datenbank gespeichert und befindet sich im Status „Ausstehend“. Nach Prüfung durch den Administrator wird er im Verzeichnis freigeschaltet.'
@@ -271,7 +270,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <h3 className="font-heading font-black text-lg text-[#0D2B75]">
+                <h3 className="font-heading font-black text-lg text-nordible-dark">
                   {isDe ? 'Neues Unternehmen registrieren' : 'Register New Business'}
                 </h3>
                 <p className="text-xs text-gray-500 mt-0.5 font-medium">
@@ -288,15 +287,15 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
               )}
 
               {/* AI URL Ingestion Bar (Hick's Law Friction Reduction) */}
-              <div className="bg-gradient-to-br from-blue-50/80 via-[#F3F7FF] to-indigo-50/60 p-4 rounded-2xl border-2 border-[#145BFF]/30 shadow-xs space-y-2.5">
+              <div className="bg-nordible-section-bg p-4 rounded-2xl border-2 border-nordible-blue/30 shadow-xs space-y-2.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
-                    <span className="text-xs font-black text-[#0D2B75] uppercase tracking-wider font-heading">
-                      {isDe ? '⚡ Blitz-Eintrag mit KI aus Website-URL' : '⚡ 1-Click AI Import via Website URL'}
+                    <Sparkles className="w-4 h-4 text-nordible-orange" />
+                    <span className="text-xs font-bold text-nordible-dark font-heading">
+                      {isDe ? 'Blitz-Eintrag mit KI aus Website-URL' : '1-Click AI Import via Website URL'}
                     </span>
                   </div>
-                  <span className="text-[10px] font-black text-[#145BFF] bg-blue-100/70 border border-blue-200/80 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold text-nordible-blue bg-blue-100/70 border border-blue-200/80 px-2 py-0.5 rounded-full">
                     {isDe ? 'Automatisch' : 'Automated'}
                   </span>
                 </div>
@@ -313,14 +312,14 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       value={aiUrlInput}
                       onChange={(e) => setAiUrlInput(e.target.value)}
                       placeholder="https://beispiel-firma.de"
-                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                     />
                   </div>
                   <button
                     type="button"
                     disabled={isExtracting || !aiUrlInput.trim()}
                     onClick={handleExtractFromUrl}
-                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white text-xs font-bold transition-all disabled:opacity-50 cursor-pointer shadow-xs active:scale-95"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-nordible-blue hover:bg-nordible-dark text-white text-xs font-bold transition-colors disabled:opacity-50 cursor-pointer shadow-xs active:scale-95"
                   >
                     {isExtracting ? (
                       <>
@@ -329,7 +328,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       </>
                     ) : (
                       <>
-                        <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
+                        <Sparkles className="w-3.5 h-3.5 text-nordible-orange" />
                         <span>{isDe ? 'Mit KI ausfüllen' : 'Auto-fill with AI'}</span>
                       </>
                     )}
@@ -348,8 +347,8 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
               </div>
 
               {/* SECTION 1: Unternehmensdaten & Logo */}
-              <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-4">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#145BFF] flex items-center gap-1.5">
+              <div className="bg-nordible-bg p-4 rounded-2xl border border-nordible-border space-y-4">
+                <h4 className="text-xs font-bold text-nordible-blue flex items-center gap-1.5">
                   <Building2 className="w-3.5 h-3.5" />
                   <span>{isDe ? 'Unternehmensdaten & Profil' : 'Company Details & Profile'}</span>
                 </h4>
@@ -365,7 +364,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={isDe ? 'z. B. Nordible Technologies' : 'e.g., Nordible Technologies'}
-                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                     />
                   </div>
 
@@ -414,11 +413,11 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                         value={formData.logoUrl}
                         onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })}
                         placeholder="https://example.com/logo.png"
-                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                       />
                     </div>
                     {/* Live Thumbnail Preview */}
-                    <div className="w-9 h-9 rounded-xl border border-[#E8ECF4] bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-2xs">
+                    <div className="w-9 h-9 rounded-xl border border-nordible-border bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-2xs">
                       {formData.logoUrl ? (
                         <Image
                           src={formData.logoUrl}
@@ -437,8 +436,8 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
               </div>
 
               {/* SECTION 2: Standort & Granulare Anschrift */}
-              <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-4">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#145BFF] flex items-center gap-1.5">
+              <div className="bg-nordible-bg p-4 rounded-2xl border border-nordible-border space-y-4">
+                <h4 className="text-xs font-bold text-nordible-blue flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5" />
                   <span>{isDe ? 'Standort & Adresse' : 'Location & Address'}</span>
                 </h4>
@@ -453,7 +452,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       placeholder={isDe ? 'z. B. Taunusanlage 8 (optional)' : 'e.g. 100 Main Street (optional)'}
-                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                     />
                   </div>
 
@@ -466,7 +465,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       value={formData.postalCode}
                       onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
                       placeholder={isDe ? 'z. B. 60329' : 'e.g. 10001'}
-                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                     />
                   </div>
                 </div>
@@ -481,7 +480,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                       placeholder={isDe ? 'z. B. Berlin, Zürich oder Wien (optional)' : 'e.g. New York, London or Tokyo (optional)'}
-                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                     />
                   </div>
 
@@ -494,7 +493,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       value={formData.state}
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                       placeholder={isDe ? 'z. B. Hessen' : 'e.g. Bavaria'}
-                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                     />
                   </div>
 
@@ -507,15 +506,15 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       value={formData.country}
                       onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                       placeholder={isDe ? 'z. B. Deutschland, Österreich, USA...' : 'e.g. Germany, United States, UK...'}
-                      className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                     />
                   </div>
                 </div>
               </div>
 
               {/* SECTION 3: Kontakt & Kommunikation */}
-              <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-4">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#145BFF] flex items-center gap-1.5">
+              <div className="bg-nordible-bg p-4 rounded-2xl border border-nordible-border space-y-4">
+                <h4 className="text-xs font-bold text-nordible-blue flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5" />
                   <span>{isDe ? 'Kontaktkanäle für Kunden' : 'Customer Contact Channels'}</span>
                 </h4>
@@ -533,7 +532,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="contact@company.com"
-                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                       />
                     </div>
                   </div>
@@ -561,7 +560,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                         value={formData.website}
                         onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                         placeholder="https://..."
-                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                       />
                     </div>
                   </div>
@@ -569,8 +568,8 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
               </div>
 
               {/* SECTION 4: 7-Tage Öffnungszeiten */}
-              <div className="bg-[#FAFBFF] p-4 rounded-2xl border border-[#E8ECF4] space-y-3">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#145BFF]">
+              <div className="bg-nordible-bg p-4 rounded-2xl border border-nordible-border space-y-3">
+                <h4 className="text-xs font-bold text-nordible-blue">
                   {isDe ? 'Öffnungszeiten (7 Tage / Woche)' : 'Opening Hours (7 Days / Week)'}
                 </h4>
                 <OpeningHoursPicker
@@ -595,7 +594,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       ? 'Beschreiben Sie Ihre Kernleistungen, Produkte, Zielgruppen und Schwerpunkte...'
                       : 'Describe your core services, specialties, target audiences, and products...'
                   }
-                  className="w-full p-3 text-xs rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] transition-all font-medium text-slate-800 resize-none"
+                  className="w-full p-3 text-xs rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue transition-colors font-medium text-slate-800 resize-none"
                 />
               </div>
 
@@ -606,11 +605,11 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                     type="checkbox"
                     checked={wantsGrowthResource}
                     onChange={(e) => setWantsGrowthResource(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 rounded border-gray-300 text-[#145BFF] focus:ring-[#145BFF] accent-[#145BFF] cursor-pointer"
+                    className="mt-0.5 w-4 h-4 rounded border-gray-300 text-nordible-blue focus:ring-nordible-blue accent-nordible-blue cursor-pointer"
                   />
                   <div className="space-y-1">
-                    <span className="text-xs font-extrabold text-[#0D2B75] flex items-center gap-1.5">
-                      <TrendingUp className="w-3.5 h-3.5 text-[#145BFF]" />
+                    <span className="text-xs font-extrabold text-nordible-dark flex items-center gap-1.5">
+                      <TrendingUp className="w-3.5 h-3.5 text-nordible-blue" />
                       <span>
                         {isDe
                           ? 'Kostenlose Wachstumsstrategie & Ressourcen erhalten'
@@ -631,7 +630,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="px-4 py-2.5 rounded-xl border border-[#E8ECF4] text-xs font-bold text-slate-600 hover:bg-[#F3F7FF] transition-colors cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl border border-nordible-border text-xs font-bold text-slate-600 hover:bg-nordible-section-bg transition-colors cursor-pointer"
                 >
                   {isDe ? 'Abbrechen' : 'Cancel'}
                 </button>

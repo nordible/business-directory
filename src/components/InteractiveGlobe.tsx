@@ -8,7 +8,6 @@ interface CityNode {
   id: string;
   name: string;
   country: string;
-  flag: string;
   lat: number;
   lon: number;
   connections: string[]; // Connected city ids
@@ -20,7 +19,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'london',
     name: 'London',
     country: 'United Kingdom',
-    flag: '🇬🇧',
     lat: 51.5074,
     lon: -0.1278,
     connections: ['newyork', 'paris', 'zurich', 'dubai', 'singapore', 'berlin'],
@@ -29,7 +27,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'paris',
     name: 'Paris',
     country: 'France',
-    flag: '🇫🇷',
     lat: 48.8566,
     lon: 2.3522,
     connections: ['london', 'berlin', 'madrid', 'milan', 'newyork'],
@@ -38,7 +35,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'berlin',
     name: 'Berlin',
     country: 'Deutschland',
-    flag: '🇩🇪',
     lat: 52.52,
     lon: 13.405,
     connections: ['london', 'paris', 'zurich', 'amsterdam', 'stockholm'],
@@ -47,7 +43,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'zurich',
     name: 'Zürich',
     country: 'Schweiz',
-    flag: '🇨🇭',
     lat: 47.3769,
     lon: 8.5417,
     connections: ['london', 'berlin', 'milan', 'dubai'],
@@ -56,7 +51,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'amsterdam',
     name: 'Amsterdam',
     country: 'Netherlands',
-    flag: '🇳🇱',
     lat: 52.3676,
     lon: 4.9041,
     connections: ['london', 'berlin', 'stockholm'],
@@ -65,7 +59,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'milan',
     name: 'Milano',
     country: 'Italia',
-    flag: '🇮🇹',
     lat: 45.4642,
     lon: 9.19,
     connections: ['paris', 'zurich', 'madrid'],
@@ -74,7 +67,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'madrid',
     name: 'Madrid',
     country: 'España',
-    flag: '🇪🇸',
     lat: 40.4168,
     lon: -3.7038,
     connections: ['paris', 'milan', 'saopaulo', 'london'],
@@ -83,7 +75,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'stockholm',
     name: 'Stockholm',
     country: 'Sverige',
-    flag: '🇸🇪',
     lat: 59.3293,
     lon: 18.0686,
     connections: ['berlin', 'amsterdam', 'london'],
@@ -93,7 +84,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'newyork',
     name: 'New York',
     country: 'United States',
-    flag: '🇺🇸',
     lat: 40.7128,
     lon: -74.006,
     connections: ['london', 'sanfrancisco', 'chicago', 'toronto', 'saopaulo', 'paris'],
@@ -102,7 +92,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'sanfrancisco',
     name: 'Silicon Valley',
     country: 'United States',
-    flag: '🇺🇸',
     lat: 37.7749,
     lon: -122.4194,
     connections: ['newyork', 'tokyo', 'singapore', 'sydney'],
@@ -111,7 +100,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'chicago',
     name: 'Chicago',
     country: 'United States',
-    flag: '🇺🇸',
     lat: 41.8781,
     lon: -87.6298,
     connections: ['newyork', 'sanfrancisco', 'toronto'],
@@ -120,7 +108,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'toronto',
     name: 'Toronto',
     country: 'Canada',
-    flag: '🇨🇦',
     lat: 43.6532,
     lon: -79.3832,
     connections: ['newyork', 'chicago', 'london'],
@@ -130,7 +117,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'saopaulo',
     name: 'São Paulo',
     country: 'Brasil',
-    flag: '🇧🇷',
     lat: -23.5505,
     lon: -46.6333,
     connections: ['newyork', 'buenosaires', 'madrid', 'johannesburg'],
@@ -139,7 +125,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'buenosaires',
     name: 'Buenos Aires',
     country: 'Argentina',
-    flag: '🇦🇷',
     lat: -34.6037,
     lon: -58.3816,
     connections: ['saopaulo', 'newyork'],
@@ -149,7 +134,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'dubai',
     name: 'Dubai',
     country: 'United Arab Emirates',
-    flag: '🇦🇪',
     lat: 25.2048,
     lon: 55.2708,
     connections: ['london', 'riyadh', 'mumbai', 'singapore', 'nairobi', 'zurich'],
@@ -158,7 +142,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'riyadh',
     name: 'Riyadh',
     country: 'Saudi Arabia',
-    flag: '🇸🇦',
     lat: 24.7136,
     lon: 46.6753,
     connections: ['dubai', 'mumbai'],
@@ -167,7 +150,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'telaviv',
     name: 'Tel Aviv',
     country: 'Israel',
-    flag: '🇮🇱',
     lat: 32.0853,
     lon: 34.7818,
     connections: ['london', 'paris', 'dubai'],
@@ -177,7 +159,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'tokyo',
     name: 'Tokyo',
     country: 'Japan',
-    flag: '🇯🇵',
     lat: 35.6762,
     lon: 139.6503,
     connections: ['sanfrancisco', 'seoul', 'shanghai', 'singapore', 'sydney'],
@@ -186,7 +167,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'seoul',
     name: 'Seoul',
     country: 'South Korea',
-    flag: '🇰🇷',
     lat: 37.5665,
     lon: 126.978,
     connections: ['tokyo', 'shanghai', 'hongkong'],
@@ -195,7 +175,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'shanghai',
     name: 'Shanghai',
     country: 'China',
-    flag: '🇨🇳',
     lat: 31.2304,
     lon: 121.4737,
     connections: ['tokyo', 'hongkong', 'singapore', 'seoul'],
@@ -204,7 +183,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'hongkong',
     name: 'Hong Kong',
     country: 'Hong Kong',
-    flag: '🇭🇰',
     lat: 22.3193,
     lon: 114.1694,
     connections: ['singapore', 'shanghai', 'tokyo', 'sydney'],
@@ -213,7 +191,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'singapore',
     name: 'Singapore',
     country: 'Singapore',
-    flag: '🇸🇬',
     lat: 1.3521,
     lon: 103.8198,
     connections: ['tokyo', 'hongkong', 'sydney', 'mumbai', 'dubai', 'london'],
@@ -222,7 +199,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'mumbai',
     name: 'Mumbai',
     country: 'India',
-    flag: '🇮🇳',
     lat: 19.076,
     lon: 72.8777,
     connections: ['dubai', 'singapore', 'london', 'riyadh'],
@@ -231,7 +207,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'sydney',
     name: 'Sydney',
     country: 'Australia',
-    flag: '🇦🇺',
     lat: -33.8688,
     lon: 151.2093,
     connections: ['singapore', 'tokyo', 'sanfrancisco', 'hongkong'],
@@ -241,7 +216,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'nairobi',
     name: 'Nairobi',
     country: 'Kenya',
-    flag: '🇰🇪',
     lat: -1.2921,
     lon: 36.8219,
     connections: ['dubai', 'johannesburg', 'london'],
@@ -250,7 +224,6 @@ const GLOBAL_CITIES: CityNode[] = [
     id: 'johannesburg',
     name: 'Johannesburg',
     country: 'South Africa',
-    flag: '🇿🇦',
     lat: -26.2041,
     lon: 28.0473,
     connections: ['nairobi', 'london', 'dubai', 'saopaulo'],
@@ -541,7 +514,7 @@ export function InteractiveGlobe() {
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-[#0A183D] text-white relative overflow-hidden border-b border-[#1E3A8A]">
+    <section className="py-16 sm:py-24 bg-nordible-darker text-white relative overflow-hidden border-b border-blue-900/50">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
 
@@ -573,7 +546,7 @@ export function InteractiveGlobe() {
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
-              className="w-full h-full cursor-grab active:cursor-grabbing touch-none select-none drop-shadow-[0_20px_50px_rgba(20,91,255,0.35)]"
+              className="w-full h-full cursor-grab active:cursor-grabbing touch-none select-none drop-shadow-2xl"
               aria-label="Interactive 3D Globe showing verified enterprises connected across global commercial hubs"
             />
           </div>

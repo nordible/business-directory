@@ -53,7 +53,7 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
         <div className="overflow-y-auto py-4 space-y-5 flex-1">
           {/* Categories */}
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+            <label className="block text-xs font-semibold text-gray-600 mb-2">
               {t('search.allCategories')}
             </label>
             <div className="flex flex-wrap gap-2">
@@ -63,7 +63,7 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
                   <button
                     key={cat.id}
                     onClick={() => onSelectCategory(cat.id)}
-                    className={`px-3.5 py-2 text-sm font-medium rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    className={`px-3.5 py-2 text-sm font-medium rounded-xl border transition-colors cursor-pointer flex items-center gap-1.5 ${
                       isSelected
                         ? 'text-white border-transparent shadow-xs'
                         : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'

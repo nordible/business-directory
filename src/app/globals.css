@@ -1,27 +1,38 @@
+/* Hallmark · built: the project · redesign: polish */
 @import "tailwindcss";
 
 :root {
   --nordible-blue: #145BFF;
   --nordible-dark: #0D2B75;
+  --nordible-darker: #0A183D;
   --nordible-orange: #FF9F1A;
   --nordible-bg: #FAFBFF;
   --nordible-section-bg: #F3F7FF;
   --nordible-border: #E8ECF4;
+  --nordible-text: #182238;
 }
 
 @theme inline {
   --color-nordible-blue: #145BFF;
   --color-nordible-dark: #0D2B75;
+  --color-nordible-darker: #0A183D;
   --color-nordible-orange: #FF9F1A;
   --color-nordible-bg: #FAFBFF;
+  --color-nordible-section-bg: #F3F7FF;
   --color-nordible-border: #E8ECF4;
+  --color-nordible-text: #182238;
   --font-heading: var(--font-sora);
   --font-sans: var(--font-inter);
 }
 
+html,
 body {
-  background-color: #FAFBFF;
-  color: #1e293b;
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--nordible-bg);
+  color: var(--nordible-text);
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }

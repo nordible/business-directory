@@ -50,7 +50,7 @@ export const DatenschutzContent: React.FC = () => {
     >
       {/* 1. Verantwortlicher */}
       <section id="verantwortlicher" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '1. Verantwortlicher & Datenschutz-Kontakt' : '1. Data Controller & Contact'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -58,8 +58,8 @@ export const DatenschutzContent: React.FC = () => {
             ? 'Verantwortliche Stelle für die Datenverarbeitung auf dieser Website im Sinne der Datenschutz-Grundverordnung (DSGVO) und des Bundesdatenschutzgesetzes (BDSG) ist:'
             : 'The responsible party (controller) for data processing on this website pursuant to the General Data Protection Regulation (GDPR) is:'}
         </p>
-        <div className="bg-[#FAFBFF] rounded-2xl border border-[#E8ECF4] p-4 text-xs space-y-1 font-mono">
-          <p className="font-bold text-[#0D2B75]">{siteConfig.company.legalName}</p>
+        <div className="bg-nordible-bg rounded-2xl border border-nordible-border p-4 text-xs space-y-1 font-mono">
+          <p className="font-bold text-nordible-dark">{siteConfig.company.legalName}</p>
           <p>{siteConfig.company.street}</p>
           <p>{siteConfig.company.postalCode} {siteConfig.company.city}, {siteConfig.company.country}</p>
           <p>{isDe ? 'E-Mail' : 'Email'}: {siteConfig.contact.email}</p>
@@ -69,7 +69,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 2. Allgemeine Hinweise */}
       <section id="ueberblick" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '2. Allgemeine Hinweise & Rechtsgrundlagen' : '2. General Information & Legal Bases'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -87,7 +87,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 3. Verzeichnisdaten */}
       <section id="verzeichnisdaten" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '3. Verarbeitung von Verzeichnis- & Unternehmensdaten' : '3. Directory & Company Data Processing'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -104,7 +104,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 4. Löschung & Aktualisierung */}
       <section id="loeschung" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '4. Löschung & Aktualisierung von Unternehmenseinträgen' : '4. Updating & Deleting Business Listings'}
         </h2>
         <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-xs space-y-2">
@@ -121,7 +121,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 5. Kundenanfragen */}
       <section id="anfragen" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '5. Kundenanfragen & Lead-Vermittlung' : '5. Customer Inquiries & Lead Routing'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -133,7 +133,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 6. KI-Verarbeitung */}
       <section id="ki-verarbeitung" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '6. KI-gestützte Datenverarbeitung (Google Gemini)' : '6. AI-Assisted Processing (Google Gemini)'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -145,7 +145,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 7. Kundenbewertungen */}
       <section id="bewertungen" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '7. Kundenbewertungen & redaktionelle Prüfung' : '7. Customer Reviews & Editorial Verification'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -157,7 +157,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 8. Hosting & Infrastruktur */}
       <section id="hosting-infrastruktur" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '8. Hosting, Datenbank (Supabase) & E-Mail (Resend)' : '8. Hosting, Database (Supabase) & Email (Resend)'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -180,7 +180,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 9. Cookies */}
       <section id="cookies" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '9. Cookies & Lokaler Speicher' : '9. Cookies & Local Storage'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -192,7 +192,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 10. Betroffenenrechte */}
       <section id="betroffenenrechte" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '10. Ihre Rechte nach der DSGVO' : '10. Your Rights under GDPR'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -217,7 +217,7 @@ export const DatenschutzContent: React.FC = () => {
 
       {/* 11. Aufsichtsbehörde */}
       <section id="aufsichtsbehoerde" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '11. Beschwerderecht bei der Aufsichtsbehörde' : '11. Right to Lodge a Complaint'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -225,11 +225,11 @@ export const DatenschutzContent: React.FC = () => {
             ? 'Im Falle datenschutzrechtlicher Verstöße steht Ihnen gemäß Art. 77 DSGVO ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde für Nordible Technologies in Hessen ist:'
             : 'In the event of GDPR violations, you have the right to lodge a complaint with the competent supervisory authority (Art. 77 GDPR). For Nordible Technologies in Hesse, Germany, this is:'}
         </p>
-        <p className="text-xs bg-[#FAFBFF] border border-[#E8ECF4] rounded-2xl p-4 font-mono">
+        <p className="text-xs bg-nordible-bg border border-nordible-border rounded-2xl p-4 font-mono">
           <strong>Der Hessische Beauftragte für Datenschutz und Informationsfreiheit</strong><br />
           Gustav-Stresemann-Ring 1<br />
           65189 Wiesbaden<br />
-          Webseite: <a href="https://datenschutz.hessen.de" target="_blank" rel="noreferrer" className="text-[#145BFF] hover:underline">https://datenschutz.hessen.de</a>
+          Webseite: <a href="https://datenschutz.hessen.de" target="_blank" rel="noreferrer" className="text-nordible-blue hover:underline">https://datenschutz.hessen.de</a>
         </p>
       </section>
     </LegalPageLayout>

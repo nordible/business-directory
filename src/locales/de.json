@@ -188,7 +188,7 @@
     "dragHint": "✦ Zum Erkunden mit der Maus oder dem Finger drehen"
   },
   "directory": {
-    "backToOverview": "← Zurück zur Übersicht",
+    "backToOverview": "Zurück zur Übersicht",
     "badgeTitle": "Internationales Branchenverzeichnis • Weltweit",
     "emptyTitle": "Keine Einträge gefunden",
     "emptyDesc": "Versuchen Sie, Ihre Suchkriterien oder Branchenfilter anzupassen.",
@@ -409,7 +409,9 @@
     "close": "Schließen",
     "errorRequired": "Bitte füllen Sie alle Pflichtfelder aus (E-Mail und Nachricht).",
     "errorSending": "Fehler beim Senden der Anfrage.",
-    "errorUnexpected": "Ein unerwarteter Fehler ist aufgetreten."
+    "errorUnexpected": "Ein unerwarteter Fehler ist aufgetreten.",
+    "aiSummary": "[Anfrage-Triage] Thema: {{subject}}. Umfang: ca. {{wordCount}} Wörter. Kunde {{customer}} bittet um Rückmeldung bezüglich \"{{subject}}\".",
+    "aiSuggestedReply": "Sehr geehrte(r) {{customer}}, vielen Dank für Ihr Interesse an {{businessName}}! Wir haben Ihre Anfrage zu \"{{subject}}\" erhalten und melden uns zeitnah bei Ihnen."
   },
   "reviewModal": {
     "modalTitle": "Kundenbewertung einreichen",
@@ -434,5 +436,105 @@
     "gesundheit-wellness": "Gesundheit & Medizin",
     "handel-ecommerce": "Handel & E-Commerce",
     "industrie-bau": "Industrie, Fertigung & Handwerk"
+  },
+  "emails": {
+    "common": {
+      "rightsReserved": "© {{year}} Nordible Technologies • business-directory.nordible.co",
+      "customer": "Kunde",
+      "prospect": "Interessent"
+    },
+    "customerOtp": {
+      "subject": "Ihr {{appTitle}} Einmalkennwort: {{code}}",
+      "heading": "Anmeldung im Kunden-Postfach",
+      "subtitle": "Ihr Einmal-Bestätigungscode für sicheren Zugang ohne Passwort",
+      "codeLabel": "Ihr 6-stelliger Sicherheitscode",
+      "codeValidity": "Gültig für 15 Minuten. Geben Sie diesen Code niemals weiter.",
+      "disclaimer": "Wenn Sie diesen Code nicht angefordert haben, können Sie diese E-Mail ignorieren.",
+      "text": "Ihr {{appTitle}} Einmalkennwort lautet: {{code}}. Gültig für 15 Minuten."
+    },
+    "inquiryNotificationToBusiness": {
+      "subject": "[Neue Kundenanfrage] {{subject}} - von {{customerName}}",
+      "badge": "Kundenanfrage",
+      "title": "Neue Anfrage für {{businessName}}",
+      "customerLabel": "Kunde:",
+      "emailLabel": "E-Mail:",
+      "phoneLabel": "Telefon:",
+      "subjectLabel": "Betreff:",
+      "messageHeading": "Nachricht des Kunden:",
+      "aiSummaryHeading": "KI-Zusammenfassung & Triage:",
+      "aiReplyHeading": "Vorgeschlagener Antwortentwurf:",
+      "replyButton": "Direkt antworten ({{customerEmail}})",
+      "text": "Neue Anfrage von {{customerName}} ({{customerEmail}}): {{message}}"
+    },
+    "inquiryConfirmationToCustomer": {
+      "subject": "Eingangsbestätigung: Ihre Anfrage an {{businessName}}",
+      "title": "Ihre Anfrage ist eingegangen",
+      "greeting": "Hallo {{customerName}},",
+      "body": "vielen Dank für Ihre Kontaktaufnahme! Ihre Nachricht an {{businessName}} wurde erfolgreich weitergeleitet.",
+      "subjectLabel": "Betreff: {{subject}}",
+      "inboxNotice": "Sie können den Verlauf Ihrer Kommunikation jederzeit in Ihrem Kunden-Postfach einsehen.",
+      "text": "Hallo {{customerName}}, Ihre Anfrage an {{businessName}} ist erfolgreich eingegangen."
+    },
+    "businessRegistrationConfirmation": {
+      "subject": "Eingangsbestätigung: Registrierung für {{businessName}} erhalten",
+      "badge": "Unternehmensregistrierung",
+      "title": "Vielen Dank für Ihre Registrierung!",
+      "greeting": "Guten Tag,",
+      "body": "wir haben die Registrierung für {{businessName}} erfolgreich erhalten. Unser Redaktionsteam prüft derzeit Ihre Angaben, um höchste Qualitätsstandards im Verzeichnis zu gewährleisten.",
+      "businessLabel": "Unternehmen:",
+      "categoryLabel": "Branche:",
+      "locationLabel": "Standort:",
+      "statusLabel": "Status:",
+      "statusValue": "In redaktioneller Prüfung",
+      "actionPrompt": "Bitte antworten Sie direkt auf diese E-Mail, um Ihr Unternehmen zu bestätigen und den Veröffentlichungsprozess zu beschleunigen.",
+      "footerNote": "Sobald die Bestätigung vorliegt, wird Ihr Unternehmensprofil im Verzeichnis veröffentlicht.",
+      "text": "Vielen Dank für Ihre Registrierung für {{businessName}}!\n\nStatus: In Prüfung\n\nWichtig: Bitte antworten Sie direkt auf diese E-Mail, um Ihr Unternehmen zu bestätigen und den Veröffentlichungsprozess zu beschleunigen."
+    },
+    "businessPublishedNotification": {
+      "subject": "Ihr Profil für {{businessName}} ist jetzt live auf Nordible!",
+      "badge": "Freigeschaltet & Verifiziert",
+      "title": "Ihr Unternehmen ist jetzt live!",
+      "greeting": "Guten Tag,",
+      "body": "wir freuen uns, Ihnen mitteilen zu können, dass die redaktionelle Freigabe für {{businessName}} erfolgreich abgeschlossen wurde. Ihr Eintrag ist ab sofort im globalen Branchenverzeichnis öffentlich erreichbar.",
+      "businessLabel": "Unternehmen:",
+      "categoryLabel": "Branche:",
+      "locationLabel": "Standort:",
+      "statusLabel": "Status:",
+      "statusValue": "Öffentlich sichtbar",
+      "viewProfileBtn": "Profil jetzt ansehen & teilen",
+      "nextStepsTitle": "Ihre nächsten Schritte:",
+      "step1": "Kunden können Sie über das Kontaktformular auf Ihrer Profilseite direkt kontaktieren.",
+      "step2": "Anfragen werden sicher in Ihr Kunden-Postfach zugestellt und per E-Mail angekündigt.",
+      "step3": "Teilen Sie Ihren Profil-Link auf Ihrer Website und auf Social Media, um Ihre Sichtbarkeit zu stärken.",
+      "text": "Herzlichen Glückwunsch! Das Profil für {{businessName}} ist jetzt live auf Nordible: {{listingUrl}}"
+    },
+    "adminNewListingNotification": {
+      "subject": "[Admin-Benachrichtigung] Neue Unternehmensregistrierung: {{businessName}} ({{location}})",
+      "badge": "Administration",
+      "title": "Neue Unternehmensregistrierung",
+      "description": "Ein neues Unternehmen hat sich im Verzeichnis registriert. Bitte prüfen Sie die eingereichten Angaben:",
+      "businessNameLabel": "Unternehmensname:",
+      "legalFormLabel": "Rechtsform:",
+      "categoryLabel": "Branche / Industrie:",
+      "addressLabel": "Straße & Hausnummer:",
+      "postalCodeLabel": "Postleitzahl (PLZ):",
+      "cityLabel": "Stadt:",
+      "stateLabel": "Bundesland / Region:",
+      "countryLabel": "Land:",
+      "phoneLabel": "Telefonnummer:",
+      "emailLabel": "E-Mail-Adresse:",
+      "websiteLabel": "Webseite:",
+      "logoLabel": "Logo-URL:",
+      "hoursLabel": "Öffnungszeiten:",
+      "descriptionLabel": "Beschreibung:",
+      "growthResourcesLabel": "Wachstumsressourcen:",
+      "growthYes": "Ja (Kostenlose Ressourcen für Unternehmenswachstum angefordert)",
+      "growthNo": "Nein",
+      "notSpecified": "Nicht angegeben",
+      "none": "Keine",
+      "hoursDefault": "24/7 Geöffnet",
+      "noDescription": "Keine Beschreibung angegeben",
+      "reviewButton": "Im Admin-Portal prüfen & freischalten →"
+    }
   }
 }

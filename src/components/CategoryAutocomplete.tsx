@@ -111,7 +111,7 @@ export const CategoryAutocomplete: React.FC<CategoryAutocompleteProps> = ({
             onChange({ name: e.target.value });
           }}
           placeholder={effectivePlaceholder}
-          className="w-full pl-10 pr-9 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-xs text-gray-900 outline-none transition-colors"
+          className="w-full pl-10 pr-9 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-xs text-gray-900 outline-none transition-colors"
         />
         <button
           type="button"
@@ -123,14 +123,14 @@ export const CategoryAutocomplete: React.FC<CategoryAutocompleteProps> = ({
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 mt-1.5 w-full bg-white rounded-2xl border border-[#E8ECF4] shadow-xl max-h-60 overflow-y-auto p-1.5 space-y-1">
+        <div className="absolute z-50 mt-1.5 w-full bg-white rounded-2xl border border-nordible-border shadow-xl max-h-60 overflow-y-auto p-1.5 space-y-1">
           {query.trim() && !exactMatch && (
             <button
               type="button"
               onClick={handleCreateNew}
-              className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-left text-xs bg-blue-50/70 hover:bg-blue-100/70 text-[#145BFF] font-bold transition-colors cursor-pointer"
+              className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-left text-xs bg-blue-50/70 hover:bg-blue-100/70 text-nordible-blue font-bold transition-colors cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 shrink-0 text-[#145BFF]" />
+              <Sparkles className="w-4 h-4 shrink-0 text-nordible-blue" />
               <div className="flex-1 truncate">
                 <span>{locale === 'de' ? 'Neu anlegen: ' : '✨ Create new: '}</span>
                 <span className="underline">{query.trim()}</span>
@@ -160,12 +160,12 @@ export const CategoryAutocomplete: React.FC<CategoryAutocompleteProps> = ({
                   onClick={() => handleSelect(c)}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-[#FAFBFF] text-[#145BFF] font-bold'
+                      ? 'bg-nordible-bg text-nordible-blue font-bold'
                       : 'hover:bg-gray-50 text-gray-800'
                   }`}
                 >
                   <span className="truncate">{displayName}</span>
-                  {isSelected && <Check className="w-3.5 h-3.5 text-[#145BFF]" />}
+                  {isSelected && <Check className="w-3.5 h-3.5 text-nordible-blue" />}
                 </button>
               );
             })

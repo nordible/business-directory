@@ -63,7 +63,7 @@ export const ClaimListingModal: React.FC<ClaimListingModalProps> = ({
     >
       <div className="absolute inset-0 -z-10" onClick={onClose} />
 
-      <div className="bg-white w-full md:max-w-md md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden border border-[#E8ECF4]">
+      <div className="bg-white w-full md:max-w-md md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden border border-nordible-border">
         {/* Mobile drag handle */}
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 md:hidden" />
 
@@ -101,22 +101,22 @@ export const ClaimListingModal: React.FC<ClaimListingModalProps> = ({
           <div className="space-y-2 pt-1">
             <a
               href={mailtoUrl}
-              className="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-98 transition-all"
+              className="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-98 transition-colors"
             >
               <Mail className="w-4 h-4" />
               <span>{t('claimModal.sendClaimEmail')}</span>
               <ExternalLink className="w-3.5 h-3.5 opacity-80" />
             </a>
 
-            <div className="flex items-center justify-between p-3 rounded-xl bg-[#FAFBFF] border border-[#E8ECF4]">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-nordible-bg border border-nordible-border">
               <div className="text-[11px] text-gray-500 font-medium">
                 {t('claimModal.emailLabel')}{' '}
-                <strong className="text-[#0D2B75] font-mono">{siteConfig.contact.email}</strong>
+                <strong className="text-nordible-dark font-mono">{siteConfig.contact.email}</strong>
               </div>
               <button
                 type="button"
                 onClick={() => copyToClipboard(siteConfig.contact.email)}
-                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#145BFF] hover:text-[#0D2B75] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-nordible-blue hover:text-nordible-dark transition-colors cursor-pointer"
               >
                 {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedEmail ? t('claimModal.copied') : t('claimModal.copy')}</span>
@@ -127,7 +127,7 @@ export const ClaimListingModal: React.FC<ClaimListingModalProps> = ({
           {/* Verification requirements */}
           <div className="p-3.5 bg-amber-50/70 border border-amber-200/60 rounded-xl text-[11px] text-amber-900 space-y-1.5">
             <div className="flex items-center gap-1.5 font-bold text-amber-950">
-              <FileCheck className="w-4 h-4 text-[#FF9F1A]" />
+              <FileCheck className="w-4 h-4 text-nordible-orange" />
               <span>{t('claimModal.reqTitle')}</span>
             </div>
             <p className="leading-relaxed">
@@ -137,7 +137,7 @@ export const ClaimListingModal: React.FC<ClaimListingModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3.5 bg-[#FAFBFF] border-t border-[#E8ECF4] flex justify-end">
+        <div className="px-6 py-3.5 bg-nordible-bg border-t border-nordible-border flex justify-end">
           <button
             type="button"
             onClick={onClose}

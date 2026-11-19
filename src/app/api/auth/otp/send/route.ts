@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createOtpToken } from '@/lib/auth-customer';
 import { sendCustomerOtpEmail } from '@/lib/email';
+import { getTranslation } from '@/lib/translations';
 
 export async function POST(req: Request) {
   try {
@@ -10,10 +11,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          error:
-            locale === 'de'
-              ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
-              : 'Please enter a valid email address.',
+          error: getTranslation(locale, 'addModal.invalidEmail'),
         },
         { status: 400 }
       );

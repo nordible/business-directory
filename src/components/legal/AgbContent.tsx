@@ -44,7 +44,7 @@ export const AgbContent: React.FC = () => {
     >
       {/* § 1 Geltungsbereich */}
       <section id="geltungsbereich" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '§ 1 Geltungsbereich & Vertragsgegenstand' : '§ 1 Scope & Subject Matter'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -56,7 +56,7 @@ export const AgbContent: React.FC = () => {
 
       {/* § 2 Leistungsangebot */}
       <section id="leistungen" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '§ 2 Leistungsangebot der Plattform' : '§ 2 Platform Services & Directory Features'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -75,7 +75,7 @@ export const AgbContent: React.FC = () => {
 
       {/* § 3 Unternehmenseinträge */}
       <section id="eintraege" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '§ 3 Unternehmenseinträge, Verifizierung & Korrekturen' : '§ 3 Listings, Verification & Takedowns'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -83,8 +83,8 @@ export const AgbContent: React.FC = () => {
             ? 'Die Verzeichnisinhalte basieren sowohl auf offiziellen Registern und frei zugänglichen Unternehmensseiten als auch auf direkten Einreichungen durch Gewerbetreibende.'
             : 'Directory contents are compiled from official public registers, publicly available company sites, and direct owner submissions.'}
         </p>
-        <div className="bg-[#FAFBFF] border border-[#E8ECF4] rounded-2xl p-4 text-xs space-y-2">
-          <p className="font-bold text-[#0D2B75]">
+        <div className="bg-nordible-bg border border-nordible-border rounded-2xl p-4 text-xs space-y-2">
+          <p className="font-bold text-nordible-dark">
             {isDe ? 'Host-Provider-Status & Notice-and-Takedown (§§ 7–10 DDG):' : 'Host-Provider Status & Notice-and-Takedown (§§ 7–10 DDG):'}
           </p>
           <p className="text-gray-600 leading-relaxed">
@@ -97,7 +97,7 @@ export const AgbContent: React.FC = () => {
 
       {/* § 4 Richtlinien für Kundenbewertungen */}
       <section id="bewertungen" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '§ 4 Richtlinien für Kundenbewertungen' : '§ 4 Review Guidelines & Moderation'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -114,7 +114,7 @@ export const AgbContent: React.FC = () => {
 
       {/* § 5 Partner-Billing */}
       <section id="partner-billing" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '§ 5 Partner-Abonnements & Zahlungsbedingungen' : '§ 5 Partner Subscriptions & Billing'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -126,7 +126,7 @@ export const AgbContent: React.FC = () => {
 
       {/* § 6 Haftung */}
       <section id="haftung" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '§ 6 Gewährleistung & Haftungsbeschränkung' : '§ 6 Warranty & Limitation of Liability'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -138,7 +138,7 @@ export const AgbContent: React.FC = () => {
 
       {/* § 7 Geistiges Eigentum */}
       <section id="marken" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '§ 7 Geistiges Eigentum & Markenrechte Dritter' : '§ 7 Intellectual Property & Trademarks'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -150,7 +150,7 @@ export const AgbContent: React.FC = () => {
 
       {/* § 8 Schlussbestimmungen */}
       <section id="schlussbestimmungen" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '§ 8 Anwendbares Recht & Gerichtsstand' : '§ 8 Governing Law & Jurisdiction'}
         </h2>
         <p className="text-xs leading-relaxed">

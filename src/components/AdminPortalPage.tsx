@@ -14,22 +14,22 @@ export function AdminPortalPage() {
   const isDe = locale === 'de';
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col bg-slate-50">
       {/* Top Header */}
-      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E8ECF4] shadow-2xs">
+      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-nordible-border shadow-2xs">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2.5 text-[#0D2B75] hover:text-[#145BFF] transition-colors group font-bold text-xs sm:text-sm"
+            className="flex items-center gap-2.5 text-nordible-dark hover:text-nordible-blue transition-colors group font-bold text-xs sm:text-sm"
           >
-            <div className="w-8 h-8 rounded-xl bg-[#FAFBFF] border border-[#E8ECF4] flex items-center justify-center group-hover:border-[#145BFF]/30 transition-colors shadow-2xs">
-              <ArrowLeft className="w-4 h-4 text-[#0D2B75] group-hover:text-[#145BFF]" />
+            <div className="w-8 h-8 rounded-xl bg-nordible-bg border border-nordible-border flex items-center justify-center group-hover:border-nordible-blue/30 transition-colors shadow-2xs">
+              <ArrowLeft className="w-4 h-4 text-nordible-dark group-hover:text-nordible-blue" />
             </div>
             <span>{isDe ? 'Zurück zur Startseite' : 'Back to Home'}</span>
           </Link>
 
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1 border border-[#E8ECF4] shadow-2xs">
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1 border border-nordible-border shadow-2xs">
               <Image
                 src={siteConfig.assets.logoIcon}
                 alt={siteConfig.company.name}
@@ -39,7 +39,7 @@ export function AdminPortalPage() {
                 priority
               />
             </div>
-            <span className="font-heading font-black text-sm text-[#0D2B75] hidden sm:inline">
+            <span className="font-heading font-black text-sm text-nordible-dark hidden sm:inline">
               {siteConfig.appName}
             </span>
           </div>

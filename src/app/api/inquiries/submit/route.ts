@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createInquiry, getBusinessByIdOrSlug } from '@/lib/db/client';
 import { sendInquiryNotificationToBusiness, sendInquiryConfirmationToCustomer } from '@/lib/email';
+import { getTranslation } from '@/lib/translations';
 import { env } from '@/config/env';
 
 export async function POST(req: Request) {
@@ -20,17 +21,20 @@ export async function POST(req: Request) {
     const businessName = business?.name || (locale === 'de' ? 'Unternehmen' : 'Business');
 
     // Agentic AI Triage & Summary generation
-    // Generates high-signal executive summary and suggested reply matching customer language
-    const isDe = locale === 'de';
+    // Generates high-signal executive summary and suggested reply matching customer language from translations
     const cleanMessage = message.trim();
     const wordCount = cleanMessage.split(/\s+/).length;
-    const aiSummary = isDe
-      ? `[Anfrage-Triage] Thema: ${subject.trim()}. Umfang: ca. ${wordCount} Wörter. Kunde ${customerName || customerEmail} bittet um Rückmeldung bezüglich "${subject.trim()}".`
-      : `[Inquiry Triage] Topic: ${subject.trim()}. Length: ~${wordCount} words. Customer ${customerName || customerEmail} requested a response regarding "${subject.trim()}".`;
-
-    const aiSuggestedReply = isDe
-      ? `Sehr geehrte(r) ${customerName || 'Kunde/in'}, vielen Dank für Ihr Interesse an ${businessName}! Wir haben Ihre Anfrage zu "${subject.trim()}" erhalten und melden uns zeitnah bei Ihnen.`
-      : `Dear ${customerName || 'Customer'}, thank you for your interest in ${businessName}! We have received your inquiry regarding "${subject.trim()}" and will get back to you shortly.`;
+    const customerDisplayName = customerName || customerEmail || getTranslation(locale, 'emails.common.prospect');
+    const aiSummary = getTranslation(locale, 'inquiry.aiSummary', {
+      subject: subject.trim(),
+      wordCount,
+      customer: customerDisplayName,
+    });
+    const aiSuggestedReply = getTranslation(locale, 'inquiry.aiSuggestedReply', {
+      customer: customerName || getTranslation(locale, 'emails.common.customer'),
+      businessName,
+      subject: subject.trim(),
+    });
 
     // Save to Database
     const result = await createInquiry({
@@ -63,7 +67,7 @@ export async function POST(req: Request) {
       sendInquiryNotificationToBusiness({
         businessEmail: targetBusinessEmail,
         businessName,
-        customerName: customerName || (isDe ? 'Interessent' : 'Prospect'),
+        customerName: customerName || getTranslation(locale, 'emails.common.prospect'),
         customerEmail,
         customerPhone,
         subject,
@@ -74,7 +78,7 @@ export async function POST(req: Request) {
       }),
       sendInquiryConfirmationToCustomer({
         customerEmail,
-        customerName: customerName || (isDe ? 'Kunde' : 'Customer'),
+        customerName: customerName || getTranslation(locale, 'emails.common.customer'),
         businessName,
         subject,
         message,

@@ -22,6 +22,7 @@ import {
   AlertCircle,
   LogOut,
   Lock,
+  Rocket,
 } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
 import { Pagination } from '@/components/Pagination';
@@ -355,16 +356,16 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
   const isEmbedded = mode === 'embedded';
 
   const modalBody = (
-    <div className={`bg-white w-full ${isEmbedded ? 'max-w-4xl rounded-3xl shadow-sm border border-[#E8ECF4]' : 'md:max-w-2xl md:rounded-3xl rounded-t-3xl shadow-2xl max-h-[90vh] border border-[#E8ECF4]'} flex flex-col overflow-hidden`}>
+    <div className={`bg-white w-full ${isEmbedded ? 'max-w-4xl rounded-3xl shadow-sm border border-nordible-border' : 'md:max-w-2xl md:rounded-3xl rounded-t-3xl shadow-2xl max-h-[90vh] border border-nordible-border'} flex flex-col overflow-hidden`}>
       {/* Mobile drag handle */}
       {!isEmbedded && (
         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 md:hidden" />
       )}
 
       {/* Modal Header */}
-      <div className="px-6 py-4 border-b border-[#E8ECF4] flex items-center justify-between bg-white">
+      <div className="px-6 py-4 border-b border-nordible-border flex items-center justify-between bg-white">
         <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-blue-50 text-[#145BFF] border border-blue-200">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-blue-50 text-nordible-blue border border-blue-200">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Tenant Admin Moderation</span>
           </span>
@@ -382,14 +383,14 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                 onClick={() => fetchModerationListings()}
                 disabled={isLoading}
                 title="Refresh"
-                className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-gray-800 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-nordible-bg text-gray-500 hover:text-gray-800 border border-nordible-border flex items-center justify-center transition-colors cursor-pointer"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
               </button>
               <button
                 onClick={handleAdminLogout}
                 title={isDe ? 'Admin-Abmeldung' : 'Admin Logout'}
-                className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-rose-600 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-nordible-bg text-gray-500 hover:text-rose-600 border border-nordible-border flex items-center justify-center transition-colors cursor-pointer"
               >
                 <LogOut className="w-3.5 h-3.5" />
               </button>
@@ -399,7 +400,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
             <button
               onClick={onClose}
               aria-label="Close"
-              className="w-8 h-8 rounded-full bg-[#FAFBFF] text-gray-500 hover:text-gray-800 border border-[#E8ECF4] flex items-center justify-center transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-full bg-nordible-bg text-gray-500 hover:text-gray-800 border border-nordible-border flex items-center justify-center transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -410,7 +411,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
         {/* ADMIN GATE: If not authenticated, require Admin Auth */}
         {isCheckingAuth ? (
           <div className="p-12 flex flex-col items-center justify-center text-center">
-            <Loader2 className="w-8 h-8 text-[#145BFF] animate-spin mb-3" />
+            <Loader2 className="w-8 h-8 text-nordible-blue animate-spin mb-3" />
             <p className="text-xs text-slate-500 font-medium">
               {isDe ? 'Berechtigungen werden geprüft...' : 'Checking admin authorization...'}
             </p>
@@ -418,10 +419,10 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
         ) : !isAdminAuthenticated ? (
           <div className="p-6 sm:p-8 flex flex-col justify-center min-h-[420px] max-w-md mx-auto space-y-6">
             <div className="text-center space-y-2">
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 text-[#145BFF] flex items-center justify-center mx-auto shadow-xs border border-blue-100">
+              <div className="w-14 h-14 rounded-2xl bg-blue-50 text-nordible-blue flex items-center justify-center mx-auto shadow-xs border border-blue-100">
                 <Lock className="w-7 h-7" />
               </div>
-              <h3 className="font-heading font-black text-xl text-[#0D2B75]">
+              <h3 className="font-heading font-black text-xl text-nordible-dark">
                 {isDe ? 'Administrator-Bereich' : 'Administrator Area'}
               </h3>
               <p className="text-xs text-gray-500 leading-relaxed font-medium">
@@ -439,8 +440,8 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                   setLoginMethod('key');
                   setAuthError(null);
                 }}
-                className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                  loginMethod === 'key' ? 'bg-white text-[#0D2B75] shadow-xs' : 'hover:text-gray-900'
+                className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                  loginMethod === 'key' ? 'bg-white text-nordible-dark shadow-xs' : 'hover:text-gray-900'
                 }`}
               >
                 <KeyRound className="w-3.5 h-3.5" />
@@ -452,8 +453,8 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                   setLoginMethod('otp');
                   setAuthError(null);
                 }}
-                className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                  loginMethod === 'otp' ? 'bg-white text-[#0D2B75] shadow-xs' : 'hover:text-gray-900'
+                className={`flex-1 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                  loginMethod === 'otp' ? 'bg-white text-nordible-dark shadow-xs' : 'hover:text-gray-900'
                 }`}
               >
                 <Mail className="w-3.5 h-3.5" />
@@ -471,7 +472,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
             {loginMethod === 'key' ? (
               <form onSubmit={handleKeyLogin} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                  <label className="block text-xs font-bold text-nordible-dark mb-1">
                     {isDe ? 'Administrator-Sicherheitsschlüssel' : 'Administrator Security Key'}
                   </label>
                   <input
@@ -481,14 +482,14 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                     value={keyInput}
                     onChange={(e) => setKeyInput(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-xs font-mono text-gray-900 outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-xs font-mono text-gray-900 outline-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={authLoading}
-                  className="w-full py-3 px-4 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-nordible-blue hover:bg-nordible-dark disabled:opacity-50 text-white font-bold text-xs shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {authLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -503,7 +504,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
             ) : otpStep === 'email' ? (
               <form onSubmit={handleRequestOtp} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                  <label className="block text-xs font-bold text-nordible-dark mb-1">
                     {isDe ? 'Admin E-Mail-Adresse' : 'Admin Email Address'}
                   </label>
                   <input
@@ -513,7 +514,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                     value={otpEmail}
                     onChange={(e) => setOtpEmail(e.target.value)}
                     placeholder="mail@nordible.co"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-xs text-gray-900 outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-xs text-gray-900 outline-none"
                   />
                   <p className="text-[11px] text-gray-400 mt-1">
                     {isDe
@@ -525,7 +526,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                 <button
                   type="submit"
                   disabled={authLoading}
-                  className="w-full py-3 px-4 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-nordible-blue hover:bg-nordible-dark disabled:opacity-50 text-white font-bold text-xs shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {authLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -540,7 +541,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
             ) : (
               <form onSubmit={handleVerifyOtp} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                  <label className="block text-xs font-bold text-nordible-dark mb-1">
                     {isDe ? '6-stelliger Sicherheitscode' : '6-digit Security Code'}
                   </label>
                   <input
@@ -551,14 +552,14 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                     value={otpCode}
                     onChange={(e) => setOtpCode(e.target.value)}
                     placeholder="123456"
-                    className="w-full py-3 px-4 text-center tracking-[8px] font-mono font-bold text-xl rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-[#145BFF] outline-none"
+                    className="w-full py-3 px-4 text-center tracking-[8px] font-mono font-bold text-xl rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-nordible-blue outline-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={authLoading}
-                  className="w-full py-3 px-4 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-nordible-blue hover:bg-nordible-dark disabled:opacity-50 text-white font-bold text-xs shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {authLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -574,7 +575,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setOtpStep('email')}
-                    className="text-xs text-gray-500 hover:text-[#145BFF] font-medium cursor-pointer"
+                    className="text-xs text-gray-500 hover:text-nordible-blue font-medium cursor-pointer"
                   >
                     {isDe ? 'E-Mail-Adresse ändern' : 'Change email address'}
                   </button>
@@ -586,11 +587,11 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
           /* AUTHENTICATED ADMIN VIEW: Moderation Console */
           <>
             {adminEmail && (
-              <div className="px-6 py-2 bg-blue-50/60 border-b border-blue-100 flex items-center justify-between text-xs text-[#0D2B75]">
+              <div className="px-6 py-2 bg-blue-50/60 border-b border-blue-100 flex items-center justify-between text-xs text-nordible-dark">
                 <span className="font-semibold flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#145BFF]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-nordible-blue" />
                   <span>{isDe ? 'Eingeloggt als:' : 'Logged in as:'}</span>{' '}
-                  <strong className="font-mono text-[#145BFF]">{adminEmail}</strong>
+                  <strong className="font-mono text-nordible-blue">{adminEmail}</strong>
                 </span>
                 <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">
                   Admin RBAC Aktiv
@@ -599,12 +600,12 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
             )}
 
             {/* Filter Navigation Tabs */}
-            <div className="px-6 pt-3 pb-2 border-b border-[#E8ECF4] bg-[#FAFBFF] flex items-center gap-2 overflow-x-auto scrollbar-none">
+            <div className="px-6 pt-3 pb-2 border-b border-nordible-border bg-nordible-bg flex items-center gap-2 overflow-x-auto scrollbar-none">
               <button
                 onClick={() => handleTabChange('pending')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer whitespace-nowrap ${
                   filterTab === 'pending'
-                    ? 'bg-[#0D2B75] text-white shadow-xs'
+                    ? 'bg-nordible-dark text-white shadow-xs'
                     : 'text-slate-600 hover:bg-slate-200/60'
                 }`}
               >
@@ -612,9 +613,9 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
               </button>
               <button
                 onClick={() => handleTabChange('published')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer whitespace-nowrap ${
                   filterTab === 'published'
-                    ? 'bg-[#0D2B75] text-white shadow-xs'
+                    ? 'bg-nordible-dark text-white shadow-xs'
                     : 'text-slate-600 hover:bg-slate-200/60'
                 }`}
               >
@@ -622,9 +623,9 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
               </button>
               <button
                 onClick={() => handleTabChange('all')}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer whitespace-nowrap ${
                   filterTab === 'all'
-                    ? 'bg-[#0D2B75] text-white shadow-xs'
+                    ? 'bg-nordible-dark text-white shadow-xs'
                     : 'text-slate-600 hover:bg-slate-200/60'
                 }`}
               >
@@ -636,7 +637,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
             <div className="p-6 overflow-y-auto space-y-4 flex-1">
               {isLoading && listings.length === 0 ? (
                 <div className="py-12 flex flex-col items-center justify-center text-center">
-                  <Loader2 className="w-8 h-8 text-[#145BFF] animate-spin mb-3" />
+                  <Loader2 className="w-8 h-8 text-nordible-blue animate-spin mb-3" />
                   <p className="text-xs text-slate-500 font-medium">
                     {isDe ? 'Einträge werden geladen...' : 'Loading submissions...'}
                   </p>
@@ -646,7 +647,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                   <div className="w-20 h-20 mx-auto mb-3">
                     <Mascot variant="working-laptop" alt="Empty" />
                   </div>
-                  <h4 className="font-heading font-bold text-base text-[#0D2B75]">
+                  <h4 className="font-heading font-bold text-base text-nordible-dark">
                     {isDe ? 'Keine Einträge in diesem Filter' : 'No listings in this view'}
                   </h4>
                   <p className="text-xs text-gray-500 mt-1 leading-relaxed font-medium">
@@ -663,12 +664,12 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                       return (
                     <div
                       key={item.id}
-                      className="p-4 rounded-2xl border border-[#E8ECF4] bg-[#FAFBFF] hover:border-[#145BFF]/30 transition-all space-y-3"
+                      className="p-4 rounded-2xl border border-nordible-border bg-nordible-bg hover:border-nordible-blue/30 transition-colors space-y-3"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <div className="flex items-center gap-2">
-                            <h4 className="font-heading font-black text-sm sm:text-base text-[#0D2B75]">
+                            <h4 className="font-heading font-black text-sm sm:text-base text-nordible-dark">
                               {item.name}
                             </h4>
                             {item.isVerified ? (
@@ -682,8 +683,9 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                             )}
 
                             {item.isPublished ? (
-                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-[#145BFF] border border-blue-200">
-                                🚀 {isDe ? 'Live' : 'Live'}
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-nordible-blue border border-blue-200 inline-flex items-center gap-1">
+                                <Rocket className="w-3 h-3 text-nordible-blue" />
+                                <span>{isDe ? 'Live' : 'Live'}</span>
                               </span>
                             ) : (
                               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700">
@@ -691,12 +693,12 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                               </span>
                             )}
                           </div>
-                          <p className="text-[11px] text-slate-500 mt-0.5 font-mono">
-                            Slug: {item.slug || item.id}
+                          <p className="text-[11px] text-slate-500 mt-0.5">
+                            Slug: <span className="font-mono">{item.slug || item.id}</span>
                           </p>
                         </div>
 
-                        <span className="text-[11px] font-extrabold text-[#145BFF] bg-blue-50 px-2.5 py-1 rounded-lg">
+                        <span className="text-[11px] font-extrabold text-nordible-blue bg-blue-50 px-2.5 py-1 rounded-lg">
                           {item.categoryName || item.categoryId}
                         </span>
                       </div>
@@ -710,27 +712,27 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                             ''}
                       </p>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-600 font-medium pt-1 border-t border-[#E8ECF4]">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-600 font-medium pt-1 border-t border-nordible-border">
                         <div className="flex items-center gap-1.5 truncate">
-                          <MapPin className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
+                          <MapPin className="w-3.5 h-3.5 text-nordible-blue shrink-0" />
                           <span className="truncate">
                             {item.address}, {item.postalCode} {item.city} ({item.country || 'DE'})
                           </span>
                         </div>
                         {item.phone && (
                           <div className="flex items-center gap-1.5 truncate">
-                            <Phone className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
+                            <Phone className="w-3.5 h-3.5 text-nordible-blue shrink-0" />
                             <span className="truncate font-mono">{item.phone}</span>
                           </div>
                         )}
                         {item.website && (
                           <div className="flex items-center gap-1.5 truncate">
-                            <Globe className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
+                            <Globe className="w-3.5 h-3.5 text-nordible-blue shrink-0" />
                             <a
                               href={item.website}
                               target="_blank"
                               rel="noreferrer"
-                              className="truncate text-[#145BFF] hover:underline"
+                              className="truncate text-nordible-blue hover:underline"
                             >
                               {item.website}
                             </a>
@@ -738,20 +740,20 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                         )}
                         {item.hours && (
                           <div className="flex items-center gap-1.5 truncate">
-                            <Clock className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
+                            <Clock className="w-3.5 h-3.5 text-nordible-blue shrink-0" />
                             <span className="truncate">{item.hours}</span>
                           </div>
                         )}
                       </div>
 
                       {/* Moderation Action Buttons */}
-                      <div className="pt-2 flex items-center justify-end gap-2 border-t border-[#E8ECF4]">
+                      <div className="pt-2 flex items-center justify-end gap-2 border-t border-nordible-border">
                         {!item.isVerified && (
                           <button
                             type="button"
                             disabled={isActing}
                             onClick={() => handleModerate(item.id, 'verify')}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all active:scale-95 disabled:opacity-50 cursor-pointer shadow-2xs"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors active:scale-95 disabled:opacity-50 cursor-pointer shadow-2xs"
                           >
                             {isActing ? (
                               <Loader2 className="w-3 h-3 animate-spin" />
@@ -767,7 +769,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                             type="button"
                             disabled={isActing}
                             onClick={() => handleModerate(item.id, 'publish')}
-                            className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] text-white text-xs font-extrabold transition-all active:scale-95 disabled:opacity-50 cursor-pointer shadow-xs"
+                            className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-nordible-blue hover:bg-nordible-dark text-white text-xs font-extrabold transition-colors active:scale-95 disabled:opacity-50 cursor-pointer shadow-xs"
                           >
                             {isActing ? (
                               <Loader2 className="w-3 h-3 animate-spin" />
@@ -783,7 +785,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                             href={getBusinessPermalink(item, locale)}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-bold text-[#145BFF] hover:underline"
+                            className="inline-flex items-center gap-1 text-xs font-bold text-nordible-blue hover:underline"
                           >
                             <span>{isDe ? 'Im Verzeichnis ansehen' : 'View on Directory'}</span>
                             <ExternalLink className="w-3 h-3" />

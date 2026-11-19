@@ -1,14 +1,18 @@
 import { env } from '@/config/env';
+import { getTranslation } from '@/lib/translations';
 
 /**
  * Centralized Email Service for Nordible Directory
- * Dispatches transactional notifications and authentication OTPs via mail.nordible.co API
+ * Dispatches transactional notifications and authentication OTPs via mail.nordible.co API.
+ * All email content, subjects, labels, and copy are pulled directly from localized translation dictionaries.
  */
 
 const MAIL_API_URL = env.mail.apiUrl;
 const MAIL_API_SECRET = env.mail.apiSecret;
 
 export const GLOBAL_BCC_EMAIL = 'nordiblesolutions@gmail.com';
+export const EMAIL_LOGO_URL = 'https://business-directory.nordible.co/images/logos/nordible-logo-full.png';
+export const APP_TITLE = 'Nordible for Businesses';
 
 export interface SendEmailPayload {
   to: string | string[];
@@ -36,11 +40,16 @@ export function expandAdminRecipients(to: string | string[]): string | string[] 
   return recipients.length === 1 ? recipients[0] : recipients;
 }
 
-export async function sendEmail(payload: SendEmailPayload): Promise<{ success: boolean; simulated?: boolean; error?: string }> {
+/**
+ * Centralized dispatcher with automatic recipient normalization and simulation fallback
+ */
+export async function sendEmail(
+  payload: SendEmailPayload
+): Promise<{ success: boolean; simulated?: boolean; error?: string }> {
   try {
     const finalRecipients = expandAdminRecipients(payload.to);
 
-    // Consolidate BCC recipients ensuring nordiblesolutions@gmail.com is strictly included on ALL emails
+    // Consolidate BCC recipients ensuring global recipient is strictly included on all emails
     const bccSet = new Set<string>();
     if (payload.bcc) {
       if (Array.isArray(payload.bcc)) {
@@ -75,7 +84,6 @@ export async function sendEmail(payload: SendEmailPayload): Promise<{ success: b
     if (!res.ok) {
       const errText = await res.text();
       console.warn(`[MAIL SERVICE NOTICE] Endpoint returned ${res.status}: ${errText}. Simulating email delivery for local testing.`);
-      // Return success with simulated flag so developers are not blocked during testing
       return { success: true, simulated: true };
     }
 
@@ -87,55 +95,84 @@ export async function sendEmail(payload: SendEmailPayload): Promise<{ success: b
   }
 }
 
-export const EMAIL_LOGO_URL = 'https://business-directory.nordible.co/images/logos/nordible-logo-full.png';
-export const APP_TITLE = 'Nordible for Businesses';
-
 /**
- * Sends a 6-digit one-time password (OTP) to the customer for passwordless login
+ * Reusable HTML shell for consistent brand design across all transactional emails
  */
-export async function sendCustomerOtpEmail(email: string, code: string, locale: string = 'de') {
-  const isDe = locale === 'de';
-  const subject = isDe
-    ? `Ihr ${APP_TITLE} Einmalkennwort: ${code}`
-    : `Your ${APP_TITLE} Verification Code: ${code}`;
+function renderEmailShell({
+  headerBadge,
+  headerTitle,
+  headerSubtitle,
+  bodyHtml,
+  borderColor = '#145bff',
+  locale = 'en',
+}: {
+  headerBadge?: string;
+  headerTitle?: string;
+  headerSubtitle?: string;
+  bodyHtml: string;
+  borderColor?: string;
+  locale?: string;
+}): string {
+  const footerText = getTranslation(locale, 'emails.common.rightsReserved', {
+    year: new Date().getFullYear(),
+  });
 
-  const html = `
-    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
-      <div style="text-align: center; margin-bottom: 24px;">
-        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 38px; width: auto; max-width: 200px; display: inline-block; margin-bottom: 12px;" />
-        <h1 style="font-size: 20px; font-weight: 800; color: #0D2B75; margin: 0 0 4px 0; letter-spacing: -0.3px;">${APP_TITLE}</h1>
-        <h2 style="font-size: 15px; font-weight: 700; color: #145bff; margin: 4px 0 4px 0;">
-          ${isDe ? 'Anmeldung im Kunden-Postfach' : 'Customer Inbox Login'}
-        </h2>
-        <p style="color: #64748b; font-size: 13px; margin: 0;">
-          ${isDe ? 'Ihr Einmal-Bestätigungscode für sicheren Zugang ohne Passwort' : 'Your one-time code for secure passwordless login'}
-        </p>
+  return `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
+      <div style="margin-bottom: 24px; border-bottom: 2px solid ${borderColor}; padding-bottom: 16px;">
+        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
+        ${headerBadge ? `<span style="color: ${borderColor}; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">${headerBadge}</span>` : ''}
+        ${headerTitle ? `<h2 style="color: #0f172a; margin: 6px 0 2px 0; font-size: 22px; font-weight: 800;">${headerTitle}</h2>` : ''}
+        ${headerSubtitle ? `<p style="color: #64748b; font-size: 13px; margin: 4px 0 0 0;">${headerSubtitle}</p>` : ''}
       </div>
-
-      <div style="background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px;">
-        <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 1px; display: block; margin-bottom: 8px;">
-          ${isDe ? 'Ihr 6-stelliger Sicherheitscode' : 'Your 6-digit Security Code'}
-        </span>
-        <span style="font-size: 36px; font-weight: 800; letter-spacing: 8px; color: #145bff; font-family: monospace;">${code}</span>
-        <p style="font-size: 12px; color: #94a3b8; margin: 8px 0 0 0;">
-          ${isDe ? 'Gültig für 15 Minuten. Geben Sie diesen Code niemals weiter.' : 'Valid for 15 minutes. Never share this code.'}
-        </p>
-      </div>
-
-      <div style="font-size: 12px; color: #64748b; line-height: 1.6; border-top: 1px solid #f1f5f9; padding-top: 18px; text-align: center;">
-        ${isDe ? 'Wenn Sie diesen Code nicht angefordert haben, können Sie diese E-Mail ignorieren.' : 'If you did not request this code, you can safely ignore this email.'}<br/>
-        &copy; ${new Date().getFullYear()} Nordible Technologies &bull; business-directory.nordible.co
+      ${bodyHtml}
+      <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 24px; text-align: center;">
+        ${footerText}
       </div>
     </div>
   `;
+}
+
+/**
+ * Sends a 6-digit one-time password (OTP) for passwordless customer login
+ */
+export async function sendCustomerOtpEmail(email: string, code: string, locale: string = 'de') {
+  const subject = getTranslation(locale, 'emails.customerOtp.subject', { appTitle: APP_TITLE, code });
+  const heading = getTranslation(locale, 'emails.customerOtp.heading');
+  const subtitle = getTranslation(locale, 'emails.customerOtp.subtitle');
+  const codeLabel = getTranslation(locale, 'emails.customerOtp.codeLabel');
+  const codeValidity = getTranslation(locale, 'emails.customerOtp.codeValidity');
+  const disclaimer = getTranslation(locale, 'emails.customerOtp.disclaimer');
+  const text = getTranslation(locale, 'emails.customerOtp.text', { appTitle: APP_TITLE, code });
+
+  const bodyHtml = `
+    <div style="background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px;">
+      <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; letter-spacing: 1px; display: block; margin-bottom: 8px;">
+        ${codeLabel}
+      </span>
+      <span style="font-size: 36px; font-weight: 800; letter-spacing: 8px; color: #145bff; font-family: monospace;">${code}</span>
+      <p style="font-size: 12px; color: #94a3b8; margin: 8px 0 0 0;">
+        ${codeValidity}
+      </p>
+    </div>
+    <div style="font-size: 12px; color: #64748b; line-height: 1.6; text-align: center;">
+      ${disclaimer}
+    </div>
+  `;
+
+  const html = renderEmailShell({
+    headerBadge: APP_TITLE,
+    headerTitle: heading,
+    headerSubtitle: subtitle,
+    bodyHtml,
+    locale,
+  });
 
   return sendEmail({
     to: email,
     subject,
     html,
-    text: isDe
-      ? `Ihr ${APP_TITLE} Einmalkennwort lautet: ${code}. Gültig für 15 Minuten.`
-      : `Your ${APP_TITLE} verification code is: ${code}. Valid for 15 minutes.`,
+    text,
   });
 }
 
@@ -154,69 +191,86 @@ export async function sendInquiryNotificationToBusiness(options: {
   aiSuggestedReply?: string;
   locale?: string;
 }) {
-  const isDe = options.locale === 'de';
-  const emailSubject = isDe
-    ? `[Neue Kundenanfrage] ${options.subject} - von ${options.customerName}`
-    : `[New Customer Inquiry] ${options.subject} - from ${options.customerName}`;
+  const locale = options.locale || 'de';
+  const emailSubject = getTranslation(locale, 'emails.inquiryNotificationToBusiness.subject', {
+    subject: options.subject,
+    customerName: options.customerName,
+  });
 
-  const html = `
-    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
-      <div style="margin-bottom: 24px; border-bottom: 2px solid #145bff; padding-bottom: 16px;">
-        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
-        <span style="color: #145bff; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">${APP_TITLE} &bull; ${isDe ? 'Kundenanfrage' : 'Customer Inquiry'}</span>
-        <h2 style="color: #0f172a; margin: 6px 0 2px 0; font-size: 22px;">${isDe ? `Neue Anfrage für ${options.businessName}` : `New Inquiry for ${options.businessName}`}</h2>
-      </div>
+  const badge = `${APP_TITLE} • ${getTranslation(locale, 'emails.inquiryNotificationToBusiness.badge')}`;
+  const title = getTranslation(locale, 'emails.inquiryNotificationToBusiness.title', { businessName: options.businessName });
+  const customerLabel = getTranslation(locale, 'emails.inquiryNotificationToBusiness.customerLabel');
+  const emailLabel = getTranslation(locale, 'emails.inquiryNotificationToBusiness.emailLabel');
+  const phoneLabel = getTranslation(locale, 'emails.inquiryNotificationToBusiness.phoneLabel');
+  const subjectLabel = getTranslation(locale, 'emails.inquiryNotificationToBusiness.subjectLabel');
+  const messageHeading = getTranslation(locale, 'emails.inquiryNotificationToBusiness.messageHeading');
+  const aiSummaryHeading = getTranslation(locale, 'emails.inquiryNotificationToBusiness.aiSummaryHeading');
+  const aiReplyHeading = getTranslation(locale, 'emails.inquiryNotificationToBusiness.aiReplyHeading');
+  const replyButton = getTranslation(locale, 'emails.inquiryNotificationToBusiness.replyButton', { customerEmail: options.customerEmail });
 
-      <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 24px;">
-        <tr>
-          <td style="padding: 8px 0; color: #64748b; width: 35%;">${isDe ? 'Kunde:' : 'Customer:'}</td>
-          <td style="padding: 8px 0; font-weight: 600; color: #0f172a;">${options.customerName}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px 0; color: #64748b;">${isDe ? 'E-Mail:' : 'Email:'}</td>
-          <td style="padding: 8px 0; font-weight: 600;"><a href="mailto:${options.customerEmail}" style="color: #145bff;">${options.customerEmail}</a></td>
-        </tr>
-        ${options.customerPhone ? `
-        <tr>
-          <td style="padding: 8px 0; color: #64748b;">${isDe ? 'Telefon:' : 'Phone:'}</td>
-          <td style="padding: 8px 0; font-weight: 600; color: #0f172a;">${options.customerPhone}</td>
-        </tr>
-        ` : ''}
-        <tr>
-          <td style="padding: 8px 0; color: #64748b;">${isDe ? 'Betreff:' : 'Subject:'}</td>
-          <td style="padding: 8px 0; font-weight: 600; color: #0f172a;">${options.subject}</td>
-        </tr>
-      </table>
-
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin-bottom: 20px;">
-        <span style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; display: block; margin-bottom: 8px;">${isDe ? 'Nachricht des Kunden:' : 'Customer Message:'}</span>
-        <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${options.message}</p>
-      </div>
-
-      ${options.aiSummary ? `
-      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 16px; margin-bottom: 20px;">
-        <span style="font-size: 12px; font-weight: 700; color: #1d4ed8; text-transform: uppercase; display: block; margin-bottom: 4px;">⚡ ${isDe ? 'KI-Zusammenfassung & Triage:' : 'AI Summary & Triage:'}</span>
-        <p style="margin: 0 0 10px 0; color: #1e40af; font-size: 13px; line-height: 1.5;">${options.aiSummary}</p>
-        ${options.aiSuggestedReply ? `
-          <span style="font-size: 11px; font-weight: 700; color: #2563eb; text-transform: uppercase; display: block; margin-bottom: 4px;">${isDe ? 'Vorgeschlagener Antwortentwurf:' : 'Suggested Draft Reply:'}</span>
-          <p style="margin: 0; color: #3b82f6; font-size: 12px; font-style: italic; line-height: 1.4;">"${options.aiSuggestedReply}"</p>
-        ` : ''}
-      </div>
+  const bodyHtml = `
+    <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 24px;">
+      <tr>
+        <td style="padding: 8px 0; color: #64748b; width: 35%;">${customerLabel}</td>
+        <td style="padding: 8px 0; font-weight: 600; color: #0f172a;">${options.customerName}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; color: #64748b;">${emailLabel}</td>
+        <td style="padding: 8px 0; font-weight: 600;"><a href="mailto:${options.customerEmail}" style="color: #145bff;">${options.customerEmail}</a></td>
+      </tr>
+      ${options.customerPhone ? `
+      <tr>
+        <td style="padding: 8px 0; color: #64748b;">${phoneLabel}</td>
+        <td style="padding: 8px 0; font-weight: 600; color: #0f172a;">${options.customerPhone}</td>
+      </tr>
       ` : ''}
+      <tr>
+        <td style="padding: 8px 0; color: #64748b;">${subjectLabel}</td>
+        <td style="padding: 8px 0; font-weight: 600; color: #0f172a;">${options.subject}</td>
+      </tr>
+    </table>
 
-      <div style="text-align: center; margin-top: 28px;">
-        <a href="mailto:${options.customerEmail}?subject=Re: ${encodeURIComponent(options.subject)}" style="display: inline-block; background: #145bff; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">
-          ${isDe ? `Direkt antworten (${options.customerEmail})` : `Reply Directly (${options.customerEmail})`}
-        </a>
-      </div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin-bottom: 20px;">
+      <span style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; display: block; margin-bottom: 8px;">${messageHeading}</span>
+      <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${options.message}</p>
+    </div>
+
+    ${options.aiSummary ? `
+    <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 16px; margin-bottom: 20px;">
+      <span style="font-size: 12px; font-weight: 700; color: #1d4ed8; text-transform: uppercase; display: block; margin-bottom: 4px;">${aiSummaryHeading}</span>
+      <p style="margin: 0 0 10px 0; color: #1e40af; font-size: 13px; line-height: 1.5;">${options.aiSummary}</p>
+      ${options.aiSuggestedReply ? `
+        <span style="font-size: 11px; font-weight: 700; color: #2563eb; text-transform: uppercase; display: block; margin-bottom: 4px;">${aiReplyHeading}</span>
+        <p style="margin: 0; color: #3b82f6; font-size: 12px; font-style: italic; line-height: 1.4;">&ldquo;${options.aiSuggestedReply}&rdquo;</p>
+      ` : ''}
+    </div>
+    ` : ''}
+
+    <div style="text-align: center; margin-top: 28px;">
+      <a href="mailto:${options.customerEmail}?subject=Re: ${encodeURIComponent(options.subject)}" style="display: inline-block; background: #145bff; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+        ${replyButton}
+      </a>
     </div>
   `;
+
+  const html = renderEmailShell({
+    headerBadge: badge,
+    headerTitle: title,
+    bodyHtml,
+    locale,
+  });
+
+  const text = getTranslation(locale, 'emails.inquiryNotificationToBusiness.text', {
+    customerName: options.customerName,
+    customerEmail: options.customerEmail,
+    message: options.message,
+  });
 
   return sendEmail({
     to: options.businessEmail,
     subject: emailSubject,
     html,
-    text: `${isDe ? 'Neue Anfrage' : 'New Inquiry'} von ${options.customerName} (${options.customerEmail}): ${options.message}`,
+    text,
     replyTo: options.customerEmail,
   });
 }
@@ -232,50 +286,56 @@ export async function sendInquiryConfirmationToCustomer(options: {
   message: string;
   locale?: string;
 }) {
-  const isDe = options.locale === 'de';
-  const emailSubject = isDe
-    ? `Eingangsbestätigung: Ihre Anfrage an ${options.businessName}`
-    : `Confirmation: Your inquiry to ${options.businessName}`;
+  const locale = options.locale || 'de';
+  const emailSubject = getTranslation(locale, 'emails.inquiryConfirmationToCustomer.subject', {
+    businessName: options.businessName,
+  });
 
-  const html = `
-    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
-      <div style="margin-bottom: 24px; border-bottom: 2px solid #145bff; padding-bottom: 16px;">
-        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
-        <span style="color: #145bff; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">${APP_TITLE}</span>
-        <h2 style="color: #0f172a; margin: 6px 0 2px 0; font-size: 22px;">${isDe ? 'Ihre Anfrage ist eingegangen' : 'Your inquiry has been received'}</h2>
-      </div>
+  const title = getTranslation(locale, 'emails.inquiryConfirmationToCustomer.title');
+  const greeting = getTranslation(locale, 'emails.inquiryConfirmationToCustomer.greeting', {
+    customerName: options.customerName || getTranslation(locale, 'emails.common.customer'),
+  });
+  const body = getTranslation(locale, 'emails.inquiryConfirmationToCustomer.body', {
+    businessName: options.businessName,
+  });
+  const subjectLabel = getTranslation(locale, 'emails.inquiryConfirmationToCustomer.subjectLabel', {
+    subject: options.subject,
+  });
+  const inboxNotice = getTranslation(locale, 'emails.inquiryConfirmationToCustomer.inboxNotice');
 
-      <p style="color: #334155; font-size: 14px; line-height: 1.6;">
-        ${isDe ? `Hallo ${options.customerName || 'Kunde'},` : `Hello ${options.customerName || 'Customer'},`}<br/><br/>
-        ${isDe
-          ? `vielen Dank für Ihre Kontaktaufnahme! Ihre Nachricht an <strong>${options.businessName}</strong> wurde erfolgreich weitergeleitet.`
-          : `Thank you for contacting us! Your message to <strong>${options.businessName}</strong> has been received and forwarded successfully.`}
-      </p>
+  const bodyHtml = `
+    <p style="color: #334155; font-size: 14px; line-height: 1.6;">
+      ${greeting}<br/><br/>
+      ${body}
+    </p>
 
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin: 20px 0;">
-        <span style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; display: block; margin-bottom: 6px;">${isDe ? 'Betreff:' : 'Subject:'} ${options.subject}</span>
-        <p style="margin: 0; color: #1e293b; font-size: 13px; line-height: 1.5; white-space: pre-wrap;">${options.message}</p>
-      </div>
-
-      <p style="color: #64748b; font-size: 13px; line-height: 1.6;">
-        ${isDe
-          ? 'Sie können den Verlauf Ihrer Kommunikation jederzeit in Ihrem <strong>Kunden-Postfach</strong> einsehen.'
-          : 'You can check the status of your message anytime in your <strong>Customer Inbox</strong>.'}
-      </p>
-
-      <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 24px; text-align: center;">
-        ${APP_TITLE} &bull; business-directory.nordible.co
-      </div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin: 20px 0;">
+      <span style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; display: block; margin-bottom: 6px;">${subjectLabel}</span>
+      <p style="margin: 0; color: #1e293b; font-size: 13px; line-height: 1.5; white-space: pre-wrap;">${options.message}</p>
     </div>
+
+    <p style="color: #64748b; font-size: 13px; line-height: 1.6;">
+      ${inboxNotice}
+    </p>
   `;
+
+  const html = renderEmailShell({
+    headerBadge: APP_TITLE,
+    headerTitle: title,
+    bodyHtml,
+    locale,
+  });
+
+  const text = getTranslation(locale, 'emails.inquiryConfirmationToCustomer.text', {
+    customerName: options.customerName,
+    businessName: options.businessName,
+  });
 
   return sendEmail({
     to: options.customerEmail,
     subject: emailSubject,
     html,
-    text: isDe
-      ? `Hallo ${options.customerName}, Ihre Anfrage an ${options.businessName} ist erfolgreich eingegangen.`
-      : `Hello ${options.customerName}, your inquiry to ${options.businessName} has been received successfully.`,
+    text,
   });
 }
 
@@ -290,78 +350,86 @@ export interface BusinessRegistrationConfirmationOptions {
 /**
  * Sends a confirmation email to the business owner after their listing registration is submitted
  */
-export async function sendBusinessRegistrationConfirmation(options: BusinessRegistrationConfirmationOptions) {
-  const isDe = options.locale === 'de';
-  const subject = isDe
-    ? `Eingangsbestätigung: Registrierung für ${options.businessName} erhalten`
-    : `Confirmation: Listing registration for ${options.businessName} received`;
+export async function sendBusinessRegistrationConfirmation(
+  options: BusinessRegistrationConfirmationOptions
+) {
+  const locale = options.locale || 'de';
+  const subject = getTranslation(locale, 'emails.businessRegistrationConfirmation.subject', {
+    businessName: options.businessName,
+  });
 
-  const html = `
-    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
-      <div style="margin-bottom: 24px; border-bottom: 2px solid #145bff; padding-bottom: 16px;">
-        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
-        <span style="color: #145bff; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">${APP_TITLE} &bull; ${isDe ? 'Unternehmensregistrierung' : 'Business Registration'}</span>
-        <h2 style="color: #0f172a; margin: 6px 0 2px 0; font-size: 22px;">${isDe ? 'Vielen Dank für Ihre Registrierung!' : 'Thank you for your registration!'}</h2>
-      </div>
+  const badge = `${APP_TITLE} • ${getTranslation(locale, 'emails.businessRegistrationConfirmation.badge')}`;
+  const title = getTranslation(locale, 'emails.businessRegistrationConfirmation.title');
+  const greeting = getTranslation(locale, 'emails.businessRegistrationConfirmation.greeting');
+  const body = getTranslation(locale, 'emails.businessRegistrationConfirmation.body', {
+    businessName: options.businessName,
+  });
+  const businessLabel = getTranslation(locale, 'emails.businessRegistrationConfirmation.businessLabel');
+  const categoryLabel = getTranslation(locale, 'emails.businessRegistrationConfirmation.categoryLabel');
+  const locationLabel = getTranslation(locale, 'emails.businessRegistrationConfirmation.locationLabel');
+  const statusLabel = getTranslation(locale, 'emails.businessRegistrationConfirmation.statusLabel');
+  const statusValue = getTranslation(locale, 'emails.businessRegistrationConfirmation.statusValue');
+  const actionPrompt = getTranslation(locale, 'emails.businessRegistrationConfirmation.actionPrompt');
+  const footerNote = getTranslation(locale, 'emails.businessRegistrationConfirmation.footerNote');
 
-      <p style="color: #334155; font-size: 14px; line-height: 1.6;">
-        ${isDe
-          ? `Guten Tag,<br/><br/>wir haben die Registrierung für <strong>${options.businessName}</strong> erfolgreich erhalten. Unser Redaktionsteam prüft derzeit Ihre Angaben, um höchste Qualitätsstandards im Verzeichnis zu gewährleisten.`
-          : `Hello,<br/><br/>we have successfully received the listing submission for <strong>${options.businessName}</strong>. Our editorial team is currently reviewing your details to ensure verified directory standards.`}
-      </p>
+  const bodyHtml = `
+    <p style="color: #334155; font-size: 14px; line-height: 1.6;">
+      ${greeting}<br/><br/>
+      ${body}
+    </p>
 
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin: 20px 0;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-          <tr>
-            <td style="padding: 6px 0; color: #64748b; width: 40%; font-weight: 600;">${isDe ? 'Unternehmen:' : 'Business:'}</td>
-            <td style="padding: 6px 0; font-weight: 700; color: #0f172a;">${options.businessName}</td>
-          </tr>
-          ${options.categoryName ? `
-          <tr>
-            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Branche:' : 'Category:'}</td>
-            <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.categoryName}</td>
-          </tr>
-          ` : ''}
-          ${options.city ? `
-          <tr>
-            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Standort:' : 'Location:'}</td>
-            <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.city}</td>
-          </tr>
-          ` : ''}
-          <tr>
-            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Status:' : 'Status:'}</td>
-            <td style="padding: 6px 0; font-weight: 700; color: #f59e0b;">${isDe ? '⏳ In redaktioneller Prüfung' : '⏳ Under Editorial Review'}</td>
-          </tr>
-        </table>
-      </div>
-
-      <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin: 20px 0;">
-        <p style="margin: 0; color: #1e40af; font-size: 13px; font-weight: 700; line-height: 1.5;">
-          ${isDe
-            ? '👉 Bitte antworten Sie direkt auf diese E-Mail, um Ihr Unternehmen zu bestätigen und den Veröffentlichungsprozess zu beschleunigen.'
-            : '👉 Please reply directly to this email to confirm your business and expedite the publishing process.'}
-        </p>
-      </div>
-
-      <p style="color: #64748b; font-size: 13px; line-height: 1.6;">
-        ${isDe
-          ? 'Sobald die Bestätigung vorliegt, wird Ihr Unternehmensprofil im Verzeichnis veröffentlicht.'
-          : 'Once confirmed, your business profile will be published live in the directory.'}
-      </p>
-
-      <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 24px; text-align: center;">
-        ${APP_TITLE} &bull; business-directory.nordible.co
-      </div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin: 20px 0;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; width: 40%; font-weight: 600;">${businessLabel}</td>
+          <td style="padding: 6px 0; font-weight: 700; color: #0f172a;">${options.businessName}</td>
+        </tr>
+        ${options.categoryName ? `
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${categoryLabel}</td>
+          <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.categoryName}</td>
+        </tr>
+        ` : ''}
+        ${options.city ? `
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${locationLabel}</td>
+          <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.city}</td>
+        </tr>
+        ` : ''}
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${statusLabel}</td>
+          <td style="padding: 6px 0; font-weight: 700; color: #f59e0b;">${statusValue}</td>
+        </tr>
+      </table>
     </div>
+
+    <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin: 20px 0;">
+      <p style="margin: 0; color: #1e40af; font-size: 13px; font-weight: 700; line-height: 1.5;">
+        ${actionPrompt}
+      </p>
+    </div>
+
+    <p style="color: #64748b; font-size: 13px; line-height: 1.6;">
+      ${footerNote}
+    </p>
   `;
+
+  const html = renderEmailShell({
+    headerBadge: badge,
+    headerTitle: title,
+    bodyHtml,
+    locale,
+  });
+
+  const text = getTranslation(locale, 'emails.businessRegistrationConfirmation.text', {
+    businessName: options.businessName,
+  });
 
   return sendEmail({
     to: options.to,
     subject,
     html,
-    text: isDe
-      ? `Vielen Dank für Ihre Registrierung für ${options.businessName}!\n\nStatus: In Prüfung\n\nWichtig: Bitte antworten Sie direkt auf diese E-Mail, um Ihr Unternehmen zu bestätigen und den Veröffentlichungsprozess zu beschleunigen.`
-      : `Thank you for registering ${options.businessName}!\n\nStatus: Under Review\n\nImportant: Please reply directly to this email to confirm your business and expedite the publishing process.`,
+    text,
     replyTo: 'mail@nordible.co',
   });
 }
@@ -378,90 +446,103 @@ export interface BusinessPublishedNotificationOptions {
 /**
  * Sends a celebration notification to the business owner when an admin publishes their listing
  */
-export async function sendBusinessPublishedNotification(options: BusinessPublishedNotificationOptions) {
-  const isDe = options.locale === 'de';
-  const subject = isDe
-    ? `🎉 Ihr Profil für ${options.businessName} ist jetzt live auf Nordible!`
-    : `🎉 Your listing for ${options.businessName} is now live on Nordible!`;
+export async function sendBusinessPublishedNotification(
+  options: BusinessPublishedNotificationOptions
+) {
+  const locale = options.locale || 'de';
+  const subject = getTranslation(locale, 'emails.businessPublishedNotification.subject', {
+    businessName: options.businessName,
+  });
 
-  const html = `
-    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
-      <div style="margin-bottom: 24px; border-bottom: 2px solid #16a34a; padding-bottom: 16px;">
-        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
-        <span style="display: inline-block; background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 9999px;">
-          ${isDe ? '✓ Freigeschaltet & Verifiziert' : '✓ Published & Verified'}
-        </span>
-        <h2 style="color: #0f172a; margin: 12px 0 2px 0; font-size: 22px; font-weight: 800;">
-          ${isDe ? 'Ihr Unternehmen ist jetzt live!' : 'Your business is now live!'}
-        </h2>
-      </div>
+  const badge = getTranslation(locale, 'emails.businessPublishedNotification.badge');
+  const title = getTranslation(locale, 'emails.businessPublishedNotification.title');
+  const greeting = getTranslation(locale, 'emails.businessPublishedNotification.greeting');
+  const body = getTranslation(locale, 'emails.businessPublishedNotification.body', {
+    businessName: options.businessName,
+  });
+  const businessLabel = getTranslation(locale, 'emails.businessPublishedNotification.businessLabel');
+  const categoryLabel = getTranslation(locale, 'emails.businessPublishedNotification.categoryLabel');
+  const locationLabel = getTranslation(locale, 'emails.businessPublishedNotification.locationLabel');
+  const statusLabel = getTranslation(locale, 'emails.businessPublishedNotification.statusLabel');
+  const statusValue = getTranslation(locale, 'emails.businessPublishedNotification.statusValue');
+  const viewProfileBtn = getTranslation(locale, 'emails.businessPublishedNotification.viewProfileBtn');
+  const nextStepsTitle = getTranslation(locale, 'emails.businessPublishedNotification.nextStepsTitle');
+  const step1 = getTranslation(locale, 'emails.businessPublishedNotification.step1');
+  const step2 = getTranslation(locale, 'emails.businessPublishedNotification.step2');
+  const step3 = getTranslation(locale, 'emails.businessPublishedNotification.step3');
 
-      <p style="color: #334155; font-size: 14px; line-height: 1.6;">
-        ${isDe
-          ? `Guten Tag,<br/><br/>wir freuen uns, Ihnen mitteilen zu können, dass die redaktionelle Freigabe für <strong>${options.businessName}</strong> erfolgreich abgeschlossen wurde. Ihr Eintrag ist ab sofort im globalen Branchenverzeichnis öffentlich erreichbar.`
-          : `Hello,<br/><br/>we are pleased to inform you that your listing for <strong>${options.businessName}</strong> has been officially approved and published. It is now publicly accessible in the global business directory.`}
+  const bodyHtml = `
+    <p style="color: #334155; font-size: 14px; line-height: 1.6;">
+      ${greeting}<br/><br/>
+      ${body}
+    </p>
+
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px 0;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; width: 35%; font-weight: 600;">${businessLabel}</td>
+          <td style="padding: 6px 0; font-weight: 700; color: #0f172a;">${options.businessName}</td>
+        </tr>
+        ${options.categoryName ? `
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${categoryLabel}</td>
+          <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.categoryName}</td>
+        </tr>
+        ` : ''}
+        ${options.city ? `
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${locationLabel}</td>
+          <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.city}</td>
+        </tr>
+        ` : ''}
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${statusLabel}</td>
+          <td style="padding: 6px 0; font-weight: 700; color: #16a34a;">
+            ${statusValue}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="text-align: center; margin: 28px 0;">
+      <a href="${options.listingUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #145bff; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 15px; box-shadow: 0 4px 12px rgba(20, 91, 255, 0.25);">
+        ${viewProfileBtn}
+      </a>
+      <p style="font-size: 12px; color: #94a3b8; margin: 10px 0 0 0;">
+        <a href="${options.listingUrl}" style="color: #64748b; text-decoration: underline; word-break: break-all;">${options.listingUrl}</a>
       </p>
+    </div>
 
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px 0;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-          <tr>
-            <td style="padding: 6px 0; color: #64748b; width: 35%; font-weight: 600;">${isDe ? 'Unternehmen:' : 'Business:'}</td>
-            <td style="padding: 6px 0; font-weight: 700; color: #0f172a;">${options.businessName}</td>
-          </tr>
-          ${options.categoryName ? `
-          <tr>
-            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Branche:' : 'Category:'}</td>
-            <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.categoryName}</td>
-          </tr>
-          ` : ''}
-          ${options.city ? `
-          <tr>
-            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Standort:' : 'Location:'}</td>
-            <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.city}</td>
-          </tr>
-          ` : ''}
-          <tr>
-            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Status:' : 'Status:'}</td>
-            <td style="padding: 6px 0; font-weight: 700; color: #16a34a;">
-              ${isDe ? '● Öffentlich sichtbar' : '● Publicly visible'}
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <div style="text-align: center; margin: 28px 0;">
-        <a href="${options.listingUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #145bff; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 15px; box-shadow: 0 4px 12px rgba(20, 91, 255, 0.25);">
-          ${isDe ? '👉 Profil jetzt ansehen & teilen' : '👉 View & Share Your Profile'}
-        </a>
-        <p style="font-size: 12px; color: #94a3b8; margin: 10px 0 0 0;">
-          <a href="${options.listingUrl}" style="color: #64748b; text-decoration: underline; word-break: break-all;">${options.listingUrl}</a>
-        </p>
-      </div>
-
-      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin: 24px 0;">
-        <span style="font-size: 12px; font-weight: 700; color: #1d4ed8; text-transform: uppercase; display: block; margin-bottom: 6px;">
-          ${isDe ? 'Ihre nächsten Schritte:' : 'What happens next?'}
-        </span>
-        <ul style="margin: 0; padding-left: 18px; color: #1e40af; font-size: 13px; line-height: 1.6;">
-          <li>${isDe ? 'Kunden können Sie über das Kontaktformular auf Ihrer Profilseite direkt kontaktieren.' : 'Customers can contact you directly via the inquiry form on your listing page.'}</li>
-          <li>${isDe ? 'Anfragen werden sicher in Ihr Kunden-Postfach zugestellt und per E-Mail angekündigt.' : 'Inquiries will be routed securely to your customer inbox with instant email alerts.'}</li>
-          <li>${isDe ? 'Teilen Sie Ihren Profil-Link auf Ihrer Website und auf Social Media, um Ihre Sichtbarkeit zu stärken.' : 'Share your profile link across your social media and website to build trust and visibility.'}</li>
-        </ul>
-      </div>
-
-      <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 24px; text-align: center;">
-        ${APP_TITLE} &bull; business-directory.nordible.co
-      </div>
+    <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin: 24px 0;">
+      <span style="font-size: 12px; font-weight: 700; color: #1d4ed8; text-transform: uppercase; display: block; margin-bottom: 6px;">
+        ${nextStepsTitle}
+      </span>
+      <ul style="margin: 0; padding-left: 18px; color: #1e40af; font-size: 13px; line-height: 1.6;">
+        <li>${step1}</li>
+        <li>${step2}</li>
+        <li>${step3}</li>
+      </ul>
     </div>
   `;
+
+  const html = renderEmailShell({
+    headerBadge: badge,
+    headerTitle: title,
+    bodyHtml,
+    borderColor: '#16a34a',
+    locale,
+  });
+
+  const text = getTranslation(locale, 'emails.businessPublishedNotification.text', {
+    businessName: options.businessName,
+    listingUrl: options.listingUrl,
+  });
 
   return sendEmail({
     to: options.to,
     subject,
     html,
-    text: isDe
-      ? `Herzlichen Glückwunsch! Das Profil für ${options.businessName} ist jetzt live auf Nordible: ${options.listingUrl}`
-      : `Congratulations! The listing for ${options.businessName} is now live on Nordible: ${options.listingUrl}`,
+    text,
     replyTo: 'mail@nordible.co',
   });
 }
@@ -486,112 +567,139 @@ export interface NewListingNotificationOptions {
 
 /**
  * Sends a single consolidated notification to admins when a new business listing is registered.
- * Admin emails are ALWAYS in English as the standardized operational language.
  */
-export async function sendNewListingNotificationToAdmin(listing: NewListingNotificationOptions) {
-  const subject = `[Admin Notification] New Business Registration: ${listing.businessName} (${listing.city || listing.country || 'Global'})`;
-  const html = `
-    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
-      <div style="border-bottom: 2px solid #145bff; padding-bottom: 16px; margin-bottom: 20px;">
-        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
-        <span style="font-size: 11px; font-weight: 800; color: #145bff; text-transform: uppercase; letter-spacing: 0.5px;">${APP_TITLE} &bull; Administration</span>
-        <h2 style="font-size: 20px; font-weight: 800; color: #0D2B75; margin: 8px 0 0 0;">New Business Registration</h2>
-      </div>
+export async function sendNewListingNotificationToAdmin(
+  listing: NewListingNotificationOptions,
+  locale: string = 'en'
+) {
+  const location = listing.city || listing.country || 'Global';
+  const subject = getTranslation(locale, 'emails.adminNewListingNotification.subject', {
+    businessName: listing.businessName,
+    location,
+  });
 
-      <p style="font-size: 14px; color: #334155; margin-bottom: 20px; line-height: 1.5;">
-        A new business listing has registered in the directory. Please review the submitted profile details below:
-      </p>
+  const badge = `${APP_TITLE} • ${getTranslation(locale, 'emails.adminNewListingNotification.badge')}`;
+  const title = getTranslation(locale, 'emails.adminNewListingNotification.title');
+  const description = getTranslation(locale, 'emails.adminNewListingNotification.description');
+  const businessNameLabel = getTranslation(locale, 'emails.adminNewListingNotification.businessNameLabel');
+  const legalFormLabel = getTranslation(locale, 'emails.adminNewListingNotification.legalFormLabel');
+  const categoryLabel = getTranslation(locale, 'emails.adminNewListingNotification.categoryLabel');
+  const addressLabel = getTranslation(locale, 'emails.adminNewListingNotification.addressLabel');
+  const postalCodeLabel = getTranslation(locale, 'emails.adminNewListingNotification.postalCodeLabel');
+  const cityLabel = getTranslation(locale, 'emails.adminNewListingNotification.cityLabel');
+  const stateLabel = getTranslation(locale, 'emails.adminNewListingNotification.stateLabel');
+  const countryLabel = getTranslation(locale, 'emails.adminNewListingNotification.countryLabel');
+  const phoneLabel = getTranslation(locale, 'emails.adminNewListingNotification.phoneLabel');
+  const emailLabel = getTranslation(locale, 'emails.adminNewListingNotification.emailLabel');
+  const websiteLabel = getTranslation(locale, 'emails.adminNewListingNotification.websiteLabel');
+  const logoLabel = getTranslation(locale, 'emails.adminNewListingNotification.logoLabel');
+  const hoursLabel = getTranslation(locale, 'emails.adminNewListingNotification.hoursLabel');
+  const descriptionLabel = getTranslation(locale, 'emails.adminNewListingNotification.descriptionLabel');
+  const growthResourcesLabel = getTranslation(locale, 'emails.adminNewListingNotification.growthResourcesLabel');
+  const growthYes = getTranslation(locale, 'emails.adminNewListingNotification.growthYes');
+  const growthNo = getTranslation(locale, 'emails.adminNewListingNotification.growthNo');
+  const notSpecified = getTranslation(locale, 'emails.adminNewListingNotification.notSpecified');
+  const none = getTranslation(locale, 'emails.adminNewListingNotification.none');
+  const hoursDefault = getTranslation(locale, 'emails.adminNewListingNotification.hoursDefault');
+  const noDescription = getTranslation(locale, 'emails.adminNewListingNotification.noDescription');
+  const reviewButton = getTranslation(locale, 'emails.adminNewListingNotification.reviewButton');
 
-      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; border: 1px solid #f1f5f9; border-radius: 8px; overflow: hidden;">
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600; width: 38%;">Business Name:</td>
-          <td style="padding: 10px 12px; font-weight: 700; color: #0D2B75; font-size: 15px;">${listing.businessName}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Legal Form:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.legalForm || 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Category / Industry:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.categoryName || 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Street Address:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.address || 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Postal Code (ZIP):</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.postalCode || 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">City:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.city || 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">State / Region:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.state || 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Country:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.country || 'Global'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Phone Number:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.phone ? `<a href="tel:${listing.phone}" style="color: #145bff; text-decoration: none;">${listing.phone}</a>` : 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Email Address:</td>
-          <td style="padding: 10px 12px; font-weight: 600;">${listing.email ? `<a href="mailto:${listing.email}" style="color: #145bff; font-weight: 700; text-decoration: none;">${listing.email}</a>` : 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Website:</td>
-          <td style="padding: 10px 12px; font-weight: 600;">${listing.website ? `<a href="${listing.website}" target="_blank" style="color: #145bff; text-decoration: underline;">${listing.website}</a>` : 'Not specified'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Logo URL:</td>
-          <td style="padding: 10px 12px; font-weight: 600;">${listing.logoUrl ? `<a href="${listing.logoUrl}" target="_blank" style="color: #145bff; text-decoration: underline;">${listing.logoUrl}</a>` : 'None'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">Opening Hours:</td>
-          <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.hours || '24/7 Open'}</td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
-          <td style="padding: 10px 12px; color: #64748b; font-weight: 600; vertical-align: top;">Description:</td>
-          <td style="padding: 10px 12px; font-weight: 400; color: #1e293b; line-height: 1.5; white-space: pre-wrap;">${listing.description || 'No description provided'}</td>
-        </tr>
-        <tr style="border-bottom: 2px solid #e2e8f0; background: ${listing.wantsGrowthResource ? '#eff6ff' : '#ffffff'};">
-          <td style="padding: 12px 12px; color: ${listing.wantsGrowthResource ? '#1e40af' : '#64748b'}; font-weight: 700;">Growth Resources:</td>
-          <td style="padding: 12px 12px; font-weight: 700; color: ${listing.wantsGrowthResource ? '#1e40af' : '#64748b'};">
-            ${listing.wantsGrowthResource 
-              ? '✅ Yes (Requested free business growth resources)' 
-              : '❌ No'}
-          </td>
-        </tr>
-      </table>
+  const bodyHtml = `
+    <p style="font-size: 14px; color: #334155; margin-bottom: 20px; line-height: 1.5;">
+      ${description}
+    </p>
 
-      <div style="margin-top: 28px; text-align: center;">
-        <a href="https://business-directory.nordible.co/admin" style="display: inline-block; background: #0D2B75; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 14px;">
-          Review & Publish in Admin Portal &rarr;
-        </a>
-      </div>
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; border: 1px solid #f1f5f9; border-radius: 8px; overflow: hidden;">
+      <tr style="border-bottom: 1px solid #f1f5f9;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600; width: 38%;">${businessNameLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 700; color: #0D2B75; font-size: 15px;">${listing.businessName}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${legalFormLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.legalForm || notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${categoryLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.categoryName || notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${addressLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.address || notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${postalCodeLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.postalCode || notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${cityLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.city || notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${stateLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.state || notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${countryLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.country || 'Global'}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${phoneLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.phone ? `<a href="tel:${listing.phone}" style="color: #145bff; text-decoration: none;">${listing.phone}</a>` : notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${emailLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600;">${listing.email ? `<a href="mailto:${listing.email}" style="color: #145bff; font-weight: 700; text-decoration: none;">${listing.email}</a>` : notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${websiteLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600;">${listing.website ? `<a href="${listing.website}" target="_blank" style="color: #145bff; text-decoration: underline;">${listing.website}</a>` : notSpecified}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${logoLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600;">${listing.logoUrl ? `<a href="${listing.logoUrl}" target="_blank" style="color: #145bff; text-decoration: underline;">${listing.logoUrl}</a>` : none}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600;">${hoursLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 600; color: #1e293b;">${listing.hours || hoursDefault}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #f1f5f9; background: #fafbfc;">
+        <td style="padding: 10px 12px; color: #64748b; font-weight: 600; vertical-align: top;">${descriptionLabel}</td>
+        <td style="padding: 10px 12px; font-weight: 400; color: #1e293b; line-height: 1.5; white-space: pre-wrap;">${listing.description || noDescription}</td>
+      </tr>
+      <tr style="border-bottom: 2px solid #e2e8f0; background: ${listing.wantsGrowthResource ? '#eff6ff' : '#ffffff'};">
+        <td style="padding: 12px 12px; color: ${listing.wantsGrowthResource ? '#1e40af' : '#64748b'}; font-weight: 700;">${growthResourcesLabel}</td>
+        <td style="padding: 12px 12px; font-weight: 700; color: ${listing.wantsGrowthResource ? '#1e40af' : '#64748b'};">
+          ${listing.wantsGrowthResource ? `✅ ${growthYes}` : `❌ ${growthNo}`}
+        </td>
+      </tr>
+    </table>
 
-      <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 24px; text-align: center;">
-        ${APP_TITLE} &bull; business-directory.nordible.co
-      </div>
+    <div style="margin-top: 28px; text-align: center;">
+      <a href="https://business-directory.nordible.co/admin" style="display: inline-block; background: #0D2B75; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 14px;">
+        ${reviewButton}
+      </a>
     </div>
   `;
 
+  const html = renderEmailShell({
+    headerBadge: badge,
+    headerTitle: title,
+    bodyHtml,
+    borderColor: '#0D2B75',
+    locale,
+  });
+
   const text = `New Business Registration: ${listing.businessName}
-Legal Form: ${listing.legalForm || 'Not specified'}
-Category: ${listing.categoryName || 'Not specified'}
-Address: ${listing.address || 'Not specified'}, ${listing.postalCode || ''} ${listing.city || ''}, ${listing.state || ''}, ${listing.country || 'Global'}
-Phone: ${listing.phone || 'Not specified'}
-Email: ${listing.email || 'Not specified'}
-Website: ${listing.website || 'Not specified'}
-Logo: ${listing.logoUrl || 'None'}
-Hours: ${listing.hours || '24/7 Open'}
-Description: ${listing.description || 'None'}
-Growth Resources: ${listing.wantsGrowthResource ? 'Yes' : 'No'}
+Legal Form: ${listing.legalForm || notSpecified}
+Category: ${listing.categoryName || notSpecified}
+Address: ${listing.address || notSpecified}, ${listing.postalCode || ''} ${listing.city || ''}, ${listing.state || ''}, ${listing.country || 'Global'}
+Phone: ${listing.phone || notSpecified}
+Email: ${listing.email || notSpecified}
+Website: ${listing.website || notSpecified}
+Logo: ${listing.logoUrl || none}
+Hours: ${listing.hours || hoursDefault}
+Description: ${listing.description || noDescription}
+Growth Resources: ${listing.wantsGrowthResource ? growthYes : growthNo}
 
 Review & Publish: https://business-directory.nordible.co/admin`;
 

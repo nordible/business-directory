@@ -127,7 +127,7 @@ export const LegalFormAutocomplete: React.FC<LegalFormAutocompleteProps> = ({
             }
           }}
           placeholder={effectivePlaceholder}
-          className="w-full pl-8 pr-14 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800 transition-colors"
+          className="w-full pl-8 pr-14 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800 transition-colors"
         />
 
         <div className="absolute right-2 top-2 flex items-center gap-1">
@@ -153,15 +153,15 @@ export const LegalFormAutocomplete: React.FC<LegalFormAutocompleteProps> = ({
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 mt-1.5 w-full bg-white rounded-2xl border border-[#E8ECF4] shadow-xl max-h-60 overflow-y-auto p-1.5 space-y-1">
+        <div className="absolute z-50 mt-1.5 w-full bg-white rounded-2xl border border-nordible-border shadow-xl max-h-60 overflow-y-auto p-1.5 space-y-1">
           {/* Custom option prompt if user typed something that isn't an exact match */}
           {query.trim() && !exactMatch && (
             <button
               type="button"
               onClick={handleCustomSubmit}
-              className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-xs bg-blue-50/70 hover:bg-blue-100/70 text-[#145BFF] font-bold transition-colors cursor-pointer"
+              className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-xs bg-blue-50/70 hover:bg-blue-100/70 text-nordible-blue font-bold transition-colors cursor-pointer"
             >
-              <Plus className="w-3.5 h-3.5 text-[#145BFF] shrink-0" />
+              <Plus className="w-3.5 h-3.5 text-nordible-blue shrink-0" />
               <span className="truncate">
                 {isDe ? `„${query.trim()}“ als Rechtsform übernehmen` : `Use "${query.trim()}" as legal form`}
               </span>
@@ -179,18 +179,18 @@ export const LegalFormAutocomplete: React.FC<LegalFormAutocompleteProps> = ({
                   onClick={() => handleSelect(item.name)}
                   className={`w-full flex items-center justify-between px-3 py-1.5 rounded-xl text-left text-xs transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-blue-50 text-[#145BFF] font-bold'
+                      ? 'bg-blue-50 text-nordible-blue font-bold'
                       : 'hover:bg-gray-50 text-gray-700 font-medium'
                   }`}
                 >
                   <span className="truncate">{item.name}</span>
                   <div className="flex items-center gap-1.5 shrink-0 ml-2">
                     {item.countryCode && (
-                      <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 border border-gray-200">
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 border border-gray-200">
                         {item.countryCode}
                       </span>
                     )}
-                    {isSelected && <Check className="w-3.5 h-3.5 text-[#145BFF]" />}
+                    {isSelected && <Check className="w-3.5 h-3.5 text-nordible-blue" />}
                   </div>
                 </button>
               );

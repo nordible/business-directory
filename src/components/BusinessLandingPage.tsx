@@ -84,7 +84,7 @@ export function BusinessLandingPage({
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFBFF] text-slate-800 font-sans selection:bg-[#145BFF]/10 selection:text-[#145BFF]">
+    <div className="min-h-screen flex flex-col bg-nordible-bg text-slate-800 font-sans selection:bg-nordible-blue/10 selection:text-nordible-blue">
       {/* Header */}
       <Header
         currentTenant={tenant}
@@ -93,15 +93,15 @@ export function BusinessLandingPage({
 
       <main className="flex-1">
         {/* HERO SECTION FOR BUSINESSES */}
-        <section className="relative overflow-hidden pt-12 pb-20 lg:pt-18 lg:pb-28 border-b border-[#E8ECF4]">
+        <section className="relative overflow-hidden pt-12 pb-20 lg:pt-18 lg:pb-28 border-b border-nordible-border">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent pointer-events-none" />
 
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               {/* Left Column: B2B Conversion Hook & URL Input */}
               <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3.5 py-1 text-xs font-bold text-[#145BFF] shadow-2xs">
-                  <span className="h-2 w-2 rounded-full bg-[#145BFF] animate-pulse" />
+                <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3.5 py-1 text-xs font-bold text-nordible-blue shadow-2xs">
+                  <span className="h-2 w-2 rounded-full bg-nordible-blue animate-pulse" />
                   <span>
                     {isDe
                       ? 'Für Dienstleister & Unternehmen • 0 % Provision'
@@ -109,7 +109,7 @@ export function BusinessLandingPage({
                   </span>
                 </div>
 
-                <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black text-[#0D2B75] tracking-tight font-heading leading-[1.15]">
+                <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black text-nordible-dark tracking-tight font-heading leading-[1.15]">
                   {isDe
                     ? 'Gewinnen Sie Neukunden, die aktiv nach Ihren Leistungen suchen'
                     : 'Win new customers actively searching for your services'}
@@ -122,10 +122,10 @@ export function BusinessLandingPage({
                 </p>
 
                 {/* 1-Click AI Website URL Onboarding Box */}
-                <div className="bg-white rounded-3xl border-2 border-[#145BFF]/30 p-4 sm:p-5 shadow-lg shadow-blue-500/10 space-y-3">
+                <div className="bg-white rounded-3xl border-2 border-nordible-blue/30 p-4 sm:p-5 shadow-lg shadow-blue-500/10 space-y-3">
                   <div className="flex items-center justify-between text-left">
-                    <span className="text-xs font-black text-[#0D2B75] uppercase tracking-wider font-heading flex items-center gap-1.5">
-                      <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
+                    <span className="text-xs font-bold text-nordible-dark font-heading flex items-center gap-1.5">
+                      <Sparkles className="w-4 h-4 text-nordible-orange" />
                       <span>{isDe ? 'Blitz-Eintrag mit KI aus Website-URL' : '1-Click AI Import via Website URL'}</span>
                     </span>
                     <span className="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
@@ -141,14 +141,14 @@ export function BusinessLandingPage({
                         value={quickUrl}
                         onChange={(e) => setQuickUrl(e.target.value)}
                         placeholder="https://ihre-firma.de"
-                        className="w-full pl-10 pr-3 py-3 text-xs sm:text-sm rounded-2xl border border-[#E8ECF4] bg-[#FAFBFF] focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
+                        className="w-full pl-10 pr-3 py-3 text-xs sm:text-sm rounded-2xl border border-nordible-border bg-nordible-bg focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                       />
                     </div>
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#145BFF] hover:bg-[#0D2B75] text-white px-6 py-3 text-xs sm:text-sm font-extrabold shadow-md shadow-blue-500/20 transition-all hover:scale-102 active:scale-95 cursor-pointer shrink-0"
+                      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-nordible-blue hover:bg-nordible-dark disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 text-xs sm:text-sm font-extrabold shadow-md shadow-blue-500/20 transition-colors hover:scale-102 active:scale-95 cursor-pointer shrink-0"
                     >
-                      <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
+                      <Sparkles className="w-4 h-4 text-nordible-orange" />
                       <span>{isDe ? 'Mit KI eintragen' : 'Import with AI'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
@@ -174,7 +174,7 @@ export function BusinessLandingPage({
                 <div className="pt-1 text-center lg:text-left">
                   <Link
                     href={`/${locale}/directory`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#145BFF] transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-nordible-blue transition-colors"
                   >
                     <Compass className="w-3.5 h-3.5" />
                     <span>{isDe ? '← Zurück zur Kundensuche / Verzeichnis' : '← Back to customer directory'}</span>
@@ -185,7 +185,7 @@ export function BusinessLandingPage({
               {/* Right Column: Welcoming Mascot */}
               <div className="lg:col-span-5 flex justify-center lg:justify-end">
                 <div className="relative w-64 h-64 sm:w-80 sm:h-80 drop-shadow-2xl">
-                  <div className="absolute inset-0 bg-[#145BFF]/10 rounded-full blur-2xl animate-pulse" />
+                  <div className="absolute inset-0 bg-nordible-blue/10 rounded-full blur-2xl animate-pulse" />
                   <Mascot
                     variant="hero-wave"
                     alt={`${siteConfig.appName} Mascot Googloo`}
@@ -198,14 +198,14 @@ export function BusinessLandingPage({
         </section>
 
         {/* 4 CORE VALUE PILLARS FOR BUSINESSES */}
-        <section className="py-16 sm:py-24 bg-white border-b border-[#E8ECF4]">
+        <section className="py-16 sm:py-24 bg-white border-b border-nordible-border">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-14">
-              <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/80 px-3.5 py-1 text-xs font-extrabold text-[#145BFF] mb-3">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#145BFF]" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/80 px-3.5 py-1 text-xs font-extrabold text-nordible-blue mb-3">
+                <ShieldCheck className="w-3.5 h-3.5 text-nordible-blue" />
                 <span>{isDe ? 'Ihre geschäftlichen Vorteile' : 'Commercial Benefits'}</span>
               </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-4xl font-black text-nordible-dark font-heading tracking-tight leading-tight">
                 {isDe
                   ? 'Warum sich ein Eintrag für Ihren Betrieb lohnt'
                   : 'Why listing your business drives real growth'}
@@ -219,12 +219,12 @@ export function BusinessLandingPage({
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Pillar 1 */}
-              <div className="bg-[#FAFBFF] rounded-3xl border border-emerald-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-emerald-300">
+              <div className="bg-nordible-bg rounded-3xl border border-emerald-100 p-6 shadow-xs hover:shadow-md transition-colors flex flex-col justify-between group hover:border-emerald-300">
                 <div>
                   <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                     <TrendingUp className="w-6 h-6" />
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2 leading-snug">
+                  <h3 className="font-heading font-extrabold text-base text-nordible-dark mb-2 leading-snug">
                     {isDe ? 'Direkte Kundenanfragen' : 'Direct Customer Leads'}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-medium">
@@ -236,12 +236,12 @@ export function BusinessLandingPage({
               </div>
 
               {/* Pillar 2 */}
-              <div className="bg-gradient-to-b from-white to-blue-50/40 rounded-3xl border-2 border-[#145BFF]/30 p-6 shadow-md transition-all flex flex-col justify-between group hover:border-[#145BFF]">
+              <div className="bg-gradient-to-b from-white to-blue-50/40 rounded-3xl border-2 border-nordible-blue/30 p-6 shadow-md transition-colors flex flex-col justify-between group hover:border-nordible-blue">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#145BFF] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-50 text-nordible-blue flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                     <Coins className="w-6 h-6" />
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2 leading-snug">
+                  <h3 className="font-heading font-extrabold text-base text-nordible-dark mb-2 leading-snug">
                     {isDe ? '0 % Provision – 100 % Marge' : '0% Commission – 100% Margin'}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-medium">
@@ -253,12 +253,12 @@ export function BusinessLandingPage({
               </div>
 
               {/* Pillar 3 */}
-              <div className="bg-[#FAFBFF] rounded-3xl border border-amber-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-amber-300">
+              <div className="bg-nordible-bg rounded-3xl border border-amber-100 p-6 shadow-xs hover:shadow-md transition-colors flex flex-col justify-between group hover:border-amber-300">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-amber-50 text-[#FF9F1A] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                    <Star className="w-6 h-6 fill-[#FF9F1A]" />
+                  <div className="w-12 h-12 rounded-2xl bg-amber-50 text-nordible-orange flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <Star className="w-6 h-6 fill-nordible-orange" />
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2 leading-snug">
+                  <h3 className="font-heading font-extrabold text-base text-nordible-dark mb-2 leading-snug">
                     {isDe ? 'Geprüfte Kundenbewertungen' : 'Verified Customer Reviews'}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-medium">
@@ -270,12 +270,12 @@ export function BusinessLandingPage({
               </div>
 
               {/* Pillar 4 */}
-              <div className="bg-[#FAFBFF] rounded-3xl border border-indigo-100 p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-indigo-300">
+              <div className="bg-nordible-bg rounded-3xl border border-indigo-100 p-6 shadow-xs hover:shadow-md transition-colors flex flex-col justify-between group hover:border-indigo-300">
                 <div>
                   <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                     <Bot className="w-6 h-6" />
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2 leading-snug">
+                  <h3 className="font-heading font-extrabold text-base text-nordible-dark mb-2 leading-snug">
                     {isDe ? 'KI- & Google-Auffindbarkeit' : 'AI & Google Discoverability'}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-medium">
@@ -290,23 +290,20 @@ export function BusinessLandingPage({
         </section>
 
         {/* 3-STEP ONBOARDING HOW IT WORKS */}
-        <section className="py-16 sm:py-24 bg-[#FAFBFF] border-b border-[#E8ECF4]">
+        <section className="py-16 sm:py-24 bg-nordible-bg border-b border-nordible-border">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
-              <span className="text-xs font-black uppercase tracking-wider text-[#FF9F1A] font-heading">
-                {isDe ? 'Einfacher Ablauf' : 'Simple Process'}
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight mt-1">
+              <h2 className="text-2xl sm:text-4xl font-black text-nordible-dark font-heading tracking-tight">
                 {isDe ? 'In 3 Schritten zum fertigen Unternehmenseintrag' : 'Listed in 3 simple steps'}
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-3xl border border-[#E8ECF4] p-7 shadow-xs text-center relative">
-                <div className="w-10 h-10 rounded-full bg-[#145BFF] text-white font-black flex items-center justify-center mx-auto mb-4 shadow-sm">
+              <div className="bg-white rounded-3xl border border-nordible-border p-7 shadow-xs text-center relative">
+                <div className="w-10 h-10 rounded-full bg-nordible-blue text-white font-black flex items-center justify-center mx-auto mb-4 shadow-sm">
                   1
                 </div>
-                <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2">
+                <h3 className="font-heading font-extrabold text-base text-nordible-dark mb-2">
                   {isDe ? 'Website-URL eingeben' : 'Paste Website URL'}
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed font-medium">
@@ -316,11 +313,11 @@ export function BusinessLandingPage({
                 </p>
               </div>
 
-              <div className="bg-white rounded-3xl border border-[#E8ECF4] p-7 shadow-xs text-center relative">
-                <div className="w-10 h-10 rounded-full bg-[#145BFF] text-white font-black flex items-center justify-center mx-auto mb-4 shadow-sm">
+              <div className="bg-white rounded-3xl border border-nordible-border p-7 shadow-xs text-center relative">
+                <div className="w-10 h-10 rounded-full bg-nordible-blue text-white font-black flex items-center justify-center mx-auto mb-4 shadow-sm">
                   2
                 </div>
-                <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2">
+                <h3 className="font-heading font-extrabold text-base text-nordible-dark mb-2">
                   {isDe ? 'Daten prüfen & anpassen' : 'Review & Customize'}
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed font-medium">
@@ -330,11 +327,11 @@ export function BusinessLandingPage({
                 </p>
               </div>
 
-              <div className="bg-white rounded-3xl border border-[#E8ECF4] p-7 shadow-xs text-center relative">
-                <div className="w-10 h-10 rounded-full bg-[#145BFF] text-white font-black flex items-center justify-center mx-auto mb-4 shadow-sm">
+              <div className="bg-white rounded-3xl border border-nordible-border p-7 shadow-xs text-center relative">
+                <div className="w-10 h-10 rounded-full bg-nordible-blue text-white font-black flex items-center justify-center mx-auto mb-4 shadow-sm">
                   3
                 </div>
-                <h3 className="font-heading font-extrabold text-base text-[#0D2B75] mb-2">
+                <h3 className="font-heading font-extrabold text-base text-nordible-dark mb-2">
                   {isDe ? 'Veröffentlichen & Anfragen erhalten' : 'Publish & Win Clients'}
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed font-medium">
@@ -349,9 +346,9 @@ export function BusinessLandingPage({
               <button
                 type="button"
                 onClick={() => setIsAddModalOpen(true)}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#145BFF] hover:bg-[#0D2B75] text-white px-8 py-4 text-sm font-extrabold shadow-lg shadow-blue-500/25 transition-all hover:scale-102 active:scale-95 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-nordible-blue hover:bg-nordible-dark text-white px-8 py-4 text-sm font-extrabold shadow-lg shadow-blue-500/25 transition-colors hover:scale-102 active:scale-95 cursor-pointer"
               >
-                <Sparkles className="w-4 h-4 text-[#FF9F1A]" />
+                <Sparkles className="w-4 h-4 text-nordible-orange" />
                 <span>{isDe ? 'Jetzt Betrieb kostenlos eintragen' : 'Add your business for free'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -360,13 +357,10 @@ export function BusinessLandingPage({
         </section>
 
         {/* B2B FAQ SECTION */}
-        <section className="py-16 sm:py-20 bg-white border-b border-[#E8ECF4]">
+        <section className="py-16 sm:py-20 bg-white border-b border-nordible-border">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <span className="text-xs font-black uppercase tracking-wider text-[#FF9F1A] font-heading">
-                {isDe ? 'Fragen & Antworten' : 'FAQ'}
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0D2B75] font-heading tracking-tight mt-1">
+              <h2 className="text-2xl sm:text-4xl font-black text-nordible-dark font-heading tracking-tight">
                 {isDe ? 'Häufige Fragen von Unternehmen' : 'Frequently Asked Questions by Businesses'}
               </h2>
             </div>
@@ -377,22 +371,22 @@ export function BusinessLandingPage({
                 return (
                   <div
                     key={idx}
-                    className="border border-[#E8ECF4] rounded-2xl overflow-hidden bg-[#FAFBFF] transition-all"
+                    className="border border-nordible-border rounded-2xl overflow-hidden bg-nordible-bg transition-colors"
                   >
                     <button
                       type="button"
                       onClick={() => toggleFaq(idx)}
-                      className="w-full p-5 text-left flex items-center justify-between gap-4 font-heading font-bold text-sm sm:text-base text-[#0D2B75] hover:text-[#145BFF] transition-colors cursor-pointer"
+                      className="w-full p-5 text-left flex items-center justify-between gap-4 font-heading font-bold text-sm sm:text-base text-nordible-dark hover:text-nordible-blue transition-colors cursor-pointer"
                     >
                       <span>{faq.q}</span>
                       {isOpen ? (
-                        <ChevronUp className="w-4 h-4 shrink-0 text-[#145BFF]" />
+                        <ChevronUp className="w-4 h-4 shrink-0 text-nordible-blue" />
                       ) : (
                         <ChevronDown className="w-4 h-4 shrink-0 text-slate-400" />
                       )}
                     </button>
                     {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-[#E8ECF4] bg-white font-medium">
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-nordible-border bg-white font-medium">
                         {faq.a}
                       </div>
                     )}

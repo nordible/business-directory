@@ -44,7 +44,7 @@ export const ImpressumContent: React.FC = () => {
     >
       {/* 1. Anbieterkennzeichnung */}
       <section id="anbieter" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '1. Angaben gemäß § 5 DDG' : '1. Information Pursuant to § 5 DDG'}
         </h2>
         <p className="text-sm">
@@ -62,7 +62,7 @@ export const ImpressumContent: React.FC = () => {
 
       {/* 2. Vertreten durch */}
       <section id="vertretung" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '2. Vertreten durch' : '2. Represented by'}
         </h2>
         <p className="text-sm">
@@ -72,25 +72,25 @@ export const ImpressumContent: React.FC = () => {
 
       {/* 3. Kontakt */}
       <section id="kontakt" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '3. Kontaktmöglichkeiten' : '3. Contact Details'}
         </h2>
-        <div className="bg-[#FAFBFF] rounded-2xl border border-[#E8ECF4] p-4 text-xs space-y-2">
+        <div className="bg-nordible-bg rounded-2xl border border-nordible-border p-4 text-xs space-y-2">
           <p>
             <strong>{isDe ? 'Telefon' : 'Phone'}:</strong>{' '}
-            <a href={siteConfig.contact.phoneHref} className="text-[#145BFF] hover:underline font-mono">
+            <a href={siteConfig.contact.phoneHref} className="text-nordible-blue hover:underline font-mono">
               {siteConfig.contact.phoneDisplay}
             </a>
           </p>
           <p>
             <strong>{isDe ? 'E-Mail' : 'Email'}:</strong>{' '}
-            <a href={`mailto:${siteConfig.contact.email}`} className="text-[#145BFF] hover:underline font-mono">
+            <a href={`mailto:${siteConfig.contact.email}`} className="text-nordible-blue hover:underline font-mono">
               {siteConfig.contact.email}
             </a>
           </p>
           <p>
             <strong>{isDe ? 'Webseite' : 'Website'}:</strong>{' '}
-            <a href={siteConfig.company.website} target="_blank" rel="noreferrer" className="text-[#145BFF] hover:underline">
+            <a href={siteConfig.company.website} target="_blank" rel="noreferrer" className="text-nordible-blue hover:underline">
               {siteConfig.company.website}
             </a>
           </p>
@@ -99,7 +99,7 @@ export const ImpressumContent: React.FC = () => {
 
       {/* 4. Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV */}
       <section id="redaktion" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '4. Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV' : '4. Editorial Responsibility (§ 18 Abs. 2 MStV)'}
         </h2>
         <p className="text-sm">
@@ -112,7 +112,7 @@ export const ImpressumContent: React.FC = () => {
 
       {/* 5. Streitbeilegung */}
       <section id="streitbeilegung" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '5. EU-Streitschlichtung & Verbraucherstreitbeilegung' : '5. Dispute Resolution & EU Platform'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -123,7 +123,7 @@ export const ImpressumContent: React.FC = () => {
             href="https://ec.europa.eu/consumers/odr/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#145BFF] hover:underline"
+            className="text-nordible-blue hover:underline"
           >
             https://ec.europa.eu/consumers/odr/
           </a>
@@ -138,7 +138,7 @@ export const ImpressumContent: React.FC = () => {
 
       {/* 6. Haftung für Inhalte */}
       <section id="haftung-inhalte" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '6. Haftung für Inhalte (§ 7 DDG)' : '6. Liability for Contents (§ 7 DDG)'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -155,7 +155,7 @@ export const ImpressumContent: React.FC = () => {
 
       {/* 7. Haftung für Links */}
       <section id="haftung-links" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '7. Haftung für externe Links (§§ 8–10 DDG)' : '7. Liability for External Links (§§ 8–10 DDG)'}
         </h2>
         <p className="text-xs leading-relaxed">
@@ -167,7 +167,7 @@ export const ImpressumContent: React.FC = () => {
 
       {/* 8. Urheberrecht */}
       <section id="urheberrecht" className="space-y-3">
-        <h2 className="text-lg font-heading font-black text-[#0D2B75] border-b border-[#E8ECF4] pb-2">
+        <h2 className="text-lg font-heading font-black text-nordible-dark border-b border-nordible-border pb-2">
           {isDe ? '8. Urheberrecht & Markenzeichen' : '8. Copyright & Trademarks'}
         </h2>
         <p className="text-xs leading-relaxed">

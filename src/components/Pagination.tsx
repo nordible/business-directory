@@ -97,7 +97,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     <nav
       role="navigation"
       aria-label={t('pagination.ariaLabel')}
-      className={`w-full py-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#E8ECF4] pt-6 select-none ${className}`}
+      className={`w-full py-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-nordible-border pt-6 select-none ${className}`}
     >
       {/* Left Metadata: Item Range & Optional Page Size Selector */}
       <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 w-full sm:w-auto">
@@ -112,15 +112,15 @@ export const Pagination: React.FC<PaginationProps> = ({
         )}
 
         {showPageSizeSelector && onPageSizeChange && pageSizeOptions && pageSizeOptions.length > 1 && (
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium bg-white px-2.5 py-1 rounded-xl border border-[#E8ECF4] shadow-2xs">
-            <label htmlFor="pagination-page-size" className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium bg-white px-2.5 py-1 rounded-xl border border-nordible-border shadow-2xs">
+            <label htmlFor="pagination-page-size" className="text-[11px] font-bold text-slate-500">
               {t('pagination.perPage')}:
             </label>
             <select
               id="pagination-page-size"
               value={pageSize}
               onChange={(e) => onPageSizeChange(Number(e.target.value))}
-              className="bg-transparent font-bold text-[#0D2B75] focus:outline-none cursor-pointer py-0.5 text-xs"
+              className="bg-transparent font-bold text-nordible-dark focus:outline-none cursor-pointer py-0.5 text-xs"
             >
               {pageSizeOptions.map((opt) => (
                 <option key={opt} value={opt}>
@@ -142,7 +142,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             disabled={safeCurrentPage === 1}
             aria-disabled={safeCurrentPage === 1}
             aria-label={t('pagination.first')}
-            className={`hidden md:inline-flex items-center justify-center w-9 h-9 rounded-xl border border-[#E8ECF4] bg-white text-[#0D2B75] shadow-2xs transition-all active:scale-95 cursor-pointer hover:border-[#145BFF]/30 hover:bg-[#F3F7FF] ${
+            className={`hidden md:inline-flex items-center justify-center w-9 h-9 rounded-xl border border-nordible-border bg-white text-nordible-dark shadow-2xs transition-colors active:scale-95 cursor-pointer hover:border-nordible-blue/30 hover:bg-nordible-section-bg ${
               safeCurrentPage === 1 ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''
             }`}
           >
@@ -156,7 +156,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             disabled={safeCurrentPage === 1}
             aria-disabled={safeCurrentPage === 1}
             aria-label={t('pagination.prevAria')}
-            className={`inline-flex items-center gap-1 px-3 sm:px-3.5 h-10 sm:h-9 rounded-xl border border-[#E8ECF4] bg-white text-[#0D2B75] text-xs font-bold shadow-2xs transition-all active:scale-95 cursor-pointer hover:border-[#145BFF]/30 hover:bg-[#F3F7FF] ${
+            className={`inline-flex items-center gap-1 px-3 sm:px-3.5 h-10 sm:h-9 rounded-xl border border-nordible-border bg-white text-nordible-dark text-xs font-bold shadow-2xs transition-colors active:scale-95 cursor-pointer hover:border-nordible-blue/30 hover:bg-nordible-section-bg ${
               safeCurrentPage === 1 ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''
             }`}
           >
@@ -165,7 +165,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           </button>
 
           {/* Mobile Current Page Indicator */}
-          <div className="sm:hidden px-3 py-1.5 rounded-xl bg-white border border-[#E8ECF4] text-xs font-bold text-[#0D2B75] shadow-2xs">
+          <div className="sm:hidden px-3 py-1.5 rounded-xl bg-white border border-nordible-border text-xs font-bold text-nordible-dark shadow-2xs">
             <span>
               {safeCurrentPage} / {totalPages}
             </span>
@@ -198,10 +198,10 @@ export const Pagination: React.FC<PaginationProps> = ({
                       ? t('pagination.currentPageAria', { page })
                       : t('pagination.pageAria', { page })
                   }
-                  className={`w-9 h-9 rounded-xl text-xs font-extrabold transition-all active:scale-95 cursor-pointer flex items-center justify-center ${
+                  className={`w-9 h-9 rounded-xl text-xs font-extrabold transition-colors active:scale-95 cursor-pointer flex items-center justify-center ${
                     isCurrent
                       ? 'text-white shadow-xs'
-                      : 'bg-white border border-[#E8ECF4] text-[#0D2B75] hover:bg-[#F3F7FF] hover:border-[#145BFF]/30 shadow-2xs'
+                      : 'bg-white border border-nordible-border text-nordible-dark hover:bg-nordible-section-bg hover:border-nordible-blue/30 shadow-2xs'
                   }`}
                   style={isCurrent ? { backgroundColor: primaryColor } : {}}
                 >
@@ -218,7 +218,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             disabled={safeCurrentPage === totalPages}
             aria-disabled={safeCurrentPage === totalPages}
             aria-label={t('pagination.nextAria')}
-            className={`inline-flex items-center gap-1 px-3 sm:px-3.5 h-10 sm:h-9 rounded-xl border border-[#E8ECF4] bg-white text-[#0D2B75] text-xs font-bold shadow-2xs transition-all active:scale-95 cursor-pointer hover:border-[#145BFF]/30 hover:bg-[#F3F7FF] ${
+            className={`inline-flex items-center gap-1 px-3 sm:px-3.5 h-10 sm:h-9 rounded-xl border border-nordible-border bg-white text-nordible-dark text-xs font-bold shadow-2xs transition-colors active:scale-95 cursor-pointer hover:border-nordible-blue/30 hover:bg-nordible-section-bg ${
               safeCurrentPage === totalPages ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''
             }`}
           >
@@ -233,7 +233,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             disabled={safeCurrentPage === totalPages}
             aria-disabled={safeCurrentPage === totalPages}
             aria-label={t('pagination.last')}
-            className={`hidden md:inline-flex items-center justify-center w-9 h-9 rounded-xl border border-[#E8ECF4] bg-white text-[#0D2B75] shadow-2xs transition-all active:scale-95 cursor-pointer hover:border-[#145BFF]/30 hover:bg-[#F3F7FF] ${
+            className={`hidden md:inline-flex items-center justify-center w-9 h-9 rounded-xl border border-nordible-border bg-white text-nordible-dark shadow-2xs transition-colors active:scale-95 cursor-pointer hover:border-nordible-blue/30 hover:bg-nordible-section-bg ${
               safeCurrentPage === totalPages ? 'opacity-40 cursor-not-allowed pointer-events-none' : ''
             }`}
           >

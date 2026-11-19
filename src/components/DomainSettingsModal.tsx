@@ -120,7 +120,7 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
             {/* CNAME record */}
             <div className="p-2.5 bg-white rounded-xl border border-gray-200 flex items-center justify-between text-xs">
               <div>
-                <span className="text-[10px] uppercase font-bold text-gray-400 block">{t('domain.cnameRecord')}</span>
+                <span className="text-[10px] font-bold text-gray-500 block">{t('domain.cnameRecord')}</span>
                 <span className="font-mono font-semibold text-gray-800">cname.nordible.com</span>
               </div>
               <button
@@ -149,7 +149,7 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-emerald-800 tracking-wider block">
+              <span className="text-[10px] font-bold text-emerald-800 block">
                 {t('domain.sslStatus')}
               </span>
               <p className="text-xs font-semibold text-emerald-900">
@@ -161,7 +161,7 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
           {/* Save Button */}
           <button
             type="submit"
-            className="w-full py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 cursor-pointer"
+            className="w-full py-3 px-4 rounded-xl text-white text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-colors active:scale-98 cursor-pointer"
             style={{ backgroundColor: primaryColor }}
           >
             <span>{t('domain.saveAndDeploy')}</span>

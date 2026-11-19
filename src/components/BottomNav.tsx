@@ -22,13 +22,13 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   return (
     <nav
       aria-label="Mobile Navigation"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E8ECF4] px-4 py-2 pb-safe shadow-[0_-4px_20px_rgba(13,43,117,0.08)]"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-nordible-border px-4 py-2 pb-safe shadow-md"
     >
       <div className="flex items-center justify-around max-w-sm mx-auto">
         {/* Explore Button */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex flex-col items-center justify-center min-w-[64px] min-h-[48px] text-[#0D2B75] hover:text-[#145BFF] active:scale-95 transition-transform cursor-pointer"
+          className="flex flex-col items-center justify-center min-w-[64px] min-h-[48px] text-nordible-dark hover:text-nordible-blue active:scale-95 transition-transform cursor-pointer"
         >
           <Compass className="w-5 h-5 mb-1" />
           <span className="text-[11px] font-bold leading-none">{t('nav.explore')}</span>
@@ -37,7 +37,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         {/* Filter / Search Button with thumb reach */}
         <button
           onClick={onOpenFilters}
-          className="relative flex flex-col items-center justify-center min-w-[64px] min-h-[48px] text-[#0D2B75] hover:text-[#145BFF] active:scale-95 transition-transform cursor-pointer"
+          className="relative flex flex-col items-center justify-center min-w-[64px] min-h-[48px] text-nordible-dark hover:text-nordible-blue active:scale-95 transition-transform cursor-pointer"
         >
           <div className="relative">
             <SlidersHorizontal className="w-5 h-5 mb-1" />
@@ -56,9 +56,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         {/* Add Listing Button */}
         <button
           onClick={onOpenAiModal}
-          className="flex flex-col items-center justify-center min-w-[64px] min-h-[48px] text-[#0D2B75] hover:text-[#145BFF] active:scale-95 transition-transform cursor-pointer"
+          className="flex flex-col items-center justify-center min-w-[64px] min-h-[48px] text-nordible-dark hover:text-nordible-blue active:scale-95 transition-transform cursor-pointer"
         >
-          <PlusCircle className="w-5 h-5 mb-1 text-[#145BFF]" />
+          <PlusCircle className="w-5 h-5 mb-1 text-nordible-blue" />
           <span className="text-[11px] font-bold leading-none">{t('nav.addListing')}</span>
         </button>
       </div>

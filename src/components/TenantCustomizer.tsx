@@ -70,7 +70,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           {/* Brand Name */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+            <label className="block text-xs font-bold text-gray-700 mb-1.5">
               {t('brand.brandName')}
             </label>
             <input
@@ -85,7 +85,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
 
           {/* Logo Icon / Text */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+            <label className="block text-xs font-bold text-gray-700 mb-1.5">
               {t('brand.logoText')}
             </label>
             <input
@@ -100,7 +100,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
 
           {/* Color Palette */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+            <label className="block text-xs font-bold text-gray-700 mb-2">
               {t('brand.primaryColor')}
             </label>
             <div className="flex items-center gap-3 flex-wrap">
@@ -127,7 +127,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
 
           {/* Tagline */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+            <label className="block text-xs font-bold text-gray-700 mb-1.5">
               {t('brand.tagline')}
             </label>
             <textarea
@@ -141,7 +141,7 @@ export const TenantCustomizer: React.FC<TenantCustomizerProps> = ({
 
           {/* Live Preview Box */}
           <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 mt-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-2">
+            <span className="text-[10px] font-bold text-gray-500 block mb-2">
               {t('brand.previewTitle')}
             </span>
             <div className="flex items-center gap-3">

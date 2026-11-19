@@ -70,7 +70,7 @@ export const OpeningHoursPicker: React.FC<OpeningHoursPickerProps> = ({ value, o
         <button
           type="button"
           onClick={copyMondayToWeekdays}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-[#145BFF] text-[11px] font-bold transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-nordible-blue text-[11px] font-bold transition-colors cursor-pointer"
         >
           <Copy className="w-3 h-3" />
           <span>{locale === 'de' ? 'Montag auf Mo–Fr übertragen' : 'Apply Monday to Mon–Fri'}</span>
@@ -81,13 +81,13 @@ export const OpeningHoursPicker: React.FC<OpeningHoursPickerProps> = ({ value, o
           onClick={setAll24Hours}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 text-[11px] font-bold transition-colors cursor-pointer"
         >
-          <Sparkles className="w-3 h-3 text-[#FF9F1A]" />
+          <Sparkles className="w-3 h-3 text-nordible-orange" />
           <span>{locale === 'de' ? '24/7 Geöffnet' : 'Open 24/7'}</span>
         </button>
       </div>
 
       {/* 7 Days Table/List */}
-      <div className="space-y-2 border border-[#E8ECF4] rounded-2xl p-3 bg-[#FAFBFF]">
+      <div className="space-y-2 border border-nordible-border rounded-2xl p-3 bg-nordible-bg">
         {DAY_LABELS.map((day) => {
           const item = schedule[day.key] || { open: '09:00', close: '18:00', closed: false };
           return (
@@ -99,7 +99,7 @@ export const OpeningHoursPicker: React.FC<OpeningHoursPickerProps> = ({ value, o
             >
               {/* Day Label & Closed Toggle */}
               <div className="flex items-center justify-between sm:justify-start gap-3 sm:w-36">
-                <span className="text-xs font-bold text-[#0D2B75]">
+                <span className="text-xs font-bold text-nordible-dark">
                   {locale === 'de' ? day.labelDe : day.labelEn}
                 </span>
                 <button
@@ -124,7 +124,7 @@ export const OpeningHoursPicker: React.FC<OpeningHoursPickerProps> = ({ value, o
               {/* Time Pickers */}
               {!item.closed ? (
                 <div className="flex items-center gap-2 text-xs">
-                  <div className="flex items-center gap-1 bg-[#FAFBFF] px-2.5 py-1 rounded-lg border border-[#E8ECF4]">
+                  <div className="flex items-center gap-1 bg-nordible-bg px-2.5 py-1 rounded-lg border border-nordible-border">
                     <Clock className="w-3 h-3 text-gray-400" />
                     <input
                       type="time"
@@ -134,7 +134,7 @@ export const OpeningHoursPicker: React.FC<OpeningHoursPickerProps> = ({ value, o
                     />
                   </div>
                   <span className="text-gray-400 text-xs">{locale === 'de' ? 'bis' : 'to'}</span>
-                  <div className="flex items-center gap-1 bg-[#FAFBFF] px-2.5 py-1 rounded-lg border border-[#E8ECF4]">
+                  <div className="flex items-center gap-1 bg-nordible-bg px-2.5 py-1 rounded-lg border border-nordible-border">
                     <Clock className="w-3 h-3 text-gray-400" />
                     <input
                       type="time"

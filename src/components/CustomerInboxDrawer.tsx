@@ -249,11 +249,11 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
     <div className="fixed inset-0 z-50 flex justify-end bg-black/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-200">
       <div className="absolute inset-0 -z-10" onClick={onClose} />
       <div
-        className="w-full sm:max-w-xl bg-white h-full shadow-2xl flex flex-col overflow-hidden border-l border-[#E8ECF4]"
+        className="w-full sm:max-w-xl bg-white h-full shadow-2xl flex flex-col overflow-hidden border-l border-nordible-border"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8ECF4] bg-gradient-to-r from-[#F3F7FF] to-white">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-nordible-border bg-gradient-to-r from-nordible-section-bg to-white">
           <div className="flex items-center gap-3">
             {selectedConversation ? (
               <button
@@ -264,12 +264,12 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                 <ArrowLeft className="w-4 h-4" />
               </button>
             ) : (
-              <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#145BFF] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-xl bg-blue-50 text-nordible-blue flex items-center justify-center">
                 <Inbox className="w-5 h-5" />
               </div>
             )}
             <div>
-              <h2 className="font-heading font-black text-base text-[#0D2B75] leading-tight">
+              <h2 className="font-heading font-black text-base text-nordible-dark leading-tight">
                 {selectedConversation ? selectedConversation.subject : (isDe ? 'Kunden-Postfach' : 'Customer Inbox')}
               </h2>
               <p className="text-[11px] text-gray-500 font-medium">
@@ -309,10 +309,10 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
             /* Unauthenticated View: Passwordless OTP Flow */
             <div className="p-6 sm:p-8 flex flex-col justify-center min-h-[420px] max-w-md mx-auto space-y-6">
               <div className="text-center space-y-2">
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 text-[#145BFF] flex items-center justify-center mx-auto shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 text-nordible-blue flex items-center justify-center mx-auto shadow-xs">
                   <ShieldCheck className="w-7 h-7" />
                 </div>
-                <h3 className="font-heading font-black text-xl text-[#0D2B75]">
+                <h3 className="font-heading font-black text-xl text-nordible-dark">
                   {authStep === 'email'
                     ? (isDe ? 'Anmelden ohne Passwort' : 'Passwordless Login')
                     : (isDe ? 'Bestätigungscode eingeben' : 'Enter Verification Code')}
@@ -354,7 +354,7 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
               {authStep === 'email' ? (
                 <form onSubmit={handleRequestOtp} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                    <label className="block text-xs font-bold text-nordible-dark mb-1">
                       {isDe ? 'E-Mail-Adresse' : 'Email Address'}
                     </label>
                     <div className="relative">
@@ -365,7 +365,7 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                         value={inputEmail}
                         onChange={(e) => setInputEmail(e.target.value)}
                         placeholder="ihre-email@example.de"
-                        className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-xs text-gray-900 outline-none"
+                        className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-xs text-gray-900 outline-none"
                       />
                     </div>
                   </div>
@@ -373,7 +373,7 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                   <button
                     type="submit"
                     disabled={authLoading}
-                    className="w-full py-3 px-4 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-3 px-4 rounded-xl bg-nordible-blue hover:bg-nordible-dark disabled:opacity-50 text-white font-bold text-xs shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
                   >
                     {authLoading ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -388,7 +388,7 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
               ) : (
                 <form onSubmit={handleVerifyOtp} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-[#0D2B75] mb-1">
+                    <label className="block text-xs font-bold text-nordible-dark mb-1">
                       {isDe ? '6-stelliger Code' : '6-digit Code'}
                     </label>
                     <input
@@ -399,14 +399,14 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                       value={otpCode}
                       onChange={(e) => setOtpCode(e.target.value)}
                       placeholder="123456"
-                      className="w-full py-3 px-4 text-center tracking-[8px] font-mono font-bold text-xl rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] focus:bg-white focus:border-[#145BFF] text-[#145BFF] outline-none"
+                      className="w-full py-3 px-4 text-center tracking-[8px] font-mono font-bold text-xl rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-nordible-blue outline-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={authLoading}
-                    className="w-full py-3 px-4 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-3 px-4 rounded-xl bg-nordible-blue hover:bg-nordible-dark disabled:opacity-50 text-white font-bold text-xs shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
                   >
                     {authLoading ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -422,7 +422,7 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                     <button
                       type="button"
                       onClick={() => setAuthStep('email')}
-                      className="text-xs text-gray-500 hover:text-[#145BFF] font-medium cursor-pointer"
+                      className="text-xs text-gray-500 hover:text-nordible-blue font-medium cursor-pointer"
                     >
                       {isDe ? 'E-Mail-Adresse ändern' : 'Change email address'}
                     </button>
@@ -436,10 +436,10 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
               {/* AI Triage Banner */}
               {selectedConversation.aiSummary && (
                 <div className="p-4 bg-blue-50/70 border-b border-blue-100 flex items-start gap-2.5">
-                  <Sparkles className="w-4 h-4 text-[#145BFF] shrink-0 mt-0.5" />
-                  <div className="text-xs text-[#0D2B75] space-y-1">
-                    <span className="font-bold uppercase tracking-wider text-[10px] text-[#145BFF] block">
-                      {isDe ? '⚡ KI-Triage & Zusammenfassung' : '⚡ AI Triage & Summary'}
+                  <Sparkles className="w-4 h-4 text-nordible-blue shrink-0 mt-0.5" />
+                  <div className="text-xs text-nordible-dark space-y-1">
+                    <span className="font-bold text-xs text-nordible-blue block">
+                      {isDe ? 'KI-Triage & Zusammenfassung' : 'AI Triage & Summary'}
                     </span>
                     <p className="leading-relaxed text-gray-700">{selectedConversation.aiSummary}</p>
                   </div>
@@ -450,7 +450,7 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
               <div className="flex-1 p-6 space-y-4 overflow-y-auto">
                 {isLoadingMessages ? (
                   <div className="flex justify-center py-8">
-                    <div className="w-6 h-6 border-2 border-[#145BFF] border-t-transparent rounded-full animate-spin" />
+                    <div className="w-6 h-6 border-2 border-nordible-blue border-t-transparent rounded-full animate-spin" />
                   </div>
                 ) : messages.length === 0 ? (
                   <p className="text-xs text-gray-400 text-center py-8">
@@ -474,8 +474,8 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                         <div
                           className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed ${
                             isCustomer
-                              ? 'bg-[#145BFF] text-white rounded-br-xs'
-                              : 'bg-[#F3F7FF] text-gray-800 border border-[#E8ECF4] rounded-bl-xs'
+                              ? 'bg-nordible-blue text-white rounded-br-xs'
+                              : 'bg-nordible-section-bg text-gray-800 border border-nordible-border rounded-bl-xs'
                           }`}
                         >
                           {m.content}
@@ -487,18 +487,18 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
               </div>
 
               {/* Reply Input (Bottom Anchored / Thumb Accessible) */}
-              <form onSubmit={handleSendReply} className="p-4 border-t border-[#E8ECF4] bg-[#FAFBFF] flex items-center gap-2">
+              <form onSubmit={handleSendReply} className="p-4 border-t border-nordible-border bg-nordible-bg flex items-center gap-2">
                 <input
                   type="text"
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
                   placeholder={isDe ? 'Antwort verfassen...' : 'Write a reply...'}
-                  className="flex-1 px-4 py-2.5 rounded-xl border border-[#E8ECF4] bg-white text-xs text-gray-900 focus:border-[#145BFF] outline-none"
+                  className="flex-1 px-4 py-2.5 rounded-xl border border-nordible-border bg-white text-xs text-gray-900 focus:border-nordible-blue outline-none"
                 />
                 <button
                   type="submit"
                   disabled={isSendingReply || !replyText.trim()}
-                  className="px-4 py-2.5 rounded-xl bg-[#145BFF] hover:bg-[#0D2B75] disabled:opacity-40 text-white font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
+                  className="px-4 py-2.5 rounded-xl bg-nordible-blue hover:bg-nordible-dark disabled:opacity-40 text-white font-bold text-xs shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">{isDe ? 'Senden' : 'Send'}</span>
@@ -508,14 +508,14 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
           ) : (
             /* Conversation List Across Multiple Businesses */
             <div className="p-4 sm:p-6 space-y-4">
-              <div className="flex items-center justify-between pb-2 border-b border-[#E8ECF4]">
-                <h3 className="font-heading font-black text-sm text-[#0D2B75]">
+              <div className="flex items-center justify-between pb-2 border-b border-nordible-border">
+                <h3 className="font-heading font-black text-sm text-nordible-dark">
                   {isDe ? `Ihre Anfragen (${conversations.length})` : `Your Inquiries (${conversations.length})`}
                 </h3>
                 <button
                   type="button"
                   onClick={() => loadConversations()}
-                  className="text-xs text-[#145BFF] hover:underline font-bold cursor-pointer"
+                  className="text-xs text-nordible-blue hover:underline font-bold cursor-pointer"
                 >
                   {isDe ? 'Aktualisieren' : 'Refresh'}
                 </button>
@@ -523,14 +523,14 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
 
               {isLoadingConversations ? (
                 <div className="flex justify-center py-12">
-                  <div className="w-6 h-6 border-2 border-[#145BFF] border-t-transparent rounded-full animate-spin" />
+                  <div className="w-6 h-6 border-2 border-nordible-blue border-t-transparent rounded-full animate-spin" />
                 </div>
               ) : conversations.length === 0 ? (
                 <div className="text-center py-12 space-y-3">
                   <div className="w-12 h-12 rounded-2xl bg-gray-50 text-gray-400 flex items-center justify-center mx-auto">
                     <Inbox className="w-6 h-6" />
                   </div>
-                  <h4 className="font-heading font-bold text-sm text-[#0D2B75]">
+                  <h4 className="font-heading font-bold text-sm text-nordible-dark">
                     {isDe ? 'Noch keine Anfragen vorhanden' : 'No inquiries yet'}
                   </h4>
                   <p className="text-xs text-gray-500 max-w-xs mx-auto">
@@ -545,12 +545,12 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                     <div
                       key={conv.id}
                       onClick={() => handleSelectConversation(conv)}
-                      className="p-4 rounded-2xl border border-[#E8ECF4] bg-[#FAFBFF] hover:bg-white hover:border-[#145BFF] hover:shadow-md transition-all cursor-pointer space-y-2 group"
+                      className="p-4 rounded-2xl border border-nordible-border bg-nordible-bg hover:bg-white hover:border-nordible-blue hover:shadow-md transition-colors cursor-pointer space-y-2 group"
                     >
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2 min-w-0">
-                          <Building2 className="w-4 h-4 text-[#145BFF] shrink-0" />
-                          <span className="font-heading font-bold text-xs text-[#0D2B75] truncate">
+                          <Building2 className="w-4 h-4 text-nordible-blue shrink-0" />
+                          <span className="font-heading font-bold text-xs text-nordible-dark truncate">
                             {conv.businessName || (isDe ? 'Unternehmen' : 'Business')}
                           </span>
                         </div>
@@ -571,13 +571,13 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                         </span>
                       </div>
 
-                      <div className="font-medium text-xs text-gray-900 line-clamp-1 group-hover:text-[#145BFF] transition-colors">
+                      <div className="font-medium text-xs text-gray-900 line-clamp-1 group-hover:text-nordible-blue transition-colors">
                         {conv.subject}
                       </div>
 
                       {conv.aiSummary && (
                         <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed bg-white/70 p-2 rounded-xl border border-gray-100">
-                          <span className="text-[#145BFF] font-semibold">
+                          <span className="text-nordible-blue font-semibold">
                             {isDe ? '⚡ Zusammenfassung: ' : '⚡ Summary: '}
                           </span>
                           {conv.aiSummary}
