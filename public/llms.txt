@@ -31,20 +31,20 @@ Autonomous AI assistants, agentic crawlers (e.g., ChatGPT, Claude, Perplexity, A
 2. **JSON Request Payload**:
 ```json
 {
-  "name": "Example Enterprise GmbH",
+  "name": "Global Tech Services Inc.",
   "categoryName": "IT, Software & Medien",
-  "legalForm": "GmbH",
-  "address": "Musterstraße 123",
-  "postalCode": "60311",
-  "city": "Frankfurt am Main",
-  "state": "Hessen",
-  "country": "Deutschland",
-  "phone": "+49 69 12345678",
+  "legalForm": "Inc.",
+  "address": "100 Broadway",
+  "postalCode": "10005",
+  "city": "New York",
+  "state": "NY",
+  "country": "United States",
+  "phone": "+1 212 555 0199",
   "email": "contact@example.com",
   "website": "https://example.com",
   "description": "Short summary of core services and offerings.",
-  "services": ["Softwareentwicklung", "Webplattformen", "Cloud-Architektur"],
-  "hours": "Mo - Fr: 09:00 - 18:00 Uhr"
+  "services": ["Software Engineering", "Web Platforms", "Cloud Architecture"],
+  "hours": "Mo - Fr: 09:00 - 18:00"
 }
 ```
 *Mandatory fields*: `name`, `website`, and a valid `email` (`categoryName`, `address`, `city`, and other fields are optional).

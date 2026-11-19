@@ -155,8 +155,8 @@ export const AgbContent: React.FC = () => {
         </h2>
         <p className="text-xs leading-relaxed">
           {isDe
-            ? `Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts (CISG). Soweit der Nutzer Kaufmann im Sinne des Handelsgesetzbuches (HGB), juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen ist, ist ausschließlicher Gerichtsstand für alle Streitigkeiten Frankfurt am Main.`
-            : `The laws of the Federal Republic of Germany apply, excluding the UN Convention on Contracts for the International Sale of Goods (CISG). Insofar as the user is a commercial entity under the German Commercial Code (HGB) or a public body, the exclusive place of jurisdiction is Frankfurt am Main, Germany.`}
+            ? `Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts (CISG). Soweit der Nutzer Kaufmann im Sinne des Handelsgesetzbuches (HGB), juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen ist, ist ausschließlicher Gerichtsstand für alle Streitigkeiten der Sitz des Betreibers.`
+            : `The laws of the Federal Republic of Germany apply, excluding the UN Convention on Contracts for the International Sale of Goods (CISG). Insofar as the user is a commercial entity under the German Commercial Code (HGB) or a public body, the exclusive place of jurisdiction is the registered seat of the Operator.`}
         </p>
       </section>
     </LegalPageLayout>

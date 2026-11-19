@@ -480,7 +480,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       type="text"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      placeholder={isDe ? 'z. B. Frankfurt am Main (optional)' : 'e.g. Berlin (optional)'}
+                      placeholder={isDe ? 'z. B. Berlin, Zürich oder Wien (optional)' : 'e.g. New York, London or Tokyo (optional)'}
                       className="w-full px-3 py-2 text-xs rounded-xl border border-[#E8ECF4] bg-white focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium text-slate-800"
                     />
                   </div>

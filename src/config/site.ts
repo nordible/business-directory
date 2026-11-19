@@ -37,7 +37,7 @@ export const siteConfig = {
   },
   geo: {
     defaultRegion: 'Global',
-    topCities: ['Global / Weltweit', 'Frankfurt am Main', 'New York', 'London', 'Berlin', 'Mumbai', 'Dubai', 'Tokyo', 'Zürich', 'Singapore'],
+    topCities: ['Global / Worldwide', 'New York', 'London', 'Tokyo', 'Paris', 'Berlin', 'Singapore', 'Dubai', 'Mumbai', 'Sydney', 'Zürich'],
   },
   assets: {
     logo: '/images/logos/nordible-logo.png',

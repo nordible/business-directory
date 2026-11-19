@@ -15,7 +15,7 @@
 1. **🤖 Agentic**:
    - Built from the ground up for the agentic web era.
    - Every profile generates machine-readable `Schema.org` entity graphs (`Organization`, `LocalBusiness` JSON-LD) and exposes an AI crawler ingestion protocol.
-   - When autonomous AI agents, ChatGPT Search, or Perplexity answer customer buying questions (*"Find me a verified B2B software partner in Frankfurt"*), the platform acts as an authoritative, structured entity index for agentic citations and recommendations.
+   - When autonomous AI agents, ChatGPT Search, or Perplexity answer customer buying questions (*"Find me a verified enterprise software partner in London or New York"*), the platform acts as an authoritative, structured entity index for agentic citations and recommendations.
 
 2. **🎁 Free to Use (0% Commission)**:
    - Traditional directories and lead brokers (Yelp, Thumbtack, Bark, MyHammer) trap business owners behind paywalls, charging **15% to 30% cuts on closed deals** or €50+ for a single shared lead.
@@ -91,6 +91,6 @@ We welcome community contributions! Feel free to open an issue or submit a pull 
 
 ## 📄 License & Maintained By
 
-Maintained by **[Nordible Technologies](https://nordible.co)** · Frankfurt am Main, Germany.  
+Maintained by **[Nordible Technologies](https://nordible.co)**.  
 Live Platform: [http://business-directory.nordible.co/](http://business-directory.nordible.co/)  
 Official Repository: [https://github.com/nordible/business-directory](https://github.com/nordible/business-directory)

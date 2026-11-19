@@ -12,38 +12,10 @@ interface CityNode {
   lat: number;
   lon: number;
   connections: string[]; // Connected city ids
-  isCenter?: boolean;
 }
 
 const GLOBAL_CITIES: CityNode[] = [
-  // THE HEART / CENTERPIECE
-  {
-    id: 'frankfurt',
-    name: 'Frankfurt am Main',
-    country: 'Deutschland',
-    flag: '🇩🇪',
-    lat: 50.1109,
-    lon: 8.6821,
-    isCenter: true,
-    connections: [
-      'london', 'paris', 'zurich', 'amsterdam', 'berlin', 'milan', 'madrid', 'stockholm',
-      'newyork', 'sanfrancisco', 'chicago', 'toronto',
-      'saopaulo', 'buenosaires',
-      'dubai', 'riyadh', 'telaviv',
-      'tokyo', 'singapore', 'hongkong', 'shanghai', 'seoul', 'mumbai',
-      'sydney', 'nairobi', 'johannesburg'
-    ],
-  },
   // EUROPEAN COMMERCIAL HUBS
-  {
-    id: 'zurich',
-    name: 'Zürich',
-    country: 'Schweiz',
-    flag: '🇨🇭',
-    lat: 47.3769,
-    lon: 8.5417,
-    connections: ['frankfurt', 'milan', 'london'],
-  },
   {
     id: 'london',
     name: 'London',
@@ -51,7 +23,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇬🇧',
     lat: 51.5074,
     lon: -0.1278,
-    connections: ['frankfurt', 'newyork', 'paris', 'singapore'],
+    connections: ['newyork', 'paris', 'zurich', 'dubai', 'singapore', 'berlin'],
   },
   {
     id: 'paris',
@@ -60,16 +32,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇫🇷',
     lat: 48.8566,
     lon: 2.3522,
-    connections: ['frankfurt', 'london', 'milan'],
-  },
-  {
-    id: 'amsterdam',
-    name: 'Amsterdam',
-    country: 'Netherlands',
-    flag: '🇳🇱',
-    lat: 52.3676,
-    lon: 4.9041,
-    connections: ['frankfurt', 'london', 'berlin'],
+    connections: ['london', 'berlin', 'madrid', 'milan', 'newyork'],
   },
   {
     id: 'berlin',
@@ -78,7 +41,25 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇩🇪',
     lat: 52.52,
     lon: 13.405,
-    connections: ['frankfurt', 'amsterdam', 'stockholm'],
+    connections: ['london', 'paris', 'zurich', 'amsterdam', 'stockholm'],
+  },
+  {
+    id: 'zurich',
+    name: 'Zürich',
+    country: 'Schweiz',
+    flag: '🇨🇭',
+    lat: 47.3769,
+    lon: 8.5417,
+    connections: ['london', 'berlin', 'milan', 'dubai'],
+  },
+  {
+    id: 'amsterdam',
+    name: 'Amsterdam',
+    country: 'Netherlands',
+    flag: '🇳🇱',
+    lat: 52.3676,
+    lon: 4.9041,
+    connections: ['london', 'berlin', 'stockholm'],
   },
   {
     id: 'milan',
@@ -87,7 +68,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇮🇹',
     lat: 45.4642,
     lon: 9.19,
-    connections: ['frankfurt', 'zurich', 'madrid'],
+    connections: ['paris', 'zurich', 'madrid'],
   },
   {
     id: 'madrid',
@@ -96,7 +77,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇪🇸',
     lat: 40.4168,
     lon: -3.7038,
-    connections: ['frankfurt', 'milan', 'saopaulo'],
+    connections: ['paris', 'milan', 'saopaulo', 'london'],
   },
   {
     id: 'stockholm',
@@ -105,7 +86,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇸🇪',
     lat: 59.3293,
     lon: 18.0686,
-    connections: ['frankfurt', 'berlin'],
+    connections: ['berlin', 'amsterdam', 'london'],
   },
   // NORTH AMERICA
   {
@@ -115,7 +96,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇺🇸',
     lat: 40.7128,
     lon: -74.006,
-    connections: ['frankfurt', 'london', 'sanfrancisco', 'toronto'],
+    connections: ['london', 'sanfrancisco', 'chicago', 'toronto', 'saopaulo', 'paris'],
   },
   {
     id: 'sanfrancisco',
@@ -124,7 +105,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇺🇸',
     lat: 37.7749,
     lon: -122.4194,
-    connections: ['frankfurt', 'newyork', 'tokyo'],
+    connections: ['newyork', 'tokyo', 'singapore', 'sydney'],
   },
   {
     id: 'chicago',
@@ -133,7 +114,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇺🇸',
     lat: 41.8781,
     lon: -87.6298,
-    connections: ['frankfurt', 'newyork'],
+    connections: ['newyork', 'sanfrancisco', 'toronto'],
   },
   {
     id: 'toronto',
@@ -142,7 +123,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇨🇦',
     lat: 43.6532,
     lon: -79.3832,
-    connections: ['frankfurt', 'newyork'],
+    connections: ['newyork', 'chicago', 'london'],
   },
   // SOUTH AMERICA
   {
@@ -152,7 +133,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇧🇷',
     lat: -23.5505,
     lon: -46.6333,
-    connections: ['frankfurt', 'buenosaires', 'newyork'],
+    connections: ['newyork', 'buenosaires', 'madrid', 'johannesburg'],
   },
   {
     id: 'buenosaires',
@@ -161,7 +142,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇦🇷',
     lat: -34.6037,
     lon: -58.3816,
-    connections: ['frankfurt', 'saopaulo'],
+    connections: ['saopaulo', 'newyork'],
   },
   // MIDDLE EAST
   {
@@ -171,7 +152,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇦🇪',
     lat: 25.2048,
     lon: 55.2708,
-    connections: ['frankfurt', 'riyadh', 'mumbai', 'singapore'],
+    connections: ['london', 'riyadh', 'mumbai', 'singapore', 'nairobi', 'zurich'],
   },
   {
     id: 'riyadh',
@@ -180,7 +161,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇸🇦',
     lat: 24.7136,
     lon: 46.6753,
-    connections: ['frankfurt', 'dubai'],
+    connections: ['dubai', 'mumbai'],
   },
   {
     id: 'telaviv',
@@ -189,7 +170,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇮🇱',
     lat: 32.0853,
     lon: 34.7818,
-    connections: ['frankfurt', 'london'],
+    connections: ['london', 'paris', 'dubai'],
   },
   // ASIA & PACIFIC
   {
@@ -199,7 +180,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇯🇵',
     lat: 35.6762,
     lon: 139.6503,
-    connections: ['frankfurt', 'sanfrancisco', 'seoul', 'singapore'],
+    connections: ['sanfrancisco', 'seoul', 'shanghai', 'singapore', 'sydney'],
   },
   {
     id: 'seoul',
@@ -208,7 +189,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇰🇷',
     lat: 37.5665,
     lon: 126.978,
-    connections: ['frankfurt', 'tokyo', 'shanghai'],
+    connections: ['tokyo', 'shanghai', 'hongkong'],
   },
   {
     id: 'shanghai',
@@ -217,7 +198,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇨🇳',
     lat: 31.2304,
     lon: 121.4737,
-    connections: ['frankfurt', 'hongkong', 'tokyo'],
+    connections: ['tokyo', 'hongkong', 'singapore', 'seoul'],
   },
   {
     id: 'hongkong',
@@ -226,7 +207,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇭🇰',
     lat: 22.3193,
     lon: 114.1694,
-    connections: ['frankfurt', 'singapore', 'shanghai'],
+    connections: ['singapore', 'shanghai', 'tokyo', 'sydney'],
   },
   {
     id: 'singapore',
@@ -235,7 +216,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇸🇬',
     lat: 1.3521,
     lon: 103.8198,
-    connections: ['frankfurt', 'sydney', 'mumbai', 'tokyo'],
+    connections: ['tokyo', 'hongkong', 'sydney', 'mumbai', 'dubai', 'london'],
   },
   {
     id: 'mumbai',
@@ -244,7 +225,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇮🇳',
     lat: 19.076,
     lon: 72.8777,
-    connections: ['frankfurt', 'dubai', 'singapore'],
+    connections: ['dubai', 'singapore', 'london', 'riyadh'],
   },
   {
     id: 'sydney',
@@ -253,7 +234,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇦🇺',
     lat: -33.8688,
     lon: 151.2093,
-    connections: ['frankfurt', 'singapore'],
+    connections: ['singapore', 'tokyo', 'sanfrancisco', 'hongkong'],
   },
   // AFRICA
   {
@@ -263,7 +244,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇰🇪',
     lat: -1.2921,
     lon: 36.8219,
-    connections: ['frankfurt', 'dubai'],
+    connections: ['dubai', 'johannesburg', 'london'],
   },
   {
     id: 'johannesburg',
@@ -272,7 +253,7 @@ const GLOBAL_CITIES: CityNode[] = [
     flag: '🇿🇦',
     lat: -26.2041,
     lon: 28.0473,
-    connections: ['frankfurt', 'nairobi', 'london'],
+    connections: ['nairobi', 'london', 'dubai', 'saopaulo'],
   },
 ];
 
@@ -282,9 +263,9 @@ export function InteractiveGlobe() {
 
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
-  // Rotation angles (radians) — initialized to highlight Frankfurt facing forward
-  const rotRef = useRef({ x: 0.42, y: -0.15 });
-  const dragStartRef = useRef({ x: 0, y: 0, rotX: 0.42, rotY: -0.15 });
+  // Rotation angles (radians) — balanced perspective showcasing global continents
+  const rotRef = useRef({ x: 0.28, y: -0.6 });
+  const dragStartRef = useRef({ x: 0, y: 0, rotX: 0.28, rotY: -0.6 });
   const pulsePhaseRef = useRef(0);
 
   useEffect(() => {
@@ -412,8 +393,6 @@ export function InteractiveGlobe() {
           if (drawnConnections.has(pairKey)) return;
           drawnConnections.add(pairKey);
 
-          const isConnectedToFrankfurt = cityA.id === 'frankfurt' || cityB.id === 'frankfurt';
-
           // Sample points along great circle arc
           const segments = 32;
           const arcPoints: { sx: number; sy: number; sz: number; visible: boolean }[] = [];
@@ -429,7 +408,7 @@ export function InteractiveGlobe() {
             const lon = cityA.lon + diffLon * t;
 
             // Elevation arch above sphere: highest at midpoint
-            const elevation = 1 + (isConnectedToFrankfurt ? 0.14 : 0.08) * Math.sin(t * Math.PI);
+            const elevation = 1 + 0.09 * Math.sin(t * Math.PI);
             arcPoints.push(project(lat, lon, elevation));
           }
 
@@ -449,14 +428,12 @@ export function InteractiveGlobe() {
             }
           });
 
-          ctx.lineWidth = isConnectedToFrankfurt ? 2.2 : 1.1;
-          ctx.strokeStyle = isConnectedToFrankfurt
-            ? 'rgba(255, 159, 26, 0.75)'
-            : 'rgba(56, 189, 248, 0.3)';
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
           ctx.stroke();
 
           // Animated traveling pulse photon along the arc
-          const pulseSpeed = isConnectedToFrankfurt ? 0.35 : 0.25;
+          const pulseSpeed = 0.28;
           const pulseT = ((pulsePhaseRef.current * pulseSpeed + (cityA.lat * 0.04)) % 1 + 1) % 1;
           const photonIndex = Math.min(segments, Math.floor(pulseT * segments));
           const photonPoint = arcPoints[photonIndex];
@@ -465,62 +442,48 @@ export function InteractiveGlobe() {
             ctx.arc(
               photonPoint.sx,
               photonPoint.sy,
-              isConnectedToFrankfurt ? 3.5 : 2.2,
+              2.4,
               0,
               Math.PI * 2
             );
-            ctx.fillStyle = isConnectedToFrankfurt ? '#FFD166' : '#60A5FA';
-            ctx.shadowColor = isConnectedToFrankfurt ? '#FF9F1A' : '#3B82F6';
-            ctx.shadowBlur = isConnectedToFrankfurt ? 10 : 5;
+            ctx.fillStyle = '#60A5FA';
+            ctx.shadowColor = '#38BDF8';
+            ctx.shadowBlur = 6;
             ctx.fill();
             ctx.shadowBlur = 0;
           }
         });
       });
 
-      // 5. Draw City Nodes & Frankfurt Pulsing Beacons
+      // 5. Draw City Nodes & Pulsing Beacons
       GLOBAL_CITIES.forEach((city) => {
         const pt = project(city.lat, city.lon, 1);
         if (!pt.visible) return;
 
-        const isFrankfurt = city.id === 'frankfurt';
-        const baseRadius = isFrankfurt ? 6.5 : 3.2;
+        const baseRadius = 3.6;
 
-        // Multi-tier Concentric radar ripples for Frankfurt (the heart of the network)
-        if (isFrankfurt) {
-          const ripple1 = baseRadius + ((pulsePhaseRef.current * 1.8) % 1) * 16;
-          const ripple2 = baseRadius + (((pulsePhaseRef.current * 1.8) + 0.5) % 1) * 16;
-
-          ctx.beginPath();
-          ctx.arc(pt.sx, pt.sy, ripple1, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(255, 159, 26, ${Math.max(0, 0.6 - (ripple1 / 22))})`;
-          ctx.lineWidth = 2;
-          ctx.stroke();
-
-          ctx.beginPath();
-          ctx.arc(pt.sx, pt.sy, ripple2, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(255, 159, 26, ${Math.max(0, 0.6 - (ripple2 / 22))})`;
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        }
+        // Subtle radar ripple
+        const ripple = baseRadius + (((pulsePhaseRef.current * 1.4) + (city.lat * 0.05)) % 1) * 14;
+        ctx.beginPath();
+        ctx.arc(pt.sx, pt.sy, ripple, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(56, 189, 248, ${Math.max(0, 0.45 - (ripple / 18))})`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
 
         // Inner glowing core dot
         ctx.beginPath();
         ctx.arc(pt.sx, pt.sy, baseRadius, 0, Math.PI * 2);
-        ctx.fillStyle = isFrankfurt ? '#FF9F1A' : '#38BDF8';
-        ctx.shadowColor = isFrankfurt ? '#FF9F1A' : '#38BDF8';
-        ctx.shadowBlur = isFrankfurt ? 16 : 6;
+        ctx.fillStyle = '#38BDF8';
+        ctx.shadowColor = '#38BDF8';
+        ctx.shadowBlur = 8;
         ctx.fill();
         ctx.shadowBlur = 0;
 
         // City Name Tag if clearly facing front
-        if (pt.sz > (isFrankfurt ? 0.05 : 0.22)) {
-          ctx.font = isFrankfurt
-            ? 'bold 12px system-ui, -apple-system, sans-serif'
-            : '10px system-ui, -apple-system, sans-serif';
-          ctx.fillStyle = isFrankfurt ? '#FFD166' : 'rgba(226, 232, 240, 0.85)';
-          const label = isFrankfurt ? `★ ${city.name} (Hub)` : city.name;
-          ctx.fillText(label, pt.sx + (isFrankfurt ? 10 : 7), pt.sy + 3.5);
+        if (pt.sz > 0.16) {
+          ctx.font = 'bold 11px system-ui, -apple-system, sans-serif';
+          ctx.fillStyle = 'rgba(241, 245, 249, 0.9)';
+          ctx.fillText(city.name, pt.sx + 8, pt.sy + 3.5);
         }
       });
 
@@ -610,24 +573,24 @@ export function InteractiveGlobe() {
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
               className="w-full h-full cursor-grab active:cursor-grabbing touch-none select-none drop-shadow-[0_20px_50px_rgba(20,91,255,0.35)]"
-              aria-label="Interactive 3D Globe showing Frankfurt connected across the world"
+              aria-label="Interactive 3D Globe showing verified enterprises connected across global commercial hubs"
             />
           </div>
 
           {/* Key Metric / Status Strip under Globe */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-slate-300">
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#FF9F1A] animate-ping" />
-              <span className="text-white font-bold">Made in Frankfurt am Main</span>
-              <span className="text-slate-400">• Digital- & Finanzzentrum</span>
+              <span className="w-2 h-2 rounded-full bg-sky-400 animate-ping" />
+              <span className="text-white font-bold">Global Enterprise Network</span>
+              <span className="text-slate-400">• Worldwide Coverage</span>
             </div>
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span>25+ Global Hubs vernetzt</span>
+              <span>25+ Global Hubs Connected</span>
             </div>
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-sky-400" />
-              <span>100% Inhaber-Verifiziert</span>
+              <span>100% Owner-Verified</span>
             </div>
           </div>
         </div>

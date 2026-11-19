@@ -167,7 +167,7 @@ export const DatenschutzContent: React.FC = () => {
         </p>
         <ul className="text-xs list-disc pl-5 space-y-1.5 text-gray-600">
           <li>
-            <strong>Supabase Inc.</strong> {isDe ? '(PostgreSQL-Datenbank): Datenhaltung erfolgt verschlüsselt in europäischen Rechenzentren (Frankfurt am Main, Deutschland). Auftragsverarbeitungsvertrag (AVV) nach Art. 28 DSGVO liegt vor.' : '(PostgreSQL Database): Data is stored encrypted in European data centers (Frankfurt am Main, Germany). Data Processing Agreement (DPA) under Art. 28 GDPR is in place.'}
+            <strong>Supabase Inc.</strong> {isDe ? '(PostgreSQL-Datenbank): Datenhaltung erfolgt verschlüsselt in europäischen Rechenzentren (ISO/IEC 27001 zertifiziert, Deutschland/EU). Auftragsverarbeitungsvertrag (AVV) nach Art. 28 DSGVO liegt vor.' : '(PostgreSQL Database): Data is stored encrypted in European data centers (ISO/IEC 27001 certified, Germany/EU). Data Processing Agreement (DPA) under Art. 28 GDPR is in place.'}
           </li>
           <li>
             <strong>Resend Inc.</strong> {isDe ? '(Transaktions-E-Mail-Dienst): Zum sicheren Versand von Bestätigungen und Benachrichtigungen. AVV nach Art. 28 DSGVO liegt vor.' : '(Transactional Email Dispatch): For secure dispatch of verification codes and notification alerts. DPA under Art. 28 GDPR is in place.'}

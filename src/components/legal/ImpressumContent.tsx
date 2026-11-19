@@ -104,9 +104,9 @@ export const ImpressumContent: React.FC = () => {
         </h2>
         <p className="text-sm">
           Kabeer<br />
-          Breitlacherstraße 101<br />
-          60489 Frankfurt am Main<br />
-          Deutschland
+          {siteConfig.company.street}<br />
+          {siteConfig.company.postalCode} {siteConfig.company.city}<br />
+          {siteConfig.company.country}
         </p>
       </section>
 

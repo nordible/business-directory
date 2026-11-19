@@ -311,8 +311,8 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                     onChange={(e) => setPromptInput(e.target.value)}
                     placeholder={
                       locale === 'de'
-                        ? 'z.B. Trage Nordible Technologies ein: Software-Agentur aus Frankfurt am Main, Web: https://nordible.co, Tel: +49 69 9999 8888, Spezialisiert auf KI-Agenten und Webplattformen.'
-                        : 'e.g. Add Nordible Technologies: Software agency from Frankfurt, Web: https://nordible.co, Tel: +49 69 9999 8888, Specializing in AI agents and web platforms.'
+                        ? 'z.B. Trage Nordible Technologies ein: Software-Agentur, Web: https://nordible.co, Tel: +49 1521 1065739, Spezialisiert auf KI-Agenten und globale Plattformen.'
+                        : 'e.g. Add Nordible Technologies: Global software agency, Web: https://nordible.co, Tel: +49 1521 1065739, Specializing in AI agents and enterprise platforms.'
                     }
                     className="w-full p-3 bg-[#FAFBFF] border border-[#E8ECF4] rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#145BFF] font-medium leading-relaxed"
                   />
@@ -327,15 +327,15 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       onClick={() =>
                         handleApplyPromptSample(
                           locale === 'de'
-                            ? 'Trage Nordible Technologies ein: AI & Software Engineering Agentur aus Frankfurt, Web: https://nordible.co, Tel: +49 69 9999 8888'
-                            : 'Add Nordible Technologies: AI & Software Engineering agency from Frankfurt, Web: https://nordible.co, Tel: +49 69 9999 8888'
+                            ? 'Trage Nordible Technologies ein: AI & Software Engineering Agentur, Web: https://nordible.co, Tel: +49 1521 1065739'
+                            : 'Add Nordible Technologies: AI & Software Engineering agency, Web: https://nordible.co, Tel: +49 1521 1065739'
                         )
                       }
                       className="px-3 py-1.5 text-xs bg-[#F3F7FF] text-[#0D2B75] border border-[#E8ECF4] rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-semibold text-left block"
                     >
                       {locale === 'de'
-                        ? '🤖 „Trage Nordible Technologies ein: Software & KI-Agentur aus Frankfurt...“'
-                        : '🤖 "Add Nordible Technologies: Software & AI agency from Frankfurt..."'}
+                        ? '🤖 „Trage Nordible Technologies ein: Software & KI-Agentur...“'
+                        : '🤖 "Add Nordible Technologies: Software & AI agency..."'}
                     </button>
                   </div>
                 </div>
