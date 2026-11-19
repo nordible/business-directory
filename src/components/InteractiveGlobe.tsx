@@ -462,8 +462,9 @@ export function InteractiveGlobe() {
 
         const baseRadius = 3.6;
 
-        // Subtle radar ripple
-        const ripple = baseRadius + (((pulsePhaseRef.current * 1.4) + (city.lat * 0.05)) % 1) * 14;
+        // Subtle radar ripple (strictly non-negative normalized phase modulo)
+        const ripplePhase = (((pulsePhaseRef.current * 1.4) + Math.abs(city.lat * 0.05)) % 1 + 1) % 1;
+        const ripple = Math.max(0.1, baseRadius + ripplePhase * 14);
         ctx.beginPath();
         ctx.arc(pt.sx, pt.sy, ripple, 0, Math.PI * 2);
         ctx.strokeStyle = `rgba(56, 189, 248, ${Math.max(0, 0.45 - (ripple / 18))})`;
