@@ -114,15 +114,12 @@ function mapDbBusiness(b: Record<string, unknown>): BusinessListing {
     categoryName: (b.categories as { name?: string })?.name || undefined,
     categorySlug: (b.categories as { slug?: string })?.slug || undefined,
     name: String(b.name),
-    description: {
-      de: String(b.description || ''),
-      en: String(b.description || ''),
-    },
+    description: String(b.description || ''),
     address: String(b.address || ''),
     postalCode: b.postal_code ? String(b.postal_code) : undefined,
     city: String(b.city || ''),
     state: b.state ? String(b.state) : undefined,
-    country: b.country ? String(b.country) : 'Germany',
+    country: b.country ? String(b.country) : undefined,
     phone: String(b.phone || ''),
     email: b.email ? String(b.email) : undefined,
     website: String(b.website || ''),
@@ -372,15 +369,15 @@ export interface SubmitBusinessPayload {
 }
 
 export function formatWeekScheduleToString(s?: WeekSchedule): string {
-  if (!s) return '24/7 Geöffnet (Rund um die Uhr)';
+  if (!s) return 'Open 24/7';
   const days: { key: keyof WeekSchedule; label: string }[] = [
-    { key: 'monday', label: 'Mo' },
-    { key: 'tuesday', label: 'Di' },
-    { key: 'wednesday', label: 'Mi' },
-    { key: 'thursday', label: 'Do' },
-    { key: 'friday', label: 'Fr' },
-    { key: 'saturday', label: 'Sa' },
-    { key: 'sunday', label: 'So' },
+    { key: 'monday', label: 'Mon' },
+    { key: 'tuesday', label: 'Tue' },
+    { key: 'wednesday', label: 'Wed' },
+    { key: 'thursday', label: 'Thu' },
+    { key: 'friday', label: 'Fri' },
+    { key: 'saturday', label: 'Sat' },
+    { key: 'sunday', label: 'Sun' },
   ];
 
   const is24_7 = days.every((d) => {
@@ -389,13 +386,13 @@ export function formatWeekScheduleToString(s?: WeekSchedule): string {
   });
 
   if (is24_7) {
-    return '24/7 Geöffnet (Rund um die Uhr)';
+    return 'Open 24/7';
   }
 
   return days
     .map((d) => {
       const item = s[d.key];
-      if (!item || item.closed) return `${d.label}: Geschlossen`;
+      if (!item || item.closed) return `${d.label}: Closed`;
       return `${d.label}: ${item.open} - ${item.close}`;
     })
     .join(', ');
@@ -537,7 +534,7 @@ export async function submitBusinessListing(payload: SubmitBusinessPayload): Pro
     const randomSuffix = Math.random().toString(36).substring(2, 6);
     const slug = `${cleanSlug}-${randomSuffix}`;
 
-    const readableHours = payload.hours || (payload.openingHoursJson ? formatWeekScheduleToString(payload.openingHoursJson) : '24/7 Geöffnet (Rund um die Uhr)');
+    const readableHours = payload.hours || (payload.openingHoursJson ? formatWeekScheduleToString(payload.openingHoursJson) : 'Open 24/7');
 
     const newRow = {
       tenant_id: tenantId,
@@ -549,7 +546,7 @@ export async function submitBusinessListing(payload: SubmitBusinessPayload): Pro
       postal_code: payload.postalCode?.trim() || null,
       city: payload.city?.trim() || '',
       state: payload.state?.trim() || null,
-      country: payload.country?.trim() || 'Germany',
+      country: payload.country?.trim() || null,
       phone: payload.phone || null,
       email: payload.email?.trim() || null,
       website: payload.website || null,

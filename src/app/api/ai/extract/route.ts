@@ -49,6 +49,7 @@ function extractJsonLdData(html: string): Partial<ExtractedBusinessData> {
 
         if (item.name && !result.name) result.name = String(item.name).trim();
         if (item.legalName && !result.legalForm) result.legalForm = String(item.legalName).trim();
+        if (item.description && !result.description) result.description = String(item.description).trim();
         if (item.telephone && !result.phone) result.phone = String(item.telephone).trim();
         if (item.email && !result.email) result.email = String(item.email).trim();
         if (item.url && !result.website) result.website = String(item.url).trim();
@@ -60,6 +61,12 @@ function extractJsonLdData(html: string): Partial<ExtractedBusinessData> {
           if (addr.addressLocality && !result.city) result.city = String(addr.addressLocality).trim();
           if (addr.addressRegion && !result.state) result.state = String(addr.addressRegion).trim();
           if (addr.addressCountry && !result.country) result.country = String(addr.addressCountry).trim();
+        } else if (typeof addr === 'string' && !result.address) {
+          result.address = addr.trim();
+        }
+
+        if (item.foundingLocation && !result.city) {
+          result.city = String(item.foundingLocation).trim();
         }
 
         const image = item.image || item.logo;
@@ -109,8 +116,9 @@ function extractCleanTextFromHtml(html: string, maxLength = 7000): string {
 async function fetchSubpageText(baseUrl: string, html: string): Promise<string> {
   try {
     const origin = new URL(baseUrl).origin;
-    const linkMatch = html.match(/href=["'](\/[^"']*(?:impressum|kontakt|contact|about|legal|imprint)[^"']*)["']/i);
-    const targetUrl = linkMatch?.[1] ? `${origin}${linkMatch[1]}` : `${origin}/impressum`;
+    const linkMatch = html.match(/href=["'](\/[^"']*(?:about|contact|legal|impressum|kontakt|imprint)[^"']*)["']/i);
+    const targetUrl = linkMatch?.[1] ? `${origin}${linkMatch[1]}` : null;
+    if (!targetUrl) return '';
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 4000);
@@ -126,7 +134,7 @@ async function fetchSubpageText(baseUrl: string, html: string): Promise<string> 
 
     if (res.ok) {
       const subHtml = await res.text();
-      return `\n\n[Contact / Legal Subpage Text]:\n${extractCleanTextFromHtml(subHtml, 3000)}`;
+      return `\n\n[Contact / About / Legal Subpage Text]:\n${extractCleanTextFromHtml(subHtml, 3000)}`;
     }
   } catch {
     // Graceful fallback if subpage doesn't exist
@@ -151,17 +159,18 @@ async function extractWithOpenRouter(
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 12000);
 
-    const systemPrompt = `You are an AI business directory extraction engine.
+    const systemPrompt = `You are a global AI business directory extraction engine.
 Analyze the company information from the given website text.
-Detect the website's language and output all text fields (categoryName, description, services) in the EXACT same language as the website.
-Extract the physical street address (street name and house number). If no physical street address is explicitly listed, infer the central commercial address for the detected city so that 'address' is never empty.
+Detect the website's primary language. Output all text fields (categoryName, description, services) strictly in that detected language (e.g. if English website, output in English; if German website, output in German; if French website, output in French).
+Never translate content into another language unless the source website is primarily in that language.
+Extract the physical street address (street name and house number). If no physical street address is explicitly listed, infer the central commercial area or city address so that 'address' is never empty.
 
 Strictly return a single JSON object with these keys only (leave empty string or [] if not found):
 - name (string: official business name)
-- legalForm (string: e.g. GmbH, UG, LLC, Inc., Ltd., etc.)
+- legalForm (string: e.g. LLC, Inc., Ltd., GmbH, Corp., etc. if applicable)
 - categoryName (string: primary industry/service category in the website's language)
 - description (string: concise 2-3 sentence overview of business and offerings in the website's language)
-- address (string: street name and house number, never empty)
+- address (string: street address or central commercial district, never empty)
 - postalCode (string: zip / postal code)
 - city (string: city name)
 - state (string: state / province / region)
@@ -170,7 +179,7 @@ Strictly return a single JSON object with these keys only (leave empty string or
 - email (string: contact email address)
 - website (string: official website URL)
 - logoUrl (string: logo or primary brand image URL if found)
-- hours (string: opening hours text if found)
+- hours (string: standard operating hours if found, e.g. "Mon - Fri: 09:00 - 18:00")
 - services (array of strings: key offerings in the website's language)
 
 Do NOT wrap in markdown \`\`\`json or add conversational text. Return ONLY the JSON object.`;
@@ -321,10 +330,7 @@ export async function POST(request: Request) {
       legalForm: combined.legalForm || undefined,
       categoryId: 'cat-all',
       categoryName: combined.categoryName || 'General Business',
-      description: {
-        de: finalDescription,
-        en: finalDescription,
-      },
+      description: finalDescription,
       address: resolvedAddress,
       postalCode: combined.postalCode || undefined,
       city: resolvedCity || 'Global',
@@ -334,7 +340,7 @@ export async function POST(request: Request) {
       email: combined.email || undefined,
       website: combined.website || url || '',
       logoUrl: combined.logoUrl || structuredData.logoUrl || undefined,
-      hours: combined.hours || 'Mo - Fr: 09:00 - 18:00 Uhr',
+      hours: combined.hours || 'Mon - Fri: 09:00 - 18:00',
       services: combined.services && combined.services.length > 0 ? combined.services : undefined,
       isVerified: false,
       isOpenNow: true,

@@ -85,10 +85,12 @@ export default function DirectoryAppPage({
         const matchesName = item.name.toLowerCase().includes(query);
         const matchesCity = item.city.toLowerCase().includes(query);
         const descText =
-          (locale === 'de' ? item.description['de'] : item.description['en']) ||
-          item.description['en'] ||
-          item.description[locale] ||
-          '';
+          typeof item.description === 'string'
+            ? item.description
+            : (item.description as Record<string, string>)?.[locale] ||
+              (item.description as Record<string, string>)?.[locale === 'de' ? 'de' : 'en'] ||
+              (item.description as Record<string, string>)?.[locale === 'de' ? 'en' : 'de'] ||
+              '';
         const matchesDesc = descText.toLowerCase().includes(query);
         return matchesName || matchesCity || matchesDesc;
       }

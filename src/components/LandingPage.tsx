@@ -514,7 +514,12 @@ export function LandingPage({
                     </div>
 
                     <p className="text-xs text-slate-600 line-clamp-2 mt-1 leading-relaxed">
-                      {listing.description[locale] || listing.description['en'] || listing.description['de']}
+                      {typeof listing.description === 'string'
+                        ? listing.description
+                        : (listing.description as Record<string, string>)?.[locale] ||
+                          (listing.description as Record<string, string>)?.[locale === 'de' ? 'de' : 'en'] ||
+                          (listing.description as Record<string, string>)?.[locale === 'de' ? 'en' : 'de'] ||
+                          ''}
                     </p>
                   </div>
 

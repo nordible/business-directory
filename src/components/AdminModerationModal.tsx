@@ -682,7 +682,12 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                       </div>
 
                       <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
-                        {item.description[locale] || item.description['de'] || item.description['en']}
+                        {typeof item.description === 'string'
+                          ? item.description
+                          : (item.description as Record<string, string>)?.[locale] ||
+                            (item.description as Record<string, string>)?.[locale === 'de' ? 'de' : 'en'] ||
+                            (item.description as Record<string, string>)?.[locale === 'de' ? 'en' : 'de'] ||
+                            ''}
                       </p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-600 font-medium pt-1 border-t border-[#E8ECF4]">

@@ -598,14 +598,18 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                   </label>
                   <textarea
                     rows={2}
-                    value={extractedListing.description.de || extractedListing.description.en || ''}
+                    value={
+                      typeof extractedListing.description === 'string'
+                        ? extractedListing.description
+                        : (extractedListing.description as Record<string, string>)?.[locale] ||
+                          (extractedListing.description as Record<string, string>)?.en ||
+                          (extractedListing.description as Record<string, string>)?.de ||
+                          ''
+                    }
                     onChange={(e) =>
                       setExtractedListing({
                         ...extractedListing,
-                        description: {
-                          de: e.target.value,
-                          en: e.target.value,
-                        },
+                        description: e.target.value,
                       })
                     }
                     className="w-full text-xs font-medium text-gray-900 bg-white border border-[#E8ECF4] rounded-xl p-2.5 focus:outline-none"

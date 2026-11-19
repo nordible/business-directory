@@ -77,10 +77,7 @@ export function mapDbBusinessToBusinessListing(dbBusiness: DbBusiness) {
     tenantId: dbBusiness.tenant_id,
     categoryId: dbBusiness.category_id,
     name: dbBusiness.name,
-    description: {
-      de: desc,
-      en: desc,
-    },
+    description: desc,
     address: dbBusiness.address,
     city: dbBusiness.city,
     phone: dbBusiness.phone || '',

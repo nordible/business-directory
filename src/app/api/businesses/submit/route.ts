@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       body.hours ||
       (body.openingHoursJson
         ? formatWeekScheduleToString(body.openingHoursJson)
-        : '24/7 Geöffnet (Rund um die Uhr)');
+        : 'Open 24/7');
 
     // Determine business language: German for DACH countries, English for international
     const isDachCountry = /deutschland|germany|österreich|austria|schweiz|switzerland/i.test(body.country || '');

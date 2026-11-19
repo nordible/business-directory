@@ -124,10 +124,12 @@ export const BusinessDetailPage: React.FC<BusinessDetailPageProps> = ({
   }
 
   const localizedDescription =
-    (locale === 'de' ? listing.description['de'] : listing.description['en']) ||
-    listing.description['en'] ||
-    listing.description[locale] ||
-    '';
+    typeof listing.description === 'string'
+      ? listing.description
+      : (listing.description as Record<string, string>)?.[locale] ||
+        (listing.description as Record<string, string>)?.[locale === 'de' ? 'de' : 'en'] ||
+        (listing.description as Record<string, string>)?.[locale === 'de' ? 'en' : 'de'] ||
+        '';
 
   const mapsQuery = encodeURIComponent(`${listing.name}, ${listing.address}, ${listing.city}`);
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;

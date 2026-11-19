@@ -47,10 +47,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const desc =
-    listing.description[lang] ||
-    listing.description['de'] ||
-    listing.description['en'] ||
-    '';
+    typeof listing.description === 'string'
+      ? listing.description
+      : (listing.description as Record<string, string>)?.[lang] ||
+        (listing.description as Record<string, string>)?.[lang === 'de' ? 'de' : 'en'] ||
+        (listing.description as Record<string, string>)?.[lang === 'de' ? 'en' : 'de'] ||
+        '';
 
   const canonicalSlug = buildBusinessSlug(listing);
 

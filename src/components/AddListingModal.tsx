@@ -131,7 +131,9 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
         description:
           (typeof item.description === 'string'
             ? item.description
-            : item.description?.de || item.description?.en) ||
+            : (item.description as Record<string, string>)?.[locale] ||
+              (item.description as Record<string, string>)?.en ||
+              (item.description as Record<string, string>)?.de) ||
           prev.description,
       }));
       setExtractSuccess(true);

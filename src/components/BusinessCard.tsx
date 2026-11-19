@@ -97,7 +97,12 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
 
         {/* Short Description */}
         <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
-          {listing.description[locale] || listing.description.en || listing.description.de}
+          {typeof listing.description === 'string'
+            ? listing.description
+            : (listing.description as Record<string, string>)?.[locale] ||
+              (listing.description as Record<string, string>)?.en ||
+              (listing.description as Record<string, string>)?.de ||
+              ''}
         </p>
 
         {/* Key Service Tags */}
