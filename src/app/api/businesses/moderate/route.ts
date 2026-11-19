@@ -1,6 +1,15 @@
 import { NextResponse } from 'next/server';
-import { verifyBusiness, publishBusiness, getAllBusinesses, getListingsByTenant } from '@/lib/db/client';
+import {
+  verifyBusiness,
+  publishBusiness,
+  getAllBusinesses,
+  getListingsByTenant,
+  getBusinessByIdOrSlug,
+} from '@/lib/db/client';
 import { verifyAdminRequest } from '@/lib/auth-customer';
+import { sendBusinessPublishedNotification } from '@/lib/email';
+import { getBusinessPermalink } from '@/lib/permalinks';
+import { siteConfig } from '@/config/site';
 
 export async function GET(request: Request) {
   try {
@@ -54,7 +63,29 @@ export async function POST(request: Request) {
     }
 
     if (action === 'publish') {
+      const business = await getBusinessByIdOrSlug(id, true);
+      const wasPublished = business?.isPublished;
       const ok = await publishBusiness(id);
+
+      if (ok && business && !wasPublished && business.email && business.email.includes('@')) {
+        try {
+          const isDachCountry = /deutschland|germany|österreich|austria|schweiz|switzerland/i.test(business.country || '');
+          const locale = isDachCountry ? 'de' : 'en';
+          const listingUrl = `${siteConfig.urls.base}${getBusinessPermalink(business, locale)}`;
+
+          await sendBusinessPublishedNotification({
+            to: business.email.trim(),
+            businessName: business.name,
+            locale,
+            listingUrl,
+            city: business.city,
+            categoryName: business.categoryName,
+          });
+        } catch (emailErr) {
+          console.error('[PUBLISH NOTIFICATION ERROR]:', emailErr);
+        }
+      }
+
       return NextResponse.json({ success: ok, action: 'publish' });
     }
 

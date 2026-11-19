@@ -366,6 +366,106 @@ export async function sendBusinessRegistrationConfirmation(options: BusinessRegi
   });
 }
 
+export interface BusinessPublishedNotificationOptions {
+  to: string;
+  businessName: string;
+  listingUrl: string;
+  locale?: string;
+  city?: string;
+  categoryName?: string;
+}
+
+/**
+ * Sends a celebration notification to the business owner when an admin publishes their listing
+ */
+export async function sendBusinessPublishedNotification(options: BusinessPublishedNotificationOptions) {
+  const isDe = options.locale === 'de';
+  const subject = isDe
+    ? `🎉 Ihr Profil für ${options.businessName} ist jetzt live auf Nordible!`
+    : `🎉 Your listing for ${options.businessName} is now live on Nordible!`;
+
+  const html = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
+      <div style="margin-bottom: 24px; border-bottom: 2px solid #16a34a; padding-bottom: 16px;">
+        <img src="${EMAIL_LOGO_URL}" alt="${APP_TITLE}" style="height: 32px; width: auto; max-width: 180px; display: block; margin-bottom: 10px;" />
+        <span style="display: inline-block; background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 9999px;">
+          ${isDe ? '✓ Freigeschaltet & Verifiziert' : '✓ Published & Verified'}
+        </span>
+        <h2 style="color: #0f172a; margin: 12px 0 2px 0; font-size: 22px; font-weight: 800;">
+          ${isDe ? 'Ihr Unternehmen ist jetzt live!' : 'Your business is now live!'}
+        </h2>
+      </div>
+
+      <p style="color: #334155; font-size: 14px; line-height: 1.6;">
+        ${isDe
+          ? `Guten Tag,<br/><br/>wir freuen uns, Ihnen mitteilen zu können, dass die redaktionelle Freigabe für <strong>${options.businessName}</strong> erfolgreich abgeschlossen wurde. Ihr Eintrag ist ab sofort im globalen Branchenverzeichnis öffentlich erreichbar.`
+          : `Hello,<br/><br/>we are pleased to inform you that your listing for <strong>${options.businessName}</strong> has been officially approved and published. It is now publicly accessible in the global business directory.`}
+      </p>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px 0;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; width: 35%; font-weight: 600;">${isDe ? 'Unternehmen:' : 'Business:'}</td>
+            <td style="padding: 6px 0; font-weight: 700; color: #0f172a;">${options.businessName}</td>
+          </tr>
+          ${options.categoryName ? `
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Branche:' : 'Category:'}</td>
+            <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.categoryName}</td>
+          </tr>
+          ` : ''}
+          ${options.city ? `
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Standort:' : 'Location:'}</td>
+            <td style="padding: 6px 0; font-weight: 600; color: #1e293b;">${options.city}</td>
+          </tr>
+          ` : ''}
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${isDe ? 'Status:' : 'Status:'}</td>
+            <td style="padding: 6px 0; font-weight: 700; color: #16a34a;">
+              ${isDe ? '● Öffentlich sichtbar' : '● Publicly visible'}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="text-align: center; margin: 28px 0;">
+        <a href="${options.listingUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #145bff; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 15px; box-shadow: 0 4px 12px rgba(20, 91, 255, 0.25);">
+          ${isDe ? '👉 Profil jetzt ansehen & teilen' : '👉 View & Share Your Profile'}
+        </a>
+        <p style="font-size: 12px; color: #94a3b8; margin: 10px 0 0 0;">
+          <a href="${options.listingUrl}" style="color: #64748b; text-decoration: underline; word-break: break-all;">${options.listingUrl}</a>
+        </p>
+      </div>
+
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin: 24px 0;">
+        <span style="font-size: 12px; font-weight: 700; color: #1d4ed8; text-transform: uppercase; display: block; margin-bottom: 6px;">
+          ${isDe ? 'Ihre nächsten Schritte:' : 'What happens next?'}
+        </span>
+        <ul style="margin: 0; padding-left: 18px; color: #1e40af; font-size: 13px; line-height: 1.6;">
+          <li>${isDe ? 'Kunden können Sie über das Kontaktformular auf Ihrer Profilseite direkt kontaktieren.' : 'Customers can contact you directly via the inquiry form on your listing page.'}</li>
+          <li>${isDe ? 'Anfragen werden sicher in Ihr Kunden-Postfach zugestellt und per E-Mail angekündigt.' : 'Inquiries will be routed securely to your customer inbox with instant email alerts.'}</li>
+          <li>${isDe ? 'Teilen Sie Ihren Profil-Link auf Ihrer Website und auf Social Media, um Ihre Sichtbarkeit zu stärken.' : 'Share your profile link across your social media and website to build trust and visibility.'}</li>
+        </ul>
+      </div>
+
+      <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 24px; text-align: center;">
+        ${APP_TITLE} &bull; business-directory.nordible.co
+      </div>
+    </div>
+  `;
+
+  return sendEmail({
+    to: options.to,
+    subject,
+    html,
+    text: isDe
+      ? `Herzlichen Glückwunsch! Das Profil für ${options.businessName} ist jetzt live auf Nordible: ${options.listingUrl}`
+      : `Congratulations! The listing for ${options.businessName} is now live on Nordible: ${options.listingUrl}`,
+    replyTo: 'mail@nordible.co',
+  });
+}
+
 export interface NewListingNotificationOptions {
   businessName: string;
   legalForm?: string;
