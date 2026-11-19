@@ -2,6 +2,7 @@ import { BusinessListing, TenantBranding, Category, Conversation, Message, WeekS
 import { extractIdFromPermalink } from '@/lib/permalinks';
 import { isBusinessOpenNow } from '@/lib/openingHours';
 import { env } from '@/config/env';
+import { siteConfig } from '@/config/site';
 
 /**
  * Directory Database Service
@@ -23,15 +24,12 @@ function getHeaders() {
 export const DEFAULT_TENANT: TenantBranding = {
   id: 'dbb7134c-4a7a-4bb8-96b1-111171c82e7a',
   slug: 'nordible',
-  name: 'Nordible for Businesses',
-  tagline: {
-    de: 'Das kostenlose globale Branchenverzeichnis für verifizierte Unternehmen weltweit',
-    en: 'The Free Global Business Directory for Verified Enterprises Worldwide',
-  },
+  name: siteConfig.appName,
+  tagline: siteConfig.tagline,
   primaryColor: '#145BFF',
   accentColor: '#FF9F1A',
   logoText: '',
-  customDomain: 'business-directory.nordible.co',
+  customDomain: siteConfig.customDomain,
 };
 
 export const DEFAULT_CATEGORIES: Category[] = [

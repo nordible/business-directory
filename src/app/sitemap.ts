@@ -4,7 +4,7 @@ import { siteConfig } from '@/config/site';
 import { getAllBusinesses } from '@/lib/db/client';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = siteConfig.urls.base || 'https://nordible.co';
+  const baseUrl = siteConfig.urls.base;
   const currentDate = new Date().toISOString();
 
   const entries: MetadataRoute.Sitemap = [];

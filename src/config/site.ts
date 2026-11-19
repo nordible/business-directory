@@ -3,6 +3,9 @@ import { env } from '@/config/env';
 export const siteConfig = {
   appName: 'Nordible for Businesses',
   appNameShort: 'Nordible',
+  rootDomain: 'nordible.co',
+  customDomain: 'business-directory.nordible.co',
+  cnameTarget: 'cname.nordible.co',
   isBeta: true,
   tagline: {
     de: 'Das kostenlose globale Branchenverzeichnis für verifizierte Unternehmen weltweit',
@@ -11,12 +14,22 @@ export const siteConfig = {
   company: {
     name: 'Nordible Technologies',
     legalName: 'Nordible Technologies',
+    founder: 'Kabeer',
+    founderRole: 'Founder & Executive',
     street: 'Breitlacherstraße 101',
     postalCode: '60489',
     city: 'Frankfurt am Main',
+    state: 'Hessen',
     country: 'Germany',
     fullAddress: 'Nordible Technologies, Breitlacherstraße 101, 60489 Frankfurt am Main, Germany',
     website: 'https://nordible.co/',
+    linkedin: 'https://linkedin.com/company/nordible',
+    github: 'https://github.com/nordible/business-directory',
+  },
+  ecosystem: {
+    portfolio: 'https://nordible.co',
+    invoiceGenerator: 'https://free-invoice-generator.nordible.co',
+    mailPlatform: 'https://email.nordible.co',
   },
   contact: {
     email: 'mail@nordible.co',
@@ -34,6 +47,7 @@ export const siteConfig = {
     forBusinesses: '/fuer-unternehmen',
     agencyServices: 'https://nordible.co/#services',
     agencyContact: 'https://nordible.co/#contact',
+    github: 'https://github.com/nordible/business-directory',
   },
   geo: {
     defaultRegion: 'Global',

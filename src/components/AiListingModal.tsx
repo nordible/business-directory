@@ -21,6 +21,7 @@ import {
   MessageSquareCode,
 } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
+import { siteConfig } from '@/config/site';
 
 interface AiListingModalProps {
   isOpen: boolean;
@@ -131,9 +132,9 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
 
   const handleApplySample = (sampleType: 'nordible' | 'coffee' | 'craft' | 'tech') => {
     if (sampleType === 'nordible') {
-      setUrlInput('https://nordible.co');
+      setUrlInput(siteConfig.company.website);
       setActiveTab('url');
-      handleStartExtraction('https://nordible.co');
+      handleStartExtraction(siteConfig.company.website);
       return;
     }
 
@@ -260,7 +261,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       type="url"
                       value={urlInput}
                       onChange={(e) => setUrlInput(e.target.value)}
-                      placeholder="https://nordible.co"
+                      placeholder={siteConfig.company.website}
                       className="w-full pl-10 pr-4 py-3 bg-nordible-bg border border-nordible-border rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium"
                     />
                   </div>
@@ -276,7 +277,7 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                         onClick={() => handleApplySample('nordible')}
                         className="px-2.5 py-1 text-xs bg-blue-50 text-nordible-blue border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-bold flex items-center gap-1"
                       >
-                        nordible.co
+                        {siteConfig.company.name}
                       </button>
                       <button
                         type="button"
@@ -311,8 +312,8 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                     onChange={(e) => setPromptInput(e.target.value)}
                     placeholder={
                       locale === 'de'
-                        ? 'z.B. Trage Nordible Technologies ein: Software-Agentur, Web: https://nordible.co, Tel: +49 1521 1065739, Spezialisiert auf KI-Agenten und globale Plattformen.'
-                        : 'e.g. Add Nordible Technologies: Global software agency, Web: https://nordible.co, Tel: +49 1521 1065739, Specializing in AI agents and enterprise platforms.'
+                        ? `z.B. Trage ${siteConfig.company.name} ein: Software-Agentur, Web: ${siteConfig.company.website}, Tel: ${siteConfig.contact.phoneDisplay}, Spezialisiert auf KI-Agenten und globale Plattformen.`
+                        : `e.g. Add ${siteConfig.company.name}: Global software agency, Web: ${siteConfig.company.website}, Tel: ${siteConfig.contact.phoneDisplay}, Specializing in AI agents and enterprise platforms.`
                     }
                     className="w-full p-3 bg-nordible-bg border border-nordible-border rounded-xl text-xs md:text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium leading-relaxed"
                   />
@@ -327,15 +328,15 @@ export const AiListingModal: React.FC<AiListingModalProps> = ({
                       onClick={() =>
                         handleApplyPromptSample(
                           locale === 'de'
-                            ? 'Trage Nordible Technologies ein: AI & Software Engineering Agentur, Web: https://nordible.co, Tel: +49 1521 1065739'
-                            : 'Add Nordible Technologies: AI & Software Engineering agency, Web: https://nordible.co, Tel: +49 1521 1065739'
+                            ? `Trage ${siteConfig.company.name} ein: AI & Software Engineering Agentur, Web: ${siteConfig.company.website}, Tel: ${siteConfig.contact.phoneDisplay}`
+                            : `Add ${siteConfig.company.name}: AI & Software Engineering agency, Web: ${siteConfig.company.website}, Tel: ${siteConfig.contact.phoneDisplay}`
                         )
                       }
                       className="px-3 py-1.5 text-xs bg-nordible-section-bg text-nordible-dark border border-nordible-border rounded-lg hover:bg-blue-100 transition-colors cursor-pointer font-semibold text-left block"
                     >
                       {locale === 'de'
-                        ? '🤖 „Trage Nordible Technologies ein: Software & KI-Agentur...“'
-                        : '🤖 "Add Nordible Technologies: Software & AI agency..."'}
+                        ? `🤖 „Trage ${siteConfig.company.name} ein: Software & KI-Agentur...“`
+                        : `🤖 "Add ${siteConfig.company.name}: Software & AI agency..."`}
                     </button>
                   </div>
                 </div>

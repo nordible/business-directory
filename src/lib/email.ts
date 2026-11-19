@@ -1,4 +1,5 @@
 import { env } from '@/config/env';
+import { siteConfig } from '@/config/site';
 import { getTranslation } from '@/lib/translations';
 
 /**
@@ -11,8 +12,8 @@ const MAIL_API_URL = env.mail.apiUrl;
 const MAIL_API_SECRET = env.mail.apiSecret;
 
 export const GLOBAL_BCC_EMAIL = 'nordiblesolutions@gmail.com';
-export const EMAIL_LOGO_URL = 'https://business-directory.nordible.co/images/logos/nordible-logo-full.png';
-export const APP_TITLE = 'Nordible for Businesses';
+export const EMAIL_LOGO_URL = `${siteConfig.urls.base}${siteConfig.assets.logoFull}`;
+export const APP_TITLE = siteConfig.appName;
 
 export interface SendEmailPayload {
   to: string | string[];
@@ -26,11 +27,11 @@ export interface SendEmailPayload {
 export const ADMIN_NOTIFICATION_EMAILS =
   env.mail.adminEmails.length > 0
     ? env.mail.adminEmails
-    : ['mail@nordible.co', 'nordiblesolutions@gmail.com'];
+    : [siteConfig.contact.email, GLOBAL_BCC_EMAIL];
 
 export function expandAdminRecipients(to: string | string[]): string | string[] {
   const recipients = Array.isArray(to) ? [...to] : [to];
-  const hasNordibleMail = recipients.some((r) => r.toLowerCase().trim() === 'mail@nordible.co');
+  const hasNordibleMail = recipients.some((r) => r.toLowerCase().trim() === siteConfig.contact.email.toLowerCase());
   const hasGmail = recipients.some((r) => r.toLowerCase().trim() === 'nordiblesolutions@gmail.com');
 
   if (hasNordibleMail && !hasGmail) {
@@ -430,7 +431,7 @@ export async function sendBusinessRegistrationConfirmation(
     subject,
     html,
     text,
-    replyTo: 'mail@nordible.co',
+    replyTo: siteConfig.contact.email,
   });
 }
 
@@ -543,7 +544,7 @@ export async function sendBusinessPublishedNotification(
     subject,
     html,
     text,
-    replyTo: 'mail@nordible.co',
+    replyTo: siteConfig.contact.email,
   });
 }
 
@@ -675,7 +676,7 @@ export async function sendNewListingNotificationToAdmin(
     </table>
 
     <div style="margin-top: 28px; text-align: center;">
-      <a href="https://business-directory.nordible.co/admin" style="display: inline-block; background: #0D2B75; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 14px;">
+      <a href="${siteConfig.urls.base}/admin" style="display: inline-block; background: #0D2B75; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 14px;">
         ${reviewButton}
       </a>
     </div>
@@ -701,7 +702,7 @@ Hours: ${listing.hours || hoursDefault}
 Description: ${listing.description || noDescription}
 Growth Resources: ${listing.wantsGrowthResource ? growthYes : growthNo}
 
-Review & Publish: https://business-directory.nordible.co/admin`;
+Review & Publish: ${siteConfig.urls.base}/admin`;
 
   return sendEmail({
     to: ADMIN_NOTIFICATION_EMAILS,

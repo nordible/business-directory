@@ -88,7 +88,7 @@ export function Footer({}: FooterProps = {}) {
             <ul className="space-y-2 text-xs text-blue-100/80">
               <li>
                 <a
-                  href="https://nordible.co"
+                  href={siteConfig.ecosystem.portfolio}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors flex items-center gap-1"
@@ -99,7 +99,7 @@ export function Footer({}: FooterProps = {}) {
               </li>
               <li>
                 <a
-                  href="https://free-invoice-generator.nordible.co"
+                  href={siteConfig.ecosystem.invoiceGenerator}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors flex items-center gap-1"
@@ -110,7 +110,7 @@ export function Footer({}: FooterProps = {}) {
               </li>
               <li>
                 <a
-                  href="https://email.nordible.co"
+                  href={siteConfig.ecosystem.mailPlatform}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors flex items-center gap-1"

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { BusinessListing } from '@/lib/types';
 import { env } from '@/config/env';
+import { siteConfig } from '@/config/site';
 
 interface ExtractRequestBody {
   url?: string;
@@ -193,7 +194,7 @@ Do NOT wrap in markdown \`\`\`json or add conversational text. Return ONLY the J
         'Content-Type': 'application/json',
         Authorization: `Bearer ${apiKey}`,
         'HTTP-Referer': env.siteUrl,
-        'X-Title': 'Nordible Directory AI Extraction',
+        'X-Title': `${siteConfig.appName} AI Extraction`,
       },
       body: JSON.stringify({
         model,

@@ -36,8 +36,8 @@ export const AgbContent: React.FC = () => {
       title={isDe ? 'Allgemeine Geschäfts- & Nutzungsbedingungen (AGB)' : 'Terms of Service / AGB'}
       subtitle={
         isDe
-          ? 'Nutzungsbedingungen und rechtliche Bestimmungen für Besucher, Unternehmensinhaber und Partner des Branchenportals "Nordible for Businesses".'
-          : 'Terms of service and legal conditions for visitors, business owners, and enterprise partners of the directory platform "Nordible for Businesses".'
+          ? `Nutzungsbedingungen und rechtliche Bestimmungen für Besucher, Unternehmensinhaber und Partner des Branchenportals "${siteConfig.appName}".`
+          : `Terms of service and legal conditions for visitors, business owners, and enterprise partners of the directory platform "${siteConfig.appName}".`
       }
       lastUpdated={isDe ? '17. Oktober 2026' : 'October 17, 2026'}
       toc={isDe ? TOC_DE : TOC_EN}
@@ -49,8 +49,8 @@ export const AgbContent: React.FC = () => {
         </h2>
         <p className="text-xs leading-relaxed">
           {isDe
-            ? `Diese Allgemeinen Geschäfts- und Nutzungsbedingungen (nachfolgend "AGB") regeln die Nutzung der Plattform "Nordible for Businesses" (abrufbar unter ${siteConfig.urls.base} sowie den zugehörigen Subdomains) bereitgestellt von ${siteConfig.company.legalName}, ${siteConfig.company.street}, ${siteConfig.company.postalCode} ${siteConfig.company.city}, Deutschland (nachfolgend "Betreiber" oder "Nordible").`
-            : `These General Terms and Conditions (hereinafter "Terms") govern the use of the platform "Nordible for Businesses" (accessible at ${siteConfig.urls.base} and affiliated subdomains) operated by ${siteConfig.company.legalName}, ${siteConfig.company.street}, ${siteConfig.company.postalCode} ${siteConfig.company.city}, Germany (hereinafter "Operator" or "Nordible").`}
+            ? `Diese Allgemeinen Geschäfts- und Nutzungsbedingungen (nachfolgend "AGB") regeln die Nutzung der Plattform "${siteConfig.appName}" (abrufbar unter ${siteConfig.urls.base} sowie den zugehörigen Subdomains) bereitgestellt von ${siteConfig.company.legalName}, ${siteConfig.company.street}, ${siteConfig.company.postalCode} ${siteConfig.company.city}, Deutschland (nachfolgend "Betreiber" oder "${siteConfig.appNameShort}").`
+            : `These General Terms and Conditions (hereinafter "Terms") govern the use of the platform "${siteConfig.appName}" (accessible at ${siteConfig.urls.base} and affiliated subdomains) operated by ${siteConfig.company.legalName}, ${siteConfig.company.street}, ${siteConfig.company.postalCode} ${siteConfig.company.city}, Germany (hereinafter "Operator" or "${siteConfig.appNameShort}").`}
         </p>
       </section>
 
@@ -61,8 +61,8 @@ export const AgbContent: React.FC = () => {
         </h2>
         <p className="text-xs leading-relaxed">
           {isDe
-            ? 'Nordible betreibt ein internationales Wirtschafts- und Branchenverzeichnis. Das Angebot umfasst:'
-            : 'Nordible operates an international business directory platform offering:'}
+            ? `${siteConfig.appNameShort} betreibt ein internationales Wirtschafts- und Branchenverzeichnis. Das Angebot umfasst:`
+            : `${siteConfig.appNameShort} operates an international business directory platform offering:`}
         </p>
         <ul className="text-xs list-disc pl-5 space-y-1 text-gray-600">
           <li>{isDe ? 'Die kostenlose Auffindbarkeit von Unternehmensprofilen mit Kontaktdaten, Öffnungszeiten und Leistungsbeschreibungen.' : 'Free discovery of business profiles, contact data, opening hours, and service descriptions.'}</li>
@@ -89,8 +89,8 @@ export const AgbContent: React.FC = () => {
           </p>
           <p className="text-gray-600 leading-relaxed">
             {isDe
-              ? `Als Host-Provider übernimmt Nordible keine Gewähr für die ständige Vollständigkeit und Aktualität von Drittangaben. Sollte ein Unternehmenseintrag unrichtige Daten enthalten oder die Löschung eines Profils gewünscht sein, genügt eine formlose E-Mail an ${siteConfig.contact.email}. Wir prüfen Beanstandungen unverzüglich und nehmen Korrekturen oder Löschungen innerhalb von 24 Stunden vor.`
-              : `As a host provider under German law (§§ 7–10 DDG), Nordible does not warrant the continuous completeness of third-party data. If any profile contains inaccuracies or requires permanent removal, a simple email to ${siteConfig.contact.email} suffices. We review and execute corrections or removals within 24 hours.`}
+              ? `Als Host-Provider übernimmt ${siteConfig.appNameShort} keine Gewähr für die ständige Vollständigkeit und Aktualität von Drittangaben. Sollte ein Unternehmenseintrag unrichtige Daten enthalten oder die Löschung eines Profils gewünscht sein, genügt eine formlose E-Mail an ${siteConfig.contact.email}. Wir prüfen Beanstandungen unverzüglich und nehmen Korrekturen oder Löschungen innerhalb von 24 Stunden vor.`
+              : `As a host provider under German law (§§ 7–10 DDG), ${siteConfig.appNameShort} does not warrant the continuous completeness of third-party data. If any profile contains inaccuracies or requires permanent removal, a simple email to ${siteConfig.contact.email} suffices. We review and execute corrections or removals within 24 hours.`}
           </p>
         </div>
       </section>

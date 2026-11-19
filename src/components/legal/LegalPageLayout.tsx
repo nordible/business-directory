@@ -129,8 +129,8 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
                   </h4>
                   <p className="text-xs text-gray-600 leading-relaxed">
                     {isDe
-                      ? `Nordible Technologies verpflichtet sich zur Einhaltung aller Vorgaben des Digitale-Dienste-Gesetzes (DDG) und der Datenschutz-Grundverordnung (DSGVO). Für Rückfragen, Korrekturen oder Auskunftsersuchen erreichen Sie unsere Rechts- und Redaktionsabteilung jederzeit unter ${siteConfig.contact.email}.`
-                      : `Nordible Technologies is dedicated to strict compliance with the German Digital Services Act (DDG) and GDPR. For inquiries, corrections, or data subject requests, please contact our legal and editorial department at ${siteConfig.contact.email}.`}
+                      ? `${siteConfig.company.legalName} verpflichtet sich zur Einhaltung aller Vorgaben des Digitale-Dienste-Gesetzes (DDG) und der Datenschutz-Grundverordnung (DSGVO). Für Rückfragen, Korrekturen oder Auskunftsersuchen erreichen Sie unsere Rechts- und Redaktionsabteilung jederzeit unter ${siteConfig.contact.email}.`
+                      : `${siteConfig.company.legalName} is dedicated to strict compliance with the German Digital Services Act (DDG) and GDPR. For inquiries, corrections, or data subject requests, please contact our legal and editorial department at ${siteConfig.contact.email}.`}
                   </p>
                 </div>
               </div>

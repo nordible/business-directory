@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
 import { TenantBranding } from '@/lib/types';
+import { siteConfig } from '@/config/site';
 import { Globe, X, Check, Copy, ShieldCheck, ArrowRight, Server } from 'lucide-react';
 
 interface DomainSettingsModalProps {
@@ -106,7 +107,7 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
               />
             </div>
             <p className="text-[11px] text-gray-500 mt-1.5">
-              {t('domain.currentSubdomain')} <code className="bg-gray-100 px-1 py-0.5 rounded text-gray-800 font-mono">{currentTenant.slug}.nordible.com</code>
+              {t('domain.currentSubdomain')} <code className="bg-gray-100 px-1 py-0.5 rounded text-gray-800 font-mono">{currentTenant.slug}.{siteConfig.rootDomain}</code>
             </p>
           </div>
 
@@ -121,11 +122,11 @@ export const DomainSettingsModal: React.FC<DomainSettingsModalProps> = ({
             <div className="p-2.5 bg-white rounded-xl border border-gray-200 flex items-center justify-between text-xs">
               <div>
                 <span className="text-[10px] font-bold text-gray-500 block">{t('domain.cnameRecord')}</span>
-                <span className="font-mono font-semibold text-gray-800">cname.nordible.com</span>
+                <span className="font-mono font-semibold text-gray-800">{siteConfig.cnameTarget}</span>
               </div>
               <button
                 type="button"
-                onClick={() => handleCopy('cname', 'cname.nordible.com')}
+                onClick={() => handleCopy('cname', siteConfig.cnameTarget)}
                 className="px-2.5 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-700 hover:bg-gray-50 flex items-center gap-1 cursor-pointer"
               >
                 {copiedKey === 'cname' ? (

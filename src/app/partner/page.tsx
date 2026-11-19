@@ -236,7 +236,7 @@ export default function PartnerPage() {
             </div>
           </div>
           <a
-            href="https://github.com/nordible/business-directory"
+            href={siteConfig.urls.github}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-nordible-dark hover:bg-nordible-blue text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors shrink-0"
@@ -264,7 +264,7 @@ export default function PartnerPage() {
 
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="https://nordible.co/#contact"
+              href={siteConfig.urls.agencyContact}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3.5 rounded-2xl bg-nordible-orange hover:bg-amber-400 text-nordible-dark font-extrabold text-xs sm:text-sm transition-transform active:scale-95 shadow-md flex items-center gap-2 cursor-pointer"

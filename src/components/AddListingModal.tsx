@@ -23,6 +23,7 @@ import {
 import { Mascot } from '@/components/mascot/Mascot';
 import { CategoryAutocomplete } from '@/components/CategoryAutocomplete';
 import { LegalFormAutocomplete } from '@/components/LegalFormAutocomplete';
+import { siteConfig } from '@/config/site';
 import { PhoneInputWithCountry } from '@/components/PhoneInputWithCountry';
 import { OpeningHoursPicker, DEFAULT_WEEK_SCHEDULE } from '@/components/OpeningHoursPicker';
 import { WeekSchedule } from '@/lib/types';
@@ -363,7 +364,7 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder={isDe ? 'z. B. Nordible Technologies' : 'e.g., Nordible Technologies'}
+                      placeholder={isDe ? `z. B. ${siteConfig.company.name}` : `e.g., ${siteConfig.company.name}`}
                       className="w-full px-3 py-2 text-xs rounded-xl border border-nordible-border bg-white focus:outline-none focus:ring-2 focus:ring-nordible-blue font-medium text-slate-800"
                     />
                   </div>

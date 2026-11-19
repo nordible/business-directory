@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { env } from '@/config/env';
+import { siteConfig } from '@/config/site';
 
 const AUTH_SECRET = env.mail.apiSecret || 'nordible-secure-auth-secret-key-321';
 const COOKIE_NAME = 'nordible_customer_session';
@@ -130,14 +131,14 @@ export function verifyAdminRequest(req: Request): { authorized: boolean; email?:
   // Check header secret
   const adminKey = req.headers.get('x-admin-key');
   if (adminKey && adminKey === ADMIN_SECRET) {
-    return { authorized: true, email: 'mail@nordible.co' };
+    return { authorized: true, email: ADMIN_EMAILS[0] || siteConfig.contact.email };
   }
 
   const authHeader = req.headers.get('authorization');
   if (authHeader?.startsWith('Bearer ')) {
     const token = authHeader.substring(7).trim();
     if (token === ADMIN_SECRET) {
-      return { authorized: true, email: 'mail@nordible.co' };
+      return { authorized: true, email: ADMIN_EMAILS[0] || siteConfig.contact.email };
     }
     const sessionEmail = verifyCustomerSessionToken(token);
     if (sessionEmail && isUserAdmin(sessionEmail)) {

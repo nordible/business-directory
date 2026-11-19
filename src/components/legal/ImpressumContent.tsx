@@ -55,8 +55,8 @@ export const ImpressumContent: React.FC = () => {
         </p>
         <p className="text-xs text-gray-500">
           {isDe
-            ? 'Betreiber dieses internationalen Branchenverzeichnisses ("Nordible for Businesses") auf der Subdomain business-directory.nordible.co sowie den zugehörigen Systemen.'
-            : 'Operator of this international business directory ("Nordible for Businesses") on the subdomain business-directory.nordible.co and associated systems.'}
+            ? `Betreiber dieses internationalen Branchenverzeichnisses ("${siteConfig.appName}") auf der Website ${siteConfig.urls.base} sowie den zugehörigen Systemen.`
+            : `Operator of this international business directory ("${siteConfig.appName}") on the website ${siteConfig.urls.base} and associated systems.`}
         </p>
       </section>
 
@@ -66,7 +66,7 @@ export const ImpressumContent: React.FC = () => {
           {isDe ? '2. Vertreten durch' : '2. Represented by'}
         </h2>
         <p className="text-sm">
-          <strong>Kabeer</strong> (Founder & Executive)
+          <strong>{siteConfig.company.founder}</strong> ({siteConfig.company.founderRole})
         </p>
       </section>
 
@@ -103,7 +103,7 @@ export const ImpressumContent: React.FC = () => {
           {isDe ? '4. Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV' : '4. Editorial Responsibility (§ 18 Abs. 2 MStV)'}
         </h2>
         <p className="text-sm">
-          Kabeer<br />
+          {siteConfig.company.founder}<br />
           {siteConfig.company.street}<br />
           {siteConfig.company.postalCode} {siteConfig.company.city}<br />
           {siteConfig.company.country}

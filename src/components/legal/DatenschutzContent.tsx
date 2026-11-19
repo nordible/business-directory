@@ -222,8 +222,8 @@ export const DatenschutzContent: React.FC = () => {
         </h2>
         <p className="text-xs leading-relaxed">
           {isDe
-            ? 'Im Falle datenschutzrechtlicher Verstöße steht Ihnen gemäß Art. 77 DSGVO ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde für Nordible Technologies in Hessen ist:'
-            : 'In the event of GDPR violations, you have the right to lodge a complaint with the competent supervisory authority (Art. 77 GDPR). For Nordible Technologies in Hesse, Germany, this is:'}
+            ? `Im Falle datenschutzrechtlicher Verstöße steht Ihnen gemäß Art. 77 DSGVO ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde für ${siteConfig.company.legalName} in ${siteConfig.company.state} ist:`
+            : `In the event of GDPR violations, you have the right to lodge a complaint with the competent supervisory authority (Art. 77 GDPR). For ${siteConfig.company.legalName} in ${siteConfig.company.state}, Germany, this is:`}
         </p>
         <p className="text-xs bg-nordible-bg border border-nordible-border rounded-2xl p-4 font-mono">
           <strong>Der Hessische Beauftragte für Datenschutz und Informationsfreiheit</strong><br />

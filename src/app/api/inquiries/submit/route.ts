@@ -3,6 +3,7 @@ import { createInquiry, getBusinessByIdOrSlug } from '@/lib/db/client';
 import { sendInquiryNotificationToBusiness, sendInquiryConfirmationToCustomer } from '@/lib/email';
 import { getTranslation } from '@/lib/translations';
 import { env } from '@/config/env';
+import { siteConfig } from '@/config/site';
 
 export async function POST(req: Request) {
   try {
@@ -60,7 +61,7 @@ export async function POST(req: Request) {
     const targetBusinessEmail =
       business?.email && business.email.includes('@')
         ? business.email.trim()
-        : env.mail.adminEmails[0] || 'mail@nordible.co';
+        : env.mail.adminEmails[0] || siteConfig.contact.email;
 
     // Dispatch Notifications via mail.nordible.co (Global BCC ensures nordiblesolutions@gmail.com receives all incoming leads)
     const dispatchResults = await Promise.allSettled([

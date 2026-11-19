@@ -39,9 +39,9 @@ export function StructuredData({ locale }: StructuredDataProps) {
         url: siteConfig.company.website,
         logo: `${siteConfig.urls.base}${siteConfig.assets.logoIcon}`,
         sameAs: [
-          'https://linkedin.com/company/nordible',
-          'https://free-invoice-generator.nordible.co',
-          'https://email.nordible.co',
+          siteConfig.company.linkedin,
+          siteConfig.ecosystem.invoiceGenerator,
+          siteConfig.ecosystem.mailPlatform,
         ],
       },
       {

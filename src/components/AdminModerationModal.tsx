@@ -513,7 +513,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                     autoFocus
                     value={otpEmail}
                     onChange={(e) => setOtpEmail(e.target.value)}
-                    placeholder="mail@nordible.co"
+                    placeholder={siteConfig.contact.email}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-nordible-border bg-nordible-bg focus:bg-white focus:border-nordible-blue text-xs text-gray-900 outline-none"
                   />
                   <p className="text-[11px] text-gray-400 mt-1">
