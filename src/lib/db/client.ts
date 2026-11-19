@@ -25,8 +25,8 @@ export const DEFAULT_TENANT: TenantBranding = {
   slug: 'nordible',
   name: 'Nordible for Businesses',
   tagline: {
-    de: 'Das kostenlose globale Branchenverzeichnis für verifizierte Unternehmen weltweit und aus Deutschland',
-    en: 'The Free Global Business Directory for Verified Enterprises Worldwide and from Germany',
+    de: 'Das kostenlose globale Branchenverzeichnis für verifizierte Unternehmen weltweit',
+    en: 'The Free Global Business Directory for Verified Enterprises Worldwide',
   },
   primaryColor: '#145BFF',
   accentColor: '#FF9F1A',

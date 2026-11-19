@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import DirectoryAppPage from '@/app/directory/page';
 import { SUPPORTED_LANGUAGES } from '@/lib/types';
 import { getAllBusinesses, getDefaultTenant, getCategories } from '@/lib/db/client';
@@ -14,10 +15,12 @@ export default async function LocalizedDirectoryPage() {
   ]);
 
   return (
-    <DirectoryAppPage
-      initialListings={businesses}
-      initialTenant={tenant}
-      initialCategories={categories}
-    />
+    <Suspense fallback={null}>
+      <DirectoryAppPage
+        initialListings={businesses}
+        initialTenant={tenant}
+        initialCategories={categories}
+      />
+    </Suspense>
   );
 }

@@ -25,7 +25,7 @@
     "launchDirectory": "Buka Direktori",
     "backHome": "Beranda",
     "partner": "Kemitraan",
-    "tagline": "Direktori Bisnis Global Gratis untuk Perusahaan Terverifikasi di Seluruh Dunia dan dari Jerman",
+    "tagline": "Direktori Bisnis Global Gratis untuk Perusahaan Terverifikasi di Seluruh Dunia",
     "toDirectory": "Direktori",
     "betaBadge": "Beta",
     "betaNotice": "Platform ini sedang dalam tahap pengujian."
@@ -41,6 +41,23 @@
     "applyFilters": "Terapkan Filter",
     "resetFilters": "Reset",
     "resultsFound": "{{count}} bisnis ditemukan"
+  },
+  "pagination": {
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "first": "Halaman pertama",
+    "last": "Halaman terakhir",
+    "page": "Halaman",
+    "of": "dari",
+    "showing": "Menampilkan {{start}}–{{end}} dari {{total}} bisnis",
+    "showingShort": "{{start}}–{{end}} dari {{total}}",
+    "perPage": "Per halaman",
+    "all": "Semua",
+    "pageAria": "Halaman {{page}}",
+    "currentPageAria": "Halaman saat ini, Halaman {{page}}",
+    "prevAria": "Ke halaman sebelumnya",
+    "nextAria": "Ke halaman berikutnya",
+    "ariaLabel": "Navigasi halaman"
   },
   "listing": {
     "verified": "Terverifikasi",
@@ -146,7 +163,7 @@
     "promoDesc": "Nordible Technologies membangun marketplace dan aplikasi web performa tinggi dengan 100% kepemilikan kode sejak hari pertama.",
     "promoExplore": "Jelajahi Layanan",
     "promoTalk": "Hubungi Kami",
-    "aboutDesc": "Direktori bisnis global untuk perusahaan terverifikasi di seluruh dunia dan dari Jerman.",
+    "aboutDesc": "Direktori bisnis global untuk perusahaan terverifikasi di seluruh dunia.",
     "featuresTitle": "Fitur",
     "featVerified": "Listing Terverifikasi",
     "featAi": "Ekstraksi Data AI",

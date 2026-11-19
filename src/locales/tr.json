@@ -25,7 +25,7 @@
     "launchDirectory": "Dizini Aç",
     "backHome": "Ana Sayfa",
     "partner": "İş Ortaklığı",
-    "tagline": "Dünya genelinden ve Almanya'dan doğrulanmış işletmeler için ücretsiz küresel rehber",
+    "tagline": "Dünya genelinden doğrulanmış işletmeler için ücretsiz küresel rehber",
     "toDirectory": "Directory",
     "betaBadge": "Beta",
     "betaNotice": "Bu platform şu anda test aşamasındadır."
@@ -41,6 +41,23 @@
     "applyFilters": "Filtreleri Uygula",
     "resetFilters": "Sıfırla",
     "resultsFound": "{{count}} işletme bulundu"
+  },
+  "pagination": {
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "first": "İlk sayfa",
+    "last": "Son sayfa",
+    "page": "Sayfa",
+    "of": "/",
+    "showing": "{{total}} işletmeden {{start}}–{{end}} arası gösteriliyor",
+    "showingShort": "{{start}}–{{end}} / {{total}}",
+    "perPage": "Sayfa başına",
+    "all": "Tümü",
+    "pageAria": "Sayfa {{page}}",
+    "currentPageAria": "Geçerli sayfa, Sayfa {{page}}",
+    "prevAria": "Önceki sayfaya git",
+    "nextAria": "Sonraki sayfaya git",
+    "ariaLabel": "Sayfalama navigasyonu"
   },
   "listing": {
     "verified": "Doğrulanmış",
@@ -266,7 +283,7 @@
     "promoDesc": "Nordible Technologies builds high-performance directories, automated data pipelines, and custom web applications with 100% IP ownership from Day 1.",
     "promoExplore": "Explore Services",
     "promoTalk": "Talk to Us",
-    "aboutDesc": "Dünya çapında ve Almanya'dan doğrulanmış işletmeler için küresel iş rehberi.",
+    "aboutDesc": "Dünya çapında doğrulanmış işletmeler için küresel iş rehberi.",
     "featuresTitle": "Features",
     "featVerified": "Verified Listings",
     "featAi": "AI Listing Extraction",

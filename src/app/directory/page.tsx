@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { TenantBranding, BusinessListing, Category } from '@/lib/types';
 import {
   DEFAULT_TENANT,
@@ -21,8 +22,9 @@ import { ClaimListingModal } from '@/components/ClaimListingModal';
 import { BusinessDashboardModal } from '@/components/BusinessDashboardModal';
 import { ReviewModal } from '@/components/ReviewModal';
 import { Mascot } from '@/components/mascot/Mascot';
+import { Pagination } from '@/components/Pagination';
 import { siteConfig } from '@/config/site';
-import { Search, SlidersHorizontal, Sparkles, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Search, SlidersHorizontal, Sparkles, ArrowRight, ArrowLeft, X } from 'lucide-react';
 
 interface DirectoryAppPageProps {
   initialListings?: BusinessListing[];
@@ -30,12 +32,17 @@ interface DirectoryAppPageProps {
   initialCategories?: Category[];
 }
 
-export default function DirectoryAppPage({
+function DirectoryAppContent({
   initialListings = [],
   initialTenant = DEFAULT_TENANT,
   initialCategories = DEFAULT_CATEGORIES,
 }: DirectoryAppPageProps) {
   const { locale, t } = useTranslation();
+  const searchParams = useSearchParams();
+
+  const qFromUrl = searchParams.get('q') || searchParams.get('query') || '';
+  const pageFromUrl = searchParams.get('page');
+  const catFromUrl = searchParams.get('category') || searchParams.get('cat') || 'cat-all';
 
   const [currentTenant, setCurrentTenant] = useState<TenantBranding>(initialTenant);
   const [categories, setCategories] = useState<Category[]>(initialCategories);
@@ -57,8 +64,22 @@ export default function DirectoryAppPage({
     });
   }, [initialListings.length, initialCategories.length]);
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('cat-all');
+  // Synchronize search query with URL search parameter
+  const [searchQuery, setSearchQuery] = useState(qFromUrl);
+  const [prevQFromUrl, setPrevQFromUrl] = useState(qFromUrl);
+  if (qFromUrl !== prevQFromUrl) {
+    setPrevQFromUrl(qFromUrl);
+    setSearchQuery(qFromUrl);
+  }
+
+  // Synchronize category with URL parameter
+  const [selectedCategory, setSelectedCategory] = useState(catFromUrl);
+  const [prevCatFromUrl, setPrevCatFromUrl] = useState(catFromUrl);
+  if (catFromUrl !== prevCatFromUrl) {
+    setPrevCatFromUrl(catFromUrl);
+    setSelectedCategory(catFromUrl);
+  }
+
   const [onlyOpenNow, setOnlyOpenNow] = useState(false);
 
   const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
@@ -66,6 +87,58 @@ export default function DirectoryAppPage({
   const [claimTarget, setClaimTarget] = useState<BusinessListing | null>(null);
   const [dashboardTarget, setDashboardTarget] = useState<BusinessListing | null>(null);
   const [reviewTarget, setReviewTarget] = useState<BusinessListing | null>(null);
+
+  // Pagination state synced with URL parameter
+  const parsedPage = pageFromUrl ? parseInt(pageFromUrl, 10) : 1;
+  const initialPage = !isNaN(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [prevPageFromUrl, setPrevPageFromUrl] = useState(pageFromUrl);
+  if (pageFromUrl !== prevPageFromUrl) {
+    setPrevPageFromUrl(pageFromUrl);
+    setCurrentPage(initialPage);
+  }
+
+  const [pageSize, setPageSize] = useState<number>(siteConfig.pagination.directoryPageSize);
+  const resultsTopRef = React.useRef<HTMLDivElement>(null);
+
+  const handleCategorySelect = (catId: string) => {
+    setSelectedCategory(catId);
+    setCurrentPage(1);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (catId && catId !== 'cat-all') {
+        url.searchParams.set('category', catId);
+      } else {
+        url.searchParams.delete('category');
+      }
+      url.searchParams.delete('page');
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (query.trim()) {
+        url.searchParams.set('q', query.trim());
+      } else {
+        url.searchParams.delete('q');
+      }
+      url.searchParams.delete('page');
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
+
+  const handleClearSearch = () => {
+    handleSearchChange('');
+  };
+
+  const handleToggleOpenNow = (open: boolean) => {
+    setOnlyOpenNow(open);
+    setCurrentPage(1);
+  };
 
   const filteredListings = useMemo(() => {
     return listings.filter((item: BusinessListing) => {
@@ -81,9 +154,11 @@ export default function DirectoryAppPage({
       }
 
       if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase();
+        const query = searchQuery.toLowerCase().trim();
         const matchesName = item.name.toLowerCase().includes(query);
         const matchesCity = item.city.toLowerCase().includes(query);
+        const matchesSlug = item.slug ? item.slug.toLowerCase().includes(query) : false;
+        const matchesCategory = item.categoryName ? item.categoryName.toLowerCase().includes(query) : false;
         const descText =
           typeof item.description === 'string'
             ? item.description
@@ -92,12 +167,48 @@ export default function DirectoryAppPage({
               (item.description as Record<string, string>)?.[locale === 'de' ? 'en' : 'de'] ||
               '';
         const matchesDesc = descText.toLowerCase().includes(query);
-        return matchesName || matchesCity || matchesDesc;
+        return matchesName || matchesCity || matchesDesc || matchesSlug || matchesCategory;
       }
 
       return true;
     });
   }, [listings, currentTenant.id, selectedCategory, onlyOpenNow, searchQuery, locale]);
+
+  // Derived pagination calculations
+  const totalItems = filteredListings.length;
+  const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
+  const safeCurrentPage = Math.min(Math.max(1, currentPage), totalPages);
+
+  const paginatedListings = useMemo(() => {
+    const startIndex = (safeCurrentPage - 1) * pageSize;
+    return filteredListings.slice(startIndex, startIndex + pageSize);
+  }, [filteredListings, safeCurrentPage, pageSize]);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (newPage > 1) {
+        url.searchParams.set('page', String(newPage));
+      } else {
+        url.searchParams.delete('page');
+      }
+      window.history.replaceState({}, '', url.toString());
+    }
+    if (resultsTopRef.current) {
+      resultsTopRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handlePageSizeChange = (newSize: number) => {
+    setPageSize(newSize);
+    setCurrentPage(1);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('page');
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
 
   const handleListingClaimed = (claimedId: string) => {
     setListings((prev) =>
@@ -127,6 +238,14 @@ export default function DirectoryAppPage({
     setSelectedCategory('cat-all');
     setOnlyOpenNow(false);
     setSearchQuery('');
+    setCurrentPage(1);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('page');
+      url.searchParams.delete('q');
+      url.searchParams.delete('query');
+      window.history.replaceState({}, '', url.toString());
+    }
   };
 
   const getCategoryName = (catId: string) => {
@@ -192,20 +311,39 @@ export default function DirectoryAppPage({
             </p>
 
             {/* Ergonomic Search Bar */}
-            <div className="mt-6 w-full max-w-2xl flex items-center gap-2 p-1.5 bg-white rounded-2xl border border-[#E8ECF4] shadow-md hover:border-[#145BFF]/30 transition-all">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (resultsTopRef.current) {
+                  resultsTopRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              className="mt-6 w-full max-w-2xl flex items-center gap-2 p-1.5 bg-white rounded-2xl border border-[#E8ECF4] shadow-md hover:border-[#145BFF]/30 transition-all"
+            >
               <div className="flex items-center flex-1 pl-3 text-gray-400">
                 <Search className="w-5 h-5 mr-2 shrink-0 text-[#145BFF]" />
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder={t('search.placeholder')}
                   className="w-full py-2 bg-transparent text-sm text-gray-900 focus:outline-none placeholder-gray-400 font-medium"
                 />
+                {searchQuery.trim() && (
+                  <button
+                    type="button"
+                    onClick={handleClearSearch}
+                    className="p-1 mr-1 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+                    aria-label="Clear search"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
 
               {/* Desktop filter button */}
               <button
+                type="button"
                 onClick={() => setIsFilterSheetOpen(true)}
                 className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#E8ECF4] bg-[#FAFBFF] text-xs font-bold text-[#0D2B75] hover:bg-[#F3F7FF] transition-colors cursor-pointer"
               >
@@ -231,7 +369,7 @@ export default function DirectoryAppPage({
                 <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
                 <span>{t('landing.ctaAdd')}</span>
               </button>
-            </div>
+            </form>
 
             {/* Category Quick Chips */}
             <div className="flex items-center justify-center gap-2 mt-4 overflow-x-auto py-1 max-w-full scrollbar-none">
@@ -246,7 +384,7 @@ export default function DirectoryAppPage({
                 return (
                   <button
                     key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
+                    onClick={() => handleCategorySelect(cat.id)}
                     className={`px-3.5 py-1.5 text-xs font-bold rounded-full border transition-all cursor-pointer whitespace-nowrap ${
                       isActive
                         ? 'text-white border-transparent shadow-xs'
@@ -263,11 +401,29 @@ export default function DirectoryAppPage({
         </section>
 
         {/* Directory Results Header */}
-        <div className="flex items-center justify-between mb-4 px-1 gap-2">
-          <div className="flex items-center gap-3">
+        <div ref={resultsTopRef} className="flex items-center justify-between mb-4 px-1 gap-2 scroll-mt-6">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <div className="text-xs font-extrabold text-[#0D2B75]/70 uppercase tracking-wider font-heading">
-              {t('search.resultsFound', { count: filteredListings.length })}
+              {t('search.resultsFound', { count: totalItems })}
             </div>
+            {searchQuery.trim() && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-blue-50 text-[#145BFF] text-xs font-bold border border-blue-200/60">
+                <span>&ldquo;{searchQuery.trim()}&rdquo;</span>
+                <button
+                  type="button"
+                  onClick={handleClearSearch}
+                  className="hover:text-[#0D2B75] cursor-pointer"
+                  aria-label="Clear search"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+            {totalPages > 1 && (
+              <span className="text-xs font-bold text-slate-400">
+                • {t('pagination.page')} {safeCurrentPage} {t('pagination.of')} {totalPages}
+              </span>
+            )}
             {activeFilterCount > 0 && (
               <button
                 onClick={handleResetFilters}
@@ -281,7 +437,7 @@ export default function DirectoryAppPage({
           <button
             type="button"
             onClick={() => setIsAddModalOpen(true)}
-            className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#145BFF] hover:text-[#0D2B75] bg-white hover:bg-[#F3F7FF] px-3.5 py-1.5 rounded-xl border border-blue-200/80 shadow-2xs transition-all active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#145BFF] hover:text-[#0D2B75] bg-white hover:bg-[#F3F7FF] px-3.5 py-1.5 rounded-xl border border-blue-200/80 shadow-2xs transition-all active:scale-95 cursor-pointer shrink-0"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#FF9F1A]" />
             <span>{t('landing.ctaAdd')}</span>
@@ -290,18 +446,33 @@ export default function DirectoryAppPage({
 
         {/* Listings Grid */}
         {filteredListings.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
-            {filteredListings.map((listing: BusinessListing) => (
-              <BusinessCard
-                key={listing.id}
-                listing={listing}
-                categoryName={getCategoryName(listing.categoryId)}
-                primaryColor={currentTenant.primaryColor}
-                onClaimListing={(item) => setClaimTarget(item)}
-                onOpenDashboard={(item) => setDashboardTarget(item)}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+              {paginatedListings.map((listing: BusinessListing) => (
+                <BusinessCard
+                  key={listing.id}
+                  listing={listing}
+                  categoryName={getCategoryName(listing.categoryId)}
+                  primaryColor={currentTenant.primaryColor}
+                  onClaimListing={(item) => setClaimTarget(item)}
+                  onOpenDashboard={(item) => setDashboardTarget(item)}
+                />
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            <Pagination
+              currentPage={safeCurrentPage}
+              totalPages={totalPages}
+              totalItems={totalItems}
+              pageSize={pageSize}
+              onPageChange={handlePageChange}
+              onPageSizeChange={handlePageSizeChange}
+              pageSizeOptions={siteConfig.pagination.directoryPageSizeOptions}
+              primaryColor={currentTenant.primaryColor}
+              className="mt-8"
+            />
+          </>
         ) : (
           <div className="bg-white rounded-3xl border border-[#E8ECF4] p-8 sm:p-12 text-center max-w-md mx-auto my-10 shadow-xs">
             <div className="w-24 h-24 mx-auto mb-4">
@@ -369,9 +540,9 @@ export default function DirectoryAppPage({
         onClose={() => setIsFilterSheetOpen(false)}
         categories={categories}
         selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
+        onSelectCategory={handleCategorySelect}
         onlyOpenNow={onlyOpenNow}
-        onToggleOpenNow={setOnlyOpenNow}
+        onToggleOpenNow={handleToggleOpenNow}
         primaryColor={currentTenant.primaryColor}
         onReset={handleResetFilters}
       />
@@ -407,5 +578,13 @@ export default function DirectoryAppPage({
         onReviewAdded={handleReviewAdded}
       />
     </div>
+  );
+}
+
+export default function DirectoryAppPage(props: DirectoryAppPageProps) {
+  return (
+    <React.Suspense fallback={null}>
+      <DirectoryAppContent {...props} />
+    </React.Suspense>
   );
 }

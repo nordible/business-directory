@@ -25,7 +25,7 @@
     "launchDirectory": "Fungua Saraka",
     "backHome": "Mwanzo",
     "partner": "Ushirikiano",
-    "tagline": "Saraka ya Biashara ya Kimataifa Isiyolipishwa kwa Biashara Zilizothibitishwa Ulimwenguni Pote na kutoka Ujerumani",
+    "tagline": "Saraka ya Biashara ya Kimataifa Isiyolipishwa kwa Biashara Zilizothibitishwa Ulimwenguni Pote",
     "toDirectory": "Directory",
     "betaBadge": "Beta",
     "betaNotice": "Jukwaa hili kwa sasa liko kwenye majaribio."
@@ -41,6 +41,23 @@
     "applyFilters": "Tekeleza Vichujio",
     "resetFilters": "Weka Upya",
     "resultsFound": "Biashara {{count}} zimepatikana"
+  },
+  "pagination": {
+    "previous": "Iliyopita",
+    "next": "Inayofuata",
+    "first": "Ukurasa wa kwanza",
+    "last": "Ukurasa wa mwisho",
+    "page": "Ukurasa",
+    "of": "wa",
+    "showing": "Inaonyesha {{start}}–{{end}} kati ya {{total}} biashara",
+    "showingShort": "{{start}}–{{end}} kati ya {{total}}",
+    "perPage": "Kwa kila ukurasa",
+    "all": "Zote",
+    "pageAria": "Ukurasa {{page}}",
+    "currentPageAria": "Ukurasa wa sasa, Ukurasa {{page}}",
+    "prevAria": "Nenda kwenye ukurasa uliopita",
+    "nextAria": "Nenda kwenye ukurasa unaofuata",
+    "ariaLabel": "Urambazaji wa kurasa"
   },
   "listing": {
     "verified": "Imethibitishwa",
@@ -266,7 +283,7 @@
     "promoDesc": "Nordible Technologies builds high-performance directories, automated data pipelines, and custom web applications with 100% IP ownership from Day 1.",
     "promoExplore": "Explore Services",
     "promoTalk": "Talk to Us",
-    "aboutDesc": "Saraka ya biashara ulimwenguni kwa mashirika yaliyothibitishwa duniani kote na kutoka Ujerumani.",
+    "aboutDesc": "Saraka ya biashara ulimwenguni kwa mashirika yaliyothibitishwa duniani kote.",
     "featuresTitle": "Features",
     "featVerified": "Verified Listings",
     "featAi": "AI Listing Extraction",

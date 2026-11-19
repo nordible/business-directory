@@ -5,8 +5,8 @@ export const siteConfig = {
   appNameShort: 'Nordible',
   isBeta: true,
   tagline: {
-    de: 'Das kostenlose globale Branchenverzeichnis für verifizierte Unternehmen weltweit und aus Deutschland',
-    en: 'The Free Global Business Directory for Verified Enterprises Worldwide and from Germany',
+    de: 'Das kostenlose globale Branchenverzeichnis für verifizierte Unternehmen weltweit',
+    en: 'The Free Global Business Directory for Verified Enterprises Worldwide',
   },
   company: {
     name: 'Nordible Technologies',
@@ -44,6 +44,12 @@ export const siteConfig = {
     logoIcon: '/images/logos/nordible-icon.png',
     logoFull: '/images/logos/nordible-logo-full.png',
     badge: '/images/logos/nordible-apple-business-1024x1024.png',
+  },
+  pagination: {
+    directoryPageSize: 10,
+    directoryPageSizeOptions: [6, 10, 20, 50],
+    adminPageSize: 10,
+    adminPageSizeOptions: [5, 10, 20, 50],
   },
 } as const;
 

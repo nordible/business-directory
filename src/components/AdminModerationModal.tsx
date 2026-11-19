@@ -24,6 +24,8 @@ import {
   Lock,
 } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
+import { Pagination } from '@/components/Pagination';
+import { siteConfig } from '@/config/site';
 
 const emptySubscribe = () => () => {};
 
@@ -64,6 +66,10 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
   const [filterTab, setFilterTab] = useState<'pending' | 'verified' | 'published' | 'all'>('pending');
   const [isLoading, setIsLoading] = useState(false);
   const [actingId, setActingId] = useState<string | null>(null);
+
+  // Pagination state for admin moderation
+  const [adminPage, setAdminPage] = useState(1);
+  const [adminPageSize, setAdminPageSize] = useState<number>(siteConfig.pagination.adminPageSize);
 
   const isMounted = useSyncExternalStore(
     emptySubscribe,
@@ -332,6 +338,18 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
     return true;
   });
 
+  const adminTotalPages = Math.max(1, Math.ceil(filtered.length / adminPageSize));
+  const safeAdminPage = Math.min(Math.max(1, adminPage), adminTotalPages);
+  const paginatedAdminListings = filtered.slice(
+    (safeAdminPage - 1) * adminPageSize,
+    safeAdminPage * adminPageSize
+  );
+
+  const handleTabChange = (tab: 'pending' | 'verified' | 'published' | 'all') => {
+    setFilterTab(tab);
+    setAdminPage(1);
+  };
+
   const pendingCount = listings.filter((l) => !l.isPublished).length;
 
   const isEmbedded = mode === 'embedded';
@@ -583,7 +601,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
             {/* Filter Navigation Tabs */}
             <div className="px-6 pt-3 pb-2 border-b border-[#E8ECF4] bg-[#FAFBFF] flex items-center gap-2 overflow-x-auto scrollbar-none">
               <button
-                onClick={() => setFilterTab('pending')}
+                onClick={() => handleTabChange('pending')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   filterTab === 'pending'
                     ? 'bg-[#0D2B75] text-white shadow-xs'
@@ -593,7 +611,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                 {isDe ? 'Ausstehend' : 'Pending Review'} ({listings.filter((l) => !l.isPublished).length})
               </button>
               <button
-                onClick={() => setFilterTab('published')}
+                onClick={() => handleTabChange('published')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   filterTab === 'published'
                     ? 'bg-[#0D2B75] text-white shadow-xs'
@@ -603,7 +621,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                 {isDe ? 'Veröffentlicht' : 'Published'} ({listings.filter((l) => l.isPublished).length})
               </button>
               <button
-                onClick={() => setFilterTab('all')}
+                onClick={() => handleTabChange('all')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   filterTab === 'all'
                     ? 'bg-[#0D2B75] text-white shadow-xs'
@@ -638,9 +656,11 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                   </p>
                 </div>
               ) : (
-                filtered.map((item) => {
-                  const isActing = actingId === item.id;
-                  return (
+                <>
+                  <div className="space-y-4">
+                    {paginatedAdminListings.map((item) => {
+                      const isActing = actingId === item.id;
+                      return (
                     <div
                       key={item.id}
                       className="p-4 rounded-2xl border border-[#E8ECF4] bg-[#FAFBFF] hover:border-[#145BFF]/30 transition-all space-y-3"
@@ -772,12 +792,32 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                       </div>
                     </div>
                   );
-                })
+                })}
+              </div>
+
+              {/* Moderation Pagination Controls */}
+              {filtered.length > 0 && (
+                <Pagination
+                  currentPage={safeAdminPage}
+                  totalPages={adminTotalPages}
+                  totalItems={filtered.length}
+                  pageSize={adminPageSize}
+                  onPageChange={setAdminPage}
+                  onPageSizeChange={(newSize) => {
+                    setAdminPageSize(newSize);
+                    setAdminPage(1);
+                  }}
+                  pageSizeOptions={siteConfig.pagination.adminPageSizeOptions}
+                  primaryColor="#145BFF"
+                  className="mt-2"
+                />
               )}
-            </div>
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </div>
+      </>
+    )}
+  </div>
   );
 
   if (isEmbedded) {
