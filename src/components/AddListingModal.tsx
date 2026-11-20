@@ -256,8 +256,8 @@ export const AddListingModal: React.FC<AddListingModalProps> = ({
               </p>
               <p className="text-xs text-gray-600 max-w-sm mx-auto leading-relaxed font-medium">
                 {isDe
-                  ? 'Ihr Unternehmenseintrag wurde in der Datenbank gespeichert und befindet sich im Status „Ausstehend“. Nach Prüfung durch den Administrator wird er im Verzeichnis freigeschaltet.'
-                  : 'Your business listing has been saved to the database in "Pending" status. After review by the administrator, it will be published to the directory.'}
+                  ? 'Ihr Unternehmenseintrag wurde in der Datenbank gespeichert und befindet sich im Status „Ausstehend“. Eine Bestätigung wurde an Ihre E-Mail gesendet. Prüfen Sie auch Ihren Spam-Ordner. Nach Prüfung durch den Administrator wird er im Verzeichnis freigeschaltet.'
+                  : 'Your business listing has been saved to the database in "Pending" status. A confirmation has been sent to your email. Check your spam folder also. After review by the administrator, it will be published to the directory.'}
               </p>
               <button
                 type="button"

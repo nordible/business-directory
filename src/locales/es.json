@@ -405,7 +405,7 @@
     "submit": "Enviar consulta ahora",
     "submitting": "Enviando y clasificando...",
     "successTitle": "¡Consulta enviada con éxito!",
-    "successDesc": "Su mensaje ha sido enviado a {{name}}. Se ha enviado una confirmación a {{email}}.",
+    "successDesc": "Su mensaje ha sido enviado a {{name}}. Se ha enviado una confirmación a {{email}}. Revise también su carpeta de correo no deseado (spam).",
     "notificationTitle": "Notificación automática activada",
     "notificationDesc": "En cuanto el negocio responda, recibirá un correo y podrá consultar la conversación en su buzón.",
     "openInbox": "Abrir buzón de cliente",

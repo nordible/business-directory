@@ -716,12 +716,21 @@ export async function rejectBusiness(id: string): Promise<boolean> {
   if (!isDbConfigured || !id) return false;
 
   try {
-    // 1. Attempt permanent DELETE first
+    // 1. Attempt permanent DELETE first with representation check
     const delRes = await fetch(`${SUPABASE_URL}/rest/v1/businesses?id=eq.${id}`, {
       method: 'DELETE',
-      headers: getHeaders(),
+      headers: {
+        ...getHeaders(),
+        Prefer: 'return=representation',
+      },
     });
-    if (delRes.ok) return true;
+
+    if (delRes.ok) {
+      const data = await delRes.json().catch(() => []);
+      if (Array.isArray(data) && data.length > 0) {
+        return true;
+      }
+    }
 
     // 2. Fallback: unpublish, unverify, and set status to rejected
     const patchRes = await fetch(`${SUPABASE_URL}/rest/v1/businesses?id=eq.${id}`, {

@@ -405,7 +405,7 @@
     "submit": "Envoyer la demande",
     "submitting": "Envoi et tri en cours...",
     "successTitle": "Demande envoyée avec succès !",
-    "successDesc": "Votre message a été transmis à {{name}}. Une confirmation a été envoyée à {{email}}.",
+    "successDesc": "Votre message a été transmis à {{name}}. Une confirmation a été envoyée à {{email}}. Vérifiez également votre dossier de spams.",
     "notificationTitle": "Notification automatique activée",
     "notificationDesc": "Dès que l'entreprise répondra, vous recevrez un e-mail et pourrez suivre la discussion dans votre boîte de réception.",
     "openInbox": "Ouvrir la boîte de réception",

@@ -404,7 +404,7 @@
     "submit": "Anfrage jetzt absenden",
     "submitting": "Wird übertragen & triagiert...",
     "successTitle": "Anfrage erfolgreich gesendet!",
-    "successDesc": "Ihre Nachricht wurde an {{name}} übermittelt. Eine Bestätigung wurde an {{email}} gesendet.",
+    "successDesc": "Ihre Nachricht wurde an {{name}} übermittelt. Eine Bestätigung wurde an {{email}} gesendet. Prüfen Sie auch Ihren Spam-Ordner.",
     "notificationTitle": "Automatisierte Benachrichtigung aktiviert",
     "notificationDesc": "Sobald das Unternehmen antwortet, erhalten Sie eine E-Mail und können die Nachricht direkt in Ihrem Kunden-Postfach verfolgen.",
     "openInbox": "Zum Kunden-Postfach öffnen",

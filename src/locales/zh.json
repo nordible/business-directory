@@ -405,7 +405,7 @@
     "submit": "立即提交咨询",
     "submitting": "正在发送并智能分类...",
     "successTitle": "咨询已成功送达！",
-    "successDesc": "您的留言已转交至 {{name}}。确认函已发送至 {{email}}。",
+    "successDesc": "您的留言已转交至 {{name}}。确认函已发送至 {{email}}。请同时检查您的垃圾邮件文件夹。",
     "notificationTitle": "自动通知已激活",
     "notificationDesc": "企业回复后，您将收到邮件通知，并可直接在客户收件箱中跟进沟通。",
     "openInbox": "打开客户收件箱",

@@ -404,7 +404,7 @@
     "submit": "Send inquiry now",
     "submitting": "Submitting & categorizing...",
     "successTitle": "Inquiry sent successfully!",
-    "successDesc": "Your message has been sent to {{name}}. A confirmation has been sent to {{email}}.",
+    "successDesc": "Your message has been sent to {{name}}. A confirmation has been sent to {{email}}. Check your spam folder also.",
     "notificationTitle": "Automated notification activated",
     "notificationDesc": "As soon as the business replies, you will receive an email and can track messages directly in your customer inbox.",
     "openInbox": "Open Customer Inbox",

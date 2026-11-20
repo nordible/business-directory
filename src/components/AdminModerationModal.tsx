@@ -548,6 +548,11 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                   <label className="block text-xs font-bold text-nordible-dark mb-1">
                     {isDe ? '6-stelliger Sicherheitscode' : '6-digit Security Code'}
                   </label>
+                  <p className="text-[11px] text-gray-500 mb-2 font-medium">
+                    {isDe
+                      ? `Wir haben einen Bestätigungscode an ${otpEmail} gesendet. Prüfen Sie auch Ihren Spam-Ordner.`
+                      : `We sent a confirmation code to ${otpEmail}. Check your spam folder also.`}
+                  </p>
                   <input
                     type="text"
                     maxLength={6}

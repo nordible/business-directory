@@ -323,8 +323,8 @@ export const CustomerInboxDrawer: React.FC<CustomerInboxDrawerProps> = ({ isOpen
                         ? 'Geben Sie Ihre E-Mail-Adresse ein. Wir senden Ihnen ein Einmalkennwort (OTP) zur sicheren Anmeldung.'
                         : 'Enter your email address. We will send you a one-time passcode (OTP) for secure sign-in.')
                     : (isDe
-                        ? `Wir haben einen 6-stelligen Sicherheitscode an ${inputEmail} gesendet.`
-                        : `We have sent a 6-digit security code to ${inputEmail}.`)}
+                        ? `Wir haben einen 6-stelligen Sicherheitscode an ${inputEmail} gesendet. Prüfen Sie auch Ihren Spam-Ordner.`
+                        : `We have sent a 6-digit security code to ${inputEmail}. Check your spam folder also.`)}
                 </p>
               </div>
 

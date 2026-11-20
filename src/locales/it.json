@@ -405,7 +405,7 @@
     "submit": "Invia richiesta ora",
     "submitting": "Invio e categorizzazione...",
     "successTitle": "Richiesta inviata con successo!",
-    "successDesc": "Il messaggio è stato inviato a {{name}}. Una conferma è stata inviata a {{email}}.",
+    "successDesc": "Il messaggio è stato inviato a {{name}}. Una conferma è stata inviata a {{email}}. Controlla anche la cartella spam.",
     "notificationTitle": "Notifica automatica attivata",
     "notificationDesc": "Non appena l'azienda risponderà, riceverai un'email e potrai seguire la conversazione nella tua casella clienti.",
     "openInbox": "Apri casella clienti",
