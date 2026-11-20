@@ -224,6 +224,8 @@
     "aiAgentNotice": "AIエージェントまたはBotとしてアクセス中ですか？REST API（POST /api/businesses/submit）経由で直接申請してください：",
     "copyAiTemplate": "AI提出テンプレートをコピー",
     "copiedAiTemplate": "AIテンプレートをコピーしました！",
+    "duplicateError": "このメールアドレスとウェブサイトの組み合わせは既に登録されています。",
+    "requiredFieldsError": "会社名、ウェブサイト、および有効なビジネス用メールアドレスを入力してください。",
     "footerNotice": "掲載審査後、Nordible for Businessesに世界中から公開されます。完全永久無料。",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

@@ -23,6 +23,7 @@ import {
   LogOut,
   Lock,
   Rocket,
+  XCircle,
 } from 'lucide-react';
 import { Mascot } from '@/components/mascot/Mascot';
 import { Pagination } from '@/components/Pagination';
@@ -294,7 +295,7 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
     setListings([]);
   };
 
-  const handleModerate = async (id: string, action: 'verify' | 'publish') => {
+  const handleModerate = async (id: string, action: 'verify' | 'publish' | 'reject') => {
     setActingId(id);
     try {
       const headers: Record<string, string> = { 'Content-Type': 'application/json' };
@@ -307,12 +308,15 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
       const res = await fetch('/api/businesses/moderate', {
         method: 'POST',
         headers,
-        body: JSON.stringify({ id, action }),
+        body: JSON.stringify({ id, action, locale }),
       });
 
       if (res.ok) {
-        setListings((prev) =>
-          prev.map((item) => {
+        setListings((prev) => {
+          if (action === 'reject') {
+            return prev.filter((item) => item.id !== id);
+          }
+          return prev.map((item) => {
             if (item.id !== id) return item;
             if (action === 'verify') {
               return { ...item, isVerified: true };
@@ -321,8 +325,8 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
               return { ...item, isPublished: true };
             }
             return item;
-          })
-        );
+          });
+        });
         if (onDataChanged) onDataChanged();
       }
     } catch {
@@ -712,6 +716,41 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                             ''}
                       </p>
 
+                      {/* Registration Email Badge & Contact Row */}
+                      <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200/90 text-xs">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <Mail className="w-3.5 h-3.5 text-nordible-blue shrink-0" />
+                          <span className="text-slate-500 font-semibold shrink-0">
+                            {isDe ? 'Registrierungs-E-Mail:' : 'Registration Email:'}
+                          </span>
+                          {item.email ? (
+                            <a
+                              href={`mailto:${item.email}`}
+                              className="font-mono font-bold text-nordible-dark hover:text-nordible-blue truncate"
+                              title={item.email}
+                            >
+                              {item.email}
+                            </a>
+                          ) : (
+                            <span className="italic text-slate-400">
+                              {isDe ? 'Keine E-Mail hinterlegt' : 'No email provided'}
+                            </span>
+                          )}
+                        </div>
+                        {item.email && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              navigator.clipboard.writeText(item.email || '');
+                            }}
+                            className="text-[10px] text-slate-500 hover:text-nordible-blue font-bold px-2 py-0.5 rounded-md bg-white border border-slate-200 shrink-0 cursor-pointer shadow-2xs active:scale-95 transition-all"
+                            title={isDe ? 'E-Mail kopieren' : 'Copy email'}
+                          >
+                            {isDe ? 'Kopieren' : 'Copy'}
+                          </button>
+                        )}
+                      </div>
+
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-600 font-medium pt-1 border-t border-nordible-border">
                         <div className="flex items-center gap-1.5 truncate">
                           <MapPin className="w-3.5 h-3.5 text-nordible-blue shrink-0" />
@@ -747,50 +786,77 @@ export const AdminModerationModal: React.FC<AdminModerationModalProps> = ({
                       </div>
 
                       {/* Moderation Action Buttons */}
-                      <div className="pt-2 flex items-center justify-end gap-2 border-t border-nordible-border">
-                        {!item.isVerified && (
-                          <button
-                            type="button"
-                            disabled={isActing}
-                            onClick={() => handleModerate(item.id, 'verify')}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors active:scale-95 disabled:opacity-50 cursor-pointer shadow-2xs"
-                          >
-                            {isActing ? (
-                              <Loader2 className="w-3 h-3 animate-spin" />
-                            ) : (
-                              <CheckCircle2 className="w-3.5 h-3.5" />
-                            )}
-                            <span>{isDe ? '1. Verifizieren' : '1. Verify'}</span>
-                          </button>
-                        )}
+                      <div className="pt-2 flex items-center justify-between gap-2 border-t border-nordible-border">
+                        {/* Reject / Discard button */}
+                        <button
+                          type="button"
+                          disabled={isActing}
+                          onClick={() => {
+                            const confirmed = window.confirm(
+                              isDe
+                                ? `Möchten Sie den Eintrag "${item.name}" (E-Mail: ${item.email || 'Keine'}) wirklich ablehnen?`
+                                : `Are you sure you want to reject the listing "${item.name}" (Email: ${item.email || 'None'})?`
+                            );
+                            if (confirmed) {
+                              handleModerate(item.id, 'reject');
+                            }
+                          }}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold transition-all active:scale-95 disabled:opacity-50 cursor-pointer shadow-2xs mr-auto"
+                          title={isDe ? 'Eintrag ablehnen und entfernen' : 'Reject and remove listing'}
+                        >
+                          {isActing ? (
+                            <Loader2 className="w-3 h-3 animate-spin" />
+                          ) : (
+                            <XCircle className="w-3.5 h-3.5 text-rose-600" />
+                          )}
+                          <span>{isDe ? 'Ablehnen' : 'Reject'}</span>
+                        </button>
 
-                        {!item.isPublished && (
-                          <button
-                            type="button"
-                            disabled={isActing}
-                            onClick={() => handleModerate(item.id, 'publish')}
-                            className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-nordible-blue hover:bg-nordible-dark text-white text-xs font-extrabold transition-colors active:scale-95 disabled:opacity-50 cursor-pointer shadow-xs"
-                          >
-                            {isActing ? (
-                              <Loader2 className="w-3 h-3 animate-spin" />
-                            ) : (
-                              <Send className="w-3.5 h-3.5" />
-                            )}
-                            <span>{isDe ? '2. Veröffentlichen' : '2. Publish'}</span>
-                          </button>
-                        )}
+                        <div className="flex items-center gap-2">
+                          {!item.isVerified && (
+                            <button
+                              type="button"
+                              disabled={isActing}
+                              onClick={() => handleModerate(item.id, 'verify')}
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors active:scale-95 disabled:opacity-50 cursor-pointer shadow-2xs"
+                            >
+                              {isActing ? (
+                                <Loader2 className="w-3 h-3 animate-spin" />
+                              ) : (
+                                <CheckCircle2 className="w-3.5 h-3.5" />
+                              )}
+                              <span>{isDe ? '1. Verifizieren' : '1. Verify'}</span>
+                            </button>
+                          )}
 
-                        {item.isPublished && (
-                          <a
-                            href={getBusinessPermalink(item, locale)}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-bold text-nordible-blue hover:underline"
-                          >
-                            <span>{isDe ? 'Im Verzeichnis ansehen' : 'View on Directory'}</span>
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
-                        )}
+                          {!item.isPublished && (
+                            <button
+                              type="button"
+                              disabled={isActing}
+                              onClick={() => handleModerate(item.id, 'publish')}
+                              className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-nordible-blue hover:bg-nordible-dark text-white text-xs font-extrabold transition-colors active:scale-95 disabled:opacity-50 cursor-pointer shadow-xs"
+                            >
+                              {isActing ? (
+                                <Loader2 className="w-3 h-3 animate-spin" />
+                              ) : (
+                                <Send className="w-3.5 h-3.5" />
+                              )}
+                              <span>{isDe ? '2. Veröffentlichen' : '2. Publish'}</span>
+                            </button>
+                          )}
+
+                          {item.isPublished && (
+                            <a
+                              href={getBusinessPermalink(item, locale)}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1 text-xs font-bold text-nordible-blue hover:underline"
+                            >
+                              <span>{isDe ? 'Im Verzeichnis ansehen' : 'View on Directory'}</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
                   );

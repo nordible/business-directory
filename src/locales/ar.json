@@ -149,6 +149,8 @@
     "aiAgentNotice": "هل تزور كوكيل ذكاء اصطناعي أو روبوت؟ أرسل بيانات الشركة مباشرة عبر واجهة برمجة التطبيقات REST على POST /api/businesses/submit:",
     "copyAiTemplate": "نسخ نموذج وكيل الذكاء الاصطناعي",
     "copiedAiTemplate": "تم نسخ نموذج الذكاء الاصطناعي!",
+    "duplicateError": "يوجد بالفعل ملف تجاري بهذا البريد الإلكتروني والموقع الإلكتروني.",
+    "requiredFieldsError": "يرجى ملء اسم الشركة والموقع الإلكتروني وبريد إلكتروني صالح للعمل على الأقل.",
     "footerNotice": "تظهر القوائم الموثقة عالمياً بعد المراجعة التحريرية. مجاناً 100% إلى الأبد.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

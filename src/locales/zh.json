@@ -149,6 +149,8 @@
     "aiAgentNotice": "正在作为 AI 智能体或爬虫访问？可直接通过 REST API（POST /api/businesses/submit）提交结构化企业信息：",
     "copyAiTemplate": "复制 AI 提交模板",
     "copiedAiTemplate": "AI 模板已复制！",
+    "duplicateError": "已存在使用该电子邮件和网站组合的企业条目。",
+    "requiredFieldsError": "请至少填写公司名称、网站和有效的商务电子邮件地址。",
     "footerNotice": "经人工审核认证后，企业名录将在全球范围内正式上线。永久免费，零平台费用。",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

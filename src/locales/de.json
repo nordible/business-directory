@@ -276,6 +276,8 @@
     "aiAgentNotice": "Besuchen Sie die Seite als KI-Agent oder Crawler? Übermitteln Sie Unternehmenseinträge direkt per REST-API an POST /api/businesses/submit:",
     "copyAiTemplate": "API-JSON-Vorlage kopieren",
     "copiedAiTemplate": "API-Vorlage kopiert!",
+    "duplicateError": "Ein Eintrag mit dieser Kombination aus E-Mail und Webseite existiert bereits.",
+    "requiredFieldsError": "Bitte füllen Sie mindestens Unternehmensname, Webseite und eine gültige geschäftliche E-Mail-Adresse aus.",
     "footerNotice": "Geprüfte Einträge erscheinen nach redaktioneller Freigabe weltweit in Nordible for Businesses. Kostenlos.",
     "submittedBadge": "Eintragsanfrage eingereicht 🎉",
     "submittedTitle": "Vielen Dank für Ihren Unternehmenseintrag!",
@@ -507,6 +509,23 @@
       "step2": "Anfragen werden sicher in Ihr Kunden-Postfach zugestellt und per E-Mail angekündigt.",
       "step3": "Teilen Sie Ihren Profil-Link auf Ihrer Website und auf Social Media, um Ihre Sichtbarkeit zu stärken.",
       "text": "Herzlichen Glückwunsch! Das Profil für {{businessName}} ist jetzt live auf Nordible: {{listingUrl}}"
+    },
+    "businessRejectedNotification": {
+      "subject": "Rückmeldung zu Ihrer Eintragsanfrage für {{businessName}}",
+      "badge": "Verifizierungshinweis",
+      "title": "Prüfung erforderlich: Eintragsverifizierung",
+      "greeting": "Hallo,",
+      "body": "vielen Dank für Ihr Interesse an Nordible for Businesses. Im Rahmen unserer redaktionellen Sicherheitsprüfung konnte unser Team die angegebene Registrierungs-E-Mail oder die Kontaktdaten für {{businessName}} nicht eindeutig authentifizieren. Zum Schutz vor unbefugten Einträgen konnte das Unternehmensprofil daher nicht freigeschaltet werden.",
+      "businessLabel": "Unternehmen:",
+      "statusLabel": "Status:",
+      "statusValue": "Verifizierung unvollständig / Abgelehnt",
+      "instructionsTitle": "So können Sie Ihren Eintrag erfolgreich einreichen:",
+      "step1": "Reichen Sie die Anfrage über eine offizielle E-Mail-Adresse Ihrer Unternehmensdomain ein (z. B. info@ihre-domain.de).",
+      "step2": "Achten Sie darauf, dass Firmenname, offizielle Webseiten-URL und Anschrift vollständig und korrekt angegeben sind.",
+      "step3": "Sie können Ihr Unternehmensprofil jederzeit mit den korrigierten Angaben über unser Portal erneut einreichen.",
+      "resubmitBtn": "Eintrag erneut einreichen",
+      "footerNote": "Falls Sie Fragen haben oder ein Missverständnis vorliegt, antworten Sie einfach direkt auf diese E-Mail.",
+      "text": "Hallo,\n\nbei der redaktionellen Prüfung konnten wir die Registrierungs-E-Mail bzw. die Angaben für {{businessName}} nicht verifizieren. Der Eintrag konnte daher nicht freigeschaltet werden.\n\nBitte reichen Sie die Anfrage mit Ihrer offiziellen geschäftlichen E-Mail-Adresse und den korrekten Unternehmensdaten erneut ein: {{resubmitUrl}}\n\nBei Fragen können Sie direkt auf diese E-Mail antworten."
     },
     "adminNewListingNotification": {
       "subject": "[Admin-Benachrichtigung] Neue Unternehmensregistrierung: {{businessName}} ({{location}})",

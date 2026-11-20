@@ -148,6 +148,8 @@
     "aiAgentNotice": "Yapay zeka ajanı veya bot olarak mı ziyaret ediyorsunuz? İşletme kayıtlarını doğrudan REST API üzerinden (POST /api/businesses/submit) iletin:",
     "copyAiTemplate": "Yapay Zeka Şablonunu Kopyala",
     "copiedAiTemplate": "Yapay Zeka Şablonu Kopyalandı!",
+    "duplicateError": "Bu e-posta ve web sitesi kombinasyonuna sahip bir işletme kaydı zaten mevcut.",
+    "requiredFieldsError": "Lütfen en az şirket adını, web sitesini ve geçerli bir kurumsal e-posta adresini doldurun.",
     "footerNotice": "Doğrulanan kayıtlar editör onayından sonra küresel olarak yayınlanır. Sonsuza kadar %100 ücretsiz.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

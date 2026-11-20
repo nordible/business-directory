@@ -2,12 +2,16 @@ import { NextResponse } from 'next/server';
 import {
   verifyBusiness,
   publishBusiness,
+  rejectBusiness,
   getAllBusinesses,
   getListingsByTenant,
   getBusinessByIdOrSlug,
 } from '@/lib/db/client';
 import { verifyAdminRequest } from '@/lib/auth-customer';
-import { sendBusinessPublishedNotification } from '@/lib/email';
+import {
+  sendBusinessPublishedNotification,
+  sendBusinessRejectedNotification,
+} from '@/lib/email';
 import { getBusinessPermalink } from '@/lib/permalinks';
 import { siteConfig } from '@/config/site';
 
@@ -48,7 +52,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { id, action } = await request.json();
+    const { id, action, locale: reqLocale } = await request.json();
 
     if (!id || !action) {
       return NextResponse.json(
@@ -62,6 +66,29 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: ok, action: 'verify' });
     }
 
+    if (action === 'reject') {
+      const business = await getBusinessByIdOrSlug(id, true);
+      const ok = await rejectBusiness(id);
+
+      if (ok && business && business.email && business.email.includes('@')) {
+        try {
+          const locale = reqLocale && typeof reqLocale === 'string' ? reqLocale.trim().toLowerCase() : 'en';
+          const resubmitUrl = `${siteConfig.urls.base}/${locale}`;
+
+          await sendBusinessRejectedNotification({
+            to: business.email.trim(),
+            businessName: business.name,
+            locale,
+            resubmitUrl,
+          });
+        } catch (emailErr) {
+          console.error('[REJECT NOTIFICATION ERROR]:', emailErr);
+        }
+      }
+
+      return NextResponse.json({ success: ok, action: 'reject' });
+    }
+
     if (action === 'publish') {
       const business = await getBusinessByIdOrSlug(id, true);
       const wasPublished = business?.isPublished;
@@ -69,8 +96,7 @@ export async function POST(request: Request) {
 
       if (ok && business && !wasPublished && business.email && business.email.includes('@')) {
         try {
-          const isDachCountry = /deutschland|germany|österreich|austria|schweiz|switzerland/i.test(business.country || '');
-          const locale = isDachCountry ? 'de' : 'en';
+          const locale = reqLocale && typeof reqLocale === 'string' ? reqLocale.trim().toLowerCase() : 'en';
           const listingUrl = `${siteConfig.urls.base}${getBusinessPermalink(business, locale)}`;
 
           await sendBusinessPublishedNotification({
@@ -90,7 +116,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(
-      { error: `Invalid action: ${action}. Expected 'verify' or 'publish'.` },
+      { error: `Invalid action: ${action}. Expected 'verify', 'publish', or 'reject'.` },
       { status: 400 }
     );
   } catch (error: unknown) {

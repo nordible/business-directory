@@ -548,6 +548,106 @@ export async function sendBusinessPublishedNotification(
   });
 }
 
+export interface BusinessRejectedNotificationOptions {
+  to: string;
+  businessName: string;
+  locale?: string;
+  resubmitUrl?: string;
+}
+
+/**
+ * Sends an email notification to the submitter when an admin rejects a submission
+ * requesting them to submit from their official business email address with correct details.
+ */
+export async function sendBusinessRejectedNotification(
+  options: BusinessRejectedNotificationOptions
+) {
+  const locale = options.locale || 'en';
+  const subject = getTranslation(locale, 'emails.businessRejectedNotification.subject', {
+    businessName: options.businessName,
+  });
+
+  const badge = getTranslation(locale, 'emails.businessRejectedNotification.badge');
+  const title = getTranslation(locale, 'emails.businessRejectedNotification.title');
+  const greeting = getTranslation(locale, 'emails.businessRejectedNotification.greeting');
+  const body = getTranslation(locale, 'emails.businessRejectedNotification.body', {
+    businessName: options.businessName,
+  });
+  const businessLabel = getTranslation(locale, 'emails.businessRejectedNotification.businessLabel');
+  const statusLabel = getTranslation(locale, 'emails.businessRejectedNotification.statusLabel');
+  const statusValue = getTranslation(locale, 'emails.businessRejectedNotification.statusValue');
+  const instructionsTitle = getTranslation(locale, 'emails.businessRejectedNotification.instructionsTitle');
+  const step1 = getTranslation(locale, 'emails.businessRejectedNotification.step1');
+  const step2 = getTranslation(locale, 'emails.businessRejectedNotification.step2');
+  const step3 = getTranslation(locale, 'emails.businessRejectedNotification.step3');
+  const resubmitBtn = getTranslation(locale, 'emails.businessRejectedNotification.resubmitBtn');
+  const footerNote = getTranslation(locale, 'emails.businessRejectedNotification.footerNote');
+  const resubmitUrl = options.resubmitUrl || siteConfig.urls.base;
+
+  const bodyHtml = `
+    <p style="color: #334155; font-size: 14px; line-height: 1.6;">
+      ${greeting}<br/><br/>
+      ${body}
+    </p>
+
+    <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 12px; padding: 20px; margin: 24px 0;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; width: 35%; font-weight: 600;">${businessLabel}</td>
+          <td style="padding: 6px 0; font-weight: 700; color: #0f172a;">${options.businessName}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #64748b; font-weight: 600;">${statusLabel}</td>
+          <td style="padding: 6px 0; font-weight: 700; color: #e11d48;">
+            ${statusValue}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px; margin: 24px 0;">
+      <span style="font-size: 13px; font-weight: 700; color: #0f172a; display: block; margin-bottom: 8px;">
+        ${instructionsTitle}
+      </span>
+      <ul style="margin: 0; padding-left: 18px; color: #334155; font-size: 13px; line-height: 1.7;">
+        <li>${step1}</li>
+        <li>${step2}</li>
+        <li>${step3}</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center; margin: 28px 0;">
+      <a href="${resubmitUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #145bff; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 12px rgba(20, 91, 255, 0.25);">
+        ${resubmitBtn}
+      </a>
+      <p style="font-size: 12px; color: #64748b; margin: 16px 0 0 0; line-height: 1.5;">
+        ${footerNote}
+      </p>
+    </div>
+  `;
+
+  const html = renderEmailShell({
+    headerBadge: badge,
+    headerTitle: title,
+    bodyHtml,
+    borderColor: '#e11d48',
+    locale,
+  });
+
+  const text = getTranslation(locale, 'emails.businessRejectedNotification.text', {
+    businessName: options.businessName,
+    resubmitUrl,
+  });
+
+  return sendEmail({
+    to: options.to,
+    subject,
+    html,
+    text,
+    replyTo: siteConfig.contact.email,
+  });
+}
+
 export interface NewListingNotificationOptions {
   businessName: string;
   legalForm?: string;

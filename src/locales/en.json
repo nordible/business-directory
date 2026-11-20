@@ -276,6 +276,8 @@
     "aiAgentNotice": "Visiting as an AI Agent or Crawler? Submit company listings directly via our REST API at POST /api/businesses/submit with structured details:",
     "copyAiTemplate": "Copy API JSON Payload",
     "copiedAiTemplate": "API Payload Copied!",
+    "duplicateError": "A business listing with this email and website combination already exists.",
+    "requiredFieldsError": "Please fill in at least Company Name, Website, and a valid business Email address.",
     "footerNotice": "Verified listings appear globally in Nordible for Businesses after human editorial check. Free to use.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",
@@ -507,6 +509,23 @@
       "step2": "Inquiries will be routed securely to your customer inbox with instant email alerts.",
       "step3": "Share your profile link across your social media and website to build trust and visibility.",
       "text": "Congratulations! The listing for {{businessName}} is now live on Nordible: {{listingUrl}}"
+    },
+    "businessRejectedNotification": {
+      "subject": "Update on your listing request for {{businessName}}",
+      "badge": "Verification Notice",
+      "title": "Action Required: Listing Verification",
+      "greeting": "Hello,",
+      "body": "Thank you for your interest in Nordible for Businesses. During our editorial verification, our security team was unable to authenticate the registration email or contact details submitted for {{businessName}}. To prevent unauthorized entries and protect directory authenticity, this listing could not be approved.",
+      "businessLabel": "Business:",
+      "statusLabel": "Status:",
+      "statusValue": "Verification Incomplete / Rejected",
+      "instructionsTitle": "How to resubmit with verified credentials:",
+      "step1": "Submit using your official company domain email address (e.g. info@yourdomain.com).",
+      "step2": "Ensure the official business name, official website URL, and physical address are complete and accurate.",
+      "step3": "You can resubmit your company profile anytime via our directory portal with the correct details.",
+      "resubmitBtn": "Resubmit Business Listing",
+      "footerNote": "If you believe this was done in error or need assistance, simply reply directly to this email with your company credentials.",
+      "text": "Hello,\n\nDuring editorial review, we were unable to authenticate the registration email or details submitted for {{businessName}}. As a result, the listing could not be approved.\n\nPlease resubmit your request using your official business email address and correct company details: {{resubmitUrl}}\n\nNeed assistance? Reply directly to this email."
     },
     "adminNewListingNotification": {
       "subject": "[Admin Notification] New Business Registration: {{businessName}} ({{location}})",

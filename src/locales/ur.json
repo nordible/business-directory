@@ -219,6 +219,8 @@
     "aiAgentNotice": "کیا آپ AI ایجنٹ یا بوٹ ہیں؟ ہمارے REST API (POST /api/businesses/submit) کے ذریعے براہ راست اندراج کروائیں:",
     "copyAiTemplate": "AI ایجنٹ ٹیمپلیٹ کاپی کریں",
     "copiedAiTemplate": "AI ٹیمپلیٹ کاپی ہو گیا!",
+    "duplicateError": "اس ای میل اور ویب سائٹ کے اشتراک کے ساتھ کاروباری اندراج پہلے سے موجود ہے۔",
+    "requiredFieldsError": "براہ کرم کم از کم کمپنی کا نام، ویب سائٹ اور درست کاروباری ای میل پتہ درج کریں۔",
     "footerNotice": "ایڈیٹوریل تصدیق کے بعد اندراجات عالمی سطح پر ظاہر ہوتے ہیں۔ ہمیشہ کے لیے 100٪ مفت۔",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

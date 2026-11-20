@@ -480,12 +480,98 @@ export async function getOrCreateCategory(name: string, tenantId?: string): Prom
   );
 }
 
-export async function submitBusinessListing(payload: SubmitBusinessPayload): Promise<{ success: boolean; data?: BusinessListing; error?: string }> {
+/**
+ * Standardize and normalize a business website URL
+ * Normalizes protocol, hostname casing, and removes redundant trailing slashes
+ */
+export function normalizeWebsite(url?: string | null): string {
+  if (!url) return '';
+  let trimmed = url.trim();
+  if (!trimmed) return '';
+  if (!/^https?:\/\//i.test(trimmed)) {
+    trimmed = `https://${trimmed}`;
+  }
+  try {
+    const parsed = new URL(trimmed);
+    const host = parsed.hostname.toLowerCase();
+    const pathname = parsed.pathname === '/' ? '' : parsed.pathname.replace(/\/+$/, '');
+    const search = parsed.search || '';
+    return `${parsed.protocol}//${host}${parsed.port ? `:${parsed.port}` : ''}${pathname}${search}`;
+  } catch {
+    return trimmed.replace(/\/+$/, '');
+  }
+}
+
+/**
+ * Check if a business entry already exists with the given email and website.
+ */
+export async function findBusinessByEmailAndWebsite(
+  email: string,
+  website: string
+): Promise<BusinessListing | null> {
+  if (!isDbConfigured || !email || !website) return null;
+
+  try {
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanWebsite = normalizeWebsite(website);
+    if (!cleanEmail || !cleanWebsite) return null;
+
+    const altWebsite = cleanWebsite.endsWith('/') ? cleanWebsite.slice(0, -1) : `${cleanWebsite}/`;
+    const cleanHttp = cleanWebsite.startsWith('https://')
+      ? cleanWebsite.replace('https://', 'http://')
+      : cleanWebsite.replace('http://', 'https://');
+    const altHttp = cleanHttp.endsWith('/') ? cleanHttp.slice(0, -1) : `${cleanHttp}/`;
+
+    const websiteVariants = Array.from(new Set([cleanWebsite, altWebsite, cleanHttp, altHttp]))
+      .map((w) => `"${encodeURIComponent(w)}"`)
+      .join(',');
+
+    const query = `${SUPABASE_URL}/rest/v1/businesses?email=ilike.${encodeURIComponent(
+      cleanEmail
+    )}&website=in.(${websiteVariants})&select=*,categories(id,slug,name)&limit=1`;
+
+    const res = await fetch(query, {
+      headers: getHeaders(),
+      cache: 'no-store',
+    });
+
+    if (!res.ok) return null;
+    const rows = await res.json();
+    if (Array.isArray(rows) && rows.length > 0) {
+      return mapDbBusiness(rows[0]);
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+export async function submitBusinessListing(payload: SubmitBusinessPayload): Promise<{
+  success: boolean;
+  data?: BusinessListing;
+  error?: string;
+  isDuplicate?: boolean;
+}> {
   if (!isDbConfigured) {
     return { success: false, error: 'Database is not configured' };
   }
 
   try {
+    const cleanEmail = payload.email?.trim().toLowerCase() || '';
+    const cleanWebsite = normalizeWebsite(payload.website);
+
+    // Rule: Uniqueness check for email + website combination
+    if (cleanEmail && cleanWebsite) {
+      const existing = await findBusinessByEmailAndWebsite(cleanEmail, cleanWebsite);
+      if (existing) {
+        return {
+          success: false,
+          error: 'A business listing with this email and website combination already exists.',
+          isDuplicate: true,
+        };
+      }
+    }
+
     const defaultTenant = await getDefaultTenant();
     const tenantId = payload.tenantId || defaultTenant.id;
 
@@ -546,8 +632,8 @@ export async function submitBusinessListing(payload: SubmitBusinessPayload): Pro
       state: payload.state?.trim() || null,
       country: payload.country?.trim() || null,
       phone: payload.phone || null,
-      email: payload.email?.trim() || null,
-      website: payload.website || null,
+      email: cleanEmail || null,
+      website: cleanWebsite || null,
       logo_url: payload.logoUrl || null,
       banner_url: payload.bannerUrl || null,
       legal_form: payload.legalForm || null,
@@ -569,6 +655,19 @@ export async function submitBusinessListing(payload: SubmitBusinessPayload): Pro
 
     if (!res.ok) {
       const errText = await res.text();
+      // Catch Postgres unique index / constraint violation (code 23505)
+      if (
+        res.status === 409 ||
+        errText.includes('23505') ||
+        errText.toLowerCase().includes('duplicate key') ||
+        errText.includes('uq_businesses_email_website')
+      ) {
+        return {
+          success: false,
+          error: 'A business listing with this email and website combination already exists.',
+          isDuplicate: true,
+        };
+      }
       return { success: false, error: errText };
     }
 
@@ -608,6 +707,33 @@ export async function publishBusiness(id: string): Promise<boolean> {
       }),
     });
     return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+export async function rejectBusiness(id: string): Promise<boolean> {
+  if (!isDbConfigured || !id) return false;
+
+  try {
+    // 1. Attempt permanent DELETE first
+    const delRes = await fetch(`${SUPABASE_URL}/rest/v1/businesses?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: getHeaders(),
+    });
+    if (delRes.ok) return true;
+
+    // 2. Fallback: unpublish, unverify, and set status to rejected
+    const patchRes = await fetch(`${SUPABASE_URL}/rest/v1/businesses?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: getHeaders(),
+      body: JSON.stringify({
+        is_published: false,
+        is_verified: false,
+        status: 'rejected',
+      }),
+    });
+    return patchRes.ok;
   } catch {
     return false;
   }

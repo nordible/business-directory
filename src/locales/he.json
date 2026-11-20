@@ -224,6 +224,8 @@
     "aiAgentNotice": "מבקר כסוכן AI או בוט? הגש בקשות רישום ישירות דרך ה-REST API ב-POST /api/businesses/submit:",
     "copyAiTemplate": "העתק תבנית סוכן AI",
     "copiedAiTemplate": "תבנית AI הועתקה!",
+    "duplicateError": "קיים כבר רישום עסק עם שילوب זה של אימייל ואתר אינטרנט.",
+    "requiredFieldsError": "נא למלא לפחות שם חברה, אתר אינטרנט וכתובת אימייל עסקית תקינה.",
     "footerNotice": "רישומים מאומתים מוצגים ברחבי העולם לאחר בדיקת עריכה. 100% חינם לתמיד.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

@@ -219,6 +219,8 @@
     "aiAgentNotice": "Mengunjungi sebagai Agen AI atau Bot? Kirimkan data bisnis langsung melalui REST API kami di POST /api/businesses/submit:",
     "copyAiTemplate": "Salin Templat Agen AI",
     "copiedAiTemplate": "Templat AI Berhasil Disalin!",
+    "duplicateError": "Daftar bisnis dengan kombinasi email dan situs web ini sudah ada.",
+    "requiredFieldsError": "Harap isi setidaknya Nama Perusahaan, Situs Web, dan alamat Email bisnis yang valid.",
     "footerNotice": "Listing terverifikasi tampil secara global setelah tinjauan redaksi. 100% gratis selamanya.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

@@ -149,6 +149,8 @@
     "aiAgentNotice": "Stai visitando come agente IA o bot? Invia le richieste di inserimento direttamente tramite la nostra API REST (POST /api/businesses/submit):",
     "copyAiTemplate": "Copia modello agente IA",
     "copiedAiTemplate": "Modello IA copiato!",
+    "duplicateError": "Esiste già una scheda aziendale con questa combinazione di email e sito web.",
+    "requiredFieldsError": "Inserisci almeno il nome dell'azienda, il sito web e un indirizzo email aziendale valido.",
     "footerNotice": "Le schede verificate appaiono a livello globale dopo revisione editoriale. 100% gratuito per sempre.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

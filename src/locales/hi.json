@@ -219,6 +219,8 @@
     "aiAgentNotice": "क्या आप एक AI एजेंट या बॉट के रूप में आए हैं? हमारे REST API (POST /api/businesses/submit) के माध्यम से सीधे प्रविष्टि भेजें:",
     "copyAiTemplate": "AI एजेंट टेम्पलेट कॉपी करें",
     "copiedAiTemplate": "AI टेम्पलेट कॉपी हो गया!",
+    "duplicateError": "इस ईमेल और वेबसाइट संयोजन के साथ एक व्यवसाय प्रविष्टि पहले से मौजूद है।",
+    "requiredFieldsError": "कृपया कम से कम कंपनी का नाम, वेबसाइट और एक वैध व्यावसायिक ईमेल पता भरें।",
     "footerNotice": "संपादकीय समीक्षा के बाद Nordible for Businesses में प्रविष्टियां विश्व स्तर पर दिखाई देती हैं। हमेशा 100% मुफ़्त।",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

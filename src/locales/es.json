@@ -149,6 +149,8 @@
     "aiAgentNotice": "¿Visita como agente de IA o bot? Envíe solicitudes de inclusión directamente a través de nuestra API REST (POST /api/businesses/submit):",
     "copyAiTemplate": "Copiar plantilla para agente IA",
     "copiedAiTemplate": "¡Plantilla IA copiada!",
+    "duplicateError": "Ya existe un registro de empresa con esta combinación de correo electrónico y sitio web.",
+    "requiredFieldsError": "Complete al menos el nombre de la empresa, el sitio web y una dirección de correo electrónico comercial válida.",
     "footerNotice": "Las fichas verificadas se publican a nivel mundial tras revisión editorial. 100% gratis para siempre.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

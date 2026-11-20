@@ -148,6 +148,8 @@
     "aiAgentNotice": "Unatembelea kama Ajenti wa AI au Boti? Wasilisha maelezo ya biashara moja kwa moja kupitia REST API yetu kwa POST /api/businesses/submit:",
     "copyAiTemplate": "Nakili Kiolezo cha Ajenti wa AI",
     "copiedAiTemplate": "Kiolezo cha AI Kimekunakiliwa!",
+    "duplicateError": "Orodha ya biashara iliyo na mchanganyiko huu wa barua pepe na tovuti tayari ipo.",
+    "requiredFieldsError": "Tafadhali jaza angalau Jina la Kampuni, Tovuti, na anwani halali ya barua pepe ya biashara.",
     "footerNotice": "Orodha zilizothibitishwa huonekana ulimwenguni kote baada ya ukaguzi wa uhariri. 100% bure daima.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

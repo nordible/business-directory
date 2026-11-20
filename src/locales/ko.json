@@ -224,6 +224,8 @@
     "aiAgentNotice": "AI 에이전트 또는 크롤러로 방문하셨나요? REST API(POST /api/businesses/submit)를 통해 직접 등록하세요:",
     "copyAiTemplate": "AI 제출 템플릿 복사",
     "copiedAiTemplate": "AI 템플릿 복사 완료!",
+    "duplicateError": "이 이메일과 웹사이트 조합으로 등록된 업체가 이미 존재합니다.",
+    "requiredFieldsError": "회사명, 웹사이트 및 유효한 비즈니스 이메일 주소를 입력해 주세요.",
     "footerNotice": "검토 완료 후 Nordible for Businesses에 전 세계로 공개됩니다. 평생 100% 무료.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",

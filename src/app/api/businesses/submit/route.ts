@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { submitBusinessListing, SubmitBusinessPayload, formatWeekScheduleToString } from '@/lib/db/client';
 import { sendNewListingNotificationToAdmin, sendBusinessRegistrationConfirmation } from '@/lib/email';
+import { getTranslation } from '@/lib/translations';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -22,9 +23,15 @@ export async function POST(request: Request) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const hasValidEmail = typeof body.email === 'string' && emailRegex.test(body.email.trim());
 
+    // Selected locale from user / dropdown (defaulting to English)
+    const userLocale =
+      body.locale && typeof body.locale === 'string'
+        ? body.locale.trim().toLowerCase()
+        : 'en';
+
     if (!body.name || !body.website || !hasValidEmail) {
       return NextResponse.json(
-        { error: 'Name, Webseite und eine gültige geschäftliche E-Mail-Adresse sind Pflichtfelder.' },
+        { error: getTranslation(userLocale, 'addModal.requiredFieldsError') },
         { status: 400, headers: CORS_HEADERS }
       );
     }
@@ -33,6 +40,17 @@ export async function POST(request: Request) {
 
     if (!result.success) {
       console.error('[SUBMIT BUSINESS ERROR]', result.error);
+
+      if (result.isDuplicate) {
+        return NextResponse.json(
+          {
+            error: getTranslation(userLocale, 'addModal.duplicateError'),
+            code: 'DUPLICATE_ENTRY',
+          },
+          { status: 409, headers: CORS_HEADERS }
+        );
+      }
+
       return NextResponse.json(
         { error: result.error || 'Failed to submit business listing.' },
         { status: 500, headers: CORS_HEADERS }
@@ -45,10 +63,6 @@ export async function POST(request: Request) {
       (body.openingHoursJson
         ? formatWeekScheduleToString(body.openingHoursJson)
         : 'Open 24/7');
-
-    // Determine business language: German for DACH countries, English for international
-    const isDachCountry = /deutschland|germany|österreich|austria|schweiz|switzerland/i.test(body.country || '');
-    const businessLocale = body.locale || (isDachCountry ? 'de' : 'en');
 
     // Dispatch admin notification (always in English) and confirmation to business submitter (in business language)
     const emailPromises: Promise<unknown>[] = [
@@ -76,7 +90,7 @@ export async function POST(request: Request) {
         sendBusinessRegistrationConfirmation({
           to: body.email.trim(),
           businessName: body.name.trim(),
-          locale: businessLocale,
+          locale: userLocale,
           city: body.city,
           categoryName: body.categoryName,
         })

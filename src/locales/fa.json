@@ -219,6 +219,8 @@
     "aiAgentNotice": "به عنوان عامل هوش مصنوعی بازدید می‌کنید؟ اطلاعات شرکت را مستقیماً از طریق REST API در POST /api/businesses/submit ارسال کنید:",
     "copyAiTemplate": "کپی قالب عامل هوش مصنوعی",
     "copiedAiTemplate": "قالب هوش مصنوعی کپی شد!",
+    "duplicateError": "کسب‌وکاری با این ترکیب ایمیل و وب‌سایت از قبل ثبت شده است.",
+    "requiredFieldsError": "لطفاً حداقل نام شرکت، وب‌سایت و یک نشانی ایمیل تجاری معتبر را وارد کنید.",
     "footerNotice": "پروفایل‌های تاییدشده پس از بررسی تحریریه در سراسر جهان منتشر می‌شوند. برای همیشه ۱۰۰٪ رایگان.",
     "submittedBadge": "Listing Initiated 🎉",
     "submittedTitle": "Thank You for Your Submission!",
